@@ -32,31 +32,32 @@
   :plugins [[lein-ring "0.9.1"]
             [lein-environ "1.0.0"]
             [lein-ancient "0.6.5"]
+            [cider/cider-nrepl "0.8.2"]
             ]
-  
 
-  
+
+
   :ring {:handler player-rankings.handler/app
          :init    player-rankings.handler/init
          :destroy player-rankings.handler/destroy
          :uberwar-name "player-rankings.war"}
 
-  
-  
-  
+
+
+
   :profiles
   {:uberjar {:omit-source true
              :env {:production true}
-             
+
              :aot :all}
    :dev {:dependencies [[ring-mock "0.1.5"]
                         [ring/ring-devel "1.3.2"]
                         [pjstadig/humane-test-output "0.7.0"]
                         ]
          :source-paths ["env/dev/clj"]
-         
-         
-         
+
+
+
          :repl-options {:init-ns player-rankings.core}
          :injections [(require 'pjstadig.humane-test-output)
                       (pjstadig.humane-test-output/activate!)]
