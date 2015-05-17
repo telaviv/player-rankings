@@ -18,6 +18,7 @@
                  [prone "0.8.1"]
                  [org.clojure/tools.nrepl "0.2.10"]
                  [ring-server "0.4.0"]
+                 [clj-http "1.1.2"]
                  ]
 
   :min-lein-version "2.0.0"

@@ -1,7 +1,8 @@
 (ns player-rankings.handler
   (:require [compojure.core :refer [defroutes routes]]
             [player-rankings.routes.home :refer [home-routes]]
-            
+            [player-rankings.routes.tournament :refer [tournament-routes]]
+
             [player-rankings.middleware
              :refer [development-middleware production-middleware]]
             [player-rankings.session :as session]
@@ -70,7 +71,7 @@
 (def app
   (-> (routes
         home-routes
-        
+        tournament-routes
         base-routes)
       development-middleware
       production-middleware))
