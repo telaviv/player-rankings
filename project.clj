@@ -33,7 +33,7 @@
   :plugins [[lein-ring "0.9.1"]
             [lein-environ "1.0.0"]
             [lein-ancient "0.6.5"]
-            [cider/cider-nrepl "0.8.2"]
+            [cider/cider-nrepl "0.9.0-SNAPSHOT"]
             ]
 
 
@@ -54,6 +54,7 @@
    :dev {:dependencies [[ring-mock "0.1.5"]
                         [ring/ring-devel "1.3.2"]
                         [pjstadig/humane-test-output "0.7.0"]
+                        [org.clojure/tools.nrepl "0.2.7"]
                         ]
          :source-paths ["env/dev/clj"]
 
