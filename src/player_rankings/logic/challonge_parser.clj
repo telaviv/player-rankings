@@ -9,6 +9,12 @@
         tournament-name (-> parseable-url .getPath (string/replace "/" ""))]
     (str "http://api.challonge.com/v1/tournaments/" subdomain "-" tournament-name "/")))
 
-(defn- participants-url [url]
+(defn- create-url-by-type [url type]
   (let [base-url (create-base-api-url url)]
-    (str base-url "participants.json?api_key=" challonge-api-key)))
+    (str base-url type ".json?api_key=" challonge-api-key)))
+
+(defn- participants-url [url]
+  (create-url-by-type url "participants"))
+
+(defn- matches-url [url]
+  (create-url-by-type url "matches"))
