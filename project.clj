@@ -19,6 +19,8 @@
                  [org.clojure/tools.nrepl "0.2.10"]
                  [ring-server "0.4.0"]
                  [clj-http "1.1.2"]
+                 [clojurewerkz/urly "1.0.0"]
+                 [org.clojure/data.json "0.2.6"]
                  ]
 
   :min-lein-version "2.0.0"
