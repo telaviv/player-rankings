@@ -5,21 +5,28 @@
             [clojure.data.json :as json])
   (:import [java.net URL]))
 
-(defn- create-base-api-url [url]
+
+(defn- create-url-id [url]
   (let [parseable-url (URL. url)
         subdomain (-> parseable-url .getHost (string/split #"\.") (get 0))
         tournament-name (-> parseable-url .getPath (string/replace "/" ""))]
-    (str "http://api.challonge.com/v1/tournaments/" subdomain "-" tournament-name "/")))
+    (str subdomain "-" tournament-name)))
 
-(defn- create-url-by-type [url type]
+(defn- create-base-api-url [url]
+  (str "http://api.challonge.com/v1/tournaments/" (create-url-id url)))
+
+(defn- create-url-by-postfix [url type]
   (let [base-url (create-base-api-url url)]
-    (str base-url type ".json?api_key=" challonge-api-key)))
+    (str base-url type "?api_key=" challonge-api-key)))
 
 (defn- participants-url [url]
-  (create-url-by-type url "participants"))
+  (create-url-by-postfix url "/participants.json"))
 
 (defn- matches-url [url]
-  (create-url-by-type url "matches"))
+  (create-url-by-postfix url "/matches.json"))
+
+(defn- tournament-url [url]
+  (create-url-by-postfix url ".json"))
 
 (defn- make-request [api-url]
   (-> api-url client/get :body json/read-str))
@@ -47,3 +54,15 @@
   (let [matches (-> url matches-url make-request)
         participants (-> url participants-url make-request)]
     (merge-matches-and-participants matches participants)))
+
+(defn get-tournament-from-url [url]
+  (let [tournament (-> url tournament-url make-request (get "tournament"))]
+    {:id (create-url-id url)
+     :started-at (tournament "started_at")
+     :completed-at (tournament "completed_at")
+     :url (tournament "full_challonge_url")
+     :image_url (tournament "live_image_url")}))
+
+(defn get-tournament-data [url]
+  {:tournament (get-tournament-from-url url)
+   :matches (get-matches-from-url url)})
