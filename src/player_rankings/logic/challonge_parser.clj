@@ -48,7 +48,7 @@
              :player-two ((participant-finder "player2_id") match)
              :scores (get-in match ["match" "scores_csv"])
              :winner (get-winner match)})]
-    (map merge-match matches)))
+    (vec (map merge-match matches))))
 
 (defn get-matches-from-url [url]
   (let [matches (-> url matches-url make-request)
