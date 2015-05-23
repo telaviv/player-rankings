@@ -57,7 +57,7 @@
 
 (defn get-tournament-from-url [url]
   (let [tournament (-> url tournament-url make-request (get "tournament"))]
-    {:id (create-url-id url)
+    {:identifier (create-url-id url)
      :title (tournament "name")
      :started-at (tournament "started_at")
      :completed-at (tournament "completed_at")
