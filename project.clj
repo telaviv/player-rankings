@@ -4,6 +4,7 @@
   :url "http://example.com/FIXME"
 
   :dependencies [[org.clojure/clojure "1.6.0"]
+                 [clj-time "0.9.0"]
                  [selmer "0.8.2"]
                  [com.taoensso/timbre "3.4.0"]
                  [com.taoensso/tower "3.0.2"]
@@ -56,7 +57,7 @@
    :dev {:dependencies [[ring-mock "0.1.5"]
                         [ring/ring-devel "1.3.2"]
                         [pjstadig/humane-test-output "0.7.0"]
-                        [org.clojure/tools.nrepl "0.2.7"]
+                        [org.clojure/tools.nrepl "0.2.10"]
                         ]
          :source-paths ["env/dev/clj"]
 

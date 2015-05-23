@@ -2,6 +2,7 @@
   (:require [clojure.string :as string]
             [player-rankings.secrets :refer [challonge-api-key]]
             [clj-http.client :as client]
+            [clj-time.coerce :as coerce-time]
             [clojure.data.json :as json])
   (:import [java.net URL]))
 
@@ -47,7 +48,7 @@
             {:player-one ((participant-finder "player1_id") match)
              :player-two ((participant-finder "player2_id") match)
              :scores (get-in match ["match" "scores_csv"])
-             :time (get-in match ["match" "started_at"])
+             :time (coerce-time/to-long (get-in match ["match" "started_at"]))
              :winner (get-winner match)})]
     (vec (map merge-match matches))))
 
