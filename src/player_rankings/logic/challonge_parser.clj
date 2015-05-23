@@ -47,15 +47,16 @@
             {:player-one ((participant-finder "player1_id") match)
              :player-two ((participant-finder "player2_id") match)
              :scores (get-in match ["match" "scores_csv"])
+             :time (get-in match ["match" "started_at"])
              :winner (get-winner match)})]
     (vec (map merge-match matches))))
 
-(defn get-matches-from-url [url]
+(defn- get-matches-from-url [url]
   (let [matches (-> url matches-url make-request)
         participants (-> url participants-url make-request)]
     (merge-matches-and-participants matches participants)))
 
-(defn get-tournament-from-url [url]
+(defn- get-tournament-from-url [url]
   (let [tournament (-> url tournament-url make-request (get "tournament"))]
     {:identifier (create-url-id url)
      :title (tournament "name")
