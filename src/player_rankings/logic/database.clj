@@ -44,6 +44,15 @@
 
 (defn raw-match-information []
   (let [query (str "match (player:player)-[played:played]-(game:match) "
-                   "return id(player) as player_id, id(played) as played_id, "
-                   "played.won as won, game.time as game_time")]
-    (cypher/tquery conn query)))
+                   "return id(player) as player_id, id(played) as played_id, played.won as won "
+                   "order by game.time")]
+    (vec (cypher/tquery conn query))))
+
+(defn match-information-by-player []
+  (reduce (fn [coll match]
+            (let [player-id (match "player_id")
+                  match-record {:played-id (match "played_id") :won (match "won")}]
+              (if (contains? coll player-id)
+                (assoc coll player-id (conj (coll player-id) match-record))
+                (assoc coll player-id [match-record]))))
+          {} (raw-match-information)))
