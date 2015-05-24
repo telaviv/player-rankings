@@ -60,6 +60,7 @@
                         [org.clojure/tools.nrepl "0.2.10"]
                         ]
          :source-paths ["env/dev/clj"]
+         :java-source-paths ["src/java"]
 
 
 
