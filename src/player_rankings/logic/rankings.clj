@@ -4,7 +4,7 @@
              org.goochjs.glicko2.RatingPeriodResults))
 
 (defn create-player [rating-system]
-  (Rating. "Player" rating-system))
+  (Rating. "player" rating-system))
 
 (defn- rating-to-map [rating-object]
   {:rating (.getRating rating-object)
@@ -16,9 +16,20 @@
         results (RatingPeriodResults.)
         player-to-track (create-player rating-system)
         dummy-player (create-player rating-system)]
+    (.addParticipants results player-to-track)
     (doseq [win wins]
       (if win
         (.addResult results player-to-track dummy-player)
         (.addResult results dummy-player player-to-track)))
     (.updateRatings rating-system results)
     (rating-to-map player-to-track)))
+
+(defn calculate-partial-ratings [wins]
+  (loop [i 1
+         old-rating (-> (RatingCalculator.) create-player rating-to-map)
+         rating-coll []]
+    (if (> i (count wins))
+      rating-coll
+      (let [new-rating (calculate-rating-period (subvec wins 0 i))
+            rating-diff {:start old-rating :end new-rating}]
+        (recur (inc i) new-rating (conj rating-coll rating-diff))))))
