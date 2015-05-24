@@ -4,7 +4,6 @@
   :url "http://example.com/FIXME"
 
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [clj-time "0.9.0"]
                  [selmer "0.8.2"]
                  [com.taoensso/timbre "3.4.0"]
                  [com.taoensso/tower "3.0.2"]
@@ -22,6 +21,7 @@
                  [clj-http "1.1.2"]
                  [org.clojure/data.json "0.2.6"]
                  [clojurewerkz/neocons "3.1.0-beta3"]
+                 [clj-time "0.9.0"]
                  ]
 
   :min-lein-version "2.0.0"

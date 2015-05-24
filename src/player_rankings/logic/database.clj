@@ -2,6 +2,7 @@
   (:require [clojurewerkz.neocons.rest :as nr]
             [clojurewerkz.neocons.rest.nodes :as nodes]
             [clojurewerkz.neocons.rest.labels :as labels]
+            [clojurewerkz.neocons.rest.cypher :as cypher]
             [clojurewerkz.neocons.rest.relationships :as relationships]
             [player-rankings.secrets :refer [neo4j-username neo4j-password]]))
 
@@ -14,7 +15,7 @@
     node))
 
 (defn- create-match-node [match]
-  (let [node (nodes/create conn {:score (:scores match)})]
+  (let [node (nodes/create conn {:score (:scores match) :time (:time match)})]
     (labels/add conn node "match")
     node))
 
@@ -34,9 +35,15 @@
     (create-match-player-relationship match-node player2-node 2 (= 2 (:winner match)))
     match-node))
 
-(defn- create-tournament-graph [tournament-data]
+(defn create-tournament-graph [tournament-data]
   (let [tournament-node (create-tournament-node (:tournament tournament-data))
         match-nodes (map create-match-graph (:matches tournament-data))]
     (doseq [match-node match-nodes]
       (relationships/create conn tournament-node match-node :hosted))
     tournament-node))
+
+(defn raw-match-information []
+  (let [query (str "match (player:player)-[played:played]-(game:match) "
+                   "return id(player) as player_id, id(played) as played_id, "
+                   "played.won as won, game.time as game_time")]
+    (cypher/tquery conn query)))
