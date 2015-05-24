@@ -19,25 +19,36 @@
     (labels/add conn node "match")
     node))
 
-(defn- create-player-node [player]
-  (let [node (nodes/create conn {:name player})]
+(defn- create-player-node [player-name]
+  (let [node (nodes/create conn {:name player-name})]
     (labels/add conn node "player")
     node))
+
+(defn create-player-nodes [matches]
+  (let [first-players (map :player-one matches)
+        second-players (map :player-two matches)
+        unique-players (distinct (concat first-players second-players))
+        player-nodes (map create-player-node unique-players)]
+    (zipmap unique-players player-nodes)))
 
 (defn- create-match-player-relationship [match player player-number is-winner]
   (relationships/create conn player match :played {:player player-number, :won is-winner}))
 
-(defn- create-match-graph [match]
+(defn- create-match-graph [match player-nodes]
   (let [match-node (create-match-node match)
-        player1-node (create-player-node (:player-one match))
-        player2-node (create-player-node (:player-two match))]
+        player1-node (player-nodes (:player-one match))
+        player2-node (player-nodes (:player-two match))]
     (create-match-player-relationship match-node player1-node 1 (= 1 (:winner match)))
     (create-match-player-relationship match-node player2-node 2 (= 2 (:winner match)))
-    match-node))
+        match-node))
+
+(defn- create-match-graphs [matches]
+  (let [player-nodes (create-player-nodes matches)]
+    (map #(create-match-graph % player-nodes) matches)))
 
 (defn create-tournament-graph [tournament-data]
   (let [tournament-node (create-tournament-node (:tournament tournament-data))
-        match-nodes (map create-match-graph (:matches tournament-data))]
+        match-nodes (create-match-graphs (:matches tournament-data))]
     (doseq [match-node match-nodes]
       (relationships/create conn tournament-node match-node :hosted))
     tournament-node))
