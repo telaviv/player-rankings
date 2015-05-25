@@ -15,11 +15,6 @@
     (labels/add conn node "tournament")
     node))
 
-(defn- create-match-node [match]
-  (let [node (nodes/create conn {:score (:scores match) :time (:time match)})]
-    (labels/add conn node "match")
-    node))
-
 (defn- get-existing-players []
   (let [query (str "match (p:player) "
                    "return id(p) as id, p.name as name")
@@ -44,10 +39,10 @@
               {} unique-players-in-tournament)))
 
 (defn- create-match-graph-data [match player-nodes]
-  (let [match-node (create-match-node match)
-        player1-node (player-nodes (:player-one match))
+  (let [player1-node (player-nodes (:player-one match))
         player2-node (player-nodes (:player-two match))]
-    {"id" (:id match-node)
+    {"score" (:scores match)
+     "time" (:time match)
      "player_one" {"id" (:id player1-node) "won" (= 1 (:winner match))}
      "player_two" {"id" (:id player2-node) "won" (= 2 (:winner match))}}))
 
@@ -55,12 +50,11 @@
   (let [player-nodes (create-player-nodes matches)
         match-graph-data (map #(create-match-graph-data % player-nodes) matches)
         query (str "unwind {records} as record "
-                   "match (m:match) "
-                   "where id(m) = record.id "
                    "match (player_one:player) "
                    "where id(player_one) = record.player_one.id "
                    "match (player_two:player) "
                    "where id(player_two) = record.player_two.id "
+                   "create (m:match {score: record.score, time: record.time}) "
                    "create (player_one)-[:played {won: record.player_one.won}]->(m) "
                    "create (player_two)-[:played {won: record.player_two.won}]->(m) "
                    "return id(m) as id")]
