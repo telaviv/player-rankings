@@ -4,7 +4,8 @@
             [clojurewerkz.neocons.rest.labels :as labels]
             [clojurewerkz.neocons.rest.cypher :as cypher]
             [clojurewerkz.neocons.rest.relationships :as relationships]
-            [player-rankings.secrets :refer [neo4j-username neo4j-password]]))
+            [player-rankings.secrets :refer [neo4j-username neo4j-password]]
+            [player-rankings.logic.rankings :as rankings]))
 
 (def conn (nr/connect
            (str "http://" neo4j-username ":" neo4j-password "@localhost:7474/db/data/")))
@@ -53,17 +54,50 @@
       (relationships/create conn tournament-node match-node :hosted))
     tournament-node))
 
-(defn raw-match-information []
+(defn- raw-match-information []
   (let [query (str "match (player:player)-[played:played]-(game:match) "
                    "return id(player) as player_id, id(played) as played_id, played.won as won "
                    "order by game.time")]
     (vec (cypher/tquery conn query))))
 
-(defn match-information-by-player []
+(defn- match-information-by-player []
   (reduce (fn [coll match]
             (let [player-id (match "player_id")
-                  match-record {:played-id (match "played_id") :won (match "won")}]
+                  match-record {:id (match "played_id") :won (match "won")}]
               (if (contains? coll player-id)
                 (assoc coll player-id (conj (coll player-id) match-record))
                 (assoc coll player-id [match-record]))))
           {} (raw-match-information)))
+
+(defn- flatten-rating-record [record]
+  (reduce-kv (fn [coll k v]
+               (reduce-kv (fn [coll2 k2 v2]
+                            (into coll2 {(str (name k) "_" (name k2)) v2}))
+                          coll v))
+             {} record))
+
+(defn- flattened-ratings [wins]
+  (->> wins
+       rankings/calculate-partial-ratings
+       (map flatten-rating-record)))
+
+(defn- ratings-information-by-player []
+  (let [player-matches (match-information-by-player)]
+    (reduce-kv
+     (fn [coll player-id match-records]
+       (let [ratings (flattened-ratings (mapv :won match-records))
+             new-match-records (map merge match-records ratings)]
+         (assoc coll player-id new-match-records))) {} player-matches)))
+
+(defn- get-match-ratings []
+  (-> (ratings-information-by-player) vals flatten vec))
+
+(defn update-player-ratings []
+  (let [matches (get-match-ratings)
+        query (str "unwind {records} as record "
+                   "match ()-[played:played]-() "
+                   "where id(played) = record.id "
+                   "set played = record "
+                   "remove played.id "
+                   "return played")]
+    (cypher/tquery conn query {:records matches})))
