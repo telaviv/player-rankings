@@ -84,11 +84,8 @@
           {} (raw-match-information)))
 
 (defn- flatten-rating-record [record]
-  (reduce-kv (fn [coll k v]
-               (reduce-kv (fn [coll2 k2 v2]
-                            (into coll2 {(str (name k) "_" (name k2)) v2}))
-                          coll v))
-             {} record))
+  {:start ((juxt :rating :rd :volatility) (:start record))
+   :end ((juxt :rating :rd :volatility) (:end record))})
 
 (defn- flattened-ratings [wins]
   (->> wins
@@ -111,9 +108,7 @@
         query (str "unwind {records} as record "
                    "match (p:player)-[played:played]-(:match) "
                    "where id(p) = record.player_id and id(played) = record.id "
-                   "set played = record "
-                   "remove played.id "
-                   "remove played.player_id")]
+                   "set played += {start_rating: record.start, end_rating: record.end} ")]
     (cypher/tquery conn query {:records matches})))
 
 (defn create-tournament-graph [tournament-data]
@@ -125,10 +120,9 @@
                    "match (t:tournament) "
                    "where id(t) = {tournament_id} "
                    "create (t)-[:hosted]->(m) ")]
-    (cypher/tquery conn query {:match_ids match-ids :tournament_id (:id tournament-node)})
-    (update-player-ratings)))
+    (cypher/tquery conn query {:match_ids match-ids :tournament_id (:id tournament-node)})))
 
 (defn load-tournaments [tournaments]
   (doseq [tournament tournaments]
-    (create-tournament-graph))
+    (create-tournament-graph tournament))
   (update-player-ratings))
