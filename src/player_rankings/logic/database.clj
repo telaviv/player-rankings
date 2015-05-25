@@ -1,5 +1,6 @@
 (ns player-rankings.logic.database
-  (:require [clojurewerkz.neocons.rest :as nr]
+  (:require [clojure.set :refer [difference]]
+            [clojurewerkz.neocons.rest :as nr]
             [clojurewerkz.neocons.rest.nodes :as nodes]
             [clojurewerkz.neocons.rest.labels :as labels]
             [clojurewerkz.neocons.rest.cypher :as cypher]
@@ -16,28 +17,32 @@
     (labels/add conn node "tournament")
     node))
 
+(defn- player-map-from-raw-arrays [raw-arrays]
+  (zipmap (map #(% "name") raw-arrays)
+          (map #(identity {:name (% "name") :id (% "id")}) raw-arrays)))
+
 (defn- get-existing-players []
   (let [query (str "match (p:player) "
                    "return id(p) as id, p.name as name")
-        results (cypher/tquery conn query)]
-    (zipmap (map #(% "name") results)
-            (map #(identity {:name (% "name") :id (% "id")}) results))))
+        data (cypher/tquery conn query)]
+    (player-map-from-raw-arrays data)))
 
-(defn- create-player-node [player-name]
-  (let [node (nodes/create conn {:name player-name})]
-    (labels/add conn node "player")
-    node))
+(defn- create-new-player-nodes [player-names]
+  (let [query (str "unwind {names} as name "
+                   "create (p:player {name: name}) "
+                   "return id(p) as id, p.name as name")
+        data (cypher/tquery conn query {:names player-names})]
+    (player-map-from-raw-arrays data)))
 
-(defn create-player-nodes [matches]
+(defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
         second-players (map :player-two matches)
         unique-players-in-tournament (distinct (concat first-players second-players))
-        existing-players (get-existing-players)]
-    (reduce (fn [coll player]
-              (if (existing-players player)
-                (into coll {player (existing-players player)})
-                (into coll {player (create-player-node player)})))
-              {} unique-players-in-tournament)))
+        existing-players (get-existing-players)
+        new-players (create-new-player-nodes
+                     (difference (set unique-players-in-tournament)
+                                 (set (keys existing-players))))]
+    (merge existing-players new-players)))
 
 (defn- create-match-graph-data [match player-nodes]
   (let [player1-node (player-nodes (:player-one match))
@@ -109,14 +114,13 @@
     (cypher/tquery conn query {:records matches})))
 
 (defn create-tournament-graph [tournament-data]
-  (transaction/in-transaction
-   (let [tournament-node (create-tournament-node (:tournament tournament-data))
-         match-ids (create-match-graphs (:matches tournament-data))
-         query (str "unwind {match_ids} as match_id "
-                    "match (m:match) "
-                    "where id(m) = match_id "
-                    "match (t:tournament) "
-                    "where id(t) = {tournament_id} "
-                    "create (t)-[:hosted]->(m) ")]
-     (cypher/tquery conn query {:match_ids match-ids :tournament_id (:id tournament-node)})
-     (update-player-ratings))))
+  (let [tournament-node (create-tournament-node (:tournament tournament-data))
+        match-ids (create-match-graphs (:matches tournament-data))
+        query (str "unwind {match_ids} as match_id "
+                   "match (m:match) "
+                   "where id(m) = match_id "
+                   "match (t:tournament) "
+                   "where id(t) = {tournament_id} "
+                   "create (t)-[:hosted]->(m) ")]
+    (cypher/tquery conn query {:match_ids match-ids :tournament_id (:id tournament-node)})
+    (update-player-ratings)))

@@ -1,4 +1,4 @@
-(ns player-rankings.logic.inializers
+(ns player-rankings.logic.initializers
   (:require [player-rankings.logic.challonge-parser :refer [get-tournament-data]]
             [player-rankings.logic.database :refer [create-tournament-graph]]))
 
