@@ -48,7 +48,7 @@
             {:player-one ((participant-finder "player1_id") match)
              :player-two ((participant-finder "player2_id") match)
              :scores (get-in match ["match" "scores_csv"])
-             :time (coerce-time/to-long (get-in match ["match" "started_at"]))
+             :time (coerce-time/to-long (get-in match ["match" "created_at"]))
              :winner (get-winner match)})]
     (vec (map merge-match matches))))
 

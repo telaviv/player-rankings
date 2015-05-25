@@ -20,6 +20,13 @@
     (labels/add conn node "match")
     node))
 
+(defn- get-existing-players []
+  (let [query (str "match (p:player) "
+                   "return id(p) as id, p.name as name")
+        results (cypher/tquery conn query)]
+    (zipmap (map #(% "name") results)
+            (map #(identity {:name (% "name") :id (% "id")}) results))))
+
 (defn- create-player-node [player-name]
   (let [node (nodes/create conn {:name player-name})]
     (labels/add conn node "player")
@@ -28,9 +35,13 @@
 (defn create-player-nodes [matches]
   (let [first-players (map :player-one matches)
         second-players (map :player-two matches)
-        unique-players (distinct (concat first-players second-players))
-        player-nodes (map create-player-node unique-players)]
-    (zipmap unique-players player-nodes)))
+        unique-players-in-tournament (distinct (concat first-players second-players))
+        existing-players (get-existing-players)]
+    (reduce (fn [coll player]
+              (if (existing-players player)
+                (into coll {player (existing-players player)})
+                (into coll {player (create-player-node player)})))
+              {} unique-players-in-tournament)))
 
 (defn- create-match-graph-data [match player-nodes]
   (let [match-node (create-match-node match)
@@ -99,7 +110,7 @@
                    "match ()-[played:played]-() "
                    "where id(played) = record.id "
                    "set played = record "
-                   "remove played.id"]
+                   "remove played.id")]
     (cypher/tquery conn query {:records matches})))
 
 (defn create-tournament-graph [tournament-data]
