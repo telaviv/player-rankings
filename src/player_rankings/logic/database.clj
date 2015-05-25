@@ -75,7 +75,9 @@
 (defn- match-information-by-player []
   (reduce (fn [coll match]
             (let [player-id (match "player_id")
-                  match-record {:id (match "played_id") :won (match "won")}]
+                  match-record {:id (match "played_id")
+                                :won (match "won")
+                                :player_id (match "player_id")}]
               (if (contains? coll player-id)
                 (assoc coll player-id (conj (coll player-id) match-record))
                 (assoc coll player-id [match-record]))))
@@ -107,10 +109,11 @@
 (defn update-player-ratings []
   (let [matches (get-match-ratings)
         query (str "unwind {records} as record "
-                   "match ()-[played:played]-() "
-                   "where id(played) = record.id "
+                   "match (p:player)-[played:played]-(:match) "
+                   "where id(p) = record.player_id and id(played) = record.id "
                    "set played = record "
-                   "remove played.id")]
+                   "remove played.id "
+                   "remove played.player_id")]
     (cypher/tquery conn query {:records matches})))
 
 (defn create-tournament-graph [tournament-data]
@@ -124,3 +127,8 @@
                    "create (t)-[:hosted]->(m) ")]
     (cypher/tquery conn query {:match_ids match-ids :tournament_id (:id tournament-node)})
     (update-player-ratings)))
+
+(defn load-tournaments [tournaments]
+  (doseq [tournament tournaments]
+    (create-tournament-graph))
+  (update-player-ratings))

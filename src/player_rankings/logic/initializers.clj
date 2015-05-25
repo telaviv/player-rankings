@@ -1,6 +1,6 @@
 (ns player-rankings.logic.initializers
   (:require [player-rankings.logic.challonge-parser :refer [get-tournament-data]]
-            [player-rankings.logic.database :refer [create-tournament-graph]]))
+            [player-rankings.logic.database :refer [load-tournaments]]))
 
 (def tournament-urls
   ["http://showdowngg.challonge.com/comeonandban13singles"
@@ -33,10 +33,7 @@
    "http://bko.challonge.com/SO34"
    "http://bko.challonge.com/SO44"])
 
-(defn run []
-  (doseq [url tournament-urls]
-    (create-tournament-graph (get-tournament-data url))))
-
 (defn load-showdown-data []
-  (doseq [url (subvec tournament-urls 0 6)]
-    (create-tournament-graph (get-tournament-data url))))
+  (let [urls (subvec tournament-urls 0 6)
+        tournaments (map get-tournament-data urls)]
+    (load-tournaments tournaments)))

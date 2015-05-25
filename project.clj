@@ -22,6 +22,7 @@
                  [org.clojure/data.json "0.2.6"]
                  [clojurewerkz/neocons "3.1.0-beta3"]
                  [clj-time "0.9.0"]
+                 [com.taoensso/timbre "3.4.0"]
                  ]
 
   :min-lein-version "2.0.0"
