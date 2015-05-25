@@ -4,6 +4,7 @@
             [clojurewerkz.neocons.rest.labels :as labels]
             [clojurewerkz.neocons.rest.cypher :as cypher]
             [clojurewerkz.neocons.rest.relationships :as relationships]
+            [clojurewerkz.neocons.rest.transaction :as transaction]
             [player-rankings.secrets :refer [neo4j-username neo4j-password]]
             [player-rankings.logic.rankings :as rankings]))
 
@@ -108,13 +109,14 @@
     (cypher/tquery conn query {:records matches})))
 
 (defn create-tournament-graph [tournament-data]
-  (let [tournament-node (create-tournament-node (:tournament tournament-data))
-        match-ids (create-match-graphs (:matches tournament-data))
-        query (str "unwind {match_ids} as match_id "
-                   "match (m:match) "
-                   "where id(m) = match_id "
-                   "match (t:tournament) "
-                   "where id(t) = {tournament_id} "
-                   "create (t)-[:hosted]->(m) ")]
-    (cypher/tquery conn query {:match_ids match-ids :tournament_id (:id tournament-node)})
-    (update-player-ratings)))
+  (transaction/in-transaction
+   (let [tournament-node (create-tournament-node (:tournament tournament-data))
+         match-ids (create-match-graphs (:matches tournament-data))
+         query (str "unwind {match_ids} as match_id "
+                    "match (m:match) "
+                    "where id(m) = match_id "
+                    "match (t:tournament) "
+                    "where id(t) = {tournament_id} "
+                    "create (t)-[:hosted]->(m) ")]
+     (cypher/tquery conn query {:match_ids match-ids :tournament_id (:id tournament-node)})
+     (update-player-ratings))))
