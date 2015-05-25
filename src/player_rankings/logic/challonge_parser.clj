@@ -11,7 +11,9 @@
   (let [parseable-url (URL. url)
         subdomain (-> parseable-url .getHost (string/split #"\.") (get 0))
         tournament-name (-> parseable-url .getPath (string/replace "/" ""))]
-    (str subdomain "-" tournament-name)))
+    (if (= subdomain "challonge")
+      tournament-name
+      (str subdomain "-" tournament-name))))
 
 (defn- create-base-api-url [url]
   (str "http://api.challonge.com/v1/tournaments/" (create-url-id url)))
@@ -48,7 +50,7 @@
             {:player-one ((participant-finder "player1_id") match)
              :player-two ((participant-finder "player2_id") match)
              :scores (get-in match ["match" "scores_csv"])
-             :time (coerce-time/to-long (get-in match ["match" "created_at"]))
+             :time (coerce-time/to-long (get-in match ["match" "updated_at"]))
              :winner (get-winner match)})]
     (vec (map merge-match matches))))
 
@@ -62,7 +64,7 @@
     {:identifier (create-url-id url)
      :title (tournament "name")
      :started-at (coerce-time/to-long (tournament "started_at"))
-     :completed-at (coerce-time/to-long (tournament "completed_at"))
+     :updated-at (coerce-time/to-long (tournament "updated_at"))
      :url (tournament "full_challonge_url")
      :image_url (tournament "live_image_url")}))
 
