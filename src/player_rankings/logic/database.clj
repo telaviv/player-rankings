@@ -1,5 +1,6 @@
 (ns player-rankings.logic.database
   (:require [clojure.set :refer [difference]]
+            [clojure.string :as string]
             [clojurewerkz.neocons.rest :as nr]
             [clojurewerkz.neocons.rest.nodes :as nodes]
             [clojurewerkz.neocons.rest.labels :as labels]
@@ -29,24 +30,35 @@
 
 (defn- create-new-player-nodes [player-names]
   (let [query (str "unwind {names} as name "
-                   "create (p:player {name: name}) "
+                   "create (p:player {name: name, aliases: [name]}) "
                    "return id(p) as id, p.name as name")
         data (cypher/tquery conn query {:names player-names})]
     (player-map-from-raw-arrays data)))
 
+(defn normalize-name [player-name]
+  (-> player-name
+      string/lower-case
+      (string/replace #"\s" "")
+      (string/split #"\|")
+      last))
+
+(defn get-matching-player [player-name players]
+  (some #(when (= (normalize-name player-name)
+                  (normalize-name (:name %))) %)
+        (vals players)))
+
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
         second-players (map :player-two matches)
-        unique-players-in-tournament (distinct (concat first-players second-players))
+        unique-players (distinct (concat first-players second-players))
         existing-players (get-existing-players)
-        new-players (create-new-player-nodes
-                     (difference (set unique-players-in-tournament)
-                                 (set (keys existing-players))))]
+        new-player-names (filter #(not (get-matching-player % existing-players)) unique-players)
+        new-players (create-new-player-nodes new-player-names)]
     (merge existing-players new-players)))
 
 (defn- create-match-graph-data [match player-nodes]
-  (let [player1-node (player-nodes (:player-one match))
-        player2-node (player-nodes (:player-two match))]
+  (let [player1-node (get-matching-player (:player-one match) player-nodes)
+        player2-node (get-matching-player (:player-two match) player-nodes)]
     {"score" (:scores match)
      "time" (:time match)
      "player_one" {"id" (:id player1-node) "won" (= 1 (:winner match))}
