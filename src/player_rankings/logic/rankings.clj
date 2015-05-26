@@ -7,26 +7,33 @@
             org.goochjs.glicko2.Rating
             org.goochjs.glicko2.RatingPeriodResults))
 
-(defn create-player [rating-system]
-  (Rating. "player" rating-system))
+
+(defn create-player [rating rating-system]
+  (let [player (Rating. "player" rating-system)]
+    (.setRating player (rating :rating))
+    (.setRatingDeviation player (rating :rd))
+    (.setVolatility player (rating :volatility))
+    player))
 
 (defn- rating-to-map [rating-object]
   {:rating (.getRating rating-object)
    :rd (.getRatingDeviation rating-object)
    :volatility (.getVolatility rating-object)})
 
-(defn calculate-rating-period [wins]
+(def default-rating (rating-to-map (Rating. "player" (RatingCalculator.))))
+
+(defn calculate-rating-period [initial-rating matches]
   (let [rating-system (RatingCalculator.)
         results (RatingPeriodResults.)
-        player-to-track (create-player rating-system)
-        dummy-player (create-player rating-system)]
-    (.addParticipants results player-to-track)
-    (doseq [win wins]
-      (if win
-        (.addResult results player-to-track dummy-player)
-        (.addResult results dummy-player player-to-track)))
+        player (create-player initial-rating rating-system)]
+    (.addParticipants results player)
+    (doseq [match matches]
+      (let [opponent (create-player (:opponent-rating match) rating-system)]
+        (if (:won match)
+          (.addResult results player opponent)
+          (.addResult results opponent player))))
     (.updateRatings rating-system results)
-    (rating-to-map player-to-track)))
+    (rating-to-map player)))
 
 (defn calculate-partial-ratings [wins]
   (loop [i 1
