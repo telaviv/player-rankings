@@ -18,22 +18,21 @@
     (labels/add conn node "tournament")
     node))
 
-(defn- player-map-from-raw-arrays [raw-arrays]
-  (zipmap (map #(% "name") raw-arrays)
-          (map #(identity {:name (% "name") :id (% "id")}) raw-arrays)))
+(defn- keys->keywords [coll]
+  (into {} (for [[k v] coll] [(keyword k) v])))
 
 (defn- get-existing-players []
   (let [query (str "match (p:player) "
-                   "return id(p) as id, p.name as name")
+                   "return id(p) as id, p.aliases as aliases")
         data (cypher/tquery conn query)]
-    (player-map-from-raw-arrays data)))
+    (map keys->keywords data)))
 
 (defn- create-new-player-nodes [player-names]
   (let [query (str "unwind {names} as name "
                    "create (p:player {name: name, aliases: [name]}) "
-                   "return id(p) as id, p.name as name")
+                   "return id(p) as id, p.aliases as aliases")
         data (cypher/tquery conn query {:names player-names})]
-    (player-map-from-raw-arrays data)))
+    (map keys->keywords data)))
 
 (defn normalize-name [player-name]
   (-> player-name
@@ -43,9 +42,11 @@
       last))
 
 (defn get-matching-player [player-name players]
-  (some #(when (= (normalize-name player-name)
-                  (normalize-name (:name %))) %)
-        (vals players)))
+  (some #(when (some (fn [existing-player-name]
+                       (= (normalize-name player-name)
+                          (normalize-name existing-player-name)))
+                     (map normalize-name (:aliases %))) %)
+        players))
 
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
@@ -54,7 +55,7 @@
         existing-players (get-existing-players)
         new-player-names (filter #(not (get-matching-player % existing-players)) unique-players)
         new-players (create-new-player-nodes new-player-names)]
-    (merge existing-players new-players)))
+    (concat existing-players new-players)))
 
 (defn- create-match-graph-data [match player-nodes]
   (let [player1-node (get-matching-player (:player-one match) player-nodes)
