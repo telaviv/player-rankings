@@ -34,9 +34,14 @@
         data (cypher/tquery conn query {:names player-names})]
     (map keys->keywords data)))
 
+(defn remove-common-team-names [lowercased-player-name]
+  (let [team-names ["sky raiders" "1up"]]
+    (reduce #(string/replace %1 %2 "") lowercased-player-name team-names)))
+
 (defn normalize-name [player-name]
   (-> player-name
       string/lower-case
+      remove-common-team-names
       (string/replace #"\s" "")
       (string/split #"\|")
       last))
@@ -149,5 +154,15 @@
                     "where id(a) = {aid} and id(b) = {bid} "
                     "set a.aliases = a.aliases + b.aliases "
                     "create (a)-[:played {won: bp.won}]->(bm) "
-                    "delete bp, b")]
+                    "delete bp, b "
+                    "with a as a "
+                    "unwind a.aliases as alias "
+                    "with collect(distinct alias) as unique_aliases, a as a "
+                    "set a.aliases = unique_aliases ")]
      (cypher/tquery conn query {:aid aid, :bid bid}))))
+
+(defn merge-multiple-player-nodes [player-nodes]
+  (let [existing-players (get-existing-players)]
+    (doseq [node-pair player-nodes]
+      (merge-player-nodes node-pair existing-players)))
+  (update-player-ratings))
