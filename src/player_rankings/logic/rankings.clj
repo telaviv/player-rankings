@@ -56,3 +56,12 @@
                           :groups (conj (:groups acc) (:current-group acc))
                           :current-group []}))
                      {:times time-seq :groups [] :current-group []} matches))))
+
+(defn group-matches-by-player-and-period [matches]
+  (let [matches-by-period (group-matches-by-rating-period matches)
+        player-ids (distinct (map #(% "player_id") matches))]
+    (mapv (fn [matches-in-period]
+           (into {}
+                 (map (fn [p] {p (filter #(= p (% "player_id")) matches-in-period)})
+                      player-ids)))
+         matches-by-period)))
