@@ -139,3 +139,15 @@
   (doseq [tournament tournaments]
     (create-tournament-graph tournament))
   (update-player-ratings))
+
+(defn merge-player-nodes
+  ([[a b]] (merge-player-nodes [a b] (get-existing-players)))
+  ([[a b] players]
+   (let [aid (:id (get-matching-player a players))
+         bid (:id (get-matching-player b players))
+         query (str "match (a:player), (b:player)-[bp:played]-(bm:match) "
+                    "where id(a) = {aid} and id(b) = {bid} "
+                    "set a.aliases = a.aliases + b.aliases "
+                    "create (a)-[:played {won: bp.won}]->(bm) "
+                    "delete bp, b")]
+     (cypher/tquery conn query {:aid aid, :bid bid}))))
