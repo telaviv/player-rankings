@@ -1,7 +1,11 @@
 (ns player-rankings.logic.rankings
-    (:import org.goochjs.glicko2.RatingCalculator
-             org.goochjs.glicko2.Rating
-             org.goochjs.glicko2.RatingPeriodResults))
+  (:require [clojure.string :as string]
+            [clj-time.periodic :as p]
+            [clj-time.core :as t]
+            [clj-time.coerce :as c])
+   (:import org.goochjs.glicko2.RatingCalculator
+            org.goochjs.glicko2.Rating
+            org.goochjs.glicko2.RatingPeriodResults))
 
 (defn create-player [rating-system]
   (Rating. "player" rating-system))
@@ -42,3 +46,13 @@
          (map read-string)
          (some #(< % 0))
          (= true))))
+
+(defn group-matches-by-rating-period [matches]
+  (let [time-seq (rest (p/periodic-seq (c/from-long (get-in matches [0 "time"])) (t/weeks 2)))]
+    (:groups (reduce (fn [acc match]
+                       (if (t/before? (c/from-long (match "time")) (first (:times acc)))
+                         (assoc acc :current-group (conj (:current-group acc) match))
+                         {:times (rest (:times acc))
+                          :groups (conj (:groups acc) (:current-group acc))
+                          :current-group []}))
+                     {:times time-seq :groups [] :current-group []} matches))))
