@@ -33,3 +33,12 @@
       (let [new-rating (calculate-rating-period (subvec wins 0 i))
             rating-diff {:start old-rating :end new-rating}]
         (recur (inc i) new-rating (conj rating-coll rating-diff))))))
+
+(defn- is-disqualifying-score [score]
+  (let [score-parts (-> score
+                        (string/replace #"(-?\d)-(-?\d)" "$1 $2")
+                        (string/split #" "))]
+    (->> score-parts
+         (map read-string)
+         (some #(< % 0))
+         (= true))))
