@@ -62,9 +62,12 @@
                           :current-group []}))
                      {:times time-seq :groups [] :current-group []} matches))))
 
-(defn group-matches-by-player-and-period [matches]
+(defn player-ids-from-matches [matches]
+  (distinct (map #(% "player_id") matches)))
+
+(defn group-matches-into-periods [matches]
   (let [matches-by-period (group-matches-by-rating-period matches)
-        player-ids (distinct (map #(% "player_id") matches))]
+        player-ids (player-ids-from-matches matches)]
     (mapv (fn [matches-in-period]
            (into {}
                  (map (fn [p] {p (filter #(= p (% "player_id")) matches-in-period)})
@@ -83,19 +86,39 @@
 (defn normalize-match-for-calculation [match player-scores]
   {:id (match "played_id")
    :won (match "won")
-   :opponent-rating (player-scores (match "opponent_id"))
-   :is-disqualified (is-disqualifying-score (match "score"))})
+   :opponent-rating (-> "opponent_id" match player-scores :current)
+   :is-disqualified (-> "score" match is-disqualifying-score)})
 
 (defn initial-player-ratings [player-ids]
-  (zipmap player-ids (repeat default-rating)))
+  (zipmap player-ids (repeat {:old default-rating :current default-rating})))
 
 (defn map-matches-with-ratings [matches player-ratings initial-rating]
   (->> matches
        (mapv #(normalize-match-for-calculation % player-ratings))
        (calculate-partial-ratings initial-rating)))
 
-(defn aggregate-period [player-ratings period]
+(defn map-ratings-to-period [player-ratings period]
   (reduce-kv (fn [coll k v]
                (assoc coll k (map-matches-with-ratings
-                              v player-ratings (player-ratings k))))
+                              v player-ratings (get-in player-ratings [k :current]))))
              {} period))
+
+(defn aggregate-ratings-from-period [player-ratings period]
+  (let [period-ratings (map-ratings-to-period player-ratings period)
+        new-ratings (reduce-kv (fn [coll k v]
+                                 (if (= 0 (count v))
+                                   (assoc coll k (player-ratings k))
+                                   (assoc coll k {:old (-> v first :start)
+                                                  :current (-> v last :end)})))
+                               {} period-ratings)
+        matches (-> period-ratings vals flatten)]
+    {:player-ratings new-ratings :matches matches}))
+
+(defn ratings-from-matches [matches]
+  (let [periods (group-matches-into-periods matches)
+        initial-ratings (-> matches player-ids-from-matches initial-player-ratings)]
+    (reduce (fn [acc period]
+              (let [new-ratings (aggregate-ratings-from-period (:player-ratings acc) period)]
+                {:player-ratings (:player-ratings new-ratings)
+                 :matches (concat (:matches acc) (:matches new-ratings))}))
+            {:player-ratings initial-ratings :matches []} periods)))
