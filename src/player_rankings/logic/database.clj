@@ -93,43 +93,18 @@
              "order by game.time ")]
     (vec (cypher/tquery conn query))))
 
-(defn- match-information-by-player []
-  (reduce (fn [coll match]
-            (let [player-id (match "player_id")
-                  match-record {:id (match "played_id")
-                                :won (match "won")
-                                :player_id (match "player_id")}]
-              (if (contains? coll player-id)
-                (assoc coll player-id (conj (coll player-id) match-record))
-                (assoc coll player-id [match-record]))))
-          {} (raw-match-information)))
-
-(defn- flatten-rating-record [record]
-  {:start ((juxt :rating :rd :volatility) (:start record))
-   :end ((juxt :rating :rd :volatility) (:end record))})
-
-(defn- flattened-ratings [wins]
-  (->> wins
-       rankings/calculate-partial-ratings
-       (map flatten-rating-record)))
-
-(defn- ratings-information-by-player []
-  (let [player-matches (match-information-by-player)]
-    (reduce-kv
-     (fn [coll player-id match-records]
-       (let [ratings (flattened-ratings (mapv :won match-records))
-             new-match-records (map merge match-records ratings)]
-         (assoc coll player-id new-match-records))) {} player-matches)))
-
 (defn- get-match-ratings []
-  (-> (ratings-information-by-player) vals flatten vec))
+  (-> (raw-match-information) rankings/ratings-from-matches))
 
 (defn update-player-ratings []
-  (let [matches (get-match-ratings)
+  (let [matches (:matches (get-match-ratings))
         query (str "unwind {records} as record "
-                   "match (p:player)-[played:played]-(:match) "
-                   "where id(p) = record.player_id and id(played) = record.id "
-                   "set played += {start_rating: record.start, end_rating: record.end} ")]
+                   "match (:player)-[pl:played]-(:match) "
+                   "where id(pl) = record.id "
+                   "set pl.start_rating = [record.start.rating, "
+                   "record.start.rd, record.start.volatility] "
+                   "set pl.end_rating = [record.end.rating, "
+                   "record.end.rd, record.end.volatility] ")]
     (cypher/tquery conn query {:records matches})))
 
 (defn create-tournament-graph [tournament-data]
