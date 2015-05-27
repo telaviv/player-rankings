@@ -42,13 +42,14 @@
     (if (= i (count nmatches))
       rating-coll
       (let [new-i (inc i)
-            match-id (get-in nmatches [i :id])]
+            nmatch (nmatches i)
+            match-info {:id (nmatch :id) :player_id (nmatch :player-id)}]
         (if (get-in nmatches [i :is-disqualified])
           (recur new-i old-rating (conj rating-coll
-                                        {:start old-rating :end old-rating :id match-id}))
+                                        (assoc match-info :start old-rating :end old-rating)))
           (let [new-rating (calculate-rating-period
                             initial-rating (take (inc i) nmatches))
-                rating-diff {:start old-rating :end new-rating :id match-id}]
+                rating-diff (assoc match-info :start old-rating :end new-rating)]
             (recur new-i new-rating (conj rating-coll rating-diff))))))))
 
 
@@ -75,16 +76,18 @@
          matches-by-period)))
 
 (defn- is-disqualifying-score [score]
-  (let [score-parts (-> score
-                        (string/replace #"(-?\d)-(-?\d)" "$1 $2")
-                        (string/split #" "))]
-    (->> score-parts
-         (map read-string)
-         (some #(< % 0))
-         (= true))))
+  (or (empty? score)
+      (let [score-parts (-> score
+                            (string/replace #"(-?\d)-(-?\d)" "$1 $2")
+                            (string/split #" "))]
+        (->> score-parts
+             (map read-string)
+             (some #(< % 0))
+             (= true)))))
 
 (defn normalize-match-for-calculation [match player-scores]
   {:id (match "played_id")
+   :player-id (match "player_id")
    :won (match "won")
    :opponent-rating (-> "opponent_id" match player-scores :current)
    :is-disqualified (-> "score" match is-disqualifying-score)})

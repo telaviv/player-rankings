@@ -1,7 +1,8 @@
 (ns player-rankings.logic.initializers
   (:require [player-rankings.logic.challonge-parser :refer [get-tournament-data]]
             [player-rankings.logic.database :refer [load-tournaments
-                                                    merge-multiple-player-nodes]]))
+                                                    merge-multiple-player-nodes
+                                                    update-ratings]]))
 
 (def tournament-urls
   ["http://showdowngg.challonge.com/comeonandban13singles"
@@ -34,14 +35,19 @@
    "http://bko.challonge.com/SO34"
    "http://bko.challonge.com/SO44"])
 
-(def showdown-aliases
+(def aliases
   [["Crow" "Chaos Crow"]
    ["Mijo" "Mijo FUEGO"]
    ["Mr. Javi" "Mr Jav"]
-   ["SKS" "watislyfe"]])
+   ["SKS" "watislyfe"]
+   ["NME | Nanerz" "Cynthia"]
+   ["Ricksaw" "NinjaRlink"]
+   ["Arikie" "MS | Shadow"]
+   ["GShark" "Leffen_Shark"]
+   ["1UP | X" "1UP I X")])
 
-(defn load-showdown-data []
-  (let [urls (subvec tournament-urls 0 6)
-        tournaments (map get-tournament-data urls)]
+(defn load-data []
+  (let [tournaments (map get-tournament-data tournament-urls)]
     (load-tournaments tournaments)
-    (merge-multiple-player-nodes showdown-aliases)))
+    (merge-multiple-player-nodes aliases)
+    (update-ratings)))

@@ -35,7 +35,7 @@
     (map keys->keywords data)))
 
 (defn remove-common-team-names [lowercased-player-name]
-  (let [team-names ["sky raiders" "1up"]]
+  (let [team-names ["sky raiders" "1up" "nme"]]
     (reduce #(string/replace %1 %2 "") lowercased-player-name team-names)))
 
 (defn normalize-name [player-name]
@@ -96,16 +96,36 @@
 (defn- get-match-ratings []
   (-> (raw-match-information) rankings/ratings-from-matches))
 
-(defn update-player-ratings []
-  (let [matches (:matches (get-match-ratings))
-        query (str "unwind {records} as record "
-                   "match (:player)-[pl:played]-(:match) "
-                   "where id(pl) = record.id "
+(defn update-played-with-ratings [match-ratings]
+  (let [query (str "unwind {records} as record "
+                   "match (p:player)-[pl:played]-(:match) "
+                   "where id(p) = record.player_id and id(pl) = record.id "
                    "set pl.start_rating = [record.start.rating, "
                    "record.start.rd, record.start.volatility] "
                    "set pl.end_rating = [record.end.rating, "
                    "record.end.rd, record.end.volatility] ")]
-    (cypher/tquery conn query {:records matches})))
+    (cypher/tquery conn query {:records match-ratings})))
+
+(defn flatten-player-ratings [player-ratings]
+  (reduce-kv (fn [coll k v]
+               (conj coll (assoc v :id k)))
+             [] player-ratings))
+
+(defn update-player-with-ratings [player-ratings]
+  (let [vector-ratings (flatten-player-ratings player-ratings)
+        query (str "unwind {records} as record "
+                   "match (p:player) "
+                   "where id(p) = record.id "
+                   "set p.current_rating = [record.old.rating, "
+                   "record.old.rd, record.old.volatility] "
+                   "set p.provisional_rating = [record.current.rating, "
+                   "record.current.rd, record.current.volatility] ")]
+    (cypher/tquery conn query {:records vector-ratings})))
+
+(defn update-ratings []
+  (let [ratings (get-match-ratings)]
+    (update-played-with-ratings (:matches ratings))
+    (update-player-with-ratings (:player-ratings ratings))))
 
 (defn create-tournament-graph [tournament-data]
   (let [tournament-node (create-tournament-node (:tournament tournament-data))
@@ -120,8 +140,7 @@
 
 (defn load-tournaments [tournaments]
   (doseq [tournament tournaments]
-    (create-tournament-graph tournament))
-  (update-player-ratings))
+    (create-tournament-graph tournament)))
 
 (defn merge-player-nodes
   ([[a b]] (merge-player-nodes [a b] (get-existing-players)))
@@ -142,5 +161,4 @@
 (defn merge-multiple-player-nodes [player-nodes]
   (let [existing-players (get-existing-players)]
     (doseq [node-pair player-nodes]
-      (merge-player-nodes node-pair existing-players)))
-  (update-player-ratings))
+      (merge-player-nodes node-pair existing-players))))

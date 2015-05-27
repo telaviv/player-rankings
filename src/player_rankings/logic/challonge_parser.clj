@@ -54,8 +54,15 @@
              :winner (get-winner match)})]
     (vec (map merge-match matches))))
 
+(defn filter-out-empty-matches [matches]
+  (filterv (fn [match]
+             (let [nmatch (match "match")]
+               (and (nmatch "player1_id")
+                    (nmatch "player2_id"))))
+           matches))
+
 (defn- get-matches-from-url [url]
-  (let [matches (-> url matches-url make-request)
+  (let [matches (-> url matches-url make-request filter-out-empty-matches)
         participants (-> url participants-url make-request)]
     (merge-matches-and-participants matches participants)))
 
