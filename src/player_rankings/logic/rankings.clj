@@ -35,24 +35,22 @@
     (.updateRatings rating-system results)
     (rating-to-map player)))
 
-(defn calculate-partial-ratings [wins]
-  (loop [i 1
-         old-rating (-> (RatingCalculator.) create-player rating-to-map)
+(defn calculate-partial-ratings [initial-rating nmatches]
+  (loop [i 0
+         old-rating initial-rating
          rating-coll []]
-    (if (> i (count wins))
+    (if (= i (count nmatches))
       rating-coll
-      (let [new-rating (calculate-rating-period (subvec wins 0 i))
-            rating-diff {:start old-rating :end new-rating}]
-        (recur (inc i) new-rating (conj rating-coll rating-diff))))))
+      (let [new-i (inc i)
+            match-id (get-in nmatches [i :id])]
+        (if (get-in nmatches [i :is-disqualified])
+          (recur new-i old-rating (conj rating-coll
+                                        {:start old-rating :end old-rating :id match-id}))
+          (let [new-rating (calculate-rating-period
+                            initial-rating (take (inc i) nmatches))
+                rating-diff {:start old-rating :end new-rating :id match-id}]
+            (recur new-i new-rating (conj rating-coll rating-diff))))))))
 
-(defn- is-disqualifying-score [score]
-  (let [score-parts (-> score
-                        (string/replace #"(-?\d)-(-?\d)" "$1 $2")
-                        (string/split #" "))]
-    (->> score-parts
-         (map read-string)
-         (some #(< % 0))
-         (= true))))
 
 (defn group-matches-by-rating-period [matches]
   (let [time-seq (rest (p/periodic-seq (c/from-long (get-in matches [0 "time"])) (t/weeks 2)))]
@@ -72,3 +70,32 @@
                  (map (fn [p] {p (filter #(= p (% "player_id")) matches-in-period)})
                       player-ids)))
          matches-by-period)))
+
+(defn- is-disqualifying-score [score]
+  (let [score-parts (-> score
+                        (string/replace #"(-?\d)-(-?\d)" "$1 $2")
+                        (string/split #" "))]
+    (->> score-parts
+         (map read-string)
+         (some #(< % 0))
+         (= true))))
+
+(defn normalize-match-for-calculation [match player-scores]
+  {:id (match "played_id")
+   :won (match "won")
+   :opponent-rating (player-scores (match "opponent_id"))
+   :is-disqualified (is-disqualifying-score (match "score"))})
+
+(defn initial-player-ratings [player-ids]
+  (zipmap player-ids (repeat default-rating)))
+
+(defn map-matches-with-ratings [matches player-ratings initial-rating]
+  (->> matches
+       (mapv #(normalize-match-for-calculation % player-ratings))
+       (calculate-partial-ratings initial-rating)))
+
+(defn aggregate-period [player-ratings period]
+  (reduce-kv (fn [coll k v]
+               (assoc coll k (map-matches-with-ratings
+                              v player-ratings (player-ratings k))))
+             {} period))

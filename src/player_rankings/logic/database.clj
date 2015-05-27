@@ -85,11 +85,12 @@
     (mapv #(% "id") (cypher/tquery conn query {:records match-graph-data}))))
 
 (defn raw-match-information []
-  (let [query (str "match (player:player)-[played:played]-(game:match), "
-                   "(game)--(opponent:player)"
-                   "return id(player) as player_id, id(played) as played_id, "
-                   "id(opponent) as opponent_id, played.won as won, game.time as time "
-                   "order by game.time ")]
+  (let [query
+        (str "match (player:player)-[played:played]-(game:match), "
+             "(game)--(opponent:player)"
+             "return id(player) as player_id, id(played) as played_id, game.score as score, "
+             "id(opponent) as opponent_id, played.won as won, game.time as time "
+             "order by game.time ")]
     (vec (cypher/tquery conn query))))
 
 (defn- match-information-by-player []
