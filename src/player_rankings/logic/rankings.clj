@@ -22,6 +22,14 @@
 
 (def default-rating (rating-to-map (Rating. "player" (RatingCalculator.))))
 
+(defn calculate-inactive-rating [initial-rating]
+  (let [rating-system (RatingCalculator.)
+        results (RatingPeriodResults.)
+        player (create-player initial-rating rating-system)]
+    (.addParticipants results player)
+    (.updateRatings rating-system results)
+    {:old initial-rating, :current (rating-to-map player)}))
+
 (defn calculate-rating-period [initial-rating matches]
   (let [rating-system (RatingCalculator.)
         results (RatingPeriodResults.)
@@ -110,7 +118,8 @@
   (let [period-ratings (map-ratings-to-period player-ratings period)
         new-ratings (reduce-kv (fn [coll k v]
                                  (if (= 0 (count v))
-                                   (assoc coll k (player-ratings k))
+                                   (assoc coll k (calculate-inactive-rating
+                                                  (get-in player-ratings [k :current])))
                                    (assoc coll k {:old (-> v first :start)
                                                   :current (-> v last :end)})))
                                {} period-ratings)
