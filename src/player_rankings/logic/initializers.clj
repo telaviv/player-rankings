@@ -40,11 +40,14 @@
    ["Mijo" "Mijo FUEGO"]
    ["Mr. Javi" "Mr Jav"]
    ["SKS" "watislyfe"]
+   ["SKS" "SKS aka Watislyfe"]
    ["NME | Nanerz" "Cynthia"]
-   ["Ricksaw" "NinjaRlink"]
+   ["Rickshaw" "NinjaRlink"]
+   ["Rickshaw" "Rickshaw (set)"]
+   ["BaNdt" "ARaNdomVillager (BaNdt)"]
    ["Arikie" "MS | Shadow"]
    ["GShark" "Leffen_Shark"]
-   ["1UP | X" "1UP I X")])
+   ["Scourge" "Summus (Scourge)"]])
 
 (defn load-data []
   (let [tournaments (map get-tournament-data tournament-urls)]

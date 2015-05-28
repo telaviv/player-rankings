@@ -35,8 +35,11 @@
     (map keys->keywords data)))
 
 (defn remove-common-team-names [lowercased-player-name]
-  (let [team-names ["sky raiders" "1up" "nme"]]
-    (reduce #(string/replace %1 %2 "") lowercased-player-name team-names)))
+  (let [team-names ["sky raiders" "1up" "nme" "bask" "pho" "bko" "made"]
+        space-team-names (map #(str % " ") team-names)
+        i-team-names (map #(str % "i") space-team-names)
+        strings-to-remove (concat i-team-names space-team-names)]
+    (reduce #(string/replace %1 %2 "") lowercased-player-name strings-to-remove)))
 
 (defn normalize-name [player-name]
   (-> player-name
