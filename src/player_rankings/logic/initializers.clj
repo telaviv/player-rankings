@@ -6,6 +6,16 @@
 
 (def tournament-urls
   ["http://showdowngg.challonge.com/comeonandban13singles"
+   "http://showdowngg.challonge.com/comeonandban2singles"
+   "http://showdowngg.challonge.com/comeonandban3singles"
+   "http://showdowngg.challonge.com/comeonandban4singles"
+   "http://showdowngg.challonge.com/comeonandban5singles"
+   "http://showdowngg.challonge.com/comeonandban6singles"
+   "http://showdowngg.challonge.com/comeonandban7singles"
+   "http://showdowngg.challonge.com/comeonandban8singles"
+   "http://showdowngg.challonge.com/comeonandban9singles"
+   "http://showdowngg.challonge.com/comeonandban12singles"
+   "http://showdowngg.challonge.com/comeonandban10singles"
    "http://showdowngg.challonge.com/comeonandban14singles"
    "http://showdowngg.challonge.com/comeonandban15singles"
    "http://showdowngg.challonge.com/comeonandban16singles"
@@ -14,7 +24,18 @@
    "http://challonge.com/MADE5Singles"
    "http://challonge.com/MADE6Singles"
    "http://challonge.com/MADE7Singles"
+   "http://challonge.com/BMLC1"
+   "http://challonge.com/BMLC2"
+   "http://challonge.com/BMLC3"
    "http://challonge.com/BMLH3"
+   "http://challonge.com/BMLH6"
+   "http://challonge.com/BMLH5"
+   "http://challonge.com/BMLH4"
+   "http://challonge.com/BMLH2"
+   "http://challonge.com/BMLH1"
+   "http://scusmash.challonge.com/WW14_4SINGLES"
+   "http://scusmash.challonge.com/WW13_4Singles"
+   "http://scusmash.challonge.com/WW11S4"
    "http://capitolfightdistrict.challonge.com/cfdandgplswu"
    "http://challonge.com/surfcityslamsinglesPRO"
    "http://challonge.com/minibosssmash4singles2"
@@ -47,7 +68,17 @@
    ["BaNdt" "ARaNdomVillager (BaNdt)"]
    ["Arikie" "MS | Shadow"]
    ["GShark" "Leffen_Shark"]
-   ["Scourge" "Summus (Scourge)"]])
+   ["Scourge" "Summus (Scourge)"]
+   ["Kronos" "Kronos2560"]
+   ["Hitaku" "Hitaku Back Sunday"]
+   ["Boba Tapioca" "Boba"]
+   ["UC | DSS" "@UC_DSS"]
+   ["Jimber Jangers" "Daimyes (Jimber Jangers)"]
+   ["MisterQ" "MrQ"]
+   ["Chaos Pro" "Sm4sh Mango aka Chaos Pro"]
+   ["Chaos Pro" "Smash 4 Mango aka ChaosPro"]
+   ["Chinito" "Chihito"]
+   ["Jeepysol" "Jeepy"]])
 
 (defn load-data []
   (let [tournaments (map get-tournament-data tournament-urls)]

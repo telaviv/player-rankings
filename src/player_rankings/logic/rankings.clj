@@ -7,6 +7,11 @@
             org.goochjs.glicko2.Rating
             org.goochjs.glicko2.RatingPeriodResults))
 
+(def DEFAULT-VOLATILITY 0.06)
+(def DEFAULT-TAU 1.2)
+
+(defn create-calculator []
+  (RatingCalculator. DEFAULT-VOLATILITY DEFAULT-TAU))
 
 (defn create-player [rating rating-system]
   (let [player (Rating. "player" rating-system)]
@@ -20,10 +25,10 @@
    :rd (.getRatingDeviation rating-object)
    :volatility (.getVolatility rating-object)})
 
-(def default-rating (rating-to-map (Rating. "player" (RatingCalculator.))))
+(def default-rating (rating-to-map (Rating. "player" (create-calculator))))
 
 (defn calculate-inactive-rating [initial-rating]
-  (let [rating-system (RatingCalculator.)
+  (let [rating-system (create-calculator)
         results (RatingPeriodResults.)
         player (create-player initial-rating rating-system)]
     (.addParticipants results player)
@@ -31,7 +36,7 @@
     {:old initial-rating, :current (rating-to-map player)}))
 
 (defn calculate-rating-period [initial-rating matches]
-  (let [rating-system (RatingCalculator.)
+  (let [rating-system (create-calculator)
         results (RatingPeriodResults.)
         player (create-player initial-rating rating-system)]
     (.addParticipants results player)
