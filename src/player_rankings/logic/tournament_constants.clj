@@ -1,4 +1,5 @@
-(ns player-rankings.logic.tournament-constants)
+(ns player-rankings.logic.tournament-constants
+  (:require [clojure.set :refer [difference]]))
 
 (def tournament-urls
   ["http://showdowngg.challonge.com/comeonandban13singles"
@@ -106,7 +107,7 @@
    ["Focast" "Foucast"]
    ["Chinito" "Chihito"]
    ["Jeepysol" "Jeepy"]
-   ["Villain" "Villian"])
+   ["Villain" "Villian"]])
 
 (def january-power-ranks
   ["Ito"
@@ -176,3 +177,10 @@
    "AD"
    "Bandt"
    "Hitaku"])
+
+(def currently-ranked-players spring-power-ranks)
+(def previously-ranked-players
+  (vec (difference (set (concat january-power-ranks
+                                february-power-ranks
+                                march-power-ranks))
+                   (set currently-ranked-players))))

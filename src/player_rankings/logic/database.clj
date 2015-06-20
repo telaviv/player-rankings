@@ -132,6 +132,29 @@
     (update-played-with-ratings (:matches ratings))
     (update-player-with-ratings (:player-ratings ratings))))
 
+(defn create-ranked-records []
+  (let [players (get-existing-players)
+        ranked (set (map normalize-name constants/currently-ranked-players))
+        previously-ranked (set (map normalize-name constants/previously-ranked-players))]
+    (map (fn [player]
+           (let [aliases (set (map normalize-name (:aliases player)))
+                 id (:id player)]
+             (cond (not= aliases (difference aliases ranked))
+                   {:id id, :ranked "currently"}
+                   (not= aliases (difference aliases previously-ranked))
+                   {:id id :ranked "previously"}
+                   :else
+                   {:id id :ranked "unranked"})))
+         players)))
+
+(defn update-rankings []
+  (let [records (create-ranked-records)
+        query (str "unwind {records} as record "
+                   "match (p:player) "
+                   "where id(p) = record.id "
+                   "set p.ranked = record.ranked ")]
+    (cypher/tquery conn query {:records records})))
+
 (defn create-tournament-graph [tournament-data]
   (let [tournament-node (create-tournament-node (:tournament tournament-data))
         match-ids (create-match-graphs (:matches tournament-data))
