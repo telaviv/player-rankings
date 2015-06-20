@@ -89,14 +89,13 @@
          matches-by-period)))
 
 (defn- is-disqualifying-score [score]
-  (or (empty? score)
-      (let [score-parts (-> score
-                            (string/replace #"(-?\d)-(-?\d)" "$1 $2")
-                            (string/split #" "))]
-        (->> score-parts
-             (map read-string)
-             (some #(< % 0))
-             (= true)))))
+  (let [score-parts (-> score
+                        (string/replace #"(-?\d)-(-?\d)" "$1 $2")
+                        (string/split #" "))]
+    (->> score-parts
+         (map read-string)
+         (some #(< % 0))
+         (= true))))
 
 (defn normalize-match-for-calculation [match player-scores]
   {:id (match "played_id")

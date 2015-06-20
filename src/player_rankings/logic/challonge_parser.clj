@@ -58,7 +58,8 @@
   (filterv (fn [match]
              (let [nmatch (match "match")]
                (and (nmatch "player1_id")
-                    (nmatch "player2_id"))))
+                    (nmatch "player2_id")
+                    (not= (nmatch "scores_csv") ""))))
            matches))
 
 (defn- get-matches-from-url [url]
