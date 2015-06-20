@@ -70,8 +70,8 @@
   (let [tournament (-> url tournament-url make-request (get "tournament"))]
     {:identifier (create-url-id url)
      :title (tournament "name")
-     :started-at (coerce-time/to-long (tournament "started_at"))
-     :updated-at (coerce-time/to-long (tournament "updated_at"))
+     :started_at (coerce-time/to-long (tournament "started_at"))
+     :updated_at (coerce-time/to-long (tournament "updated_at"))
      :url (tournament "full_challonge_url")
      :image_url (tournament "live_image_url")}))
 

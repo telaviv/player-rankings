@@ -8,7 +8,8 @@
             [clojurewerkz.neocons.rest.relationships :as relationships]
             [clojurewerkz.neocons.rest.transaction :as transaction]
             [player-rankings.secrets :refer [neo4j-username neo4j-password]]
-            [player-rankings.logic.rankings :as rankings]))
+            [player-rankings.logic.rankings :as rankings]
+            [player-rankings.logic.tournament-constants :as constants]))
 
 (def conn (nr/connect
            (str "http://" neo4j-username ":" neo4j-password "@localhost:7474/db/data/")))
@@ -35,7 +36,7 @@
     (map keys->keywords data)))
 
 (defn remove-common-team-names [lowercased-player-name]
-  (let [team-names ["sky raiders" "1up" "nme" "bask" "pho" "bko" "made" "8bit"]
+  (let [team-names constants/team-names
         space-team-names (map #(str % " ") team-names)
         i-team-names (map #(str % "i") space-team-names)
         strings-to-remove (concat i-team-names space-team-names)]
@@ -43,6 +44,7 @@
 
 (defn normalize-name [player-name]
   (-> player-name
+      (string/replace #"\(.*\)" "")
       string/lower-case
       remove-common-team-names
       (string/replace #"\s" "")

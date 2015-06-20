@@ -74,6 +74,9 @@
    "http://bko.challonge.com/BMS4S"
    "http://bko.challonge.com/SO5M"])
 
+(def team-names
+  ["sky raiders" "1up" "nme" "bask" "pho" "bko" "made" "8bit" "swarm" "uc" "fyt"])
+
 (def aliases
   [["Crow" "Chaos Crow"]
    ["Crow" "Maleficent"]
@@ -83,23 +86,27 @@
    ["SKS" "SKS aka Watislyfe"]
    ["NME | Nanerz" "Cynthia"]
    ["Rickshaw" "NinjaRlink"]
-   ["Rickshaw" "Rickshaw (set)"]
-   ["BaNdt" "ARaNdomVillager (BaNdt)"]
+   ["BaNdt" "ARaNdomVillager"]
    ["Arikie" "MS | Shadow"]
    ["Arikie" "4B_Arikie"]
    ["GShark" "Leffen_Shark"]
    ["GShark" "G-Shark"]
-   ["Scourge" "Summus (Scourge)"]
+   ["Mocha" "Andrew Le"]
+   ["Scourge" "Summus"]
    ["Kronos" "Kronos2560"]
    ["Hitaku" "Hitaku Back Sunday"]
    ["Boba Tapioca" "Boba"]
    ["UC | DSS" "@UC_DSS"]
-   ["Jimber Jangers" "Daimyes (Jimber Jangers)"]
+   ["Jimber Jangers" "Daimyes"]
    ["MisterQ" "MrQ"]
+   ["MisterQ" "Mr. Q"]
    ["Chaos Pro" "Sm4sh Mango aka Chaos Pro"]
    ["Chaos Pro" "Smash 4 Mango aka ChaosPro"]
+   ["Andy_Sauro" "Andy The Albatross"]
+   ["Focast" "Foucast"]
    ["Chinito" "Chihito"]
-   ["Jeepysol" "Jeepy"]])
+   ["Jeepysol" "Jeepy"]
+   ["Villain" "Villian"])
 
 (def january-power-ranks
   ["Ito"
