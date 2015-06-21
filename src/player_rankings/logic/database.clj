@@ -184,7 +184,8 @@
                     "unwind a.aliases as alias "
                     "with collect(distinct alias) as unique_aliases, a as a "
                     "set a.aliases = unique_aliases ")]
-     (cypher/tquery conn query {:aid aid, :bid bid}))))
+     (if (and (some? aid) (some? bid))
+       (cypher/tquery conn query {:aid aid, :bid bid})))))
 
 (defn merge-multiple-player-nodes [player-nodes]
   (let [existing-players (get-existing-players)]
