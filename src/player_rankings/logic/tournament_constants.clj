@@ -52,6 +52,7 @@
    "http://capitolfightdistrict.challonge.com/icrrkb29"
    "http://capitolfightdistrict.challonge.com/1vzpjxd1"
    "http://capitolfightdistrict.challonge.com/oojlvpxf"
+   "http://capitolfightdistrict.challonge.com/fd8j4kag"
    "http://challonge.com/surfcityslamsinglesPRO"
    "http://challonge.com/minibosssmash4singles2"
    "http://challonge.com/hostdc"
@@ -155,6 +156,7 @@
    ["MisterQ" "Mr. Q"]
    ["Chaos Pro" "Sm4sh Mango aka Chaos Pro"]
    ["Chaos Pro" "Smash 4 Mango aka ChaosPro"]
+   ["Rice" "Rice-kun"]
    ["Andy_Sauro" "Andy The Albatross"]
    ["Focast" "Foucast"]
    ["Chinito" "Chihito"]
