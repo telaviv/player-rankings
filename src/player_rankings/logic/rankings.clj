@@ -67,14 +67,12 @@
 
 
 (defn group-matches-by-rating-period [matches]
-  (let [time-seq (rest (p/periodic-seq (c/from-long (get-in matches [0 "time"])) (t/weeks 2)))]
-    (:groups (reduce (fn [acc match]
-                       (if (t/before? (c/from-long (match "time")) (first (:times acc)))
-                         (assoc acc :current-group (conj (:current-group acc) match))
-                         {:times (rest (:times acc))
-                          :groups (conj (:groups acc) (:current-group acc))
-                          :current-group []}))
-                     {:times time-seq :groups [] :current-group []} matches))))
+  (let [sorted-matches (vec (sort-by #(% "time") matches))
+        earliest-time (c/from-long (get-in sorted-matches [0 "time"]))]
+    (vec (partition-by (fn [match]
+                         (t/in-weeks (t/interval earliest-time
+                                                 (c/from-long (match "time")))))
+                       sorted-matches))))
 
 (defn player-ids-from-matches [matches]
   (distinct (map #(% "player_id") matches)))
