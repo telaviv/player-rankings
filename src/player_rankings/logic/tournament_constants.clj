@@ -206,6 +206,7 @@
   [["Crow" "Chaos Crow"]
    ["Crow" "Maleficent"]
    ["Mijo" "Mijo FUEGO"]
+   ["Mijo" "Fuego"]
    ["Mr. Javi" "Mr Jav"]
    ["SKS" "watislyfe"]
    ["SKS" "SKS aka Watislyfe"]
