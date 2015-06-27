@@ -62,11 +62,6 @@
                     (not= (nmatch "scores_csv") ""))))
            matches))
 
-(defn- get-matches-from-url [url]
-  (let [matches (-> url matches-url make-request filter-out-empty-matches)
-        participants (-> url participants-url make-request)]
-    (merge-matches-and-participants matches participants)))
-
 (defn- get-tournament-from-url [url]
   (let [tournament (-> url tournament-url make-request (get "tournament"))]
     {:identifier (create-url-id url)
@@ -76,6 +71,21 @@
      :url (tournament "full_challonge_url")
      :image_url (tournament "live_image_url")}))
 
+(defn- raw-matches-from-url [url]
+  (-> url matches-url make-request filter-out-empty-matches))
+
+(defn- raw-participants-from-url [url]
+  (-> url participants-url make-request))
+
+(defn normalize-participants [participants]
+  (map (fn [participant]
+         {:name (get-in participant ["participant" "display_name"])
+          :placing (get-in participant ["participant" "final_rank"])})
+       participants))
+
 (defn get-tournament-data [url]
-  {:tournament (get-tournament-from-url url)
-   :matches (get-matches-from-url url)})
+  (let [matches (raw-matches-from-url url)
+        participants (raw-participants-from-url url)]
+    {:participants (normalize-participants participants)
+     :matches (merge-matches-and-participants matches participants)
+     :tournament (get-tournament-from-url url)}))

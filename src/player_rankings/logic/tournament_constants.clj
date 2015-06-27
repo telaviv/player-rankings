@@ -233,6 +233,7 @@
    ["Focast" "Foucast"]
    ["Chinito" "Chihito"]
    ["Jeepysol" "Jeepy"]
+   ["Trex Destiny" "T-Rex Destiny"]
    ["Villain" "Villian"]])
 
 (def january-power-ranks
