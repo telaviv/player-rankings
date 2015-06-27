@@ -155,16 +155,32 @@
                    "set p.ranked = record.ranked ")]
     (cypher/tquery conn query {:records records})))
 
-(defn create-tournament-graph [tournament-data]
-  (let [tournament-node (create-tournament-node (:tournament tournament-data))
-        match-ids (create-match-graphs (:matches tournament-data))
+(defn merge-participants-with-tournament [tournament-node tournament-data]
+  (let [query (str "unwind {players} as player "
+                   "match (p:player {name: player.name}) "
+                   "match (t:tournament) "
+                   "where id(t) = {tournament_id} "
+                   "create (p)-[:participated {placement: player.placement}]->(t) ")]
+    (cypher/tquery conn query {:players (:participants tournament-data)
+                               :tournament_id (:id tournament-node)})))
+
+
+(defn merge-matches-with-tournament [tournament-node tournament-data]
+  (let [match-ids (create-match-graphs (:matches tournament-data))
         query (str "unwind {match_ids} as match_id "
                    "match (m:match) "
                    "where id(m) = match_id "
                    "match (t:tournament) "
                    "where id(t) = {tournament_id} "
                    "create (t)-[:hosted]->(m) ")]
-    (cypher/tquery conn query {:match_ids match-ids :tournament_id (:id tournament-node)})))
+    (cypher/tquery conn query {:match_ids match-ids
+                               :players (:participants tournament-data)
+                               :tournament_id (:id tournament-node)})))
+
+(defn create-tournament-graph [tournament-data]
+  (let [tournament-node (create-tournament-node (:tournament tournament-data))]
+    (merge-matches-with-tournament tournament-node tournament-data)
+    (merge-participants-with-tournament tournament-node tournament-data)))
 
 (defn load-tournaments [tournaments]
   (doseq [tournament tournaments]
