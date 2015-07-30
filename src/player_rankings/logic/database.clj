@@ -191,16 +191,19 @@
   ([[a b] players]
    (let [aid (:id (get-matching-player a players))
          bid (:id (get-matching-player b players))
-         query (str "match (a:player), (b:player)-[bp:played]-(bm:match) "
+         query (str "match (a:player), (b:player)-[bp:played]-(bm:match), "
+                    "(b)-[pa:participated]-(t:tournament) "
                     "where id(a) = {aid} and id(b) = {bid} "
                     "set a.aliases = a.aliases + b.aliases "
-                    "create (a)-[:played {won: bp.won}]->(bm) "
-                    "delete bp, b "
-                    "with a as a "
+                    "merge (a)-[:played {won: bp.won}]->(bm) "
+                    "merge (a)-[:participated {placement: pa.placement}]->(t) "
+                    "with a, b, pa, bp "
+                    "delete b, pa, bp "
+                    "with a "
                     "unwind a.aliases as alias "
                     "with collect(distinct alias) as unique_aliases, a as a "
                     "set a.aliases = unique_aliases ")]
-     (if (and (some? aid) (some? bid))
+     (if (and (some? aid) (some? bid) (not= aid bid))
        (cypher/tquery conn query {:aid aid, :bid bid})))))
 
 (defn merge-multiple-player-nodes [player-nodes]

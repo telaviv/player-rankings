@@ -80,7 +80,7 @@
 (defn normalize-participants [participants]
   (map (fn [participant]
          {:name (get-in participant ["participant" "display_name"])
-          :placement (get-in participant ["participant" "final_rank"])})
+          :placement (or (get-in participant ["participant" "final_rank"]) -1)})
        participants))
 
 (defn get-tournament-data [url]
