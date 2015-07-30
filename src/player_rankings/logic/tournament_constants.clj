@@ -55,6 +55,7 @@
    "http://capitolfightdistrict.challonge.com/1vzpjxd1"
    "http://capitolfightdistrict.challonge.com/oojlvpxf"
    "http://capitolfightdistrict.challonge.com/fd8j4kag"
+   "http://capitolfightdistrict.challonge.com/GSLatBHD"
    "http://challonge.com/surfcityslamsinglesPRO"
    "http://challonge.com/minibosssmash4singles2"
    "http://challonge.com/hostdc"
@@ -65,6 +66,7 @@
    "http://challonge.com/hostdc5singles"
    "http://challonge.com/hostdc6singles"
    "http://challonge.com/hostdc7singles"
+   "http://challonge.com/ghostdc3smash4singles"
    "http://ncr2015.challonge.com/SSB41"
    "http://ncr2015.challonge.com/SSB42"
    "http://ncr2015.challonge.com/SSB43"
@@ -78,7 +80,9 @@
    "http://bko.challonge.com/SO44"
    "http://bko.challonge.com/BMS4S"
    "http://bko.challonge.com/SO5M"
-   "http://bko.challonge.com/OW3S4"])
+   "http://bko.challonge.com/OW3S4"
+   "http://challonge.com/sm4shbruhsep2"
+   "http://challonge.com/bsgdhfdshdssdhfsdh"])
 
 (def summer-power-ranks-urls
   ["http://BKO.challonge.com/BMS4S"
@@ -165,6 +169,7 @@
    "http://capitolfightdistrict.challonge.com/1vzpjxd1"
    "http://capitolfightdistrict.challonge.com/oojlvpxf"
    "http://capitolfightdistrict.challonge.com/fd8j4kag"
+   "http://capitolfightdistrict.challonge.com/GSLatBHD"
    "http://challonge.com/surfcityslamsinglesPRO"
    "http://challonge.com/minibosssmash4singles2"
    "http://challonge.com/hostdc5singles"
