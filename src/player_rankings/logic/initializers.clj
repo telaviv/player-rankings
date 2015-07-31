@@ -8,16 +8,17 @@
                                                     update-ratings
                                                     update-rankings]]))
 
+(defn update-player-data []
+  (merge-multiple-player-nodes aliases)
+  (update-ratings)
+  (update-rankings))
+
 (defn load-data []
   (let [tournaments (map get-tournament-data tournament-urls)]
     (load-tournaments tournaments)
-    (merge-multiple-player-nodes aliases)
-    (update-ratings)
-    (update-rankings)))
+    (update-player-data)))
 
 (defn load-test-data []
   (let [tournaments (map get-tournament-data test-urls)]
     (load-tournaments tournaments)
-    (merge-multiple-player-nodes aliases)
-    (update-ratings)
-    (update-rankings)))
+    (update-player-data)))

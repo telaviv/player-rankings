@@ -1,7 +1,7 @@
 (ns player-rankings.logic.tournament-constants
   (:require [clojure.set :refer [difference]]))
 
-(def tournament-urls
+(def the-foundry
   [
    "http://showdowngg.challonge.com/comeonandban2singles"
    "http://showdowngg.challonge.com/comeonandban3singles"
@@ -28,6 +28,11 @@
    "http://showdowngg.challonge.com/comeonandban24singles"
    "http://showdowngg.challonge.com/comeonandban25singles"
    "http://showdowngg.challonge.com/comeonandban26singles"
+   "http://showdowngg.challonge.com/comeonandban27"
+   ])
+
+(def made
+  [
    "http://challonge.com/MADEsmashbi4singles"
    "http://challonge.com/MADE5Singles"
    "http://challonge.com/MADE6Singles"
@@ -37,6 +42,10 @@
    "http://challonge.com/MADE10Singles"
    "http://challonge.com/MADE11Singles"
    "http://challonge.com/MADE12Singles"
+   ])
+
+(def big-mamas-little-cup
+  [
    "http://challonge.com/BMLC1"
    "http://challonge.com/BMLC2"
    "http://challonge.com/BMLC3"
@@ -45,19 +54,35 @@
    "http://challonge.com/BMLC6"
    "http://challonge.com/BMLC7"
    "http://challonge.com/BMLC8"
+   ])
+
+(def big-mamas-little-house
+  [
    "http://challonge.com/BMLH1"
    "http://challonge.com/BMLH2"
    "http://challonge.com/BMLH3"
    "http://challonge.com/BMLH4"
    "http://challonge.com/BMLH5"
    "http://challonge.com/BMLH6"
+   ])
+
+(def big-mamas-off-season
+  [
    "http://challonge.com/BMOff1"
    "http://challonge.com/BMOff2"
+   ])
+
+(def wombo-wednesdays
+  [
    "http://scusmash.challonge.com/WW10S4"
    "http://scusmash.challonge.com/WW11S4"
    "http://scusmash.challonge.com/WW13_4Singles"
    "http://scusmash.challonge.com/WW14_4SINGLES"
    "http://scusmash.challonge.com/wwFinale_smash4"
+   ])
+
+(def gamerz-smash-labs
+  [
    "http://capitolfightdistrict.challonge.com/cfdandgplswu"
    "http://capitolfightdistrict.challonge.com/fd8j4kag"
    "http://capitolfightdistrict.challonge.com/hn1tvh5t"
@@ -72,8 +97,10 @@
    "http://capitolfightdistrict.challonge.com/SL8WU"
    "http://capitolfightdistrict.challonge.com/GSL9WU"
    "http://capitolfightdistrict.challonge.com/GSL10WU"
-   "http://challonge.com/surfcityslamsinglesPRO"
-   "http://challonge.com/minibosssmash4singles2"
+   ])
+
+(def ghost-at-dc
+  [
    "http://challonge.com/hostdc"
    "http://challonge.com/hostdc1singles"
    "http://challonge.com/hostdc2singles"
@@ -88,6 +115,10 @@
    "http://challonge.com/ghostdc4smash4singles"
    "http://challonge.com/ghostdc5smash4singles"
    "http://challonge.com/ghostdc6smash4singles"
+   ])
+
+(def ncr2015
+  [
    "http://ncr2015.challonge.com/SSB41"
    "http://ncr2015.challonge.com/SSB42"
    "http://ncr2015.challonge.com/SSB43"
@@ -97,15 +128,10 @@
    "http://ncr2015.challonge.com/SSB47"
    "http://ncr2015.challonge.com/SSB48"
    "http://ncr2015.challonge.com/SSB416"
-   "http://bko.challonge.com/SO34"
-   "http://bko.challonge.com/SO44"
-   "http://bko.challonge.com/BMS4S"
-   "http://bko.challonge.com/SO5M"
-   "http://bko.challonge.com/OW3S4"
-   "http://bko.challonge.com/OW4S"
-   "http://bko.challonge.com/OW54"
-   "http://bko.challonge.com/OW64"
-   "http://bko.challonge.com/OW74"
+   ])
+
+(def blu42
+  [
    "http://challonge.com/blu_421"
    "http://challonge.com/Blu42_Jun2"
    "http://challonge.com/Blu421234"
@@ -116,65 +142,43 @@
    "http://challonge.com/Blu42smashmass"
    "http://challonge.com/blu4211"
    "http://challonge.com/sm4shbruhsep2"
+   ])
+
+(def smash-odyssey
+  [
+   "http://bko.challonge.com/SO34"
+   "http://bko.challonge.com/SO44"
+   "http://bko.challonge.com/SO5M"
+   "http://bko.challonge.com/OW3S4"
+   "http://bko.challonge.com/OW4S"
+   "http://bko.challonge.com/OW54"
+   "http://bko.challonge.com/OW64"
+   "http://bko.challonge.com/OW74"
+   ])
+
+(def miscellaneous-tournaments
+  [
+   "http://challonge.com/surfcityslamsinglesPRO"
+   "http://challonge.com/minibosssmash4singles2"
+   "http://bko.challonge.com/BMS4S"
    "http://challonge.com/Simplysmashing1"
    ])
 
+(def tournament-urls
+  (concat the-foundry
+          made
+          big-mamas-little-cup
+          big-mamas-little-house
+          big-mamas-off-season
+          wombo-wednesdays
+          gamerz-smash-labs
+          ghost-at-dc
+          ncr2015
+          blu42
+          smash-odyssey
+          miscellaneous-tournaments))
 
-(def summer-power-ranks-urls
-  ["http://BKO.challonge.com/BMS4S"
-   "http://BKO.challonge.com/SO44"
-   "http://bko.challonge.com/OW3S4"
-   "http://SCUsmash.challonge.com/wwFinale_smash4"
-   "http://capitolfightdistrict.challonge.com/icrrkb29"
-   "http://challonge.com/BMLC4"
-   "http://challonge.com/BMLC5"
-   "http://challonge.com/BMLC6"
-   "http://challonge.com/BMLH1"
-   "http://challonge.com/BMLH3"
-   "http://challonge.com/BMLH5"
-   "http://challonge.com/BMLH6"
-   "http://challonge.com/MADE5Singles"
-   "http://challonge.com/MADE7Singles"
-   "http://challonge.com/MADE9Singles"
-   "http://challonge.com/BMLC1"
-   "http://challonge.com/BMLC3"
-   "http://challonge.com/BMLC7"
-   "http://challonge.com/BMLH4"
-   "http://challonge.com/MADEsmashbi4singles"
-   "http://challonge.com/MADE6Singles"
-   "http://challonge.com/MADE8Singles"
-   "http://challonge.com/MADE10Singles"
-   "http://challonge.com/hostdc"
-   "http://challonge.com/hostdc3singles"
-   "http://challonge.com/hostdc5singles"
-   "http://challonge.com/hostdc6singles"
-   "http://challonge.com/minibosssmash4singles2"
-   "http://challonge.com/BMLC2"
-   "http://challonge.com/hostdc7singles"
-   "http://challonge.com/surfcityslamsinglesPRO"
-   "http://ncr2015.challonge.com/SSB41"
-   "http://ncr2015.challonge.com/SSB42"
-   "http://ncr2015.challonge.com/SSB43"
-   "http://ncr2015.challonge.com/SSB44"
-   "http://ncr2015.challonge.com/SSB45"
-   "http://ncr2015.challonge.com/SSB46"
-   "http://ncr2015.challonge.com/SSB47"
-   "http://ncr2015.challonge.com/SSB48"
-   "http://ncr2015.challonge.com/SSB416"
-   "http://showdowngg.challonge.com/comeonandban12singles"
-   "http://showdowngg.challonge.com/comeonandban13singles"
-   "http://showdowngg.challonge.com/comeonandban14singles"
-   "http://showdowngg.challonge.com/comeonandban15singles"
-   "http://showdowngg.challonge.com/comeonandban16singles"
-   "http://showdowngg.challonge.com/comeonandban17singles"
-   "http://showdowngg.challonge.com/comeonandban18singles"
-   "http://showdowngg.challonge.com/comeonandban19singles"
-   "http://showdowngg.challonge.com/comeonandban20singles"
-   "http://showdowngg.challonge.com/comeonandban21singles"
-   "http://showdowngg.challonge.com/comeonandban22singles"
-   "http://showdowngg.challonge.com/comeonandban23singles"])
-
-(def test-urls summer-power-ranks-urls)
+(def test-urls tournament-urls)
 
 
 (def team-names
@@ -194,6 +198,7 @@
    "os"
    "fonc"
    "giga"
+   "gpl"
    ])
 
 (def aliases
@@ -206,6 +211,7 @@
    ["SKS" "SKS aka Watislyfe"]
    ["NME | Nanerz" "Cynthia"]
    ["Rickshaw" "NinjaRlink"]
+   ["Rickshaw" "Rick"]
    ["BaNdt" "ARaNdomVillager"]
    ["Arikie" "MS | Shadow"]
    ["Arikie" "4B_Arikie"]
@@ -229,6 +235,7 @@
    ["Jimber Jangers" "Daimyes"]
    ["MisterQ" "MrQ"]
    ["MisterQ" "Mr. Q"]
+   ["Chye" "Koci"]
    ["Chaos Pro" "Sm4sh Mango aka Chaos Pro"]
    ["Chaos Pro" "Smash 4 Mango aka ChaosPro"]
    ["Rice" "Rice-kun"]
