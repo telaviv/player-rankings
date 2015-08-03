@@ -37,7 +37,7 @@
   :plugins [[lein-ring "0.9.1"]
             [lein-environ "1.0.0"]
             [lein-ancient "0.6.5"]
-            [cider/cider-nrepl "0.9.0-SNAPSHOT"]
+            [cider/cider-nrepl "0.10.0-SNAPSHOT"]
             ]
 
 

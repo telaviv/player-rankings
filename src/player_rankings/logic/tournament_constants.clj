@@ -42,6 +42,7 @@
    "http://challonge.com/MADE10Singles"
    "http://challonge.com/MADE11Singles"
    "http://challonge.com/MADE12Singles"
+   "http://challonge.com/MADE13Singles"
    ])
 
 (def big-mamas-little-cup
@@ -199,6 +200,7 @@
    "fonc"
    "giga"
    "gpl"
+   "ct"
    ])
 
 (def aliases
@@ -212,6 +214,10 @@
    ["NME | Nanerz" "Cynthia"]
    ["Rickshaw" "NinjaRlink"]
    ["Rickshaw" "Rick"]
+   ["Rickshaw" "Richshaw"]
+   ["Shia Lepuff" "Demi Lovato"]
+   ["Shia Lepuff" "Shia La Puff"]
+   ["Shia Lepuff" "ShaiLapuff"]
    ["BaNdt" "ARaNdomVillager"]
    ["Arikie" "MS | Shadow"]
    ["Arikie" "4B_Arikie"]
@@ -239,6 +245,7 @@
    ["Chaos Pro" "Sm4sh Mango aka Chaos Pro"]
    ["Chaos Pro" "Smash 4 Mango aka ChaosPro"]
    ["Rice" "Rice-kun"]
+   ["Rice" "Dark Rice"]
    ["Andy_Sauro" "Andy The Albatross"]
    ["OS Thee.O.P" "OS | TheeOP"]
    ["Focast" "Foucast"]
