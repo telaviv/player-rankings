@@ -71,6 +71,14 @@
                 {:matched matched :unmatched (conj unmatched player)}))
             {:matched [] :unmatched []} players)))
 
+(defn partition-by-mergeable-players [players]
+  (let [split-players (split-by-first-mergeable-player players)]
+    (if (empty? (:unmatched split-players))
+      [(:matched split-players)]
+      (conj (partition-by-mergeable-players (:unmatched split-players))
+            (:matched split-players)))))
+
+
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
         second-players (map :player-two matches)
