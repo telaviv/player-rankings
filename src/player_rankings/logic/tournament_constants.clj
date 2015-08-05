@@ -131,7 +131,7 @@
    "http://ncr2015.challonge.com/SSB416"
    ])
 
-(def blu42
+(def blu42-weekly
   [
    "http://challonge.com/blu_421"
    "http://challonge.com/Blu42_Jun2"
@@ -140,10 +140,25 @@
    "http://challonge.com/bsgdhfdshdssdhfsdh"
    "http://challonge.com/blu429"
    "http://challonge.com/afhsjfhbsljfhbdksahfbaskjf"
-   "http://challonge.com/Blu42smashmass"
    "http://challonge.com/blu4211"
-   "http://challonge.com/sm4shbruhsep2"
+   "http://challonge.com/Blu42smash12"
    ])
+
+(def blu42-smash-mass
+  [
+   "http://challonge.com/Blu42smashmass"
+   ])
+
+(def versus
+  [
+   "http://challonge.com/sm4shbruhsep1"
+   "http://challonge.com/sm4shbruhsep2"
+   "http://challonge.com/sm4shbruhsep3"
+   "http://challonge.com/sm4shsep4"
+   "http://challonge.com/sm4shsep5"
+   "http://challonge.com/sm4shep6"
+   ])
+
 
 (def smash-odyssey
   [
@@ -175,7 +190,9 @@
           gamerz-smash-labs
           ghost-at-dc
           ncr2015
-          blu42
+          blu42-weekly
+          blu42-smash-mass
+          versus
           smash-odyssey
           miscellaneous-tournaments))
 
@@ -201,6 +218,7 @@
    "giga"
    "gpl"
    "ct"
+   "blu"
    ])
 
 (def aliases
@@ -226,9 +244,9 @@
    ["Arda" "Ishiey"]
    ["Arda" "A"]
    ["Arda" "Adriel"]
-   ["Arda" "Myro"]
    ["Arda" "AA"]
    ["Arda" "Ish"]
+   ["Arda" "Im The Best Wolf"]
    ["ChosenL" "Chosen_L"]
    ["CrispyTacoz" "Tacoz"]
    ["z" "OS/z"]
@@ -246,7 +264,9 @@
    ["Chaos Pro" "Smash 4 Mango aka ChaosPro"]
    ["Rice" "Rice-kun"]
    ["Rice" "Dark Rice"]
-   ["Andy_Sauro" "Andy The Albatross"]
+   ["Andy Sauro" "Andy_Sauro"]
+   ["Andy Sauro" "Andy"]
+   ["Andy Sauro" "Andy The Albatross"]
    ["OS Thee.O.P" "OS | TheeOP"]
    ["Focast" "Foucast"]
    ["Chinito" "Chihito"]
