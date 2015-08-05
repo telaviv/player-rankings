@@ -116,6 +116,7 @@
    "http://challonge.com/ghostdc4smash4singles"
    "http://challonge.com/ghostdc5smash4singles"
    "http://challonge.com/ghostdc6smash4singles"
+   "http://challonge.com/ghostdc7smash4singles"
    ])
 
 (def ncr2015
@@ -170,6 +171,7 @@
    "http://bko.challonge.com/OW54"
    "http://bko.challonge.com/OW64"
    "http://bko.challonge.com/OW74"
+   "http://bko.challonge.com/OW84"
    ])
 
 (def miscellaneous-tournaments
@@ -196,7 +198,11 @@
           smash-odyssey
           miscellaneous-tournaments))
 
-(def test-urls tournament-urls)
+(def test-urls
+  [
+   "http://showdowngg.challonge.com/comeonandban27"
+   "http://challonge.com/ghostdc7smash4singles"
+   ])
 
 
 (def team-names
@@ -219,6 +225,13 @@
    "gpl"
    "ct"
    "blu"
+   "aether"
+   "trnp"
+   "ist"
+   "cog"
+   "sin"
+   "4b"
+   "koq"
    ])
 
 (def aliases
@@ -237,8 +250,11 @@
    ["Shia Lepuff" "Shia La Puff"]
    ["Shia Lepuff" "ShaiLapuff"]
    ["BaNdt" "ARaNdomVillager"]
+   ["OS | basedGO64" "OS/ basedgo64"]
    ["Arikie" "MS | Shadow"]
    ["Arikie" "4B_Arikie"]
+   ["Arikie" "4B_Arikie"]
+   ["Arikie" "Arike"]
    ["GShark" "Leffen_Shark"]
    ["GShark" "G-Shark"]
    ["Arda" "Ishiey"]
@@ -249,10 +265,11 @@
    ["Arda" "Im The Best Wolf"]
    ["ChosenL" "Chosen_L"]
    ["CrispyTacoz" "Tacoz"]
+   ["CrispyTacoz" "TRNP | CrispyTacoz *"]
    ["z" "OS/z"]
    ["Mocha" "Andrew Le"]
    ["Scourge" "Summus"]
-   ["Kronos" "Kronos2560"]
+   ["Kronos2560" "Kronos"]
    ["Hitaku" "Hitaku Back Sunday"]
    ["Boba Tapioca" "Boba"]
    ["UC | DSS" "@UC_DSS"]

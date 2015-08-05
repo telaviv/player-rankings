@@ -1,5 +1,5 @@
 (ns player-rankings.logic.database
-  (:require [clojure.set :refer [difference]]
+  (:require [clojure.set :refer [difference intersection]]
             [clojure.string :as string]
             [clojurewerkz.neocons.rest :as nr]
             [clojurewerkz.neocons.rest.nodes :as nodes]
@@ -58,14 +58,16 @@
                      (map normalize-name (:aliases %))) %)
         players))
 
+(defn players-share-aliases? [a b]
+  (let [a-aliases (set (map normalize-name (:aliases a)))
+        b-aliases (set (map normalize-name (:aliases b)))]
+    (not (empty? (intersection a-aliases b-aliases)))))
+
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
         second-players (map :player-two matches)
-        unique-players (distinct (concat first-players second-players))
-        existing-players (get-existing-players)
-        new-player-names (filter #(not (get-matching-player % existing-players)) unique-players)
-        new-players (create-new-player-nodes new-player-names)]
-    (concat existing-players new-players)))
+        unique-players (distinct (concat first-players second-players))]
+    (create-new-player-nodes unique-players)))
 
 (defn- create-match-graph-data [match player-nodes]
   (let [player1-node (get-matching-player (:player-one match) player-nodes)
@@ -186,7 +188,7 @@
   (doseq [tournament tournaments]
     (create-tournament-graph tournament)))
 
-(defn merge-player-nodes
+(defn merge-player-nodes-by-alias
   ([[a b]] (merge-player-nodes [a b] (get-existing-players)))
   ([[a b] players]
    (let [aid (:id (get-matching-player a players))
@@ -206,7 +208,7 @@
      (if (and (some? aid) (some? bid) (not= aid bid))
        (cypher/tquery conn query {:aid aid, :bid bid})))))
 
-(defn merge-multiple-player-nodes [player-nodes]
+(defn merge-multiple-player-nodes-by-alias [player-nodes]
   (let [existing-players (get-existing-players)]
     (doseq [node-pair player-nodes]
-      (merge-player-nodes node-pair existing-players))))
+      (merge-player-nodes-by-alias node-pair existing-players))))
