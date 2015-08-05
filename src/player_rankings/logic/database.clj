@@ -63,6 +63,14 @@
         b-aliases (set (map normalize-name (:aliases b)))]
     (not (empty? (intersection a-aliases b-aliases)))))
 
+(defn split-by-first-mergeable-player [players]
+  (let [first-player (first players)]
+    (reduce (fn [{:keys [matched unmatched]} player]
+              (if (players-share-aliases? first-player player)
+                {:matched (conj matched player) :unmatched unmatched}
+                {:matched matched :unmatched (conj unmatched player)}))
+            {:matched [] :unmatched []} players)))
+
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
         second-players (map :player-two matches)
