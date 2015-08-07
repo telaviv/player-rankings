@@ -200,8 +200,8 @@
 
 (def test-urls
   [
+   "http://showdowngg.challonge.com/comeonandban4singles"
    "http://showdowngg.challonge.com/comeonandban27"
-   "http://challonge.com/ghostdc7smash4singles"
    ])
 
 
@@ -279,6 +279,7 @@
    ["Chye" "Koci"]
    ["Chaos Pro" "Sm4sh Mango aka Chaos Pro"]
    ["Chaos Pro" "Smash 4 Mango aka ChaosPro"]
+   ["Chaos Pro" "Rocky Balboa"]
    ["Rice" "Rice-kun"]
    ["Rice" "Dark Rice"]
    ["Andy Sauro" "Andy_Sauro"]

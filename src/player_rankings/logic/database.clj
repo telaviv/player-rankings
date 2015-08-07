@@ -94,10 +94,51 @@
         merge-ids (map :id (rest players))]
     (reduce #(conj %1 {:aid canon-id :bid %2 :aliases aliases}) [] merge-ids)))
 
-(defn create-merge-nodes [players]
+(defn create-merge-nodes-by-implicit-aliases [players]
   (let [mergeable-players (partition-by-mergeable-players players)
         players-to-merge (filter #(> (count %) 1) mergeable-players)]
     (mapcat create-merge-nodes-for-mergeable-players players-to-merge)))
+
+(defn merge-player-nodes-by-implicit-alias
+  ([] (merge-player-nodes-by-implicit-alias (get-existing-players)))
+  ([players]
+   (let [merge-nodes (create-merge-nodes-by-implicit-aliases players)
+         query (str "unwind {records} as record "
+                    "match (a:player), (b:player)-[bp:played]-(bm:match), "
+                    "(b)-[pa:participated]-(t:tournament) "
+                    "where id(a) = record.aid and id(b) = record.bid "
+                    "set a.aliases = record.aliases "
+                    "merge (a)-[:played {won: bp.won}]->(bm) "
+                    "merge (a)-[:participated {placement: pa.placement}]->(t) "
+                    "with a, b, pa, bp "
+                    "delete b, pa, bp ")]
+     (cypher/tquery conn query {:records merge-nodes}))))
+
+(comment "This should be merged with merge-player-nodes-by-implicit-alias")
+(defn merge-player-nodes-by-explicit-alias
+  ([[a b]] (merge-player-nodes-by-explicit-alias [a b] (get-existing-players)))
+  ([[a b] players]
+   (let [aid (:id (get-matching-player a players))
+         bid (:id (get-matching-player b players))
+         query (str "match (a:player), (b:player)-[bp:played]-(bm:match), "
+                    "(b)-[pa:participated]-(t:tournament) "
+                    "where id(a) = {aid} and id(b) = {bid} "
+                    "set a.aliases = a.aliases + b.aliases "
+                    "merge (a)-[:played {won: bp.won}]->(bm) "
+                    "merge (a)-[:participated {placement: pa.placement}]->(t) "
+                    "with a, b, pa, bp "
+                    "delete b, pa, bp "
+                    "with a "
+                    "unwind a.aliases as alias "
+                    "with collect(distinct alias) as unique_aliases, a as a "
+                    "set a.aliases = unique_aliases ")]
+     (if (and (some? aid) (some? bid) (not= aid bid))
+       (cypher/tquery conn query {:aid aid, :bid bid})))))
+
+(defn merge-multiple-player-nodes-by-explicit-alias []
+  (let [existing-players (get-existing-players)]
+    (doseq [node-pair constants/aliases]
+      (merge-player-nodes-by-explicit-alias node-pair existing-players))))
 
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
@@ -223,28 +264,3 @@
 (defn load-tournaments [tournaments]
   (doseq [tournament tournaments]
     (create-tournament-graph tournament)))
-
-(defn merge-player-nodes
-  ([[a b]] (merge-player-nodes [a b] (get-existing-players)))
-  ([[a b] players]
-   (let [aid (:id (get-matching-player a players))
-         bid (:id (get-matching-player b players))
-         query (str "match (a:player), (b:player)-[bp:played]-(bm:match), "
-                    "(b)-[pa:participated]-(t:tournament) "
-                    "where id(a) = {aid} and id(b) = {bid} "
-                    "set a.aliases = a.aliases + b.aliases "
-                    "merge (a)-[:played {won: bp.won}]->(bm) "
-                    "merge (a)-[:participated {placement: pa.placement}]->(t) "
-                    "with a, b, pa, bp "
-                    "delete b, pa, bp "
-                    "with a "
-                    "unwind a.aliases as alias "
-                    "with collect(distinct alias) as unique_aliases, a as a "
-                    "set a.aliases = unique_aliases ")]
-     (if (and (some? aid) (some? bid) (not= aid bid))
-       (cypher/tquery conn query {:aid aid, :bid bid})))))
-
-(defn merge-multiple-player-nodes-by-alias [player-nodes]
-  (let [existing-players (get-existing-players)]
-    (doseq [node-pair player-nodes]
-      (merge-player-nodes-by-alias node-pair existing-players))))

@@ -1,15 +1,14 @@
 (ns player-rankings.logic.initializers
   (:require [player-rankings.logic.challonge-parser :refer [get-tournament-data]]
             [player-rankings.logic.tournament-constants :refer [tournament-urls
-                                                                test-urls
-                                                                aliases]]
+                                                                test-urls]]
             [player-rankings.logic.database :refer [load-tournaments
                                                     merge-multiple-player-nodes
                                                     update-ratings
                                                     update-rankings]]))
 
 (defn update-player-data []
-  (merge-multiple-player-nodes aliases)
+  (merge-multiple-player-nodes)
   (update-ratings)
   (update-rankings))
 
