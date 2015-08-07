@@ -9,6 +9,7 @@
             [clojurewerkz.neocons.rest.transaction :as transaction]
             [player-rankings.secrets :refer [neo4j-username neo4j-password]]
             [player-rankings.logic.rankings :as rankings]
+            [player-rankings.logic.challonge-parser :as challonge-parser]
             [player-rankings.logic.tournament-constants :as constants]))
 
 (def conn (nr/connect
@@ -270,3 +271,10 @@
 (defn load-tournaments [tournaments]
   (doseq [tournament tournaments]
     (create-tournament-graph tournament)))
+
+(defn add-tournament [tournament-url]
+  (let [tournament-data  (challonge-parser/get-tournament-data tournament-url)]
+    (create-tournament-graph tournament-data)
+    (merge-player-nodes)
+    (update-ratings)
+    (update-rankings)))
