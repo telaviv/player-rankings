@@ -88,11 +88,16 @@
            acc
            (conj acc alias)))) [] aliases)))
 
-(defn create-merge-pairs [players]
+(defn create-merge-nodes-for-mergeable-players [players]
   (let [aliases (merge-aliases players)
         canon-id (-> players first :id)
         merge-ids (map :id (rest players))]
-    (reduce #(conj %1 {:aid canon-id :bid %2}) [] merge-ids)))
+    (reduce #(conj %1 {:aid canon-id :bid %2 :aliases aliases}) [] merge-ids)))
+
+(defn create-merge-nodes [players]
+  (let [mergeable-players (partition-by-mergeable-players players)
+        players-to-merge (filter #(> (count %) 1) mergeable-players)]
+    (mapcat create-merge-nodes-for-mergeable-players players-to-merge)))
 
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
