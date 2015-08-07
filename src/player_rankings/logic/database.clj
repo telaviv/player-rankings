@@ -135,10 +135,16 @@
      (if (and (some? aid) (some? bid) (not= aid bid))
        (cypher/tquery conn query {:aid aid, :bid bid})))))
 
-(defn merge-multiple-player-nodes-by-explicit-alias []
-  (let [existing-players (get-existing-players)]
-    (doseq [node-pair constants/aliases]
-      (merge-player-nodes-by-explicit-alias node-pair existing-players))))
+(defn merge-all-player-nodes-by-explicit-alias
+  ([] (merge-all-player-nodes-by-explicit-alias (get-existing-players)))
+  ([existing-players]
+   (doseq [node-pair constants/aliases]
+     (merge-player-nodes-by-explicit-alias node-pair existing-players))))
+
+(defn merge-player-nodes []
+  (let [players (get-existing-players)]
+    (merge-player-nodes-by-implicit-alias players)
+    (merge-all-player-nodes-by-explicit-alias players)))
 
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
