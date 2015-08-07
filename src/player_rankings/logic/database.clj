@@ -78,6 +78,15 @@
       (conj (partition-by-mergeable-players (:unmatched split-players))
             (:matched split-players)))))
 
+(defn merge-aliases [players]
+  (let [aliases (mapcat :aliases players)]
+    (reduce
+     (fn [acc alias]
+       (let [normalized-acc (map normalize-name acc)
+             normalized-alias (normalize-name alias)]
+         (if (some #(= normalized-alias %) normalized-acc)
+           acc
+           (conj acc alias)))) [] aliases)))
 
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
@@ -204,7 +213,7 @@
   (doseq [tournament tournaments]
     (create-tournament-graph tournament)))
 
-(defn merge-player-nodes-by-alias
+(defn merge-player-nodes
   ([[a b]] (merge-player-nodes [a b] (get-existing-players)))
   ([[a b] players]
    (let [aid (:id (get-matching-player a players))
