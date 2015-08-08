@@ -85,8 +85,9 @@
        participants))
 
 (defn get-tournament-data [url]
-  (let [matches (raw-matches-from-url url)
-        participants (raw-participants-from-url url)]
-    {:participants (normalize-participants participants)
-     :matches (merge-matches-and-participants matches participants)
-     :tournament (get-tournament-from-url url)}))
+  (let [matches (future (raw-matches-from-url url))
+        participants (future (raw-participants-from-url url))
+        tournament (future (get-tournament-from-url url))]
+    {:participants (normalize-participants @participants)
+     :matches (merge-matches-and-participants @matches @participants)
+     :tournament @tournament}))

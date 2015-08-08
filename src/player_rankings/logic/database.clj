@@ -273,8 +273,8 @@
     (create-tournament-graph tournament)))
 
 (defn add-tournament [tournament-url]
-  (let [tournament-data (challonge-parser/get-tournament-data tournament-url)]
-    (create-tournament-graph tournament-data)
-    (merge-player-nodes)
-    (update-ratings)
-    (update-rankings)))
+  (let [tournament-data (timed (challonge-parser/get-tournament-data tournament-url))]
+    (timed (create-tournament-graph tournament-data))
+    (timed (merge-player-nodes))
+    (timed (update-ratings))
+    (timed (update-rankings))))
