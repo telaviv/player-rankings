@@ -29,6 +29,7 @@
    "http://showdowngg.challonge.com/comeonandban25singles"
    "http://showdowngg.challonge.com/comeonandban26singles"
    "http://showdowngg.challonge.com/comeonandban27"
+   "http://showdowngg.challonge.com/comeonandban28"
    ])
 
 (def made
