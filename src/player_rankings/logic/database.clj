@@ -17,9 +17,9 @@
            (str "http://" neo4j-username ":" neo4j-password "@localhost:7474/db/data/")))
 
 (defn- create-tournament-node [tournament]
-  (let [node (nodes/create conn tournament)]
-    (labels/add conn node "tournament")
-    node))
+  (let [query (str "create (t:tournament {data}) "
+                   "return id(t) as id")]
+    ((first (cypher/tquery conn query {:data tournament})) "id")))
 
 (defn- keys->keywords [coll]
   (into {} (for [[k v] coll] [(keyword k) v])))
@@ -242,17 +242,16 @@
                    "set p.ranked = record.ranked ")]
     (cypher/tquery conn query {:records records})))
 
-(defn merge-participants-with-tournament [tournament-node tournament-data]
+(defn merge-participants-with-tournament [tournament-id tournament-data]
   (let [query (str "unwind {players} as player "
                    "match (p:player {name: player.name}) "
                    "match (t:tournament) "
                    "where id(t) = {tournament_id} "
                    "create (p)-[:participated {placement: player.placement}]->(t) ")]
     (cypher/tquery conn query {:players (:participants tournament-data)
-                               :tournament_id (:id tournament-node)})))
+                               :tournament_id tournament-id})))
 
-
-(defn merge-matches-with-tournament [tournament-node tournament-data]
+(defn merge-matches-with-tournament [tournament-id tournament-data]
   (let [match-ids (create-match-graphs (:matches tournament-data))
         query (str "unwind {match_ids} as match_id "
                    "match (m:match) "
@@ -262,12 +261,12 @@
                    "create (t)-[:hosted]->(m) ")]
     (cypher/tquery conn query {:match_ids match-ids
                                :players (:participants tournament-data)
-                               :tournament_id (:id tournament-node)})))
+                               :tournament_id tournament-id})))
 
 (defn create-tournament-graph [tournament-data]
-  (let [tournament-node (create-tournament-node (:tournament tournament-data))]
-    (merge-matches-with-tournament tournament-node tournament-data)
-    (merge-participants-with-tournament tournament-node tournament-data)))
+  (let [tournament-id (create-tournament-node (:tournament tournament-data))]
+    (merge-matches-with-tournament tournament-id tournament-data)
+    (merge-participants-with-tournament tournament-id tournament-data)))
 
 (defn load-tournaments [tournaments]
   (doseq [tournament tournaments]

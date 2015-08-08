@@ -69,7 +69,7 @@
      :title (tournament "name")
      :started_at (coerce-time/to-long (tournament "started_at"))
      :updated_at (coerce-time/to-long (tournament "updated_at"))
-     :url (tournament "full_challonge_url")
+     :url url
      :image_url (tournament "live_image_url")}))
 
 (defn- raw-matches-from-url [url]
