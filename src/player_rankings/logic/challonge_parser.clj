@@ -1,6 +1,7 @@
 (ns player-rankings.logic.challonge-parser
   (:require [clojure.string :as string]
             [player-rankings.secrets :refer [challonge-api-key]]
+            [player-rankings.profiling :refer [timed]]
             [clj-http.client :as client]
             [clj-time.coerce :as coerce-time]
             [clojure.data.json :as json])
