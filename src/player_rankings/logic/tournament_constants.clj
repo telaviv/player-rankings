@@ -175,6 +175,13 @@
    "http://bko.challonge.com/OW84"
    ])
 
+(def the-2-stock-and-the-handshake
+  [
+   "http://challonge.com/thehandshake4"
+   "http://challonge.com/thehandshake5"
+   ])
+
+
 (def miscellaneous-tournaments
   [
    "http://challonge.com/surfcityslamsinglesPRO"
@@ -197,6 +204,7 @@
           blu42-smash-mass
           versus
           smash-odyssey
+          the-2-stock-and-the-handshake
           miscellaneous-tournaments))
 
 (def test-urls
