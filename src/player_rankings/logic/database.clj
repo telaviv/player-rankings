@@ -16,13 +16,19 @@
 (def conn (nr/connect
            (str "http://" neo4j-username ":" neo4j-password "@localhost:7474/db/data/")))
 
+(defn- keys->keywords [coll]
+  (into {} (for [[k v] coll] [(keyword k) v])))
+
+(defn first-match [pred coll]
+  (cond
+    (empty? coll) nil
+    (pred (first coll)) (first coll)
+    :else (recur pred (rest coll))))
+
 (defn- create-tournament-node [tournament]
   (let [query (str "create (t:tournament {data}) "
                    "return id(t) as id")]
     ((first (cypher/tquery conn query {:data tournament})) "id")))
-
-(defn- keys->keywords [coll]
-  (into {} (for [[k v] coll] [(keyword k) v])))
 
 (defn- get-existing-players []
   (let [query (str "match (p:player) "

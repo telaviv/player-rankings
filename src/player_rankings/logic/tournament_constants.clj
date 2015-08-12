@@ -118,6 +118,7 @@
    "http://challonge.com/ghostdc5smash4singles"
    "http://challonge.com/ghostdc6smash4singles"
    "http://challonge.com/ghostdc7smash4singles"
+   "http://challonge.com/ghostdc9smash4singles"
    ])
 
 (def ncr2015
@@ -159,6 +160,7 @@
    "http://challonge.com/sm4shsep4"
    "http://challonge.com/sm4shsep5"
    "http://challonge.com/sm4shep6"
+   "http://challonge.com/sm4shep7"
    ])
 
 
@@ -173,6 +175,7 @@
    "http://bko.challonge.com/OW64"
    "http://bko.challonge.com/OW74"
    "http://bko.challonge.com/OW84"
+   "http://bko.challonge.com/OW94"
    ])
 
 (def the-2-stock-and-the-handshake
@@ -295,6 +298,7 @@
    ["Andy Sauro" "Andy"]
    ["Andy Sauro" "Andy The Albatross"]
    ["OS Thee.O.P" "OS | TheeOP"]
+   ["OS Thee.O.P" "OS | thee.O.P."]
    ["Focast" "Foucast"]
    ["Chinito" "Chihito"]
    ["Jeepysol" "Jeepy"]
