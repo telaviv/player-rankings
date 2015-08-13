@@ -19,12 +19,6 @@
 (defn- keys->keywords [coll]
   (into {} (for [[k v] coll] [(keyword k) v])))
 
-(defn first-match [pred coll]
-  (cond
-    (empty? coll) nil
-    (pred (first coll)) (first coll)
-    :else (recur pred (rest coll))))
-
 (defn- create-tournament-node [tournament]
   (let [query (str "create (t:tournament {data}) "
                    "return id(t) as id")]
@@ -102,15 +96,22 @@
         merge-ids (map :id (rest players))]
     (reduce #(conj %1 {:aid canon-id :bid %2 :aliases aliases}) [] merge-ids)))
 
+(defn get-matching-players-from-alias-map [alias-map aliases]
+  (let [normalized-aliases (map normalize-name aliases)]
+    (cond
+      (empty? aliases) nil
+      (contains? alias-map (first normalized-aliases)) (alias-map (first normalized-aliases))
+      :else (recur alias-map (rest aliases)))))
+
 (defn create-merge-nodes-by-implicit-aliases [players]
-  (let [mergeable-players (partition-by-mergeable-players players)
+  (let [mergeable-players (timed (partition-by-mergeable-players players))
         players-to-merge (filter #(> (count %) 1) mergeable-players)]
-    (mapcat create-merge-nodes-for-mergeable-players players-to-merge)))
+    (timed (mapcat create-merge-nodes-for-mergeable-players players-to-merge))))
 
 (defn merge-player-nodes-by-implicit-alias
-  ([] (merge-player-nodes-by-implicit-alias (get-existing-players)))
+  ([] (merge-player-nodes-by-implicit-alias (timed (get-existing-players))))
   ([players]
-   (let [merge-nodes (create-merge-nodes-by-implicit-aliases players)
+   (let [merge-nodes (timed (create-merge-nodes-by-implicit-aliases players))
          query (str "unwind {records} as record "
                     "match (a:player), (b:player)-[bp:played]-(bm:match), "
                     "(b)-[pa:participated]-(t:tournament) "
