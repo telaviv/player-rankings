@@ -30,6 +30,7 @@
    "http://showdowngg.challonge.com/comeonandban26singles"
    "http://showdowngg.challonge.com/comeonandban27"
    "http://showdowngg.challonge.com/comeonandban28"
+   "http://showdowngg.challonge.com/comeonandban29"
    ])
 
 (def made
@@ -44,6 +45,7 @@
    "http://challonge.com/MADE11Singles"
    "http://challonge.com/MADE12Singles"
    "http://challonge.com/MADE13Singles"
+   "http://challonge.com/MADE14Singles"
    ])
 
 (def big-mamas-little-cup
@@ -99,6 +101,9 @@
    "http://capitolfightdistrict.challonge.com/SL8WU"
    "http://capitolfightdistrict.challonge.com/GSL9WU"
    "http://capitolfightdistrict.challonge.com/GSL10WU"
+   "http://capitolfightdistrict.challonge.com/GSL11WU"
+   "http://capitolfightdistrict.challonge.com/GSL12WU"
+   "http://capitolfightdistrict.challonge.com/GSL13WU"
    ])
 
 (def ghost-at-dc
@@ -244,13 +249,13 @@
    "sin"
    "4b"
    "koq"
+   "beast"
    ])
 
 (def aliases
   [["Crow" "Chaos Crow"]
    ["Crow" "Maleficent"]
    ["Mijo" "Mijo FUEGO"]
-   ["Mijo" "Fuego"]
    ["Mr. Javi" "Mr Jav"]
    ["SKS" "watislyfe"]
    ["SKS" "SKS aka Watislyfe"]
@@ -258,13 +263,15 @@
    ["Rickshaw" "NinjaRlink"]
    ["Rickshaw" "Rick"]
    ["Rickshaw" "Richshaw"]
+   ["SirDaniel" "Sir"]
    ["Shia Lepuff" "Demi Lovato"]
    ["Shia Lepuff" "Shia La Puff"]
    ["Shia Lepuff" "ShaiLapuff"]
    ["BaNdt" "ARaNdomVillager"]
    ["OS | basedGO64" "OS/ basedgo64"]
+   ["OS | basedGO64" "OS/.GO64"]
+   ["OS | basedGO64" "GO"]
    ["Arikie" "MS | Shadow"]
-   ["Arikie" "4B_Arikie"]
    ["Arikie" "4B_Arikie"]
    ["Arikie" "Arike"]
    ["GShark" "Leffen_Shark"]
@@ -285,7 +292,8 @@
    ["Hitaku" "Hitaku Back Sunday"]
    ["Boba Tapioca" "Boba"]
    ["UC | DSS" "@UC_DSS"]
-   ["Jimber Jangers" "Daimyes"]
+   ["Beast" "Daimyes"]
+   ["Beast" "Jimber Jangers"]
    ["MisterQ" "MrQ"]
    ["MisterQ" "Mr. Q"]
    ["Chye" "Koci"]
@@ -297,6 +305,7 @@
    ["Andy Sauro" "Andy_Sauro"]
    ["Andy Sauro" "Andy"]
    ["Andy Sauro" "Andy The Albatross"]
+   ["Shin" "Ph~ck Shin"]
    ["OS Thee.O.P" "OS | TheeOP"]
    ["OS Thee.O.P" "OS | thee.O.P."]
    ["Focast" "Foucast"]
