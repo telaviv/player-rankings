@@ -96,12 +96,21 @@
         merge-ids (map :id (rest players))]
     (reduce #(conj %1 {:aid canon-id :bid %2 :aliases aliases}) [] merge-ids)))
 
-(defn get-matching-players-from-alias-map [alias-map aliases]
-  (let [normalized-aliases (map normalize-name aliases)]
-    (cond
-      (empty? aliases) nil
-      (contains? alias-map (first normalized-aliases)) (alias-map (first normalized-aliases))
-      :else (recur alias-map (rest aliases)))))
+(defn get-matching-players-from-alias-map
+  ([alias-map player] (get-matching-players-from-alias-map alias-map player (:aliases player)))
+  ([alias-map player aliases]
+   (let [normalized-aliases (map normalize-name aliases)
+         alias-to-check (first normalized-aliases)]
+     (cond
+       (empty? aliases) [player]
+       (contains? alias-map alias-to-check) (conj (alias-map alias-to-check) player)
+       :else (recur alias-map player (rest aliases))))))
+
+(defn add-player-to-alias-map [alias-map player]
+  (let [matching-players (get-matching-players-from-alias-map alias-map player)
+        aliases (merge-aliases matching-players)]
+    (apply assoc (concat [alias-map]
+                         (interleave (map normalize-name aliases) (repeat matching-players))))))
 
 (defn create-merge-nodes-by-implicit-aliases [players]
   (let [mergeable-players (timed (partition-by-mergeable-players players))
@@ -121,7 +130,7 @@
                     "merge (a)-[:participated {placement: pa.placement}]->(t) "
                     "with a, b, pa, bp "
                     "delete b, pa, bp ")]
-     (cypher/tquery conn query {:records merge-nodes}))))
+     (timed (cypher/tquery conn query {:records merge-nodes})))))
 
 (comment "This should be merged with merge-player-nodes-by-implicit-alias")
 (defn merge-player-nodes-by-explicit-alias
@@ -152,8 +161,8 @@
 
 (defn merge-player-nodes []
   (let [players (get-existing-players)]
-    (merge-player-nodes-by-implicit-alias players)
-    (merge-all-player-nodes-by-explicit-alias players)))
+    (timed (merge-player-nodes-by-implicit-alias players))
+    (timed (merge-all-player-nodes-by-explicit-alias players))))
 
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)

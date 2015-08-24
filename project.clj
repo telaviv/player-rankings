@@ -23,6 +23,7 @@
                  [clojurewerkz/neocons "3.1.0-beta3"]
                  [clj-time "0.9.0"]
                  [com.taoensso/timbre "3.4.0"]
+                 [spyscope "0.1.5"]
                  ]
 
   :min-lein-version "2.0.0"
@@ -67,5 +68,6 @@
 
          :repl-options {:init-ns player-rankings.core}
          :injections [(require 'pjstadig.humane-test-output)
-                      (pjstadig.humane-test-output/activate!)]
+                      (pjstadig.humane-test-output/activate!)
+                      (require 'spyscope.core)]
          :env {:dev true}}})

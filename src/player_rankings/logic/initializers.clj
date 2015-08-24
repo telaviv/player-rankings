@@ -13,7 +13,7 @@
   (update-rankings))
 
 (defn load-data []
-  (let [tournaments (map get-tournament-data tournament-urls)]
+  (let [tournaments (pmap get-tournament-data tournament-urls)]
     (load-tournaments tournaments)
     (update-player-data)))
 
