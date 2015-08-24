@@ -73,13 +73,6 @@
                 {:matched matched :unmatched (conj unmatched player)}))
             {:matched [] :unmatched []} players)))
 
-(defn partition-by-mergeable-players [players]
-  (let [split-players (split-by-first-mergeable-player players)]
-    (if (empty? (:unmatched split-players))
-      [(:matched split-players)]
-      (conj (partition-by-mergeable-players (:unmatched split-players))
-            (:matched split-players)))))
-
 (defn merge-aliases [players]
   (let [aliases (mapcat :aliases players)]
     (reduce
@@ -111,6 +104,12 @@
         aliases (merge-aliases matching-players)]
     (apply assoc (concat [alias-map]
                          (interleave (map normalize-name aliases) (repeat matching-players))))))
+
+(defn create-alias-map [players]
+  (reduce #(add-player-to-alias-map %1 %2) {} players))
+
+(defn partition-by-mergeable-players [players]
+  (-> players create-alias-map vals concat))
 
 (defn create-merge-nodes-by-implicit-aliases [players]
   (let [mergeable-players (timed (partition-by-mergeable-players players))
