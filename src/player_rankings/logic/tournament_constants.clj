@@ -1,3 +1,4 @@
+
 (ns player-rankings.logic.tournament-constants
   (:require [clojure.set :refer [difference]]))
 
@@ -74,6 +75,9 @@
   [
    "http://challonge.com/BMOff1"
    "http://challonge.com/BMOff2"
+   "http://challonge.com/BMOff3"
+   "http://challonge.com/BMOS4"
+   "http://challonge.com/BMOS5"
    ])
 
 (def wombo-wednesdays
@@ -104,6 +108,7 @@
    "http://capitolfightdistrict.challonge.com/GSL11WU"
    "http://capitolfightdistrict.challonge.com/GSL12WU"
    "http://capitolfightdistrict.challonge.com/GSL13WU"
+   "http://capitolfightdistrict.challonge.com/GSL14ABD"
    ])
 
 (def ghost-at-dc
@@ -124,6 +129,7 @@
    "http://challonge.com/ghostdc6smash4singles"
    "http://challonge.com/ghostdc7smash4singles"
    "http://challonge.com/ghostdc9smash4singles"
+   "http://challonge.com/GHOST10Smash4Singles"
    ])
 
 (def ncr2015
@@ -166,6 +172,7 @@
    "http://challonge.com/sm4shsep5"
    "http://challonge.com/sm4shep6"
    "http://challonge.com/sm4shep7"
+   "http://challonge.com/sm4shep8"
    ])
 
 
@@ -187,6 +194,13 @@
   [
    "http://challonge.com/thehandshake4"
    "http://challonge.com/thehandshake5"
+   ])
+
+(def teke-tourney
+  [
+   "http://challonge.com/teketourney"
+   "http://challonge.com/Teke3"
+   "http://challonge.com/Teke4"
    ])
 
 
@@ -213,6 +227,7 @@
           versus
           smash-odyssey
           the-2-stock-and-the-handshake
+          teke-tourney
           miscellaneous-tournaments))
 
 (def test-urls
@@ -255,18 +270,23 @@
 (def aliases
   [["Crow" "Chaos Crow"]
    ["Crow" "Maleficent"]
+   ["QT | K4rma" "QT.k4rma"]
+   ["8BIT | Zepplin" "Zeppelin"]
+   ["8BIT | Zepplin" "Zepland"]
    ["Mijo" "Mijo FUEGO"]
    ["Mr. Javi" "Mr Jav"]
    ["SKS" "watislyfe"]
    ["SKS" "SKS aka Watislyfe"]
    ["NME | Nanerz" "Cynthia"]
    ["Rickshaw" "NinjaRlink"]
-   ["Rickshaw" "Rick"]
    ["Rickshaw" "Richshaw"]
+   ["MF Space" "Space"]
    ["SirDaniel" "Sir"]
    ["Shia Lepuff" "Demi Lovato"]
    ["Shia Lepuff" "Shia La Puff"]
    ["Shia Lepuff" "ShaiLapuff"]
+   ["8BIT | Blank" "Blankey69"]
+   ["8BIT | Blank" "8BIT | Trojan"]
    ["BaNdt" "ARaNdomVillager"]
    ["OS | basedGO64" "OS/ basedgo64"]
    ["OS | basedGO64" "OS/.GO64"]
@@ -283,10 +303,11 @@
    ["Arda" "Ish"]
    ["Arda" "Im The Best Wolf"]
    ["ChosenL" "Chosen_L"]
+   ["ChosenL" "ChosenL*"]
    ["CrispyTacoz" "Tacoz"]
    ["CrispyTacoz" "TRNP | CrispyTacoz *"]
    ["z" "OS/z"]
-   ["Mocha" "Andrew Le"]
+   ["Violet" "Andrew Le"]
    ["Scourge" "Summus"]
    ["Kronos2560" "Kronos"]
    ["Hitaku" "Hitaku Back Sunday"]
@@ -299,6 +320,7 @@
    ["Chye" "Koci"]
    ["Chaos Pro" "Sm4sh Mango aka Chaos Pro"]
    ["Chaos Pro" "Smash 4 Mango aka ChaosPro"]
+   ["BKO | Choknater" "BKO | Chokenator"]
    ["Chaos Pro" "Rocky Balboa"]
    ["Rice" "Rice-kun"]
    ["Rice" "Dark Rice"]
