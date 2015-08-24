@@ -201,6 +201,7 @@
    "http://challonge.com/teketourney"
    "http://challonge.com/Teke3"
    "http://challonge.com/Teke4"
+   "http://challonge.com/Teke5"
    ])
 
 
@@ -270,6 +271,7 @@
 (def aliases
   [["Crow" "Chaos Crow"]
    ["Crow" "Maleficent"]
+   ["Glith" "glith10"]
    ["QT | K4rma" "QT.k4rma"]
    ["8BIT | Zepplin" "Zeppelin"]
    ["8BIT | Zepplin" "Zepland"]
@@ -281,6 +283,7 @@
    ["Rickshaw" "NinjaRlink"]
    ["Rickshaw" "Richshaw"]
    ["MF Space" "Space"]
+   ["MF Space" "MF"]
    ["SirDaniel" "Sir"]
    ["Shia Lepuff" "Demi Lovato"]
    ["Shia Lepuff" "Shia La Puff"]
