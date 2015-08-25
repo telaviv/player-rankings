@@ -282,6 +282,6 @@
     (timed (update-rankings))))
 
 (defn update-player-data []
-  (merge-player-nodes)
-  (update-ratings)
-  (update-rankings))
+  (timed (merge-player-nodes))
+  (timed (update-ratings))
+  (timed (update-rankings)))
