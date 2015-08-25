@@ -109,59 +109,46 @@
   (reduce #(add-player-to-alias-map %1 %2) {} players))
 
 (defn partition-by-mergeable-players [players]
-  (-> players create-alias-map vals concat))
+  (-> players create-alias-map vals distinct concat))
 
 (defn create-merge-nodes-by-implicit-aliases [players]
-  (let [mergeable-players (timed (partition-by-mergeable-players players))
+  (let [mergeable-players (partition-by-mergeable-players players)
         players-to-merge (filter #(> (count %) 1) mergeable-players)]
-    (timed (mapcat create-merge-nodes-for-mergeable-players players-to-merge))))
+    (mapcat create-merge-nodes-for-mergeable-players players-to-merge)))
 
-(defn merge-player-nodes-by-implicit-alias
-  ([] (merge-player-nodes-by-implicit-alias (timed (get-existing-players))))
-  ([players]
-   (let [merge-nodes (timed (create-merge-nodes-by-implicit-aliases players))
-         query (str "unwind {records} as record "
-                    "match (a:player), (b:player)-[bp:played]-(bm:match), "
-                    "(b)-[pa:participated]-(t:tournament) "
-                    "where id(a) = record.aid and id(b) = record.bid "
-                    "set a.aliases = record.aliases "
-                    "merge (a)-[:played {won: bp.won}]->(bm) "
-                    "merge (a)-[:participated {placement: pa.placement}]->(t) "
-                    "with a, b, pa, bp "
-                    "delete b, pa, bp ")]
-     (timed (cypher/tquery conn query {:records merge-nodes})))))
+(defn match-aliases-to-players [aliases players]
+  (filter (comp not nil?) (map #(get-matching-player % players) aliases)))
 
-(comment "This should be merged with merge-player-nodes-by-implicit-alias")
-(defn merge-player-nodes-by-explicit-alias
-  ([[a b]] (merge-player-nodes-by-explicit-alias [a b] (get-existing-players)))
-  ([[a b] players]
-   (let [aid (:id (get-matching-player a players))
-         bid (:id (get-matching-player b players))
-         query (str "match (a:player), (b:player)-[bp:played]-(bm:match), "
-                    "(b)-[pa:participated]-(t:tournament) "
-                    "where id(a) = {aid} and id(b) = {bid} "
-                    "set a.aliases = a.aliases + b.aliases "
-                    "merge (a)-[:played {won: bp.won}]->(bm) "
-                    "merge (a)-[:participated {placement: pa.placement}]->(t) "
-                    "with a, b, pa, bp "
-                    "delete b, pa, bp "
-                    "with a "
-                    "unwind a.aliases as alias "
-                    "with collect(distinct alias) as unique_aliases, a as a "
-                    "set a.aliases = unique_aliases ")]
-     (if (and (some? aid) (some? bid) (not= aid bid))
-       (cypher/tquery conn query {:aid aid, :bid bid})))))
+(defn has-multiple-elements? [coll]
+  (> (count coll) 1))
 
-(defn merge-all-player-nodes-by-explicit-alias
-  ([] (merge-all-player-nodes-by-explicit-alias (get-existing-players)))
-  ([existing-players]
-   (doseq [node-pair constants/aliases]
-     (merge-player-nodes-by-explicit-alias node-pair existing-players))))
+(defn filter-empty-aliases [matching-aliases]
+  (filter has-multiple-elements? matching-aliases))
+
+(defn create-merge-nodes-by-explicit-aliases [players]
+  (filter (comp not empty?) (map #(match-aliases-to-players % players) constants/aliases)))
+
+(defn merge-player-nodes-by-implicit-alias []
+  (create-merge-nodes-by-implicit-aliases (get-existing-players)))
+
+(defn merge-player-nodes-by-explicit-alias []
+  (create-merge-nodes-by-explicit-aliases (get-existing-players)))
+
+(defn merge-nodes-into-db [merge-nodes]
+  (let [query (str "unwind {records} as record "
+                   "match (a:player), (b:player)-[bp:played]-(bm:match), "
+                   "(b)-[pa:participated]-(t:tournament) "
+                   "where id(a) = record.aid and id(b) = record.bid "
+                   "set a.aliases = record.aliases "
+                   "merge (a)-[:played {won: bp.won}]->(bm) "
+                   "merge (a)-[:participated {placement: pa.placement}]->(t) "
+                   "with a, b, pa, bp "
+                   "delete b, pa, bp ")]
+    (cypher/tquery conn query {:records merge-nodes})))
 
 (defn merge-player-nodes []
-  (let [players (get-existing-players)]
-    (timed (merge-player-nodes-by-implicit-alias players))
-    (timed (merge-all-player-nodes-by-explicit-alias players))))
+  (timed (merge-player-nodes-by-implicit-alias))
+  (timed (merge-player-nodes-by-explicit-alias)))
 
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
@@ -293,3 +280,8 @@
     (timed (merge-player-nodes))
     (timed (update-ratings))
     (timed (update-rankings))))
+
+(defn update-player-data []
+  (merge-player-nodes)
+  (update-ratings)
+  (update-rankings))

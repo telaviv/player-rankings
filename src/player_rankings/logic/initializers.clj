@@ -3,14 +3,9 @@
             [player-rankings.logic.tournament-constants :refer [tournament-urls
                                                                 test-urls]]
             [player-rankings.logic.database :refer [load-tournaments
-                                                    merge-player-nodes
-                                                    update-ratings
-                                                    update-rankings]]))
+                                                    update-player-data]]))
 
-(defn update-player-data []
-  (merge-player-nodes)
-  (update-ratings)
-  (update-rankings))
+
 
 (defn load-data []
   (let [tournaments (pmap get-tournament-data tournament-urls)]
