@@ -32,6 +32,7 @@
    "http://showdowngg.challonge.com/comeonandban27"
    "http://showdowngg.challonge.com/comeonandban28"
    "http://showdowngg.challonge.com/comeonandban29"
+   "http://showdowngg.challonge.com/comeonandban30"
    ])
 
 (def made
@@ -110,6 +111,7 @@
    "http://capitolfightdistrict.challonge.com/GSL12WU"
    "http://capitolfightdistrict.challonge.com/GSL13WU"
    "http://capitolfightdistrict.challonge.com/GSL14ABD"
+   "http://capitolfightdistrict.challonge.com/GSL15CES"
    ])
 
 (def ghost-at-dc
