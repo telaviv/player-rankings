@@ -111,13 +111,15 @@
 (defn partition-by-mergeable-players [players]
   (-> players create-alias-map vals distinct concat))
 
-(defn create-merge-nodes-by-implicit-aliases [players]
-  (let [mergeable-players (partition-by-mergeable-players players)
-        players-to-merge (filter #(> (count %) 1) mergeable-players)]
+(defn create-merge-nodes-from-mergeable-players [mergeable-players]
+  (let [players-to-merge (filter #(> (count %) 1) mergeable-players)]
     (mapcat create-merge-nodes-for-mergeable-players players-to-merge)))
 
+(defn create-merge-nodes-by-implicit-aliases [players]
+  (-> (partition-by-mergeable-players players) create-merge-nodes-from-mergeable-players))
+
 (defn match-aliases-to-players [aliases players]
-  (filter (comp not nil?) (map #(get-matching-player % players) aliases)))
+  (filter (comp not nil?) (distinct (map #(get-matching-player % players) aliases))))
 
 (defn has-multiple-elements? [coll]
   (> (count coll) 1))
@@ -125,14 +127,22 @@
 (defn filter-empty-aliases [matching-aliases]
   (filter has-multiple-elements? matching-aliases))
 
+(defn partition-by-explicit-players [players]
+  (filter (comp not empty?)
+          (map #(match-aliases-to-players % players) constants/aliases)))
+
 (defn create-merge-nodes-by-explicit-aliases [players]
-  (filter (comp not empty?) (map #(match-aliases-to-players % players) constants/aliases)))
+  (-> (partition-by-explicit-players players) create-merge-nodes-from-mergeable-players))
 
 (defn merge-player-nodes-by-implicit-alias []
-  (create-merge-nodes-by-implicit-aliases (get-existing-players)))
+  (-> (get-existing-players)
+      create-merge-nodes-by-implicit-aliases
+      merge-nodes-into-db))
 
 (defn merge-player-nodes-by-explicit-alias []
-  (create-merge-nodes-by-explicit-aliases (get-existing-players)))
+  (-> (get-existing-players)
+      create-merge-nodes-by-explicit-aliases
+      merge-nodes-into-db))
 
 (defn merge-nodes-into-db [merge-nodes]
   (let [query (str "unwind {records} as record "
@@ -277,9 +287,8 @@
 (defn add-tournament [tournament-url]
   (let [tournament-data (timed (challonge-parser/get-tournament-data tournament-url))]
     (timed (create-tournament-graph tournament-data))
-    (timed (merge-player-nodes))
-    (timed (update-ratings))
-    (timed (update-rankings))))
+    (update-player-data)))
+
 
 (defn update-player-data []
   (timed (merge-player-nodes))
