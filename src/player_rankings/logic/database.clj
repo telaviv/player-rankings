@@ -131,6 +131,18 @@
   (filter (comp not empty?)
           (map #(match-aliases-to-players % players) constants/aliases)))
 
+(defn merge-nodes-into-db [merge-nodes]
+  (let [query (str "unwind {records} as record "
+                   "match (a:player), (b:player)-[bp:played]-(bm:match), "
+                   "(b)-[pa:participated]-(t:tournament) "
+                   "where id(a) = record.aid and id(b) = record.bid "
+                   "set a.aliases = record.aliases "
+                   "merge (a)-[:played {won: bp.won}]->(bm) "
+                   "merge (a)-[:participated {placement: pa.placement}]->(t) "
+                   "with a, b, pa, bp "
+                   "delete b, pa, bp ")]
+    (cypher/tquery conn query {:records merge-nodes})))
+
 (defn create-merge-nodes-by-explicit-aliases [players]
   (-> (partition-by-explicit-players players) create-merge-nodes-from-mergeable-players))
 
@@ -143,18 +155,6 @@
   (-> (get-existing-players)
       create-merge-nodes-by-explicit-aliases
       merge-nodes-into-db))
-
-(defn merge-nodes-into-db [merge-nodes]
-  (let [query (str "unwind {records} as record "
-                   "match (a:player), (b:player)-[bp:played]-(bm:match), "
-                   "(b)-[pa:participated]-(t:tournament) "
-                   "where id(a) = record.aid and id(b) = record.bid "
-                   "set a.aliases = record.aliases "
-                   "merge (a)-[:played {won: bp.won}]->(bm) "
-                   "merge (a)-[:participated {placement: pa.placement}]->(t) "
-                   "with a, b, pa, bp "
-                   "delete b, pa, bp ")]
-    (cypher/tquery conn query {:records merge-nodes})))
 
 (defn merge-player-nodes []
   (timed (merge-player-nodes-by-implicit-alias))
@@ -284,13 +284,12 @@
   (doseq [tournament tournaments]
     (create-tournament-graph tournament)))
 
-(defn add-tournament [tournament-url]
-  (let [tournament-data (timed (challonge-parser/get-tournament-data tournament-url))]
-    (timed (create-tournament-graph tournament-data))
-    (update-player-data)))
-
-
 (defn update-player-data []
   (timed (merge-player-nodes))
   (timed (update-ratings))
   (timed (update-rankings)))
+
+(defn add-tournament [tournament-url]
+  (let [tournament-data (timed (challonge-parser/get-tournament-data tournament-url))]
+    (timed (create-tournament-graph tournament-data))
+    (update-player-data)))
