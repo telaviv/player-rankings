@@ -13,6 +13,5 @@
     (update-player-data)))
 
 (defn load-test-data []
-  (let [tournaments (pmap get-tournament-data test-urls)]
-    (load-tournaments tournaments)
-    (update-player-data)))
+  (let [tournaments (pmap get-tournament-data (butlast tournament-urls))]
+    (load-tournaments tournaments)))

@@ -78,6 +78,7 @@
    "http://challonge.com/BMOff3"
    "http://challonge.com/BMOS4"
    "http://challonge.com/BMOS5"
+   "http://challonge.com/BMOS6"
    ])
 
 (def wombo-wednesdays
@@ -130,6 +131,7 @@
    "http://challonge.com/ghostdc7smash4singles"
    "http://challonge.com/ghostdc9smash4singles"
    "http://challonge.com/GHOST10Smash4Singles"
+   "http://challonge.com/ghostdc11smash4s"
    ])
 
 (def ncr2015
@@ -173,6 +175,7 @@
    "http://challonge.com/sm4shep6"
    "http://challonge.com/sm4shep7"
    "http://challonge.com/sm4shep8"
+   "http://challonge.com/sm4shep9"
    ])
 
 
@@ -266,6 +269,7 @@
    "4b"
    "koq"
    "beast"
+   "dmg"
    ])
 
 (def aliases
@@ -281,6 +285,7 @@
    ["MF Space" "Space" "MF"]
    ["SirDaniel" "Sir"]
    ["Shia Lepuff" "Demi Lovato" "Shia La Puff" "ShaiLapuff"]
+   ["Pulse" "RH | Old man Pulse"]
    ["8BIT | Blank" "Blankey69" "8BIT | Trojan"]
    ["BaNdt" "ARaNdomVillager"]
    ["OS | basedGO64" "OS/ basedgo64" "OS/.GO64" "GO"]
@@ -290,6 +295,8 @@
    ["ChosenL" "Chosen_L" "ChosenL*"]
    ["CrispyTacoz" "Tacoz" "TRNP | CrispyTacoz *"]
    ["z" "OS/z"]
+   ["FONC | GPL Chye" "FONC | KOCI"]
+   ["FONC | Fist o cuffs" "FistOCuffs" "FONC | Fist'O'cuffs"]
    ["Violet" "Andrew Le"]
    ["Scourge" "Summus"]
    ["Kronos2560" "Kronos"]
@@ -298,7 +305,7 @@
    ["UC | DSS" "@UC_DSS"]
    ["Beast" "Daimyes" "Jimber Jangers"]
    ["MisterQ" "MrQ" "Mr. Q"]
-   ["Chye" "Koci"]
+   ["QT | Haystack" "QT|Haystax" "QT|Dadstax"]
    ["Chaos Pro" "Sm4sh Mango aka Chaos Pro" "Smash 4 Mango aka ChaosPro" "Rocky Balboa"]
    ["BKO | Choknater" "BKO | Chokenator"]
    ["Rice" "Rice-kun" "Dark Rice"]
@@ -309,8 +316,9 @@
    ["Chinito" "Chihito"]
    ["Jeepysol" "Jeepy"]
    ["My Jeans" "60 Scarabs"]
-   ["A Stray Cat" "Stray"]
+   ["A Stray Cat" "Stray" "StrayCat" "A Stay Cat"]
    ["Trex Destiny" "T-Rex Destiny"]
+   ["AwesomeTheSauce" "AwesomeSauce"]
    ["Villain" "Villian"]])
 
 (def january-power-ranks
