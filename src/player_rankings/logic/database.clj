@@ -7,6 +7,7 @@
             [clojurewerkz.neocons.rest.cypher :as cypher]
             [clojurewerkz.neocons.rest.relationships :as relationships]
             [clojurewerkz.neocons.rest.transaction :as transaction]
+            [taoensso.timbre.profiling :refer [p defnp]]
             [player-rankings.secrets :refer [neo4j-username neo4j-password]]
             [player-rankings.profiling :refer [timed]]
             [player-rankings.logic.rankings :as rankings]
@@ -83,7 +84,7 @@
            acc
            (conj acc alias)))) [] aliases)))
 
-(defn create-merge-nodes-for-mergeable-players [players]
+(defnp create-merge-nodes-for-mergeable-players [players]
   (let [aliases (merge-aliases players)
         canon-id (-> players first :id)
         merge-ids (map :id (rest players))]
@@ -111,9 +112,9 @@
 (defn partition-by-mergeable-players [players]
   (-> players create-alias-map vals distinct concat))
 
-(defn create-merge-nodes-from-mergeable-players [mergeable-players]
-  (let [players-to-merge (filter #(> (count %) 1) mergeable-players)]
-    (mapcat create-merge-nodes-for-mergeable-players players-to-merge)))
+(defnp create-merge-nodes-from-mergeable-players [mergeable-players]
+  (let [players-to-merge (p :filter-empty-players (filter #(> (count %) 1) mergeable-players))]
+    (p :mapcat-players (concat (map create-merge-nodes-for-mergeable-players players-to-merge)))))
 
 (defn create-merge-nodes-by-implicit-aliases [players]
   (-> (partition-by-mergeable-players players) create-merge-nodes-from-mergeable-players))
@@ -127,7 +128,7 @@
 (defn filter-empty-aliases [matching-aliases]
   (filter has-multiple-elements? matching-aliases))
 
-(defn partition-by-explicit-players [players]
+(defnp partition-by-explicit-players [players]
   (filter (comp not empty?)
           (map #(match-aliases-to-players % players) constants/aliases)))
 
@@ -143,8 +144,9 @@
                    "delete b, pa, bp ")]
     (cypher/tquery conn query {:records merge-nodes})))
 
-(defn create-merge-nodes-by-explicit-aliases [players]
-  (-> (partition-by-explicit-players players) create-merge-nodes-from-mergeable-players))
+(defnp create-merge-nodes-by-explicit-aliases [players]
+  (let [partitioned-players (partition-by-explicit-players players)]
+    (create-merge-nodes-from-mergeable-players partitioned-players)))
 
 (defn merge-player-nodes-by-implicit-alias []
   (-> (get-existing-players)
