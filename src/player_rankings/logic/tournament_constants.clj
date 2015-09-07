@@ -48,6 +48,7 @@
    "http://challonge.com/MADE12Singles"
    "http://challonge.com/MADE13Singles"
    "http://challonge.com/MADE14Singles"
+   "http://challonge.com/SmashMassXMADESingles"
    ])
 
 (def big-mamas-little-cup
@@ -178,6 +179,7 @@
    "http://challonge.com/sm4shep7"
    "http://challonge.com/sm4shep8"
    "http://challonge.com/sm4shep9"
+   "http://challonge.com/sm4shep10"
    ])
 
 
@@ -193,6 +195,7 @@
    "http://bko.challonge.com/OW74"
    "http://bko.challonge.com/OW84"
    "http://bko.challonge.com/OW94"
+   "http://bko.challonge.com/SO64"
    ])
 
 (def the-2-stock-and-the-handshake
@@ -207,8 +210,16 @@
    "http://challonge.com/Teke3"
    "http://challonge.com/Teke4"
    "http://challonge.com/Teke5"
+   "http://challonge.com/Teke6"
    ])
 
+(def game-addiction
+  [
+   "http://challonge.com/GAddiction2"
+   "http://challonge.com/GAddiction3"
+   "http://challonge.com/Gaddiction4"
+   "http://challonge.com/Gaddiction5"
+   ])
 
 (def miscellaneous-tournaments
   [
@@ -234,6 +245,7 @@
           smash-odyssey
           the-2-stock-and-the-handshake
           teke-tourney
+          game-addiction
           miscellaneous-tournaments))
 
 (def test-urls
@@ -277,6 +289,7 @@
 (def aliases
   [["Crow" "Chaos Crow" "Maleficent"]
    ["Glith" "glith10"]
+   ["Trevonte" "Trevante"]
    ["QT | K4rma" "QT.k4rma"]
    ["8BIT | Zepplin" "Zeppelin" "Zepland"]
    ["Mijo" "Mijo FUEGO"]
