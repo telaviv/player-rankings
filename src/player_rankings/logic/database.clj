@@ -7,6 +7,7 @@
             [clojurewerkz.neocons.rest.cypher :as cypher]
             [clojurewerkz.neocons.rest.relationships :as relationships]
             [clojurewerkz.neocons.rest.transaction :as transaction]
+            [taoensso.timbre :refer [spy]]
             [taoensso.timbre.profiling :refer [p defnp]]
             [player-rankings.secrets :refer [neo4j-username neo4j-password]]
             [player-rankings.profiling :refer [timed]]
@@ -25,7 +26,7 @@
                    "return id(t) as id")]
     ((first (cypher/tquery conn query {:data tournament})) "id")))
 
-(defn- get-existing-players []
+(defnp get-existing-players []
   (let [query (str "match (p:player) "
                    "return id(p) as id, p.aliases as aliases")
         data (cypher/tquery conn query)]
@@ -54,7 +55,7 @@
       (string/split #"\|")
       last))
 
-(defn get-matching-player [player-name players]
+(defnp get-matching-player [player-name players]
   (some #(when (some (fn [existing-player-name]
                        (= (normalize-name player-name)
                           (normalize-name existing-player-name)))
@@ -106,8 +107,8 @@
     (apply assoc (concat [alias-map]
                          (interleave (map normalize-name aliases) (repeat matching-players))))))
 
-(defn create-alias-map [players]
-  (reduce #(add-player-to-alias-map %1 %2) {} players))
+(def create-alias-map
+  (memoize (fn [players] (reduce #(add-player-to-alias-map %1 %2) {} players))))
 
 (defn partition-by-mergeable-players [players]
   (-> players create-alias-map vals distinct concat))
@@ -119,8 +120,10 @@
 (defn create-merge-nodes-by-implicit-aliases [players]
   (-> (partition-by-mergeable-players players) create-merge-nodes-from-mergeable-players))
 
-(defn match-aliases-to-players [aliases players]
-  (filter (comp not nil?) (distinct (map #(get-matching-player % players) aliases))))
+(defnp match-aliases-to-players [aliases players]
+  (let [alias-map (create-alias-map players)]
+    (filter (comp not nil?)
+            (distinct (mapcat #(get alias-map (normalize-name %) []) aliases)))))
 
 (defn has-multiple-elements? [coll]
   (> (count coll) 1))
@@ -132,7 +135,7 @@
   (filter (comp not empty?)
           (map #(match-aliases-to-players % players) constants/aliases)))
 
-(defn merge-nodes-into-db [merge-nodes]
+(defnp merge-nodes-into-db [merge-nodes]
   (let [query (str "unwind {records} as record "
                    "match (a:player), (b:player)-[bp:played]-(bm:match), "
                    "(b)-[pa:participated]-(t:tournament) "
@@ -142,25 +145,26 @@
                    "merge (a)-[:participated {placement: pa.placement}]->(t) "
                    "with a, b, pa, bp "
                    "delete b, pa, bp ")]
-    (cypher/tquery conn query {:records merge-nodes})))
+  (if (not (empty? merge-nodes))
+    (cypher/tquery conn query {:records merge-nodes}))))
 
 (defnp create-merge-nodes-by-explicit-aliases [players]
   (let [partitioned-players (partition-by-explicit-players players)]
     (create-merge-nodes-from-mergeable-players partitioned-players)))
 
-(defn merge-player-nodes-by-implicit-alias []
+(defnp merge-player-nodes-by-implicit-alias []
   (-> (get-existing-players)
       create-merge-nodes-by-implicit-aliases
       merge-nodes-into-db))
 
-(defn merge-player-nodes-by-explicit-alias []
-  (-> (get-existing-players)
-      create-merge-nodes-by-explicit-aliases
-      merge-nodes-into-db))
+(defnp merge-player-nodes-by-explicit-alias []
+  (let [merge-nodes (spy :info (-> (get-existing-players)
+                                   create-merge-nodes-by-explicit-aliases))]
+    (p :info :merge-nodez (merge-nodes-into-db merge-nodes))))
 
 (defn merge-player-nodes []
-  (timed (merge-player-nodes-by-implicit-alias))
-  (timed (merge-player-nodes-by-explicit-alias)))
+  (merge-player-nodes-by-implicit-alias)
+  (merge-player-nodes-by-explicit-alias))
 
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
