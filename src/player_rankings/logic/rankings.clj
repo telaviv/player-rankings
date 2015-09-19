@@ -10,17 +10,6 @@
             org.goochjs.glicko2.RatingPeriodResults))
 
 
-(defn doall-recur [s]
-  (cond
-   (map? s) (reduce
-             (fn [r i]
-               (merge {(first i)
-                       (doall-recur (second i))} r))
-             {} s)
-   (seq? s) (doall
-             (map doall-recur
-                  s))
-   :else s))
 
 (def DEFAULT-VOLATILITY 0.06)
 (def DEFAULT-TAU 1.2)
@@ -63,7 +52,7 @@
     (.updateRatings rating-system results)
     (rating-to-map player)))
 
-(defnp calculate-partial-ratings [nmatches initial-rating]
+(defnp calculate-partial-ratings [initial-rating nmatches]
   (loop [i 0
          old-rating initial-rating
          rating-coll []]
@@ -92,13 +81,9 @@
 (defnp player-ids-from-matches [matches]
   (distinct (map #(% "player_id") matches)))
 
-(defnp filter-by-player-id [player-id matches]
-  {player-id (doall (filter #(= player-id (% "player_id")) matches))})
-
 (defnp group-match-by-id [matches player-ids]
-  (comment (into {} (map #(filter-by-player-id % matches) player-ids)))
   (let [default-matches (into {} (map vector player-ids (repeat [])))
-        grouped-matches (doall-recur (group-by #(get % "player_id") matches))]
+        grouped-matches (group-by #(get % "player_id") matches)]
     (merge default-matches grouped-matches)))
 
 (defnp group-matches-into-periods [matches]
@@ -125,16 +110,9 @@
 (defnp initial-player-ratings [player-ids]
   (zipmap player-ids (repeat {:old default-rating :current default-rating})))
 
-(defnp normalize-matches [matches player-ratings]
-  (mapv
-   (fn [match]
-     (p :normalize-lambda
-        (normalize-match-for-calculation match player-ratings)))
-   matches))
-
 (defnp map-matches-with-ratings [matches player-ratings initial-rating]
-  (-> matches
-      (normalize-matches player-ratings)
+  (->> matches
+      (mapv #(normalize-match-for-calculation % player-ratings))
       (calculate-partial-ratings initial-rating)))
 
 (defnp map-ratings-to-period [player-ratings period]
