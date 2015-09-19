@@ -2,32 +2,47 @@
   (:require [clojure.string :as string]
             [clj-time.periodic :as p]
             [clj-time.core :as t]
-            [clj-time.coerce :as c])
+            [clj-time.coerce :as c]
+            [taoensso.timbre :refer [spy info]]
+            [taoensso.timbre.profiling :refer [p defnp]])
    (:import org.goochjs.glicko2.RatingCalculator
             org.goochjs.glicko2.Rating
             org.goochjs.glicko2.RatingPeriodResults))
 
+
+(defn doall-recur [s]
+  (cond
+   (map? s) (reduce
+             (fn [r i]
+               (merge {(first i)
+                       (doall-recur (second i))} r))
+             {} s)
+   (seq? s) (doall
+             (map doall-recur
+                  s))
+   :else s))
+
 (def DEFAULT-VOLATILITY 0.06)
 (def DEFAULT-TAU 1.2)
 
-(defn create-calculator []
+(defnp create-calculator []
   (RatingCalculator. DEFAULT-VOLATILITY DEFAULT-TAU))
 
-(defn create-player [rating rating-system]
+(defnp create-player [rating rating-system]
   (let [player (Rating. "player" rating-system)]
     (.setRating player (rating :rating))
     (.setRatingDeviation player (rating :rd))
     (.setVolatility player (rating :volatility))
     player))
 
-(defn- rating-to-map [rating-object]
+(defnp rating-to-map [rating-object]
   {:rating (.getRating rating-object)
    :rd (.getRatingDeviation rating-object)
    :volatility (.getVolatility rating-object)})
 
 (def default-rating (rating-to-map (Rating. "player" (create-calculator))))
 
-(defn calculate-inactive-rating [initial-rating]
+(defnp calculate-inactive-rating [initial-rating]
   (let [rating-system (create-calculator)
         results (RatingPeriodResults.)
         player (create-player initial-rating rating-system)]
@@ -35,7 +50,7 @@
     (.updateRatings rating-system results)
     {:old initial-rating, :current (rating-to-map player)}))
 
-(defn calculate-rating-period [initial-rating matches]
+(defnp calculate-rating-period [initial-rating matches]
   (let [rating-system (create-calculator)
         results (RatingPeriodResults.)
         player (create-player initial-rating rating-system)]
@@ -48,7 +63,7 @@
     (.updateRatings rating-system results)
     (rating-to-map player)))
 
-(defn calculate-partial-ratings [initial-rating nmatches]
+(defnp calculate-partial-ratings [nmatches initial-rating]
   (loop [i 0
          old-rating initial-rating
          rating-coll []]
@@ -61,32 +76,37 @@
           (recur new-i old-rating (conj rating-coll
                                         (assoc match-info :start old-rating :end old-rating)))
           (let [new-rating (calculate-rating-period
-                            initial-rating (take (inc i) nmatches))
+                            initial-rating (take new-i nmatches))
                 rating-diff (assoc match-info :start old-rating :end new-rating)]
             (recur new-i new-rating (conj rating-coll rating-diff))))))))
 
 
-(defn group-matches-by-rating-period [matches]
+(defnp group-matches-by-rating-period [matches]
   (let [sorted-matches (vec (sort-by #(% "time") matches))
         earliest-time (c/from-long (get-in sorted-matches [0 "time"]))]
-    (vec (partition-by (fn [match]
-                         (t/in-weeks (t/interval earliest-time
-                                                 (c/from-long (match "time")))))
-                       sorted-matches))))
+    (partition-by (fn [match]
+                    (t/in-weeks (t/interval earliest-time
+                                            (c/from-long (match "time")))))
+                  sorted-matches)))
 
-(defn player-ids-from-matches [matches]
+(defnp player-ids-from-matches [matches]
   (distinct (map #(% "player_id") matches)))
 
-(defn group-matches-into-periods [matches]
+(defnp filter-by-player-id [player-id matches]
+  {player-id (doall (filter #(= player-id (% "player_id")) matches))})
+
+(defnp group-match-by-id [matches player-ids]
+  (comment (into {} (map #(filter-by-player-id % matches) player-ids)))
+  (let [default-matches (into {} (map vector player-ids (repeat [])))
+        grouped-matches (doall-recur (group-by #(get % "player_id") matches))]
+    (merge default-matches grouped-matches)))
+
+(defnp group-matches-into-periods [matches]
   (let [matches-by-period (group-matches-by-rating-period matches)
         player-ids (player-ids-from-matches matches)]
-    (mapv (fn [matches-in-period]
-           (into {}
-                 (map (fn [p] {p (filter #(= p (% "player_id")) matches-in-period)})
-                      player-ids)))
-         matches-by-period)))
+    (mapv #(group-match-by-id % player-ids) matches-by-period)))
 
-(defn- is-disqualifying-score [score]
+(defnp is-disqualifying-score [score]
   (let [score-parts (-> score
                         (string/replace #"(-?\d)-(-?\d)" "$1 $2")
                         (string/split #" "))]
@@ -95,28 +115,37 @@
          (some #(< % 0))
          (= true))))
 
-(defn normalize-match-for-calculation [match player-scores]
+(defnp normalize-match-for-calculation [match player-scores]
   {:id (match "played_id")
    :player-id (match "player_id")
    :won (match "won")
    :opponent-rating (-> "opponent_id" match player-scores :current)
    :is-disqualified (-> "score" match is-disqualifying-score)})
 
-(defn initial-player-ratings [player-ids]
+(defnp initial-player-ratings [player-ids]
   (zipmap player-ids (repeat {:old default-rating :current default-rating})))
 
-(defn map-matches-with-ratings [matches player-ratings initial-rating]
-  (->> matches
-       (mapv #(normalize-match-for-calculation % player-ratings))
-       (calculate-partial-ratings initial-rating)))
+(defnp normalize-matches [matches player-ratings]
+  (mapv
+   (fn [match]
+     (p :normalize-lambda
+        (normalize-match-for-calculation match player-ratings)))
+   matches))
 
-(defn map-ratings-to-period [player-ratings period]
+(defnp map-matches-with-ratings [matches player-ratings initial-rating]
+  (-> matches
+      (normalize-matches player-ratings)
+      (calculate-partial-ratings initial-rating)))
+
+(defnp map-ratings-to-period [player-ratings period]
   (reduce-kv (fn [coll k v]
                (assoc coll k (map-matches-with-ratings
-                              v player-ratings (get-in player-ratings [k :current]))))
+                              v
+                              player-ratings
+                              (get-in player-ratings [k :current]))))
              {} period))
 
-(defn aggregate-ratings-from-period [player-ratings period]
+(defnp aggregate-ratings-from-period [player-ratings period]
   (let [period-ratings (map-ratings-to-period player-ratings period)
         new-ratings (reduce-kv (fn [coll k v]
                                  (if (= 0 (count v))
@@ -128,7 +157,7 @@
         matches (-> period-ratings vals flatten)]
     {:player-ratings new-ratings :matches matches}))
 
-(defn ratings-from-matches [matches]
+(defnp ratings-from-matches [matches]
   (let [periods (group-matches-into-periods matches)
         initial-ratings (-> matches player-ids-from-matches initial-player-ratings)]
     (reduce (fn [acc period]

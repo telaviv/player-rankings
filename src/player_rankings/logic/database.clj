@@ -158,11 +158,11 @@
       merge-nodes-into-db))
 
 (defnp merge-player-nodes-by-explicit-alias []
-  (let [merge-nodes (spy :info (-> (get-existing-players)
-                                   create-merge-nodes-by-explicit-aliases))]
-    (p :info :merge-nodez (merge-nodes-into-db merge-nodes))))
+  (-> (get-existing-players)
+      create-merge-nodes-by-explicit-aliases
+      merge-nodes-into-db))
 
-(defn merge-player-nodes []
+(defnp merge-player-nodes []
   (merge-player-nodes-by-implicit-alias)
   (merge-player-nodes-by-explicit-alias))
 
@@ -232,7 +232,7 @@
                    "record.current.rd, record.current.volatility] ")]
     (cypher/tquery conn query {:records vector-ratings})))
 
-(defn update-ratings []
+(defnp update-ratings []
   (let [ratings (get-match-ratings)]
     (update-played-with-ratings (:matches ratings))
     (update-player-with-ratings (:player-ratings ratings))))
@@ -252,7 +252,7 @@
                    {:id id :ranked "unranked"})))
          players)))
 
-(defn update-rankings []
+(defnp update-rankings []
   (let [records (create-ranked-records)
         query (str "unwind {records} as record "
                    "match (p:player) "
@@ -291,9 +291,9 @@
     (create-tournament-graph tournament)))
 
 (defn update-player-data []
-  (timed (merge-player-nodes))
-  (timed (update-ratings))
-  (timed (update-rankings)))
+  (merge-player-nodes)
+  (update-ratings)
+  (update-rankings))
 
 (defn add-tournament [tournament-url]
   (let [tournament-data (timed (challonge-parser/get-tournament-data tournament-url))]
