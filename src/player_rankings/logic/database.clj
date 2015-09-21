@@ -56,14 +56,14 @@
         data (cypher/tquery conn query {:names player-names})]
     (map keys->keywords data)))
 
-(defn remove-common-team-names [lowercased-player-name]
+(defn- remove-common-team-names [lowercased-player-name]
   (let [team-names constants/team-names
         space-team-names (map #(str % " ") team-names)
         i-team-names (map #(str % "i") space-team-names)
         strings-to-remove (concat i-team-names space-team-names)]
     (reduce #(string/replace %1 %2 "") lowercased-player-name strings-to-remove)))
 
-(defn normalize-name [player-name]
+(defn- normalize-name [player-name]
   (-> player-name
       (string/replace #"\(.*\)" "")
       string/lower-case
@@ -72,19 +72,19 @@
       (string/split #"\|")
       last))
 
-(defnp get-matching-player [player-name players]
+(defn- get-matching-player [player-name players]
   (some #(when (some (fn [existing-player-name]
                        (= (normalize-name player-name)
                           (normalize-name existing-player-name)))
                      (map normalize-name (:aliases %))) %)
         players))
 
-(defn players-share-aliases? [a b]
+(defn- players-share-aliases? [a b]
   (let [a-aliases (set (map normalize-name (:aliases a)))
         b-aliases (set (map normalize-name (:aliases b)))]
     (not (empty? (intersection a-aliases b-aliases)))))
 
-(defn split-by-first-mergeable-player [players]
+(defn- split-by-first-mergeable-player [players]
   (let [first-player (first players)]
     (reduce (fn [{:keys [matched unmatched]} player]
               (if (players-share-aliases? first-player player)
@@ -92,7 +92,7 @@
                 {:matched matched :unmatched (conj unmatched player)}))
             {:matched [] :unmatched []} players)))
 
-(defn merge-aliases [players]
+(defn- merge-aliases [players]
   (let [aliases (mapcat :aliases players)]
     (reduce
      (fn [acc alias]
@@ -102,13 +102,13 @@
            acc
            (conj acc alias)))) [] aliases)))
 
-(defnp create-merge-nodes-for-mergeable-players [players]
+(defn- pair-merge-nodes-from-list [players]
   (let [aliases (merge-aliases players)
         canon-id (-> players first :id)
         merge-ids (map :id (rest players))]
     (reduce #(conj %1 {:aid canon-id :bid %2 :aliases aliases}) [] merge-ids)))
 
-(defn get-matching-players-from-alias-map
+(defn- get-matching-players-from-alias-map
   ([alias-map player] (get-matching-players-from-alias-map alias-map player (:aliases player)))
   ([alias-map player aliases]
    (let [normalized-aliases (map normalize-name aliases)
@@ -118,7 +118,7 @@
        (contains? alias-map alias-to-check) (conj (alias-map alias-to-check) player)
        :else (recur alias-map player (rest aliases))))))
 
-(defn add-player-to-alias-map [alias-map player]
+(defn- add-player-to-alias-map [alias-map player]
   (let [matching-players (get-matching-players-from-alias-map alias-map player)
         aliases (merge-aliases matching-players)]
     (apply assoc (concat [alias-map]
@@ -127,33 +127,27 @@
 (def create-alias-map
   (memoize (fn [players] (reduce #(add-player-to-alias-map %1 %2) {} players))))
 
-(defn partition-by-mergeable-players [players]
-  (-> players create-alias-map vals distinct concat))
-
-(defnp create-merge-nodes-from-mergeable-players [mergeable-players]
+(defn- create-merge-nodes-from-mergeable-players [mergeable-players]
   (let [players-to-merge (p :filter-empty-players (filter #(> (count %) 1) mergeable-players))]
-    (mapcat create-merge-nodes-for-mergeable-players players-to-merge)))
+    (mapcat pair-merge-nodes-from-list players-to-merge)))
 
-(defn create-merge-nodes-by-implicit-aliases [players]
-  (s/validate Players players)
-  (-> (partition-by-mergeable-players players) create-merge-nodes-from-mergeable-players))
-
-(defnp match-aliases-to-players [aliases players]
+(defn- match-aliases-to-players [aliases players]
   (let [alias-map (create-alias-map players)]
     (filter (comp not nil?)
             (distinct (mapcat #(get alias-map (normalize-name %) []) aliases)))))
 
-(defn has-multiple-elements? [coll]
+(defn- has-multiple-elements? [coll]
   (> (count coll) 1))
 
-(defn filter-empty-aliases [matching-aliases]
+(defn- filter-empty-aliases [matching-aliases]
   (filter has-multiple-elements? matching-aliases))
 
-(defnp partition-by-explicit-players [players]
+(defn- partition-by-explicit-players [players]
+  (s/validate Players players)
   (filter (comp not empty?)
           (map #(match-aliases-to-players % players) constants/aliases)))
 
-(defnp merge-nodes-into-db [merge-nodes]
+(defn- merge-nodes-into-db [merge-nodes]
   (s/validate MergeNodes merge-nodes)
   (let [query (str "unwind {records} as record "
                    "match (a:player), (b:player)-[bp:played]-(bm:match), "
@@ -167,23 +161,14 @@
   (if (not (empty? merge-nodes))
     (cypher/tquery conn query {:records merge-nodes}))))
 
-(defnp create-merge-nodes-by-explicit-aliases [players]
+(defn- create-merge-nodes [players]
   (let [partitioned-players (partition-by-explicit-players players)]
     (create-merge-nodes-from-mergeable-players partitioned-players)))
 
-(defnp merge-player-nodes-by-implicit-alias []
-  (-> (get-existing-players)
-      create-merge-nodes-by-implicit-aliases
-      merge-nodes-into-db))
-
-(defnp merge-player-nodes-by-explicit-alias []
-  (-> (get-existing-players)
-      create-merge-nodes-by-explicit-aliases
-      merge-nodes-into-db))
-
 (defnp merge-player-nodes []
-  (merge-player-nodes-by-implicit-alias)
-  (merge-player-nodes-by-explicit-alias))
+  (-> (get-existing-players)
+      create-merge-nodes
+      merge-nodes-into-db))
 
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
@@ -213,7 +198,7 @@
                    "return id(m) as id")]
     (mapv #(% "id") (cypher/tquery conn query {:records match-graph-data}))))
 
-(defn raw-match-information []
+(defnp raw-match-information []
   (let [query
         (str "match (player:player)-[played:played]-(game:match), "
              "(game)--(opponent:player)"
@@ -225,7 +210,7 @@
 (defn- get-match-ratings []
   (-> (raw-match-information) rankings/ratings-from-matches))
 
-(defn update-played-with-ratings [match-ratings]
+(defn- update-played-with-ratings [match-ratings]
   (let [query (str "unwind {records} as record "
                    "match (p:player)-[pl:played]-(:match) "
                    "where id(p) = record.player_id and id(pl) = record.id "
@@ -235,12 +220,12 @@
                    "record.end.rd, record.end.volatility] ")]
     (cypher/tquery conn query {:records match-ratings})))
 
-(defn flatten-player-ratings [player-ratings]
+(defn- flatten-player-ratings [player-ratings]
   (reduce-kv (fn [coll k v]
                (conj coll (assoc v :id k)))
              [] player-ratings))
 
-(defn update-player-with-ratings [player-ratings]
+(defn- update-player-with-ratings [player-ratings]
   (let [vector-ratings (flatten-player-ratings player-ratings)
         query (str "unwind {records} as record "
                    "match (p:player) "
@@ -256,7 +241,7 @@
     (update-played-with-ratings (:matches ratings))
     (update-player-with-ratings (:player-ratings ratings))))
 
-(defn create-ranked-records []
+(defn- create-ranked-records []
   (let [players (get-existing-players)
         ranked (set (map normalize-name constants/currently-ranked-players))
         previously-ranked (set (map normalize-name constants/previously-ranked-players))]
@@ -279,7 +264,7 @@
                    "set p.ranked = record.ranked ")]
     (cypher/tquery conn query {:records records})))
 
-(defn merge-participants-with-tournament [tournament-id tournament-data]
+(defn- merge-participants-with-tournament [tournament-id tournament-data]
   (let [query (str "unwind {players} as player "
                    "match (p:player {name: player.name}) "
                    "match (t:tournament) "
@@ -288,7 +273,7 @@
     (cypher/tquery conn query {:players (:participants tournament-data)
                                :tournament_id tournament-id})))
 
-(defn merge-matches-with-tournament [tournament-id tournament-data]
+(defn- merge-matches-with-tournament [tournament-id tournament-data]
   (let [match-ids (create-match-graphs (:matches tournament-data))
         query (str "unwind {match_ids} as match_id "
                    "match (m:match) "
@@ -300,21 +285,21 @@
                                :players (:participants tournament-data)
                                :tournament_id tournament-id})))
 
-(defn create-tournament-graph [tournament-data]
+(defn- create-tournament-graph [tournament-data]
   (let [tournament-id (create-tournament-node (:tournament tournament-data))]
     (merge-matches-with-tournament tournament-id tournament-data)
     (merge-participants-with-tournament tournament-id tournament-data)))
 
-(defn load-tournaments [tournaments]
+(defn- load-tournaments [tournaments]
   (doseq [tournament tournaments]
     (create-tournament-graph tournament)))
 
-(defn update-player-data []
+(defnp update-player-data []
   (merge-player-nodes)
   (update-ratings)
   (update-rankings))
 
-(defn add-tournament [tournament-url]
+(defnp add-tournament [tournament-url]
   (let [tournament-data (timed (challonge-parser/get-tournament-data tournament-url))]
     (timed (create-tournament-graph tournament-data))
     (update-player-data)))
