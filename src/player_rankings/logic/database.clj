@@ -9,11 +9,28 @@
             [clojurewerkz.neocons.rest.transaction :as transaction]
             [taoensso.timbre :refer [spy]]
             [taoensso.timbre.profiling :refer [p defnp]]
+            [schema.core :as s]
             [player-rankings.secrets :refer [neo4j-username neo4j-password]]
             [player-rankings.profiling :refer [timed]]
             [player-rankings.logic.rankings :as rankings]
             [player-rankings.logic.challonge-parser :as challonge-parser]
             [player-rankings.logic.tournament-constants :as constants]))
+
+(def Aliases [s/Str])
+
+(def MergeNode
+  {:aid s/Int
+   :bid s/Int
+   :aliases Aliases})
+
+(def MergeNodes
+  [MergeNode])
+
+(def Player
+  {:aliases Aliases :id s/Int})
+
+(def Players
+  [Player])
 
 (def conn (nr/connect
            (str "http://" neo4j-username ":" neo4j-password "@localhost:7474/db/data/")))
@@ -115,9 +132,10 @@
 
 (defnp create-merge-nodes-from-mergeable-players [mergeable-players]
   (let [players-to-merge (p :filter-empty-players (filter #(> (count %) 1) mergeable-players))]
-    (p :mapcat-players (concat (map create-merge-nodes-for-mergeable-players players-to-merge)))))
+    (mapcat create-merge-nodes-for-mergeable-players players-to-merge)))
 
 (defn create-merge-nodes-by-implicit-aliases [players]
+  (s/validate Players players)
   (-> (partition-by-mergeable-players players) create-merge-nodes-from-mergeable-players))
 
 (defnp match-aliases-to-players [aliases players]
@@ -136,6 +154,7 @@
           (map #(match-aliases-to-players % players) constants/aliases)))
 
 (defnp merge-nodes-into-db [merge-nodes]
+  (s/validate MergeNodes merge-nodes)
   (let [query (str "unwind {records} as record "
                    "match (a:player), (b:player)-[bp:played]-(bm:match), "
                    "(b)-[pa:participated]-(t:tournament) "

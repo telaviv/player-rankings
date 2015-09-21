@@ -24,6 +24,7 @@
                  [clj-time "0.9.0"]
                  [com.taoensso/timbre "3.4.0"]
                  [spyscope "0.1.5"]
+                 [prismatic/schema "1.0.1"]
                  ]
 
   :min-lein-version "2.0.0"
