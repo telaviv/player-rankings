@@ -33,6 +33,7 @@
    "http://showdowngg.challonge.com/comeonandban28"
    "http://showdowngg.challonge.com/comeonandban29"
    "http://showdowngg.challonge.com/comeonandban30"
+   "http://showdowngg.challonge.com/comeonandban31"
    ])
 
 (def made
