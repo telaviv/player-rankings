@@ -49,6 +49,15 @@
         data (cypher/tquery conn query)]
     (map keys->keywords data)))
 
+(defnp get-players-for-rank-sorting []
+  (let [query (str "match (p:player) "
+                   "return id(p) as id, "
+                   "p.aliases as aliases, "
+                   "p.provisional_rating[0] as rating,"
+                   "p.provisional_rating[1] as stddev")
+        data (cypher/tquery conn query)]
+    (map keys->keywords data)))
+
 (defn- create-new-player-nodes [player-names]
   (let [query (str "unwind {names} as name "
                    "create (p:player {name: name, aliases: [name]}) "
