@@ -179,6 +179,32 @@
       create-merge-nodes
       merge-nodes-into-db))
 
+(defn- get-players-by-name-for-rank-sorting [player-names]
+  (let [players (get-players-for-rank-sorting)
+        alias-map (create-alias-map players)]
+    (map (fn [player-name]
+           (if (contains? alias-map player-name)
+             (assoc (first (get alias-map player-name)) :name player-name :new false)
+             {:aliases [player-name]
+              :rating (:rating rankings/default-rating)
+              :stddev (:rd rankings/default-rating)
+              :name player-name
+              :new true}))
+         player-names)))
+
+(defn- convert-player-scores-to-ranges [players]
+  (map (fn [{:keys [rating stddev] :as player}]
+         (let [min (- rating (* stddev 3))
+               max (+ rating (* stddev 3))]
+           (dissoc (assoc player :min min :max max) :rating stddev)))
+       players))
+
+(defnp sort-player-names-by-cse [player-names]
+  (->> player-names
+       (get-players-by-name-for-rank-sorting)
+       (convert-player-scores-to-ranges)
+       (sort-by :min)))
+
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
         second-players (map :player-two matches)
