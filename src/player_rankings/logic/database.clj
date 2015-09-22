@@ -183,27 +183,29 @@
   (let [players (get-players-for-rank-sorting)
         alias-map (create-alias-map players)]
     (map (fn [player-name]
-           (if (contains? alias-map player-name)
-             (assoc (first (get alias-map player-name)) :name player-name :new false)
-             {:aliases [player-name]
-              :rating (:rating rankings/default-rating)
-              :stddev (:rd rankings/default-rating)
-              :name player-name
-              :new true}))
-         player-names)))
+           (let [normalized-name (normalize-name player-name)]
+             (if (contains? alias-map normalized-name)
+               (assoc (first (get alias-map normalized-name)) :name player-name :new false)
+               {:aliases [player-name]
+                :rating (:rating rankings/default-rating)
+                :stddev (:rd rankings/default-rating)
+                :name player-name
+                :new true})))
+           player-names)))
 
-(defn- convert-player-scores-to-ranges [players]
+(defn- normalize-player-scores [players]
   (map (fn [{:keys [rating stddev] :as player}]
          (let [min (- rating (* stddev 3))
                max (+ rating (* stddev 3))]
-           (dissoc (assoc player :min min :max max) :rating stddev)))
+           (dissoc (assoc player :min min :max max) :rating :stddev :id)))
        players))
 
 (defnp sort-player-names-by-cse [player-names]
   (->> player-names
        (get-players-by-name-for-rank-sorting)
-       (convert-player-scores-to-ranges)
-       (sort-by :min)))
+       (normalize-player-scores)
+       (sort-by :min)
+       (reverse)))
 
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
