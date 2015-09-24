@@ -338,12 +338,13 @@
                                :players (:participants tournament-data)
                                :tournament_id tournament-id})))
 
-(defn- create-tournament-graph [tournament-data]
+(defnp create-tournament-graph [tournament-data]
+  (spy :info (get-in tournament-data [:tournament :title]))
   (let [tournament-id (create-tournament-node (:tournament tournament-data))]
     (merge-matches-with-tournament tournament-id tournament-data)
     (merge-participants-with-tournament tournament-id tournament-data)))
 
-(defn load-tournaments [tournaments]
+(defnp load-tournaments [tournaments]
   (doseq [tournament tournaments]
     (create-tournament-graph tournament)))
 
@@ -353,6 +354,6 @@
   (update-rankings))
 
 (defnp add-tournament [tournament-url]
-  (let [tournament-data (timed (challonge-parser/get-tournament-data tournament-url))]
-    (timed (create-tournament-graph tournament-data))
+  (let [tournament-data (challonge-parser/get-tournament-data tournament-url)]
+    (create-tournament-graph tournament-data)
     (update-player-data)))

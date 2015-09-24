@@ -222,7 +222,6 @@
    "http://challonge.com/thehandshake6"
    "http://challonge.com/thehandshake7"
    "http://challonge.com/thehandshake8"
-   "http://challonge.com/thehandshake9"
    ])
 
 (def teke-tourney
