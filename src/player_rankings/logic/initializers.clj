@@ -22,7 +22,7 @@
   (->> tournament-urls (pmap get-tournament-data) load-data-from-tournaments))
 
 (defn load-test-data []
-  (->> tournament-urls butlast (pmap get-tournament-data) load-data-from-tournaments))
+  (->> test-urls (pmap get-tournament-data) load-data-from-tournaments))
 
 (defn load-summer-data []
   (->> (filter-tournament-date 2015 6 28) load-data-from-tournaments))
