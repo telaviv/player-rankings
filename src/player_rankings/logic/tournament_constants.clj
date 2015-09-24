@@ -1,4 +1,3 @@
-
 (ns player-rankings.logic.tournament-constants
   (:require [clojure.set :refer [difference]]))
 
@@ -50,6 +49,7 @@
    "http://challonge.com/MADE13Singles"
    "http://challonge.com/MADE14Singles"
    "http://challonge.com/SmashMassXMADESingles"
+   "http://challonge.com/MADESingles15"
    ])
 
 (def big-mamas-little-cup
@@ -82,6 +82,9 @@
    "http://challonge.com/BMOS4"
    "http://challonge.com/BMOS5"
    "http://challonge.com/BMOS6"
+   "http://challonge.com/BMOS7"
+   "http://challonge.com/BMOS8"
+   "http://challonge.com/BMOS9"
    ])
 
 (def wombo-wednesdays
@@ -114,6 +117,9 @@
    "http://capitolfightdistrict.challonge.com/GSL13WU"
    "http://capitolfightdistrict.challonge.com/GSL14ABD"
    "http://capitolfightdistrict.challonge.com/GSL15CES"
+   "http://capitolfightdistrict.challonge.com/GSL16HBRS"
+   "http://capitolfightdistrict.challonge.com/GSL17WU"
+   "http://capitolfightdistrict.challonge.com/GSL18"
    ])
 
 (def ghost-at-dc
@@ -136,6 +142,10 @@
    "http://challonge.com/ghostdc9smash4singles"
    "http://challonge.com/GHOST10Smash4Singles"
    "http://challonge.com/ghostdc11smash4s"
+   "http://challonge.com/ghostdc12smash4singles"
+   "http://challonge.com/ghostarcadiansmash4singles"
+   "http://challonge.com/ghostdc13smash4singles"
+   "http://challonge.com/ghostdc14smas4"
    ])
 
 (def ncr2015
@@ -156,9 +166,11 @@
    "http://challonge.com/blu_421"
    "http://challonge.com/Blu42_Jun2"
    "http://challonge.com/Blu421234"
+   "http://challonge.com/nvaxrbp3"
    "http://challonge.com/blu42w8"
    "http://challonge.com/bsgdhfdshdssdhfsdh"
    "http://challonge.com/blu429"
+   "http://challonge.com/Smash4Blu42"
    "http://challonge.com/afhsjfhbsljfhbdksahfbaskjf"
    "http://challonge.com/blu4211"
    "http://challonge.com/Blu42smash12"
@@ -181,8 +193,8 @@
    "http://challonge.com/sm4shep8"
    "http://challonge.com/sm4shep9"
    "http://challonge.com/sm4shep10"
+   "http://challonge.com/sm4sh11"
    ])
-
 
 (def smash-odyssey
   [
@@ -197,12 +209,20 @@
    "http://bko.challonge.com/OW84"
    "http://bko.challonge.com/OW94"
    "http://bko.challonge.com/SO64"
+   "http://bko.challonge.com/SO7S4"
    ])
 
 (def the-2-stock-and-the-handshake
   [
+   "http://challonge.com/2stocked"
+   "http://challonge.com/thehandshake2"
+   "http://challonge.com/thehandshake3"
    "http://challonge.com/thehandshake4"
    "http://challonge.com/thehandshake5"
+   "http://challonge.com/thehandshake6"
+   "http://challonge.com/thehandshake7"
+   "http://challonge.com/thehandshake8"
+   "http://challonge.com/thehandshake9"
    ])
 
 (def teke-tourney
@@ -220,6 +240,15 @@
    "http://challonge.com/GAddiction3"
    "http://challonge.com/Gaddiction4"
    "http://challonge.com/Gaddiction5"
+   "http://challonge.com/GAddiction6"
+   ])
+
+(def pheonix-uprising
+  [
+   "http://challonge.com/phoenixuprising1"
+   "http://challonge.com/phoenixuprising2"
+   "http://challonge.com/phoenixuprising3"
+   "http://challonge.com/phoenixuprising4"
    ])
 
 (def miscellaneous-tournaments
@@ -247,17 +276,22 @@
           the-2-stock-and-the-handshake
           teke-tourney
           game-addiction
+          pheonix-uprising
           miscellaneous-tournaments))
 
 (def test-urls
   [
-   "http://showdowngg.challonge.com/comeonandban4singles"
-   "http://showdowngg.challonge.com/comeonandban27"
+   "http://challonge.com/sm4shsep5"
+   "http://bko.challonge.com/OW74"
    ])
 
 
 (def team-names
   [
+   "ta"
+   "aps"
+   "ph"
+   "bg"
    "sky raiders"
    "1up"
    "nme"
@@ -285,12 +319,13 @@
    "koq"
    "beast"
    "dmg"
+   "sin"
    ])
 
 (def aliases
   [["Crow" "Chaos Crow" "Maleficent"]
    ["Glith" "glith10"]
-   ["Trevonte" "Trevante"]
+   ["Trevonte" "Trevante" "SiN | Thizz Naruto! DBZ"]
    ["QT | K4rma" "QT.k4rma"]
    ["8BIT | Zepplin" "Zeppelin" "Zepland"]
    ["Mijo" "Mijo FUEGO"]
