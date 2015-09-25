@@ -33,6 +33,7 @@
    "http://showdowngg.challonge.com/comeonandban29"
    "http://showdowngg.challonge.com/comeonandban30"
    "http://showdowngg.challonge.com/comeonandban31"
+   "http://showdowngg.challonge.com/comeonandban34"
    ])
 
 (def made
@@ -337,7 +338,7 @@
    ["MF Space" "Space" "MF"]
    ["SirDaniel" "Sir"]
    ["Shia Lepuff" "Demi Lovato" "Shia La Puff" "ShaiLapuff"]
-   ["Pulse" "RH | Old man Pulse" "Pulse *ganon grunt*"]
+   ["Pulse" "RH | Old man Pulse" "Pulse *ganon grunt*" "Pulse *ganon grunts*"]
    ["8BIT | Blank" "Blankey69" "8BIT | Trojan"]
    ["K10" "ss3Katen"]
    ["BaNdt" "ARaNdomVillager"]
