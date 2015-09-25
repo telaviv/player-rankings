@@ -69,7 +69,8 @@
   (let [team-names constants/team-names
         space-team-names (map #(str % " ") team-names)
         i-team-names (map #(str % "i") space-team-names)
-        strings-to-remove (concat i-team-names space-team-names)]
+        l-team-names (map #(str % "l") space-team-names)
+        strings-to-remove (concat i-team-names l-team-names space-team-names)]
     (reduce #(string/replace %1 %2 "") lowercased-player-name strings-to-remove)))
 
 (defn- normalize-name [player-name]
@@ -135,19 +136,18 @@
 
 (defn- merge-in-alias-list [alias-map alias-list]
   (let [normalized-aliases (map normalize-name alias-list)
-        matching-aliases (filter #(contains? alias-map %) normalized-aliases)
-        merged-players (mapcat #(get alias-map %) matching-aliases)]
+        matching-aliases (distinct (filter #(contains? alias-map %) normalized-aliases))
+        merged-players (distinct (mapcat #(get alias-map %) matching-aliases))]
     (reduce #(assoc %1 %2 merged-players) alias-map matching-aliases)))
 
 (defn- merge-players-by-explicit-alias [alias-map]
   (reduce (fn [coll alias-list]
-            (merge-in-alias-list alias-map alias-list))
-          constants/aliases))
+            (merge-in-alias-list coll alias-list))
+          alias-map constants/aliases))
 
-(def create-alias-map
-  (memoize (fn [players]
-             (merge-players-by-explicit-alias
-              (reduce #(add-player-to-alias-map %1 %2) {} players)))))
+(defn create-alias-map [players]
+  (merge-players-by-explicit-alias
+   (reduce #(add-player-to-alias-map %1 %2) {} players)))
 
 (defn- create-merge-nodes-from-mergeable-players [mergeable-players]
   (let [players-to-merge (p :filter-empty-players (filter #(> (count %) 1) mergeable-players))]

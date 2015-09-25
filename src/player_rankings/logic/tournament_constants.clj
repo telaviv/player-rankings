@@ -300,6 +300,7 @@
    "made"
    "8bit"
    "8 bit"
+   "8-bit"
    "swarm"
    "uc"
    "fyt"
@@ -324,6 +325,7 @@
 (def aliases
   [["Crow" "Chaos Crow" "Maleficent"]
    ["Glith" "glith10"]
+   ["Snorlax" "SnorlaxPlox" "Snorlax Plo"]
    ["Trevonte" "Trevante" "SiN | Thizz Naruto! DBZ"]
    ["QT | K4rma" "QT.k4rma"]
    ["8BIT | Zepplin" "Zeppelin" "Zepland"]
@@ -335,12 +337,13 @@
    ["MF Space" "Space" "MF"]
    ["SirDaniel" "Sir"]
    ["Shia Lepuff" "Demi Lovato" "Shia La Puff" "ShaiLapuff"]
-   ["Pulse" "RH | Old man Pulse"]
+   ["Pulse" "RH | Old man Pulse" "Pulse *ganon grunt*"]
    ["8BIT | Blank" "Blankey69" "8BIT | Trojan"]
+   ["K10" "ss3Katen"]
    ["BaNdt" "ARaNdomVillager"]
    ["OS | basedGO64" "OS/ basedgo64" "OS/.GO64" "GO"]
    ["Arikie" "MS | Shadow" "4B_Arikie" "Arike"]
-   ["GShark" "Leffen_Shark" "G-Shark"]
+   ["GShark" "Leffen_Shark" "G-Shark" "isT_G Shark"]
    ["Arda" "Ishiey" "A" "Adriel" "AA" "Ish" "Im The Best Wolf"]
    ["ChosenL" "Chosen_L" "ChosenL*"]
    ["CrispyTacoz" "Tacoz" "TRNP | CrispyTacoz *"]
@@ -348,7 +351,8 @@
    ["FONC | GPL Chye" "FONC | KOCI"]
    ["FONC | Fist o cuffs" "FistOCuffs" "FONC | Fist'O'cuffs"]
    ["Violet" "Andrew Le"]
-   ["Scourge" "Summus"]
+   ["York" "T 17/York"]
+   ["Scourge" "Summus" "Lt. Skerge"]
    ["Kronos2560" "Kronos"]
    ["Hitaku" "Hitaku Back Sunday"]
    ["Boba Tapioca" "Boba"]
@@ -361,13 +365,13 @@
    ["Rice" "Rice-kun" "Dark Rice"]
    ["Andy Sauro" "Andy_Sauro" "Andy" "Andy The Albatross"]
    ["Shin" "Ph~ck Shin"]
-   ["OS Thee.O.P" "OS | TheeOP" "OS | thee.O.P."]
+   ["Thee.O.P" "TheeOP" "thee.O.P." "OS-theeOP" "OS / TheeOP"]
    ["Focast" "Foucast"]
    ["Chinito" "Chihito"]
-   ["Jeepysol" "Jeepy"]
+   ["Jeepysol" "Jeepy" "VnG|JeepySol [Degenerate without a wallet]"]
    ["My Jeans" "60 Scarabs"]
    ["A Stray Cat" "Stray" "StrayCat" "A Stay Cat"]
-   ["Trex Destiny" "T-Rex Destiny"]
+   ["Trex Destiny" "T-Rex Destiny" "Jae Pea"]
    ["AwesomeTheSauce" "AwesomeSauce"]
    ["Villain" "Villian"]])
 
