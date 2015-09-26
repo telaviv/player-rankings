@@ -121,6 +121,7 @@
    "http://capitolfightdistrict.challonge.com/GSL16HBRS"
    "http://capitolfightdistrict.challonge.com/GSL17WU"
    "http://capitolfightdistrict.challonge.com/GSL18"
+   "http://capitolfightdistrict.challonge.com/GSL19S"
    ])
 
 (def ghost-at-dc

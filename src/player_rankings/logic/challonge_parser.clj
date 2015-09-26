@@ -2,6 +2,7 @@
   (:require [clojure.string :as string]
             [player-rankings.secrets :refer [challonge-api-key]]
             [player-rankings.profiling :refer [timed]]
+            [taoensso.timbre.profiling :refer [p defnp]]
             [clj-http.client :as client]
             [clj-time.coerce :as coerce-time]
             [clojure.data.json :as json])
