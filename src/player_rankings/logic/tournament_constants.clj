@@ -233,6 +233,7 @@
    "http://challonge.com/Teke4"
    "http://challonge.com/Teke5"
    "http://challonge.com/Teke6"
+   "http://challonge.com/Teke7"
    ])
 
 (def game-addiction
@@ -250,6 +251,16 @@
    "http://challonge.com/phoenixuprising2"
    "http://challonge.com/phoenixuprising3"
    "http://challonge.com/phoenixuprising4"
+   ])
+
+(def super-south-bay-sundays
+  [
+   "http://ssbs.challonge.com/S4S1"
+   "http://ssbs.challonge.com/sm4sheaster"
+   "http://ssbs.challonge.com/SSBS5_S4Singles"
+   "http://ssbs.challonge.com/SSBS6S4S"
+   "http://ssbs.challonge.com/SSBS7_4Singles"
+   "http://ssbs.challonge.com/SSBS8S4singles"
    ])
 
 (def miscellaneous-tournaments
@@ -278,6 +289,7 @@
           teke-tourney
           game-addiction
           pheonix-uprising
+          super-south-bay-sundays
           miscellaneous-tournaments))
 
 (def test-urls
@@ -304,6 +316,7 @@
    "8 bit"
    "8-bit"
    "swarm"
+   "wtf"
    "uc"
    "fyt"
    "os"
@@ -330,22 +343,24 @@
    ["Snorlax" "SnorlaxPlox" "Snorlax Plo"]
    ["Trevonte" "Trevante" "SiN | Thizz Naruto! DBZ"]
    ["QT | K4rma" "QT.k4rma"]
-   ["8BIT | Zepplin" "Zeppelin" "Zepland"]
+   ["8BIT | Zepplin" "Zeppelin" "Zepland" "Zep"]
    ["Mijo" "Mijo FUEGO"]
    ["Mr. Javi" "Mr Jav"]
    ["SKS" "watislyfe" "SKS aka Watislyfe"]
    ["NME | Nanerz" "Cynthia"]
    ["Rickshaw" "NinjaRlink" "Richshaw"]
+   ["Kitka" "Ktika"]
    ["MF Space" "Space" "MF"]
    ["SirDaniel" "Sir"]
    ["Shia Lepuff" "Demi Lovato" "Shia La Puff" "ShaiLapuff"]
    ["Pulse" "RH | Old man Pulse" "Pulse *ganon grunt*" "Pulse *ganon grunts*"]
    ["8BIT | Blank" "Blankey69" "8BIT | Trojan"]
    ["K10" "ss3Katen"]
+   ["DMG | Shingo" "Shing0" "Shing07"]
    ["BaNdt" "ARaNdomVillager"]
    ["OS | basedGO64" "OS/ basedgo64" "OS/.GO64" "GO"]
    ["Arikie" "MS | Shadow" "4B_Arikie" "Arike"]
-   ["GShark" "Leffen_Shark" "G-Shark" "isT_G Shark"]
+   ["GShark" "Leffen_Shark" "G-Shark" "isT_G Shark" "ShArK (invitation pending)"]
    ["Arda" "Ishiey" "A" "Adriel" "AA" "Ish" "Im The Best Wolf"]
    ["ChosenL" "Chosen_L" "ChosenL*"]
    ["CrispyTacoz" "Tacoz" "TRNP | CrispyTacoz *"]
@@ -367,6 +382,7 @@
    ["Rice" "Rice-kun" "Dark Rice"]
    ["Andy Sauro" "Andy_Sauro" "Andy" "Andy The Albatross"]
    ["Shin" "Ph~ck Shin"]
+   ["Warchief" "Warhief"]
    ["Thee.O.P" "TheeOP" "thee.O.P." "OS-theeOP" "OS / TheeOP"]
    ["Focast" "Foucast"]
    ["Chinito" "Chihito"]
