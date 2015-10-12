@@ -34,6 +34,7 @@
    "http://showdowngg.challonge.com/comeonandban30"
    "http://showdowngg.challonge.com/comeonandban31"
    "http://showdowngg.challonge.com/comeonandban34"
+   "http://showdowngg.challonge.com/comeonandban35"
    ])
 
 (def made
@@ -51,6 +52,7 @@
    "http://challonge.com/MADE14Singles"
    "http://challonge.com/SmashMassXMADESingles"
    "http://challonge.com/MADESingles15"
+   "http://challonge.com/MADEFinalSingles"
    ])
 
 (def big-mamas-little-cup
@@ -86,6 +88,8 @@
    "http://challonge.com/BMOS7"
    "http://challonge.com/BMOS8"
    "http://challonge.com/BMOS9"
+   "http://challonge.com/BMOS10"
+   "http://challonge.com/BMOS11"
    ])
 
 (def wombo-wednesdays
@@ -95,6 +99,7 @@
    "http://scusmash.challonge.com/WW13_4Singles"
    "http://scusmash.challonge.com/WW14_4SINGLES"
    "http://scusmash.challonge.com/wwFinale_smash4"
+   "http://scusmash.challonge.com/WW16S4singles"
    ])
 
 (def gamerz-smash-labs
@@ -212,6 +217,7 @@
    "http://bko.challonge.com/OW94"
    "http://bko.challonge.com/SO64"
    "http://bko.challonge.com/SO7S4"
+   "http://bko.challonge.com/SO84"
    ])
 
 (def the-2-stock-and-the-handshake
@@ -224,6 +230,7 @@
    "http://challonge.com/thehandshake6"
    "http://challonge.com/thehandshake7"
    "http://challonge.com/thehandshake8"
+   "http://challonge.com/thehandshake9"
    ])
 
 (def teke-tourney
@@ -251,6 +258,8 @@
    "http://challonge.com/phoenixuprising2"
    "http://challonge.com/phoenixuprising3"
    "http://challonge.com/phoenixuprising4"
+   "http://challonge.com/phoenixuprising5"
+   "http://challonge.com/phoenixuprising6"
    ])
 
 (def super-south-bay-sundays
@@ -263,12 +272,20 @@
    "http://ssbs.challonge.com/SSBS8S4singles"
    ])
 
+(def simply-smashing
+  ["http://challonge.com/Simplysmashing1"
+   "http://challonge.com/Ssmashing2"
+   "http://challonge.com/Ssmashing3"
+   "http://challonge.com/SSmashing4"
+   "http://challonge.com/SSmashing5"
+   ])
+
+
 (def miscellaneous-tournaments
   [
    "http://challonge.com/surfcityslamsinglesPRO"
    "http://challonge.com/minibosssmash4singles2"
    "http://bko.challonge.com/BMS4S"
-   "http://challonge.com/Simplysmashing1"
    ])
 
 (def tournament-urls
@@ -290,6 +307,7 @@
           game-addiction
           pheonix-uprising
           super-south-bay-sundays
+          simply-smashing
           miscellaneous-tournaments))
 
 (def test-urls
@@ -306,12 +324,12 @@
    "ph"
    "bg"
    "sky raiders"
+   "made"
    "1up"
    "nme"
    "bask"
    "pho"
    "bko"
-   "made"
    "8bit"
    "8 bit"
    "8-bit"
@@ -335,15 +353,26 @@
    "beast"
    "dmg"
    "sin"
+   "tome"
+   "st"
+   "dire"
    ])
 
 (def aliases
   [["Crow" "Chaos Crow" "Maleficent"]
    ["Glith" "glith10"]
+   ["Parasite" "Not Last"]
+   (comment "This is due to a bug with team name processing."
+            "'BKOlC4' and 'BKO|C4' often happen so we need to strip out the l")
+   ["Legit" "egit"]
+   ["Myro" "Myron"]
+   ["Three" "Three!"]
+   ["ShadowsDepth" "ShadowsDeath"]
+   ["Serg!" "Surg!" "Surge!"]
    ["Snorlax" "SnorlaxPlox" "Snorlax Plo"]
    ["Trevonte" "Trevante" "SiN | Thizz Naruto! DBZ"]
    ["QT | K4rma" "QT.k4rma"]
-   ["8BIT | Zepplin" "Zeppelin" "Zepland" "Zep"]
+   ["Zeppelin" "8BIT | Zepplin" "Zepland" "Zep"]
    ["Mijo" "Mijo FUEGO"]
    ["Mr. Javi" "Mr Jav"]
    ["SKS" "watislyfe" "SKS aka Watislyfe"]
@@ -352,17 +381,19 @@
    ["Kitka" "Ktika"]
    ["MF Space" "Space" "MF"]
    ["SirDaniel" "Sir"]
-   ["Shia Lepuff" "Demi Lovato" "Shia La Puff" "ShaiLapuff"]
+   ["Shia Lepuff" "Demi Lovato" "Shia La Puff" "ShaiLapuff" "Shila La Puff"]
    ["Pulse" "RH | Old man Pulse" "Pulse *ganon grunt*" "Pulse *ganon grunts*"]
    ["8BIT | Blank" "Blankey69" "8BIT | Trojan"]
    ["K10" "ss3Katen"]
+   ["Kato" "Kaito"]
    ["DMG | Shingo" "Shing0" "Shing07"]
    ["BaNdt" "ARaNdomVillager"]
-   ["OS | basedGO64" "OS/ basedgo64" "OS/.GO64" "GO"]
+   ["OS | basedGO64" "OS/ basedgo64" "OS/.GO64" "GO" "GO 64"]
    ["Arikie" "MS | Shadow" "4B_Arikie" "Arike"]
    ["GShark" "Leffen_Shark" "G-Shark" "isT_G Shark" "ShArK (invitation pending)"]
-   ["Arda" "Ishiey" "A" "Adriel" "AA" "Ish" "Im The Best Wolf"]
-   ["ChosenL" "Chosen_L" "ChosenL*"]
+   ["Arda" "Ishiey" "A" "AA" "Ish" "Im The Best Wolf"]
+   ["AD" "Adriel"]
+   ["ChosenL" "Chosen_L" "ChosenL*" "CoG_ChosenL"]
    ["CrispyTacoz" "Tacoz" "TRNP | CrispyTacoz *"]
    ["z" "OS/z"]
    ["FONC | GPL Chye" "FONC | KOCI"]
@@ -376,20 +407,25 @@
    ["UC | DSS" "@UC_DSS"]
    ["Beast" "Daimyes" "Jimber Jangers"]
    ["MisterQ" "MrQ" "Mr. Q"]
+   ["Soronie" "Seronie"]
+   ["C4" "PHO -C4"]
    ["QT | Haystack" "QT|Haystax" "QT|Dadstax"]
-   ["Chaos Pro" "Sm4sh Mango aka Chaos Pro" "Smash 4 Mango aka ChaosPro" "Rocky Balboa"]
+   ["Chaos Pro" "Sm4sh Mango aka Chaos Pro" "Smash 4 Mango aka ChaosPro" "Rocky Balboa" "Sm4sh Mango"]
    ["BKO | Choknater" "BKO | Chokenator"]
+   ["TheComposer" "theComposr"]
    ["Rice" "Rice-kun" "Dark Rice"]
    ["Andy Sauro" "Andy_Sauro" "Andy" "Andy The Albatross"]
    ["Shin" "Ph~ck Shin"]
    ["Warchief" "Warhief"]
-   ["Thee.O.P" "TheeOP" "thee.O.P." "OS-theeOP" "OS / TheeOP"]
+   ["GPik" "G PIC"]
+   ["Thee.O.P" "TheeOP" "thee.O.P." "OS-theeOP" "OS / TheeOP" "TheOP"]
    ["Focast" "Foucast"]
-   ["Chinito" "Chihito"]
+   ["Chinito" "Chihito" "Chino"]
    ["Jeepysol" "Jeepy" "VnG|JeepySol [Degenerate without a wallet]"]
    ["My Jeans" "60 Scarabs"]
+   ["PewPewU" "CLG.PewPewU"]
    ["A Stray Cat" "Stray" "StrayCat" "A Stay Cat"]
-   ["Trex Destiny" "T-Rex Destiny" "Jae Pea"]
+   ["Trex Destiny" "T-Rex Destiny" "Jae Pea" "T-Rex"]
    ["AwesomeTheSauce" "AwesomeSauce"]
    ["Villain" "Villian"]])
 
