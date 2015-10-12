@@ -65,22 +65,27 @@
         data (cypher/tquery conn query {:names player-names})]
     (map keys->keywords data)))
 
-(defn- remove-common-team-names [lowercased-player-name]
-  (let [team-names constants/team-names
-        space-team-names (map #(str % " ") team-names)
+(defn- remove-common-team-names [lowercased-player-name team-names]
+  (let [space-team-names (map #(str % " ") team-names)
         i-team-names (map #(str % "i") space-team-names)
         l-team-names (map #(str % "l") space-team-names)
         strings-to-remove (concat i-team-names l-team-names space-team-names)]
-    (reduce #(string/replace %1 %2 "") lowercased-player-name strings-to-remove)))
+    (reduce (fn [acc team-name]
+              (if (.startsWith acc team-name)
+                (string/trim (string/replace-first acc team-name "")) acc))
+            lowercased-player-name strings-to-remove)))
 
-(defn- normalize-name [player-name]
-  (-> player-name
-      (string/replace #"\(.*\)" "")
-      string/lower-case
-      remove-common-team-names
-      (string/replace #"\s" "")
-      (string/split #"\|")
-      last))
+(defn normalize-name
+  ([player-name] (normalize-name player-name constants/team-names))
+  ([player-name team-names]
+   (-> player-name
+       (string/replace #"\(.*\)" "")
+       (string/split #"\|")
+       last
+       string/trim
+       string/lower-case
+       (remove-common-team-names team-names)
+       (string/replace #"\s" ""))))
 
 (defn- get-matching-player [player-name players]
   (some #(when (some (fn [existing-player-name]
