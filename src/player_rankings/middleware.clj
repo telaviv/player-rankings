@@ -36,18 +36,32 @@
                   <p>We've dispatched a team of highly trained gnomes to take care of the problem.</p>
                 </body>"}))))
 
+(def cors-headers
+  { "Access-Control-Allow-Origin" "*"
+    "Access-Control-Allow-Headers" "Content-Type"
+    "Access-Control-Allow-Methods" "GET,POST,OPTIONS" })
+
+(defn wrap-all-cors
+  "Allow requests from all origins"
+  [handler]
+  (fn [request]
+    (let [response (handler request)]
+      (update-in response [:headers]
+        merge cors-headers ))))
+
 (defn development-middleware [handler]
   (if (env :dev)
     (-> handler
+        wrap-all-cors
         wrap-error-page
         wrap-exceptions)
     handler))
-
 
 (defn production-middleware [handler]
   (-> handler
       json/wrap-json-response
       (wrap-restful-format :formats [:json-kw :edn :transit-json :transit-msgpack])
+      wrap-all-cors
       (wrap-idle-session-timeout
         {:timeout (* 60 30)
          :timeout-response (redirect "/")})
