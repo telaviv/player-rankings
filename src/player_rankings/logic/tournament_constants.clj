@@ -421,7 +421,7 @@
    ["Thee.O.P" "TheeOP" "thee.O.P." "OS-theeOP" "OS / TheeOP" "TheOP"]
    ["Focast" "Foucast"]
    ["Chinito" "Chihito" "Chino"]
-   ["Jeepysol" "Jeepy" "VnG|JeepySol [Degenerate without a wallet]"]
+   ["Jeepysol" "Jeepy" "JeepySol [Degenerate without a wallet]"]
    ["My Jeans" "60 Scarabs"]
    ["PewPewU" "CLG.PewPewU"]
    ["A Stray Cat" "Stray" "StrayCat" "A Stay Cat"]
