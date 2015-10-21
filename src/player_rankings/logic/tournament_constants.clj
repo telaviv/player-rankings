@@ -35,6 +35,7 @@
    "http://showdowngg.challonge.com/comeonandban31"
    "http://showdowngg.challonge.com/comeonandban34"
    "http://showdowngg.challonge.com/comeonandban35"
+   "http://showdowngg.challonge.com/comeonandban36"
    ])
 
 (def made
@@ -100,6 +101,7 @@
    "http://scusmash.challonge.com/WW14_4SINGLES"
    "http://scusmash.challonge.com/wwFinale_smash4"
    "http://scusmash.challonge.com/WW16S4singles"
+   "http://scusmash.challonge.com/WW17s4singles"
    ])
 
 (def gamerz-smash-labs
@@ -241,6 +243,7 @@
    "http://challonge.com/Teke5"
    "http://challonge.com/Teke6"
    "http://challonge.com/Teke7"
+   "http://challonge.com/Teke8"
    ])
 
 (def game-addiction
@@ -260,6 +263,7 @@
    "http://challonge.com/phoenixuprising4"
    "http://challonge.com/phoenixuprising5"
    "http://challonge.com/phoenixuprising6"
+   "http://challonge.com/phoenixuprising7"
    ])
 
 (def super-south-bay-sundays
@@ -360,7 +364,7 @@
 
 (def aliases
   [["Crow" "Chaos Crow" "Maleficent"]
-   ["Glith" "glith10"]
+   ["Glith" "glith10" "gltih"]
    ["Parasite" "Not Last"]
    (comment "This is due to a bug with team name processing."
             "'BKOlC4' and 'BKO|C4' often happen so we need to strip out the l")
@@ -385,10 +389,9 @@
    ["Pulse" "RH | Old man Pulse" "Pulse *ganon grunt*" "Pulse *ganon grunts*"]
    ["8BIT | Blank" "Blankey69" "8BIT | Trojan"]
    ["K10" "ss3Katen"]
-   ["Kato" "Kaito"]
    ["DMG | Shingo" "Shing0" "Shing07"]
    ["BaNdt" "ARaNdomVillager"]
-   ["OS | basedGO64" "OS/ basedgo64" "OS/.GO64" "GO" "GO 64"]
+   ["basedGO64" "OS/ basedgo64" "OS/.GO64" "GO" "GO 64" "OS~TOME`GO"]
    ["Arikie" "MS | Shadow" "4B_Arikie" "Arike"]
    ["GShark" "Leffen_Shark" "G-Shark" "isT_G Shark" "ShArK (invitation pending)"]
    ["Arda" "Ishiey" "A" "AA" "Ish" "Im The Best Wolf"]
