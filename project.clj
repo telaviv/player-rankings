@@ -19,13 +19,14 @@
                  [prone "0.8.1"]
                  [org.clojure/tools.nrepl "0.2.10"]
                  [ring-server "0.4.0"]
-                 [clj-http "1.1.2"]
+                 [clj-http "3.0.0-SNAPSHOT"]
                  [org.clojure/data.json "0.2.6"]
                  [clojurewerkz/neocons "3.1.0-beta3"]
                  [clj-time "0.9.0"]
                  [com.taoensso/timbre "3.4.0"]
                  [spyscope "0.1.5"]
                  [prismatic/schema "1.0.1"]
+                 [enlive "1.1.6"]
                  ]
 
   :min-lein-version "2.0.0"
