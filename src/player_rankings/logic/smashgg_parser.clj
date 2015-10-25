@@ -6,10 +6,10 @@
 
 (def tournament-url "https://smash.gg/tournament/come-on-and-ban-33")
 
-(defn tournament-slug [url]
+(defn- tournament-slug [url]
   (second (re-find #"https://smash.gg/tournament/(.*)" url)))
 
-(defn general-info-api-url [url]
+(defn- general-info-api-url [url]
   (let [slug (tournament-slug url)]
     (str "https://smash.gg/api/-/resource/gg_api./tournament/"
          slug
@@ -17,7 +17,7 @@
          ";slug="
          slug)))
 
-(defn bracket-url [group-id]
+(defn- bracket-url [group-id]
   (str "https://smash.gg/api/-/resource/gg_api./phase_group/"
        group-id
        ";admin=undefined;expand=%5B%22sets%22%2C%22entrants%22%5D;id="
@@ -27,6 +27,15 @@
 (defn- make-request [api-url]
   (-> api-url client/get :body (json/read-str :key-fn keyword)))
 
-(defn group-ids-from-url [url]
+(defn- group-ids-from-url [url]
   (let [bracket-info (-> url general-info-api-url make-request)]
     (map :id (get-in bracket-info [:entities :groups]))))
+
+(defn- participant-name [participant]
+  (if (empty? (:prefix participant))
+    (:gamerTag participant)
+    (str (:prefix participant) " | " (:gamerTag participant))))
+
+(defn brackets-from-url [url]
+  (pmap (fn [group-id] (-> group-id bracket-url make-request))
+        (group-ids-from-url url)))
