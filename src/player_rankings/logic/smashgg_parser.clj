@@ -17,5 +17,16 @@
          ";slug="
          slug)))
 
+(defn bracket-url [group-id]
+  (str "https://smash.gg/api/-/resource/gg_api./phase_group/"
+       group-id
+       ";admin=undefined;expand=%5B%22sets%22%2C%22entrants%22%5D;id="
+       group-id
+       "reset=false"))
+
 (defn- make-request [api-url]
   (-> api-url client/get :body (json/read-str :key-fn keyword)))
+
+(defn group-ids-from-url [url]
+  (let [bracket-info (-> url general-info-api-url make-request)]
+    (map :id (get-in bracket-info [:entities :groups]))))
