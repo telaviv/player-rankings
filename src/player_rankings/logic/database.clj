@@ -13,7 +13,7 @@
             [player-rankings.secrets :refer [neo4j-username neo4j-password]]
             [player-rankings.profiling :refer [timed]]
             [player-rankings.logic.rankings :as rankings]
-            [player-rankings.logic.challonge-parser :as challonge-parser]
+            [player-rankings.logic.tournament-url-parser :as tournament-url-parser]
             [player-rankings.logic.tournament-constants :as constants]))
 
 (def Aliases [s/Str])
@@ -359,6 +359,6 @@
   (update-rankings))
 
 (defnp add-tournament [tournament-url]
-  (let [tournament-data (challonge-parser/get-tournament-data tournament-url)]
+  (let [tournament-data (tournament-url-parser/get-tournament-data tournament-url)]
     (create-tournament-graph tournament-data)
     (update-player-data)))

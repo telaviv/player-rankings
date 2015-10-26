@@ -69,6 +69,12 @@
   (cond (= (:entrant1Id match) (:winnerId match)) 1
         (= (:entrant2Id match) (:winnerId match)) 2))
 
+(defn- times-from-tournament [tournament]
+  (let [start-time (* 1000 (:startAt tournament))]
+    (if (:endAt tournament)
+      {:start-time start-time :updated-time (* 1000 (:endAt tournament))}
+      {:start-time start-time :updated-time start-time})))
+
 (defn- normalize-participants [participants]
   (map (fn [participant-name]
          (comment "we should figure out a way to get the real placement.")
@@ -86,11 +92,12 @@
        matches))
 
 (defn- normalized-tournament [tournament url]
-  {:identifier (get-in tournament [:slugs 0])
-   :title (:name tournament)
-   :started_at (* 1000 (:startAt tournament))
-   :updated_at (* 1000 (:endAt tournament))
-   :url url})
+  (let [{:keys [start-time updated-time]} (times-from-tournament tournament)]
+    {:identifier (get-in tournament [:slugs 0])
+     :title (:name tournament)
+     :started_at start-time
+     :updated_at updated-time
+     :url url}))
 
 (defn get-tournament-data [url]
   (let [{:keys [brackets tournament]} (get-tournament-information url)

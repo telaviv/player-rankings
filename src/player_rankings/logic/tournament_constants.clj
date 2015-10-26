@@ -33,6 +33,8 @@
    "http://showdowngg.challonge.com/comeonandban29"
    "http://showdowngg.challonge.com/comeonandban30"
    "http://showdowngg.challonge.com/comeonandban31"
+   "https://smash.gg/tournament/come-on-and-ban-32"
+   "https://smash.gg/tournament/come-on-and-ban-33"
    "http://showdowngg.challonge.com/comeonandban34"
    "http://showdowngg.challonge.com/comeonandban35"
    "http://showdowngg.challonge.com/comeonandban36"
@@ -292,6 +294,7 @@
    "http://challonge.com/minibosssmash4singles2"
    "http://bko.challonge.com/BMS4S"
    "http://bko.challonge.com/BM24"
+   "https://smash.gg/tournament/extra-life-charity-smash-4-tournament-presented-by-showdown"
    ])
 
 (def tournament-urls
