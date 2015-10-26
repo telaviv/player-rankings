@@ -92,3 +92,6 @@
     {:participants (normalize-participants @participants)
      :matches (merge-matches-and-participants @matches @participants)
      :tournament @tournament}))
+
+(defn matching-url? [url]
+  (re-matches #".*challonge.com.*" url))

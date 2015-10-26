@@ -65,6 +65,10 @@
             (or (key match) -1))]
     (str (get-score :entrant1Score) "-" (get-score :entrant2Score))))
 
+(defn- winner-from-match [match]
+  (cond (= (:entrant1Id match) (:winnerId match)) 1
+        (= (:entrant2Id match) (:winnerId match)) 2))
+
 (defn- normalize-participants [participants]
   (map (fn [participant-name]
          (comment "we should figure out a way to get the real placement.")
@@ -77,8 +81,8 @@
          {:player-one (participants (:entrant1Id match))
           :player-two (participants (:entrant2Id match))
           :scores (score-from-match match)
-          :time (:completedAt match)
-          :winner (participants (:winnerId match))})
+          :time (* 1000 (:completedAt match))
+          :winner (winner-from-match match)})
        matches))
 
 (defn- normalized-tournament [tournament url]
@@ -95,3 +99,6 @@
     {:participants (normalize-participants participants)
      :matches (merge-matches-and-participants matches participants)
      :tournament (normalized-tournament tournament url)}))
+
+(defn matching-url? [url]
+  (re-matches #".*smash.gg.*" url))
