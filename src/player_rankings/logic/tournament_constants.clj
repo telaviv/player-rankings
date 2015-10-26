@@ -253,6 +253,7 @@
    "http://challonge.com/Gaddiction4"
    "http://challonge.com/Gaddiction5"
    "http://challonge.com/GAddiction6"
+   "http://challonge.com/gaddiction7"
    ])
 
 (def pheonix-uprising
@@ -290,6 +291,7 @@
    "http://challonge.com/surfcityslamsinglesPRO"
    "http://challonge.com/minibosssmash4singles2"
    "http://bko.challonge.com/BMS4S"
+   "http://bko.challonge.com/BM24"
    ])
 
 (def tournament-urls
