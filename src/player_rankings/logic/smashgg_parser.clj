@@ -81,9 +81,17 @@
           :winner (participants (:winnerId match))})
        matches))
 
+(defn- normalized-tournament [tournament url]
+  {:identifier (get-in tournament [:slugs 0])
+   :title (:name tournament)
+   :started_at (* 1000 (:startAt tournament))
+   :updated_at (* 1000 (:endAt tournament))
+   :url url})
+
 (defn get-tournament-data [url]
   (let [{:keys [brackets tournament]} (get-tournament-information url)
         participants (get-participants brackets)
         matches (get-matches brackets)]
     {:participants (normalize-participants participants)
-     :matches (merge-matches-and-participants matches participants)}))
+     :matches (merge-matches-and-participants matches participants)
+     :tournament (normalized-tournament tournament url)}))
