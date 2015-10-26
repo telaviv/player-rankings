@@ -13,7 +13,7 @@
   (let [slug (tournament-slug url)]
     (str "https://smash.gg/api/-/resource/gg_api./tournament/"
          slug
-         ";expand=%5B%22groups%22%5D"
+         ";expand=%5B%22groups%22%2C%22tournament%22%5D"
          ";slug="
          slug)))
 
@@ -27,18 +27,20 @@
 (defn- make-request [api-url]
   (-> api-url client/get :body (json/read-str :key-fn keyword)))
 
-(defn- group-ids-from-url [url]
-  (let [bracket-info (-> url general-info-api-url make-request)]
-    (map :id (get-in bracket-info [:entities :groups]))))
-
 (defn- participant-name [participant]
   (if (empty? (:prefix participant))
     (:gamerTag participant)
     (str (:prefix participant) " | " (:gamerTag participant))))
 
-(defn brackets-from-url [url]
+(defn brackets-from-ids [group-ids]
   (pmap (fn [group-id] (-> group-id bracket-url make-request))
-        (group-ids-from-url url)))
+        group-ids))
+
+(defn get-tournament-information [url]
+  (let [raw-tournament-information (-> url general-info-api-url make-request)
+        group-ids (map :id (get-in raw-tournament-information [:entities :groups]))]
+    {:brackets (brackets-from-ids group-ids)
+     :tournament (get-in raw-tournament-information [:entities :tournament])}))
 
 (defn- get-participants [brackets]
   (let [participants (mapcat #(get-in % [:entities :player]) brackets)]
@@ -63,6 +65,13 @@
             (or (key match) -1))]
     (str (get-score :entrant1Score) "-" (get-score :entrant2Score))))
 
+(defn- normalize-participants [participants]
+  (map (fn [participant-name]
+         (comment "we should figure out a way to get the real placement.")
+         {:name participant-name
+          :placement -1})
+       (vals participants)))
+
 (defn- merge-matches-and-participants [matches participants]
   (map (fn [match]
          {:player-one (participants (:entrant1Id match))
@@ -73,7 +82,8 @@
        matches))
 
 (defn get-tournament-data [url]
-  (let [brackets (brackets-from-url url)
+  (let [{:keys [brackets tournament]} (get-tournament-information url)
         participants (get-participants brackets)
         matches (get-matches brackets)]
-    (merge-matches-and-participants matches participants)))
+    {:participants (normalize-participants participants)
+     :matches (merge-matches-and-participants matches participants)}))
