@@ -69,7 +69,6 @@
           :player-two (participants (:entrant2Id match))
           :scores (score-from-match match)
           :time (:completedAt match)
-          :match match
           :winner (participants (:winnerId match))})
        matches))
 
