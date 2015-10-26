@@ -39,3 +39,42 @@
 (defn brackets-from-url [url]
   (pmap (fn [group-id] (-> group-id bracket-url make-request))
         (group-ids-from-url url)))
+
+(defn- get-participants [brackets]
+  (let [participants (mapcat #(get-in % [:entities :player]) brackets)]
+    (reduce (fn [acc participant]
+              (assoc acc
+                     (Integer/parseInt (:entrantId participant))
+                     (participant-name participant)))
+            {} participants)))
+
+(defn- filter-matches [matches]
+  (filter (fn [match]
+            (not (or (nil? (:entrant1Id match))
+                     (nil? (:entrant2Id match))
+                     (nil? (:winnerId match)))))
+          matches))
+
+(defn- get-matches [brackets]
+  (filter-matches (mapcat #(get-in % [:entities :sets]) brackets)))
+
+(defn- score-from-match [match]
+  (letfn [(get-score [key]
+            (or (key match) -1))]
+    (str (get-score :entrant1Score) "-" (get-score :entrant2Score))))
+
+(defn- merge-matches-and-participants [matches participants]
+  (map (fn [match]
+         {:player-one (participants (:entrant1Id match))
+          :player-two (participants (:entrant2Id match))
+          :scores (score-from-match match)
+          :time (:completedAt match)
+          :match match
+          :winner (participants (:winnerId match))})
+       matches))
+
+(defn get-tournament-data [url]
+  (let [brackets (brackets-from-url url)
+        participants (get-participants brackets)
+        matches (get-matches brackets)]
+    (merge-matches-and-participants matches participants)))
