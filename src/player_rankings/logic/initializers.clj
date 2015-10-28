@@ -1,5 +1,5 @@
 (ns player-rankings.logic.initializers
-  (:require [player-rankings.logic.challonge-parser :refer [get-tournament-data]]
+  (:require [player-rankings.logic.tournament-url-parser :refer [get-tournament-data]]
             [clj-time.coerce :as coerce-time]
             [clj-time.core :as time]
             [player-rankings.logic.tournament-constants :refer [tournament-urls
