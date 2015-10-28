@@ -9,4 +9,4 @@ pom.xml
 /.env
 *.log
 .nrepl-port
-src/player_rankings/secrets.clj
+src/clj/player_rankings/secrets.clj

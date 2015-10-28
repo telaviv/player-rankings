@@ -32,6 +32,7 @@
   :min-lein-version "2.0.0"
   :uberjar-name "player-rankings.jar"
   :jvm-opts ["-server"]
+  :source-paths ["src/clj"]
 
 ;;enable to start the nREPL server when the application launches
 ;:env {:repl-port 7001}
