@@ -24,5 +24,5 @@
 (defn load-test-data []
   (->> test-urls (pmap get-tournament-data) load-data-from-tournaments))
 
-(defn load-summer-data []
-  (->> (filter-tournament-date 2015 6 28) load-data-from-tournaments))
+(defn load-new-data []
+  (->> (filter-tournament-date 2015 8 30) load-data-from-tournaments))

@@ -328,6 +328,7 @@
 
 (def team-names
   [
+   "t17"
    "ta"
    "aps"
    "ph"
@@ -370,6 +371,7 @@
 (def aliases
   [["Crow" "Chaos Crow" "Maleficent"]
    ["Glith" "glith10" "gltih"]
+   ["KossisMOSS" "Kossimoss"]
    ["Parasite" "Not Last"]
    (comment "This is due to a bug with team name processing."
             "'BKOlC4' and 'BKO|C4' often happen so we need to strip out the l")
@@ -413,6 +415,8 @@
    ["York" "T 17/York"]
    ["Scourge" "Summus" "Lt. Skerge"]
    ["Kronos2560" "Kronos"]
+   ["Krustol" "TCM/Krustol"]
+   ["110" "110_"]
    ["Hitaku" "Hitaku Back Sunday"]
    ["Twich" "Twitch"]
    ["Boba Tapioca" "Boba"]
