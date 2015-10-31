@@ -19,12 +19,18 @@
 (defn- make-request [api-url]
   (-> api-url client/get :body (json/read-str :key-fn keyword)))
 
+(defn- filter-matches [matches]
+  (filter (fn [match]
+            (not (or (= "Bye" (get-in match [:player1 :firstName]))
+                     (= "Bye" (get-in match [:player2 :firstName])))))
+          matches))
+
 (defn- get-matches [url]
   (let [raw-request (-> url api-url make-request)
         winners (get-in raw-request [:tourney :winners])
         losers (get-in raw-request [:tourney :losers])
         raw-matches (concat winners losers)]
-    (mapcat :matches raw-matches)))
+    (filter-matches (mapcat :matches raw-matches))))
 
 (defn- score-from-match [match]
   (letfn [(get-score [key]
