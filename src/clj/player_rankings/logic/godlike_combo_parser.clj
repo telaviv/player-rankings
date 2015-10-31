@@ -21,7 +21,9 @@
 
 (defn- filter-matches [matches]
   (filter (fn [match]
-            (not (or (get-in match [:player1 :isByePlayer])
+            (not (or (nil? (get-in match [:player1]))
+                     (nil? (get-in match [:player2]))
+                     (get-in match [:player1 :isByePlayer])
                      (get-in match [:player2 :isByePlayer]))))
           matches))
 
@@ -29,7 +31,8 @@
   (let [raw-request (-> url api-url make-request)
         winners (get-in raw-request [:tourney :winners])
         losers (get-in raw-request [:tourney :losers])
-        raw-matches (concat winners losers)]
+        grandFinals (get-in raw-request [:tourney :grandFinals])
+        raw-matches (concat winners losers grandFinals)]
     (filter-matches (mapcat :matches raw-matches))))
 
 (defn- score-from-match [match]
