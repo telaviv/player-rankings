@@ -21,8 +21,8 @@
 
 (defn- filter-matches [matches]
   (filter (fn [match]
-            (not (or (= "Bye" (get-in match [:player1 :firstName]))
-                     (= "Bye" (get-in match [:player2 :firstName])))))
+            (not (or (get-in match [:player1 :isByePlayer])
+                     (get-in match [:player2 :isByePlayer]))))
           matches))
 
 (defn- get-matches [url]
