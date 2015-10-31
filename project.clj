@@ -17,7 +17,7 @@
                  [ring-middleware-format "0.5.0"]
                  [bouncer "0.3.2"]
                  [prone "0.8.1"]
-                 [org.clojure/tools.nrepl "0.2.10"]
+                 [org.clojure/tools.nrepl "0.2.11"]
                  [ring-server "0.4.0"]
                  [clj-http "3.0.0-SNAPSHOT"]
                  [org.clojure/data.json "0.2.6"]

@@ -38,6 +38,7 @@
    "http://showdowngg.challonge.com/comeonandban34"
    "http://showdowngg.challonge.com/comeonandban35"
    "http://showdowngg.challonge.com/comeonandban36"
+   "http://showdowngg.challonge.com/comeonandban38"
    ])
 
 (def made
@@ -93,6 +94,8 @@
    "http://challonge.com/BMOS9"
    "http://challonge.com/BMOS10"
    "http://challonge.com/BMOS11"
+   "http://challonge.com/BMOS12"
+   "http://challonge.com/BMOS13"
    ])
 
 (def wombo-wednesdays
@@ -104,6 +107,7 @@
    "http://scusmash.challonge.com/wwFinale_smash4"
    "http://scusmash.challonge.com/WW16S4singles"
    "http://scusmash.challonge.com/WW17s4singles"
+   "http://scusmash.challonge.com/WWS418"
    ])
 
 (def gamerz-smash-labs
@@ -131,6 +135,10 @@
    "http://capitolfightdistrict.challonge.com/GSL17WU"
    "http://capitolfightdistrict.challonge.com/GSL18"
    "http://capitolfightdistrict.challonge.com/GSL19S"
+   "http://capitolfightdistrict.challonge.com/GttES"
+   "http://capitolfightdistrict.challonge.com/GSL21S"
+   "http://capitolfightdistrict.challonge.com/GSL22GRD"
+   "http://capitolfightdistrict.challonge.com/prebloodmoonS"
    ])
 
 (def ghost-at-dc
@@ -267,6 +275,8 @@
    "http://challonge.com/phoenixuprising5"
    "http://challonge.com/phoenixuprising6"
    "http://challonge.com/phoenixuprising7"
+   "http://challonge.com/phoenixuprising8"
+   "http://challonge.com/phoenixuprising9"
    ])
 
 (def super-south-bay-sundays
@@ -277,6 +287,7 @@
    "http://ssbs.challonge.com/SSBS6S4S"
    "http://ssbs.challonge.com/SSBS7_4Singles"
    "http://ssbs.challonge.com/SSBS8S4singles"
+   "http://ssbs.challonge.com/SSBS9s4singles"
    ])
 
 (def simply-smashing
@@ -285,6 +296,8 @@
    "http://challonge.com/Ssmashing3"
    "http://challonge.com/SSmashing4"
    "http://challonge.com/SSmashing5"
+   "http://challonge.com/SSmashing6"
+   "http://challonge.com/ssmashing7"
    ])
 
 
@@ -323,6 +336,7 @@
   [
    "http://challonge.com/sm4shsep5"
    "http://bko.challonge.com/OW74"
+   "https://smash.gg/tournament/come-on-and-ban-33"
    ])
 
 
@@ -385,6 +399,7 @@
    ["QT | K4rma" "QT.k4rma"]
    ["Zeppelin" "8BIT | Zepplin" "Zepland" "Zep"]
    ["Mijo" "Mijo FUEGO" "FS MijoFeugo"]
+   ["BigMama" "Alkaid"]
    ["Wolflord" "Woflord"]
    ["Mr. Javi" "Mr Jav"]
    ["SKS" "watislyfe" "SKS aka Watislyfe"]
@@ -399,7 +414,7 @@
    ["K10" "ss3Katen"]
    ["DMG | Shingo" "Shing0" "Shing07"]
    ["BaNdt" "ARaNdomVillager"]
-   ["basedGO64" "OS/ basedgo64" "OS/.GO64" "GO" "GO 64" "OS~TOME`GO" "TOME|Go!"]
+   ["TOME|Go!" "basedGO64" "OS/ basedgo64" "OS/.GO64" "GO" "GO 64" "OS~TOME`GO" "Tome"]
    ["Robotic Painter" "Robatic Painter"]
    ["Mr. Pink" "Mr Pink" "Pink"]
    ["Arikie" "MS | Shadow" "4B_Arikie" "Arike"]
@@ -425,9 +440,11 @@
    ["MisterQ" "MrQ" "Mr. Q"]
    ["Soronie" "Seronie"]
    ["C4" "PHO -C4"]
-   ["QT | Haystack" "QT|Haystax" "QT|Dadstax"]
+   ["Haystack" "Haystax" "Dadstax" "Haystacks" "QTHaystack"]
    ["Chaos Pro" "Sm4sh Mango aka Chaos Pro" "Smash 4 Mango aka ChaosPro" "Rocky Balboa" "Sm4sh Mango"]
    ["BKO | Choknater" "BKO | Chokenator"]
+   ["Kitka" "Yung Lord Kitka" "Lord Kitka"]
+   ["Pheno" "GPheno"]
    ["TheComposer" "theComposr"]
    ["Rice" "Rice-kun" "Dark Rice"]
    ["Andy Sauro" "Andy_Sauro" "Andy" "Andy The Albatross"]
