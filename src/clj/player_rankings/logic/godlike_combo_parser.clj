@@ -1,61 +1,30 @@
-(ns player-rankings.logic.smashgg-parser
-  (:require [clj-http.client :as client]
+(ns player-rankings.logic.godlike-combo-parser
+  (:require [net.cgrand.enlive-html :as html]
+            [clj-http.client :as client]
             [clojure.data.json :as json])
   (:import [java.net URL]))
 
+(def tournament-url "http://brackets.godlikecombo.com/#!/sm4shep16")
+
 (defn- tournament-slug [url]
-  (second (re-find #"https://smash.gg/tournament/(.*)" url)))
+  (second (re-find #"http://brackets.godlikecombo.com/#!/(.*)" url)))
 
-(defn- general-info-api-url [url]
+(defn- api-url [url]
   (let [slug (tournament-slug url)]
-    (str "https://smash.gg/api/-/resource/gg_api./tournament/"
+    (str "https://api.godlikecombo.com/godlikecombo?"
+         "apicall=get_tourney_by_url_path&url_path="
          slug
-         ";expand=%5B%22groups%22%2C%22tournament%22%5D"
-         ";slug="
-         slug)))
-
-(defn- bracket-url [group-id]
-  (str "https://smash.gg/api/-/resource/gg_api./phase_group/"
-       group-id
-       ";admin=undefined;expand=%5B%22sets%22%2C%22entrants%22%5D;id="
-       group-id
-       "reset=false"))
+         "&protocol_version=0.08&client_os=web")))
 
 (defn- make-request [api-url]
   (-> api-url client/get :body (json/read-str :key-fn keyword)))
 
-(defn- participant-name [participant]
-  (if (empty? (:prefix participant))
-    (:gamerTag participant)
-    (str (:prefix participant) " | " (:gamerTag participant))))
-
-(defn brackets-from-ids [group-ids]
-  (pmap (fn [group-id] (-> group-id bracket-url make-request))
-        group-ids))
-
-(defn get-tournament-information [url]
-  (let [raw-tournament-information (-> url general-info-api-url make-request)
-        group-ids (map :id (get-in raw-tournament-information [:entities :groups]))]
-    {:brackets (brackets-from-ids group-ids)
-     :tournament (get-in raw-tournament-information [:entities :tournament])}))
-
-(defn- get-participants [brackets]
-  (let [participants (mapcat #(get-in % [:entities :player]) brackets)]
-    (reduce (fn [acc participant]
-              (assoc acc
-                     (Integer/parseInt (:entrantId participant))
-                     (participant-name participant)))
-            {} participants)))
-
-(defn- filter-matches [matches]
-  (filter (fn [match]
-            (not (or (nil? (:entrant1Id match))
-                     (nil? (:entrant2Id match))
-                     (nil? (:winnerId match)))))
-          matches))
-
-(defn- get-matches [brackets]
-  (filter-matches (mapcat #(get-in % [:entities :sets]) brackets)))
+(defn- get-matches [url]
+  (let [raw-request (-> url api-url make-request)
+        winners (get-in raw-request [:tourney :winners])
+        losers (get-in raw-request [:tourney :losers])
+        raw-matches (concat winners losers)]
+    (mapcat :matches raw-matches)))
 
 (defn- score-from-match [match]
   (letfn [(get-score [key]
