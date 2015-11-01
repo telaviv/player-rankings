@@ -7,7 +7,7 @@
 (def tournament-url "http://brackets.godlikecombo.com/#!/sm4shep16")
 
 (defn- tournament-slug [url]
-  (second (re-find #"http://brackets.godlikecombo.com/#!/(.*)" url)))
+  (second (re-matches #"http://brackets.godlikecombo.com/#!/(.*)" url)))
 
 (defn- api-url [url]
   (let [slug (tournament-slug url)]
@@ -31,9 +31,30 @@
   (let [raw-request (-> url api-url make-request)
         winners (get-in raw-request [:tourney :winners])
         losers (get-in raw-request [:tourney :losers])
-        grandFinals (get-in raw-request [:tourney :grandFinals])
-        raw-matches (concat winners losers grandFinals)]
+        grand-finals (get-in raw-request [:tourney :grandFinals])
+        raw-matches (concat winners losers grand-finals)]
     (filter-matches (mapcat :matches raw-matches))))
+
+(defn- strip-w-l [name]
+  (let [match (re-matches #"(.*) \((W|L)\)" name)]
+    (assert (= 3 (count match)) (str name " isn't in the right format"))
+    (second match)))
+
+(defn- strip-underscores [name]
+  (let [match (re-matches #"(.*?)(_+)" name)]
+    (if match
+      (second match)
+      name)))
+
+(defn- normalize-name [raw-name]
+  (-> raw-name strip-w-l strip-underscores))
+
+(defn- get-participants [matches]
+  (vec (reduce (fn [names match]
+                 (into names
+                       [(normalize-name (:player1UiString match))
+                        (normalize-name (:player2UiString match))]))
+               #{} matches)))
 
 (defn- score-from-match [match]
   (letfn [(get-score [key]
