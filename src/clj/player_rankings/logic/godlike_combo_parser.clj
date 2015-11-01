@@ -56,21 +56,6 @@
                         (normalize-name (:player2UiString match))]))
                #{} matches)))
 
-(defn- score-from-match [match]
-  (letfn [(get-score [key]
-            (or (key match) -1))]
-    (str (get-score :entrant1Score) "-" (get-score :entrant2Score))))
-
-(defn- winner-from-match [match]
-  (cond (= (:entrant1Id match) (:winnerId match)) 1
-        (= (:entrant2Id match) (:winnerId match)) 2))
-
-(defn- times-from-tournament [tournament]
-  (let [start-time (* 1000 (:startAt tournament))]
-    (if (:endAt tournament)
-      {:start-time start-time :updated-time (* 1000 (:endAt tournament))}
-      {:start-time start-time :updated-time start-time})))
-
 (defn- normalize-participants [participants]
   (map (fn [participant-name]
          (comment "we should figure out a way to get the real placement.")
@@ -78,12 +63,19 @@
           :placement -1})
        (vals participants)))
 
-(defn- merge-matches-and-participants [matches participants]
+(defn- score-from-match [match]
+  (str (:player1Wins match) "-" (:player2Wins match)))
+
+(defn- winner-from-match [match]
+  (if (> (:player1Wins match) (:player2Wins match)) 1 2))
+
+(defn- normalize-matches [matches]
+  (comment "we need to change the time to be dynamic.")
   (map (fn [match]
-         {:player-one (participants (:entrant1Id match))
-          :player-two (participants (:entrant2Id match))
+         {:player-one (normalize-name (:player1UiString match))
+          :player-two (normalize-name (:player2UiString match))
           :scores (score-from-match match)
-          :time (* 1000 (:completedAt match))
+          :time 1443729600
           :winner (winner-from-match match)})
        matches))
 
