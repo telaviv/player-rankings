@@ -535,6 +535,28 @@
    "Bandt"
    "Hitaku"])
 
+(def fall-power-rankings
+  ["Shaky"
+   "Trevonte"
+   "Zex"
+   "Boringman"
+   "Jeepysol"
+   "Rice"
+   "Virus"
+   "Teb"
+   "DSS"
+   "Legit"
+   "3xA"
+   "Soulimar"
+   "Nitro"
+   "Stark"
+   "X"
+   "Jodi Bleek"
+   "Scourge"
+   "Sean"
+   "Arikie"
+   "Mocha"])
+
 (def currently-ranked-players spring-power-ranks)
 (def previously-ranked-players
   (vec (difference (set (concat january-power-ranks
