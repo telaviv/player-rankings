@@ -214,6 +214,16 @@
    "http://challonge.com/sm4shep9"
    "http://challonge.com/sm4shep10"
    "http://challonge.com/sm4sh11"
+   {:url "http://brackets.godlikecombo.com/#!/versus_smash4_singles_12"
+    :date (t/date-time 2015 9 14)}
+   {:url "http://brackets.godlikecombo.com/#!/versus_smash_singles_ep13"
+    :date (t/date-time 2015 9 21)}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh14"
+    :date (t/date-time 2015 10 5)}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh15"
+    :date (t/date-time 2015 10 19)}
+   {:url "http://brackets.godlikecombo.com/#!/sm4shep16"
+    :date (t/date-time 2015 10 26)}
    ])
 
 (def smash-odyssey
