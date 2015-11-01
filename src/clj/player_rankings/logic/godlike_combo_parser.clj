@@ -27,11 +27,10 @@
                      (get-in match [:player2 :isByePlayer]))))
           matches))
 
-(defn- get-matches [url]
-  (let [raw-request (-> url api-url make-request)
-        winners (get-in raw-request [:tourney :winners])
-        losers (get-in raw-request [:tourney :losers])
-        grand-finals (get-in raw-request [:tourney :grandFinals])
+(defn- get-matches [tournament]
+  (let [winners (get-in tournament [:tourney :winners])
+        losers (get-in tournament [:tourney :losers])
+        grand-finals (get-in tournament [:tourney :grandFinals])
         raw-matches (concat winners losers grand-finals)]
     (filter-matches (mapcat :matches raw-matches))))
 
@@ -75,7 +74,7 @@
          {:player-one (normalize-name (:player1UiString match))
           :player-two (normalize-name (:player2UiString match))
           :scores (score-from-match match)
-          :time 1443729600
+          :time 1443729600000
           :winner (winner-from-match match)})
        matches))
 
@@ -88,12 +87,8 @@
      :url url}))
 
 (defn get-tournament-data [url]
-  (let [{:keys [brackets tournament]} (get-tournament-information url)
-        participants (get-participants brackets)
-        matches (get-matches brackets)]
-    {:participants (normalize-participants participants)
-     :matches (merge-matches-and-participants matches participants)
-     :tournament (normalized-tournament tournament url)}))
+  (let [tournament (-> url api-url make-request)]
+    {:matches (normalize-matches (get-matches tournament))}))
 
 (defn matching-url? [url]
   (re-matches #".*smash.gg.*" url))
