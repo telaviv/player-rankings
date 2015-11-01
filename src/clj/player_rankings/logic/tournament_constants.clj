@@ -1,5 +1,6 @@
 (ns player-rankings.logic.tournament-constants
-  (:require [clojure.set :refer [difference]]))
+  (:require [clojure.set :refer [difference]]
+            [clj-time.core :as t]))
 
 (def the-foundry
   [
@@ -337,8 +338,9 @@
    "http://challonge.com/sm4shsep5"
    "http://bko.challonge.com/OW74"
    "https://smash.gg/tournament/come-on-and-ban-33"
+   {:url "http://brackets.godlikecombo.com/#!/sm4shep16"
+    :date (t/date-time 2015 10 26)}
    ])
-
 
 (def team-names
   [

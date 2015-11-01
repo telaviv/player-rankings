@@ -1,6 +1,8 @@
 (ns player-rankings.logic.tournament-url-parser
   (:require [player-rankings.logic.smashgg-parser :as smashgg]
             [player-rankings.logic.challonge-parser :as challonge]
+            [player-rankings.logic.godlike-combo-parser :as godlike]
+            [taoensso.timbre :refer [spy]]
             [schema.core :as s]))
 
 (def Participant
@@ -27,7 +29,26 @@
    :matches [Match]
    :tournament Tournament})
 
-(defn get-tournament-data [url]
-  (cond
-    (challonge/matching-url? url) (s/validate TournamentData (challonge/get-tournament-data url))
-    (smashgg/matching-url? url) (s/validate TournamentData (smashgg/get-tournament-data url))))
+(def data-parsers
+  [{:matching-url? challonge/matching-url?
+    :get-tournament-data challonge/get-tournament-data}
+   {:matching-url? smashgg/matching-url?
+    :get-tournament-data smashgg/get-tournament-data}
+   {:matching-url? godlike/matching-url?
+    :get-tournament-data godlike/get-tournament-data}])
+
+(defn- tournament-data-from-parser [parser url]
+  (s/validate TournamentData ((:get-tournament-data parser) url)))
+
+(defn- get-url [meta-url]
+  (if (string? meta-url)
+    meta-url
+    (:url meta-url)))
+
+(defn get-tournament-data [meta-url]
+  (let [url (get-url meta-url)]
+    (reduce (fn [tournament-data parser]
+              (if ((:matching-url? parser) url)
+                (tournament-data-from-parser parser meta-url)
+                tournament-data))
+            nil data-parsers)))

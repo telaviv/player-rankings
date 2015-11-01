@@ -1,10 +1,9 @@
 (ns player-rankings.logic.godlike-combo-parser
   (:require [net.cgrand.enlive-html :as html]
             [clj-http.client :as client]
-            [clojure.data.json :as json])
+            [clojure.data.json :as json]
+            [clj-time.coerce :as c])
   (:import [java.net URL]))
-
-(def tournament-url "http://brackets.godlikecombo.com/#!/sm4shep16")
 
 (defn- tournament-slug [url]
   (second (re-matches #"http://brackets.godlikecombo.com/#!/(.*)" url)))
@@ -49,18 +48,18 @@
   (-> raw-name strip-w-l strip-underscores))
 
 (defn- get-participants [matches]
-  (vec (reduce (fn [names match]
-                 (into names
-                       [(normalize-name (:player1UiString match))
-                        (normalize-name (:player2UiString match))]))
-               #{} matches)))
+  (reduce (fn [names match]
+            (into names
+                  [(normalize-name (:player1UiString match))
+                   (normalize-name (:player2UiString match))]))
+          #{} matches))
 
 (defn- normalize-participants [participants]
   (map (fn [participant-name]
          (comment "we should figure out a way to get the real placement.")
          {:name participant-name
           :placement -1})
-       (vals participants)))
+       participants))
 
 (defn- score-from-match [match]
   (str (:player1Wins match) "-" (:player2Wins match)))
@@ -68,27 +67,32 @@
 (defn- winner-from-match [match]
   (if (> (:player1Wins match) (:player2Wins match)) 1 2))
 
-(defn- normalize-matches [matches]
+(defn- normalize-matches [matches time]
   (comment "we need to change the time to be dynamic.")
   (map (fn [match]
          {:player-one (normalize-name (:player1UiString match))
           :player-two (normalize-name (:player2UiString match))
           :scores (score-from-match match)
-          :time 1443729600000
+          :time time
           :winner (winner-from-match match)})
        matches))
 
-(defn- normalized-tournament [tournament url]
-  (let [{:keys [start-time updated-time]} (times-from-tournament tournament)]
-    {:identifier (get-in tournament [:slugs 0])
-     :title (:name tournament)
-     :started_at start-time
-     :updated_at updated-time
+(defn- normalize-tournament [raw-tournament time url]
+  (let [tournament (:tourney raw-tournament)]
+    {:identifier (:bracketUrlPath tournament)
+     :title (:title tournament)
+     :started_at time
+     :updated_at time
      :url url}))
 
-(defn get-tournament-data [url]
-  (let [tournament (-> url api-url make-request)]
-    {:matches (normalize-matches (get-matches tournament))}))
+(defn get-tournament-data [{:keys [url date]}]
+  (let [tournament (-> url api-url make-request)
+        matches (get-matches tournament)
+        participants (get-participants matches)
+        time (c/to-long date)]
+    {:matches (normalize-matches matches time)
+     :participants (normalize-participants participants)
+     :tournament (normalize-tournament tournament time url)}))
 
 (defn matching-url? [url]
-  (re-matches #".*smash.gg.*" url))
+  (re-matches #".*godlikecombo.com.*" url))
