@@ -224,6 +224,8 @@
     :date (t/date-time 2015 10 19)}
    {:url "http://brackets.godlikecombo.com/#!/sm4shep16"
     :date (t/date-time 2015 10 26)}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh17"
+    :date (t/date-time 2015 11 2)}
    ])
 
 (def smash-odyssey
@@ -345,11 +347,8 @@
 
 (def test-urls
   [
-   "http://challonge.com/sm4shsep5"
-   "http://bko.challonge.com/OW74"
-   "https://smash.gg/tournament/come-on-and-ban-33"
-   {:url "http://brackets.godlikecombo.com/#!/sm4shep16"
-    :date (t/date-time 2015 10 26)}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh17"
+    :date (t/date-time 2015 11 2)}
    ])
 
 (def team-names
@@ -425,6 +424,7 @@
    ["8BIT | Blank" "Blankey69" "8BIT | Trojan"]
    ["K10" "ss3Katen"]
    ["DMG | Shingo" "Shing0" "Shing07"]
+   ["Vermillion" "STVermillion"]
    ["BaNdt" "ARaNdomVillager"]
    ["TOME|Go!" "basedGO64" "OS/ basedgo64" "OS/.GO64" "GO" "GO 64" "OS~TOME`GO" "Tome"]
    ["Robotic Painter" "Robatic Painter"]
