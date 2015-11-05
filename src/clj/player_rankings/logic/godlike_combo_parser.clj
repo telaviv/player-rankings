@@ -1,6 +1,5 @@
 (ns player-rankings.logic.godlike-combo-parser
-  (:require [net.cgrand.enlive-html :as html]
-            [clj-http.client :as client]
+  (:require [clj-http.client :as client]
             [clojure.data.json :as json]
             [clj-time.coerce :as c])
   (:import [java.net URL]))
