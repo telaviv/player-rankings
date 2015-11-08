@@ -381,11 +381,14 @@
            (create-tournament-graph tournament-data))))))
 
 (defnp get-loaded-tournament-urls []
-  (map #(get % "url") (cypher/tquery conn "match (t:tournament) return t.url as url")))
+  (set (map #(get % "url") (cypher/tquery conn "match (t:tournament) return t.url as url"))))
+
+(defnp remove-loaded-tournaments [tournament-urls]
+  (let [existing-urls (get-loaded-tournament-urls)]
+    (filter #(not (contains? existing-urls %)) tournament-urls)))
 
 (defnp load-tournaments [tournaments]
-  (let [existing-urls (get-loaded-tournament-urls)
-        urls-to-load (difference (set tournaments) existing-urls)]
+  (let [urls-to-load (remove-loaded-tournaments tournaments)]
     (doseq [url urls-to-load]
       (load-tournament-data url))))
 
