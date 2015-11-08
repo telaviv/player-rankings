@@ -349,6 +349,15 @@
                  "create (tc:tournament_cache {blob: {tournament_data}})"
                  {:tournament_data (json/write-str tournament-data)}))
 
+(defnp load-tournament-cache []
+  (let [query (str "match (tc:tournament_cache) "
+                   "return tc.blob as blob")
+        tournament-cache (cypher/tquery conn query)]
+    (reduce (fn [coll cache]
+              (let [tournament (json/read-str (cache "blob") :key-fn keyword)]
+                (assoc coll (get-in tournament [:tournament :url]) tournament)))
+            {} tournament-cache)))
+
 (defnp create-tournament-graph [tournament-data]
   (spy :info (get-in tournament-data [:tournament :title]))
   (let [tournament-id (create-tournament-node (:tournament tournament-data))]
