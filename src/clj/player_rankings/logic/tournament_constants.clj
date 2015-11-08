@@ -40,6 +40,7 @@
    "http://showdowngg.challonge.com/comeonandban35"
    "http://showdowngg.challonge.com/comeonandban36"
    "http://showdowngg.challonge.com/comeonandban38"
+   "http://showdowngg.challonge.com/comeonandban39"
    ])
 
 (def made
@@ -267,6 +268,7 @@
    "http://challonge.com/Teke6"
    "http://challonge.com/Teke7"
    "http://challonge.com/Teke8"
+   "http://challonge.com/Teke9"
    ])
 
 (def game-addiction
@@ -290,6 +292,7 @@
    "http://challonge.com/phoenixuprising7"
    "http://challonge.com/phoenixuprising8"
    "http://challonge.com/phoenixuprising9"
+   "http://challonge.com/phoenixuprising10"
    ])
 
 (def super-south-bay-sundays
