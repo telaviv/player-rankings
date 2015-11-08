@@ -7,6 +7,7 @@
             [clojurewerkz.neocons.rest.cypher :as cypher]
             [clojurewerkz.neocons.rest.relationships :as relationships]
             [clojurewerkz.neocons.rest.transaction :as transaction]
+            [clojure.data.json :as json]
             [taoensso.timbre :refer [spy]]
             [taoensso.timbre.profiling :refer [p defnp]]
             [schema.core :as s]
@@ -342,6 +343,11 @@
     (cypher/tquery conn query {:match_ids match-ids
                                :players (:participants tournament-data)
                                :tournament_id tournament-id})))
+
+(defnp cache-tournament-data [tournament-data]
+  (cypher/tquery conn
+                 "create (tc:tournament_cache {blob: {tournament_data}})"
+                 {:tournament_data (json/write-str tournament-data)}))
 
 (defnp create-tournament-graph [tournament-data]
   (spy :info (get-in tournament-data [:tournament :title]))
