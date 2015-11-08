@@ -8,7 +8,7 @@
             [clojurewerkz.neocons.rest.relationships :as relationships]
             [clojurewerkz.neocons.rest.transaction :as transaction]
             [clojure.data.json :as json]
-            [taoensso.timbre :refer [spy]]
+            [taoensso.timbre :refer [spy info]]
             [taoensso.timbre.profiling :refer [p defnp]]
             [schema.core :as s]
             [player-rankings.secrets :refer [neo4j-username neo4j-password]]
@@ -364,9 +364,30 @@
     (merge-matches-with-tournament tournament-id tournament-data)
     (merge-participants-with-tournament tournament-id tournament-data)))
 
+(defnp delete-uncached-data []
+  (let [query (str "match (p:player)--(t:tournament), (t)--(m:match) "
+                   "detach delete p, t, m")]
+    (cypher/tquery conn query)))
+
+(defnp load-tournament-data
+  ([tournament-url] (load-tournament-data tournament-url (load-tournament-cache)))
+  ([tournament-url tournament-cache]
+   (if (contains? tournament-cache tournament-url)
+     (do (info (str "cache hit: " tournament-url))
+         (create-tournament-graph (tournament-cache tournament-url)))
+     (do (info (str "cache miss: " tournament-url))
+         (let [tournament-data (tournament-url-parser/get-tournament-data tournament-url)]
+           (cache-tournament-data tournament-data)
+           (create-tournament-graph tournament-data))))))
+
+(defnp get-loaded-tournament-urls []
+  (map #(get % "url") (cypher/tquery conn "match (t:tournament) return t.url as url")))
+
 (defnp load-tournaments [tournaments]
-  (doseq [tournament tournaments]
-    (create-tournament-graph tournament)))
+  (let [existing-urls (get-loaded-tournament-urls)
+        urls-to-load (difference (set tournaments) existing-urls)]
+    (doseq [url urls-to-load]
+      (load-tournament-data url))))
 
 (defnp update-player-data []
   (merge-player-nodes)
@@ -374,6 +395,5 @@
   (update-rankings))
 
 (defnp add-tournament [tournament-url]
-  (let [tournament-data (tournament-url-parser/get-tournament-data tournament-url)]
-    (create-tournament-graph tournament-data)
-    (update-player-data)))
+  (load-tournament-data tournament-url)
+  (update-player-data))
