@@ -110,6 +110,7 @@
    "http://scusmash.challonge.com/WW16S4singles"
    "http://scusmash.challonge.com/WW17s4singles"
    "http://scusmash.challonge.com/WWS418"
+   "http://scusmash.challonge.com/WW19s4singles"
    ])
 
 (def gamerz-smash-labs
@@ -141,6 +142,7 @@
    "http://capitolfightdistrict.challonge.com/GSL21S"
    "http://capitolfightdistrict.challonge.com/GSL22GRD"
    "http://capitolfightdistrict.challonge.com/prebloodmoonS"
+   "http://capitolfightdistrict.challonge.com/GSL24S"
    ])
 
 (def ghost-at-dc
@@ -275,6 +277,7 @@
    "http://challonge.com/Teke7"
    "http://challonge.com/Teke8"
    "http://challonge.com/Teke9"
+   "http://challonge.com/Teke10"
    ])
 
 (def game-addiction
@@ -299,6 +302,7 @@
    "http://challonge.com/phoenixuprising8"
    "http://challonge.com/phoenixuprising9"
    "http://challonge.com/phoenixuprising10"
+   "http://challonge.com/phoenixuprising11"
    ])
 
 (def super-south-bay-sundays
@@ -330,6 +334,7 @@
    "http://bko.challonge.com/BMS4S"
    "http://bko.challonge.com/BM24"
    "https://smash.gg/tournament/extra-life-charity-smash-4-tournament-presented-by-showdown"
+   "http://capitolfightdistrict.challonge.com/CGELS4S"
    ])
 
 (def tournament-urls
@@ -403,6 +408,7 @@
    "tome"
    "st"
    "dire"
+   "tcm"
    ])
 
 (def aliases
@@ -459,7 +465,7 @@
    ["Hitaku" "Hitaku Back Sunday"]
    ["Twich" "Twitch"]
    ["Boba Tapioca" "Boba"]
-   ["UC | DSS" "@UC_DSS"]
+   ["UC | DSS" "@UC_DSS" "Rocky"]
    ["Beast" "Daimyes" "Jimber Jangers"]
    ["MisterQ" "MrQ" "Mr. Q"]
    ["Soronie" "Seronie"]
