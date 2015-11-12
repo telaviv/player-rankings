@@ -1,6 +1,7 @@
 (ns player-rankings.logic.godlike-combo-parser
   (:require [clj-http.client :as client]
             [clojure.data.json :as json]
+            [taoensso.timbre :refer [spy info]]
             [clj-time.coerce :as c])
   (:import [java.net URL]))
 
@@ -76,22 +77,22 @@
           :winner (winner-from-match match)})
        matches))
 
-(defn- normalize-tournament [raw-tournament time url]
+(defn- normalize-tournament [raw-tournament time title url]
   (let [tournament (:tourney raw-tournament)]
     {:identifier (:bracketUrlPath tournament)
-     :title (:title tournament)
+     :title title
      :started_at time
      :updated_at time
      :url url}))
 
-(defn get-tournament-data [{:keys [url date]}]
+(defn get-tournament-data [{:keys [url date title]}]
   (let [tournament (-> url api-url make-request)
         matches (get-matches tournament)
         participants (get-participants matches)
         time (c/to-long date)]
     {:matches (normalize-matches matches time)
      :participants (normalize-participants participants)
-     :tournament (normalize-tournament tournament time url)}))
+     :tournament (normalize-tournament tournament time title url)}))
 
 (defn matching-url? [url]
   (re-matches #".*godlikecombo.com.*" url))

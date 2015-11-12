@@ -216,17 +216,23 @@
    "http://challonge.com/sm4shep10"
    "http://challonge.com/sm4sh11"
    {:url "http://brackets.godlikecombo.com/#!/versus_smash4_singles_12"
-    :date (t/date-time 2015 9 14)}
+    :date (t/date-time 2015 9 14)
+    :title "Versus Revival - Sm4sh Singles ep 12"}
    {:url "http://brackets.godlikecombo.com/#!/versus_smash_singles_ep13"
-    :date (t/date-time 2015 9 21)}
+    :date (t/date-time 2015 9 21)
+    :title "Versus Revival - Sm4sh Singles ep 13"}
    {:url "http://brackets.godlikecombo.com/#!/sm4sh14"
-    :date (t/date-time 2015 10 5)}
+    :date (t/date-time 2015 10 5)
+    :title "Versus Revival - Sm4sh Singles ep 14"}
    {:url "http://brackets.godlikecombo.com/#!/sm4sh15"
-    :date (t/date-time 2015 10 19)}
+    :date (t/date-time 2015 10 19)
+    :title "Versus Revival - Sm4sh Singles ep 15"}
    {:url "http://brackets.godlikecombo.com/#!/sm4shep16"
-    :date (t/date-time 2015 10 26)}
+    :date (t/date-time 2015 10 26)
+    :title "Versus Revival - Sm4sh Singles ep 16"}
    {:url "http://brackets.godlikecombo.com/#!/sm4sh17"
-    :date (t/date-time 2015 11 2)}
+    :date (t/date-time 2015 11 2)
+    :title "Versus Revival - Sm4sh Singles ep 17"}
    ])
 
 (def smash-odyssey
@@ -350,8 +356,11 @@
 
 (def test-urls
   [
+   "http://showdowngg.challonge.com/comeonandban12singles"
+   "https://smash.gg/tournament/extra-life-charity-smash-4-tournament-presented-by-showdown"
    {:url "http://brackets.godlikecombo.com/#!/sm4sh17"
-    :date (t/date-time 2015 11 2)}
+    :date (t/date-time 2015 11 2)
+    :title "Versus Revival - Sm4sh Singles ep 17"}
    ])
 
 (def team-names

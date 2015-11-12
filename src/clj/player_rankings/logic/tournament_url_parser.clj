@@ -40,13 +40,14 @@
 (defn- tournament-data-from-parser [parser url]
   (s/validate TournamentData ((:get-tournament-data parser) url)))
 
-(defn- get-url [meta-url]
+(defn url-from-meta-url [meta-url]
   (if (string? meta-url)
     meta-url
     (:url meta-url)))
 
 (defn get-tournament-data [meta-url]
-  (let [url (get-url meta-url)]
+  (let [url (url-from-meta-url meta-url)]
+    (spy url)
     (reduce (fn [tournament-data parser]
               (if ((:matching-url? parser) url)
                 (tournament-data-from-parser parser meta-url)

@@ -3,6 +3,7 @@
             [player-rankings.secrets :refer [challonge-api-key]]
             [player-rankings.profiling :refer [timed]]
             [taoensso.timbre.profiling :refer [p defnp]]
+            [taoensso.timbre :refer [spy info]]
             [clj-http.client :as client]
             [clj-time.coerce :as coerce-time]
             [clojure.data.json :as json])
@@ -94,4 +95,5 @@
      :tournament @tournament}))
 
 (defn matching-url? [url]
+  (assert (-> url nil? not))
   (re-matches #".*challonge.com.*" url))

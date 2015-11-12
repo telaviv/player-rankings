@@ -370,27 +370,32 @@
     (cypher/tquery conn query)))
 
 (defnp load-tournament-data
-  ([tournament-url] (load-tournament-data tournament-url (load-tournament-cache)))
-  ([tournament-url tournament-cache]
-   (if (contains? tournament-cache tournament-url)
-     (do (info (str "cache hit: " tournament-url))
-         (create-tournament-graph (tournament-cache tournament-url)))
-     (do (info (str "cache miss: " tournament-url))
-         (let [tournament-data (tournament-url-parser/get-tournament-data tournament-url)]
-           (cache-tournament-data tournament-data)
-           (create-tournament-graph tournament-data))))))
+  ([meta-url] (load-tournament-data meta-url (load-tournament-cache)))
+  ([meta-url tournament-cache]
+   (let [tournament-url (tournament-url-parser/url-from-meta-url meta-url)]
+     (if (contains? tournament-cache tournament-url)
+       (do (info (str "cache hit: " tournament-url))
+           (tournament-cache tournament-url))
+       (do (info (str "cache miss: " tournament-url))
+           (let [tournament-data
+                 (tournament-url-parser/get-tournament-data meta-url)]
+             (cache-tournament-data tournament-data)
+             tournament-data))))))
 
 (defnp get-loaded-tournament-urls []
   (set (map #(get % "url") (cypher/tquery conn "match (t:tournament) return t.url as url"))))
 
-(defnp remove-loaded-tournaments [tournament-urls]
+(defnp remove-loaded-tournaments [meta-urls]
   (let [existing-urls (get-loaded-tournament-urls)]
-    (filter #(not (contains? existing-urls %)) tournament-urls)))
+    (filter #(not (contains? existing-urls (tournament-url-parser/url-from-meta-url %)))
+            meta-urls)))
 
 (defnp load-tournaments [tournaments]
-  (let [urls-to-load (remove-loaded-tournaments tournaments)]
-    (doseq [url urls-to-load]
-      (load-tournament-data url))))
+  (let [urls-to-load (remove-loaded-tournaments tournaments)
+        tournament-cache (load-tournament-cache)
+        tournament-datum (map #(load-tournament-data % tournament-cache) urls-to-load)]
+    (doseq [tournament-data tournament-datum]
+      (create-tournament-graph tournament-data))))
 
 (defnp update-player-data []
   (merge-player-nodes)
@@ -398,5 +403,5 @@
   (update-rankings))
 
 (defnp add-tournament [tournament-url]
-  (load-tournament-data tournament-url)
+  (tournament-url load-tournament-data )
   (update-player-data))

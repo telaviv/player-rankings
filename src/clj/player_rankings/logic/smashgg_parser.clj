@@ -105,4 +105,5 @@
      :tournament (normalized-tournament tournament url)}))
 
 (defn matching-url? [url]
+  (assert (-> url nil? not))
   (re-matches #".*smash.gg.*" url))
