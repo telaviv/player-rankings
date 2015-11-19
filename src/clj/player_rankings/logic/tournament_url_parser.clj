@@ -47,7 +47,6 @@
 
 (defn get-tournament-data [meta-url]
   (let [url (url-from-meta-url meta-url)]
-    (spy url)
     (reduce (fn [tournament-data parser]
               (if ((:matching-url? parser) url)
                 (tournament-data-from-parser parser meta-url)

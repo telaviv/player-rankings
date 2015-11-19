@@ -41,6 +41,7 @@
    "http://showdowngg.challonge.com/comeonandban36"
    "http://showdowngg.challonge.com/comeonandban38"
    "http://showdowngg.challonge.com/comeonandban39"
+   "http://showdowngg.challonge.com/comeonandban40"
    ])
 
 (def made
@@ -98,6 +99,8 @@
    "http://challonge.com/BMOS11"
    "http://challonge.com/BMOS12"
    "http://challonge.com/BMOS13"
+   "http://challonge.com/BMOS14"
+   "http://challonge.com/bmos15"
    ])
 
 (def wombo-wednesdays
@@ -143,6 +146,7 @@
    "http://capitolfightdistrict.challonge.com/GSL22GRD"
    "http://capitolfightdistrict.challonge.com/prebloodmoonS"
    "http://capitolfightdistrict.challonge.com/GSL24S"
+   "http://capitolfightdistrict.challonge.com/GSL25S"
    ])
 
 (def ghost-at-dc
@@ -235,6 +239,17 @@
    {:url "http://brackets.godlikecombo.com/#!/sm4sh17"
     :date (t/date-time 2015 11 2)
     :title "Versus Revival - Sm4sh Singles ep 17"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh18"
+    :date (t/date-time 2015 11 9)
+    :title "Versus Revival - Sm4sh Singles ep 18"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh19"
+    :date (t/date-time 2015 11 16)
+    :title "Versus Revival - Sm4sh Singles ep 19"}
+   ])
+
+(def rise-at-ssf
+  [
+   "http://challonge.com/risessfs3e1"
    ])
 
 (def smash-odyssey
@@ -265,6 +280,7 @@
    "http://challonge.com/thehandshake7"
    "http://challonge.com/thehandshake8"
    "http://challonge.com/thehandshake9"
+   "http://challonge.com/thehandshake10"
    ])
 
 (def teke-tourney
@@ -303,6 +319,7 @@
    "http://challonge.com/phoenixuprising9"
    "http://challonge.com/phoenixuprising10"
    "http://challonge.com/phoenixuprising11"
+   "http://challonge.com/phoenixuprising12"
    ])
 
 (def super-south-bay-sundays
@@ -357,6 +374,7 @@
           pheonix-uprising
           super-south-bay-sundays
           simply-smashing
+          rise-at-ssf
           miscellaneous-tournaments))
 
 (def test-urls
@@ -424,9 +442,12 @@
    ["ShadowsDepth" "ShadowsDeath"]
    ["Serg!" "Surg!" "Surge!"]
    ["Snorlax" "SnorlaxPlox" "Snorlax Plo"]
+   ["Dyno Wright" "BBSOWN BlackDynoWright" "Black_DynoWright" "BlueDyno"]
+   ["Jirachinik" "Jirachinick"]
    ["Trevonte" "Trevante" "SiN | Thizz Naruto! DBZ"]
    ["QT | K4rma" "QT.k4rma"]
    ["Zeppelin" "8BIT | Zepplin" "Zepland" "Zep"]
+   ["Pump Magic" "Dump Magic"]
    ["Mijo" "Mijo FUEGO" "FS MijoFeugo"]
    ["BigMama" "Alkaid"]
    ["Wolflord" "Woflord"]
@@ -464,10 +485,14 @@
    ["110" "110_"]
    ["Hitaku" "Hitaku Back Sunday"]
    ["Twich" "Twitch"]
+   ["Electric Soldier" "Electric Solder"]
+   ["Ninja-The-Link-Sage" "FINAL-NINJA-THE-LINK-SAGE"]
+   ["Saint" " Deity"]
    ["Boba Tapioca" "Boba"]
    ["UC | DSS" "@UC_DSS" "Rocky"]
    ["Beast" "Daimyes" "Jimber Jangers"]
    ["MisterQ" "MrQ" "Mr. Q"]
+   ["Crisis" "Tep"]
    ["Soronie" "Seronie"]
    ["C4" "PHO -C4"]
    ["Haystack" "Haystax" "Dadstax" "Haystacks" "QTHaystack"]
@@ -480,6 +505,7 @@
    ["Andy Sauro" "Andy_Sauro" "Andy" "Andy The Albatross"]
    ["Shin" "Ph~ck Shin"]
    ["Warchief" "Warhief"]
+   ["Heartsdealer" "T Heartsdealer"]
    ["GPik" "G PIC"]
    ["Thee.O.P" "TheeOP" "thee.O.P." "OS-theeOP" "OS / TheeOP" "TheOP" "OS/ theeOP"]
    ["Focast" "Foucast"]
@@ -491,7 +517,8 @@
    ["MaddJu5t1n" "Madd Ju5tin"]
    ["Froggie" "Froggy" "Froge"]
    ["PewPewU" "CLG.PewPewU"]
-   ["A Stray Cat" "Stray" "StrayCat" "A Stay Cat"]
+   ["Mr. Krabs" "Mr_Krabs"]
+   ["A Stray Cat" "Stray" "StrayCat" "A Stay Cat" "A_Stray_Cat"]
    ["Trex Destiny" "T-Rex Destiny" "Jae Pea" "T-Rex"]
    ["AwesomeTheSauce" "AwesomeSauce"]
    ["Villain" "Villian"]])

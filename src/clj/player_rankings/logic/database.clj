@@ -403,5 +403,5 @@
   (update-rankings))
 
 (defnp add-tournament [tournament-url]
-  (tournament-url load-tournament-data )
+  (load-tournaments [tournament-url])
   (update-player-data))
