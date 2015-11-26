@@ -42,6 +42,7 @@
    "http://showdowngg.challonge.com/comeonandban38"
    "http://showdowngg.challonge.com/comeonandban39"
    "http://showdowngg.challonge.com/comeonandban40"
+   "http://showdowngg.challonge.com/comeonandban41"
    ])
 
 (def made
@@ -101,6 +102,7 @@
    "http://challonge.com/BMOS13"
    "http://challonge.com/BMOS14"
    "http://challonge.com/bmos15"
+   "http://challonge.com/BMOS16"
    ])
 
 (def wombo-wednesdays
@@ -245,6 +247,9 @@
    {:url "http://brackets.godlikecombo.com/#!/sm4sh19"
     :date (t/date-time 2015 11 16)
     :title "Versus Revival - Sm4sh Singles ep 19"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh20"
+    :date (t/date-time 2015 11 23)
+    :title "Versus Revival - Sm4sh Singles ep 20"}
    ])
 
 (def rise-at-ssf
@@ -267,6 +272,7 @@
    "http://bko.challonge.com/SO64"
    "http://bko.challonge.com/SO7S4"
    "http://bko.challonge.com/SO84"
+   "http://bko.challonge.com/SO94"
    ])
 
 (def the-2-stock-and-the-handshake
@@ -341,6 +347,7 @@
    "http://challonge.com/SSmashing5"
    "http://challonge.com/SSmashing6"
    "http://challonge.com/ssmashing7"
+   "http://challonge.com/SSmashing8"
    ])
 
 
