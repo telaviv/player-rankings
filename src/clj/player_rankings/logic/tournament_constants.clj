@@ -149,6 +149,8 @@
    "http://capitolfightdistrict.challonge.com/prebloodmoonS"
    "http://capitolfightdistrict.challonge.com/GSL24S"
    "http://capitolfightdistrict.challonge.com/GSL25S"
+   "http://capitolfightdistrict.challonge.com/GSL26S"
+   "http://challonge.com/GSL27S"
    ])
 
 (def ghost-at-dc
@@ -250,6 +252,9 @@
    {:url "http://brackets.godlikecombo.com/#!/sm4sh20"
     :date (t/date-time 2015 11 23)
     :title "Versus Revival - Sm4sh Singles ep 20"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh21"
+    :date (t/date-time 2015 11 30)
+    :title "Versus Revival - Sm4sh Singles ep 21"}
    ])
 
 (def rise-at-ssf
@@ -326,6 +331,7 @@
    "http://challonge.com/phoenixuprising10"
    "http://challonge.com/phoenixuprising11"
    "http://challonge.com/phoenixuprising12"
+   "http://challonge.com/phoenixuprising13"
    ])
 
 (def super-south-bay-sundays
@@ -434,6 +440,7 @@
    "st"
    "dire"
    "tcm"
+   "#lh"
    ])
 
 (def aliases
@@ -468,9 +475,9 @@
    ["Shia Lepuff" "Demi Lovato" "Shia La Puff" "ShaiLapuff" "Shila La Puff"]
    ["Pulse" "RH | Old man Pulse" "Pulse *ganon grunt*" "Pulse *ganon grunts*"]
    ["8BIT | Blank" "Blankey69" "8BIT | Trojan"]
-   ["K10" "ss3Katen"]
+   ["K10" "ss3Katen" "KIO"]
    ["DMG | Shingo" "Shing0" "Shing07"]
-   ["Vermillion" "STVermillion"]
+   ["Vermillion" "STVermillion" "ST_vermillion"]
    ["BaNdt" "ARaNdomVillager"]
    ["TOME|Go!" "basedGO64" "OS/ basedgo64" "OS/.GO64" "GO" "GO 64" "OS~TOME`GO" "Tome"]
    ["Robotic Painter" "Robatic Painter"]
@@ -512,6 +519,8 @@
    ["Andy Sauro" "Andy_Sauro" "Andy" "Andy The Albatross"]
    ["Shin" "Ph~ck Shin"]
    ["Warchief" "Warhief"]
+   ["Tsarkhasm" "Tsharkasm"]
+   ["Pink Ranger" "PLSryrslrz"]
    ["Heartsdealer" "T Heartsdealer"]
    ["GPik" "G PIC"]
    ["Thee.O.P" "TheeOP" "thee.O.P." "OS-theeOP" "OS / TheeOP" "TheOP" "OS/ theeOP"]
@@ -519,8 +528,8 @@
    ["Chinito" "Chihito" "Chino"]
    ["Jeepysol" "Jeepy" "JeepySol [Degenerate without a wallet]"]
    ["My Jeans" "60 Scarabs"]
-   ["Wind Warrior" "#lh WindWarrior"]
    ["Professor Dill" "Proffesor Dill" "Prof. Dill"]
+   ["Happa" "srsHappa"]
    ["MaddJu5t1n" "Madd Ju5tin"]
    ["Froggie" "Froggy" "Froge"]
    ["PewPewU" "CLG.PewPewU"]
