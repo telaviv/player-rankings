@@ -43,6 +43,7 @@
    "http://showdowngg.challonge.com/comeonandban39"
    "http://showdowngg.challonge.com/comeonandban40"
    "http://showdowngg.challonge.com/comeonandban41"
+   "http://showdowngg.challonge.com/comeonandban42"
    ])
 
 (def made
@@ -493,7 +494,7 @@
    ["FONC | Fist o cuffs" "FistOCuffs" "FONC | Fist'O'cuffs"]
    ["Violet" "Andrew Le"]
    ["York" "T 17/York"]
-   ["Scourge" "Summus" "Lt. Skerge"]
+   ["Scourge" "Summus" "Lt. Skerge" "Melon Lord"]
    ["Kronos2560" "Kronos"]
    ["Krustol" "TCM/Krustol"]
    ["110" "110_"]
