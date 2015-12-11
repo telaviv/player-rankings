@@ -256,11 +256,20 @@
    {:url "http://brackets.godlikecombo.com/#!/sm4sh21"
     :date (t/date-time 2015 11 30)
     :title "Versus Revival - Sm4sh Singles ep 21"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh22"
+    :date (t/date-time 2015 12 7)
+    :title "Versus Revival - Sm4sh Singles ep 22"}
    ])
 
 (def rise-at-ssf
   [
    "http://challonge.com/risessfs3e1"
+   ])
+
+(def casa-del-fuego
+  [
+   "http://challonge.com/CDF1singles"
+   "http://challonge.com/CDF2"
    ])
 
 (def smash-odyssey
@@ -333,6 +342,8 @@
    "http://challonge.com/phoenixuprising11"
    "http://challonge.com/phoenixuprising12"
    "http://challonge.com/phoenixuprising13"
+   "http://challonge.com/phoenixuprising14"
+   "http://challonge.com/phoenixuprising15"
    ])
 
 (def super-south-bay-sundays
@@ -389,6 +400,7 @@
           super-south-bay-sundays
           simply-smashing
           rise-at-ssf
+          casa-del-fuego
           miscellaneous-tournaments))
 
 (def test-urls
@@ -469,7 +481,7 @@
    ["Mr. Javi" "Mr Jav"]
    ["SKS" "watislyfe" "SKS aka Watislyfe"]
    ["NME | Nanerz" "Cynthia"]
-   ["Rickshaw" "NinjaRlink" "Richshaw"]
+   ["Rickshaw" "NinjaRlink" "Richshaw" "Dickshaw"]
    ["Kitka" "Ktika"]
    ["MF Space" "Space" "MF" "8BIT | Masta Space"]
    ["SirDaniel" "Sir"]
@@ -479,12 +491,12 @@
    ["K10" "ss3Katen" "KIO"]
    ["DMG | Shingo" "Shing0" "Shing07"]
    ["Vermillion" "STVermillion" "ST_vermillion"]
-   ["BaNdt" "ARaNdomVillager"]
+   ["BaNdt" "ARaNdomVillager" "Bandito"]
    ["TOME|Go!" "basedGO64" "OS/ basedgo64" "OS/.GO64" "GO" "GO 64" "OS~TOME`GO" "Tome"]
    ["Robotic Painter" "Robatic Painter"]
    ["Mr. Pink" "Mr Pink" "Pink"]
    ["Arikie" "MS | Shadow" "4B_Arikie" "Arike"]
-   ["GShark" "Leffen_Shark" "G-Shark" "isT_G Shark" "ShArK (invitation pending)"]
+   ["GShark" "Leffen_Shark" "G-Shark" "isT_G Shark" "ShArK"]
    ["Arda" "Ishiey" "A" "AA" "Ish" "Im The Best Wolf"]
    ["AD" "Adriel"]
    ["ChosenL" "Chosen_L" "ChosenL*" "CoG_ChosenL"]
@@ -516,7 +528,7 @@
    ["Kitka" "Yung Lord Kitka" "Lord Kitka"]
    ["Pheno" "GPheno"]
    ["TheComposer" "theComposr"]
-   ["Rice" "Rice-kun" "Dark Rice"]
+   ["Rice" "Rice-kun" "Dark Rice" "Mr.Rice"]
    ["Andy Sauro" "Andy_Sauro" "Andy" "Andy The Albatross"]
    ["Shin" "Ph~ck Shin"]
    ["Warchief" "Warhief"]
