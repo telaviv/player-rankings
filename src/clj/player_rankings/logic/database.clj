@@ -213,7 +213,7 @@
                 :stddev (:rd rankings/default-rating)
                 :name player-name
                 :new true})))
-           player-names)))
+         player-names)))
 
 (defn- normalize-player-scores [players]
   (map (fn [{:keys [rating stddev] :as player}]
@@ -228,6 +228,21 @@
        (normalize-player-scores)
        (sort-by :min)
        (reverse)))
+
+(defnp crew-eligible-for-ranking? [players existing-players]
+  (let [player-scores (map #(get-matching-player % existing-players) players)
+        eligible-players (filter #(< (:stddev %) 100) player-scores)]
+    (>= 5 (count eligible-players))))
+
+(defnp filter-ineligible-crews [crews]
+  (let [player-names (-> constants/norcal-crews vals flatten)
+        existing-players (get-players-by-name-for-rank-sorting player-names)]
+    (reduce-kv
+     (fn [coll crew-name crew]
+       (if (crew-eligible-for-ranking? crew existing-players)
+         (assoc coll crew-name crew)
+         coll))
+     {} crews)))
 
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
