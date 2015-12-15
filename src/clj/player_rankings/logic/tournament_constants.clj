@@ -44,6 +44,7 @@
    "http://showdowngg.challonge.com/comeonandban40"
    "http://showdowngg.challonge.com/comeonandban41"
    "http://showdowngg.challonge.com/comeonandban42"
+   "http://showdowngg.challonge.com/comeonandban43"
    ])
 
 (def made
@@ -377,6 +378,9 @@
    "http://bko.challonge.com/BM24"
    "https://smash.gg/tournament/extra-life-charity-smash-4-tournament-presented-by-showdown"
    "http://capitolfightdistrict.challonge.com/CGELS4S"
+   "http://smashkin.challonge.com/smashkin1"
+   "http://challonge.com/cogpog4s4singles"
+   "http://challonge.com/cogpogs4amateur"
    ])
 
 (def tournament-urls
