@@ -157,6 +157,7 @@
    "http://capitolfightdistrict.challonge.com/GSL28S"
    "http://capitolfightdistrict.challonge.com/GSL29S"
    "http://capitolfightdistrict.challonge.com/GSL30S"
+   "http://capitolfightdistrict.challonge.com/GSL31S"
    ])
 
 (def ghost-at-dc
