@@ -6,6 +6,7 @@
             [player-rankings.logic.tournament-constants :refer [tournament-urls
                                                                 test-urls]]
             [player-rankings.logic.database :refer [load-tournaments
+                                                    load-new-tournaments
                                                     update-player-data]]))
 
 
@@ -26,4 +27,5 @@
   (load-data-from-tournaments test-urls))
 
 (defn load-new-data []
-  (load-data-from-tournaments (filter-tournament-date 2015 8 30)))
+  (load-new-tournaments 2015 10 30)
+  (update-player-data))

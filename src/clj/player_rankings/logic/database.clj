@@ -11,6 +11,8 @@
             [taoensso.timbre :refer [spy info]]
             [taoensso.timbre.profiling :refer [p defnp]]
             [schema.core :as s]
+            [clj-time.coerce :as coerce-time]
+            [clj-time.core :as time]
             [player-rankings.secrets :refer [neo4j-username neo4j-password]]
             [player-rankings.profiling :refer [timed]]
             [player-rankings.logic.rankings :as rankings]
@@ -409,6 +411,15 @@
 (defnp get-loaded-tournament-urls []
   (set (map #(get % "url") (cypher/tquery conn "match (t:tournament) return t.url as url"))))
 
+(defnp get-new-tournament-urls [year month day]
+  (let [cache (load-tournament-cache)]
+    (map (fn [tournament] (get-in tournament [:tournament :url]))
+         (filter (fn [tournament]
+                   (time/after?
+                    (-> (get-in tournament [:tournament :started_at]) coerce-time/from-long)
+                    (time/date-time year month day)))
+                 (vals cache)))))
+
 (defnp remove-loaded-tournaments [meta-urls]
   (let [existing-urls (get-loaded-tournament-urls)]
     (filter #(not (contains? existing-urls (tournament-url-parser/url-from-meta-url %)))
@@ -420,6 +431,9 @@
         tournament-datum (map #(load-tournament-data % tournament-cache) urls-to-load)]
     (doseq [tournament-data tournament-datum]
       (create-tournament-graph tournament-data))))
+
+(defnp load-new-tournaments [year month day]
+  (-> (get-new-tournament-urls year month day) load-tournaments))
 
 (defnp update-player-data []
   (merge-player-nodes)
