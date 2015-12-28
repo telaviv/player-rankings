@@ -45,6 +45,7 @@
    "http://showdowngg.challonge.com/comeonandban41"
    "http://showdowngg.challonge.com/comeonandban42"
    "http://showdowngg.challonge.com/comeonandban43"
+   "http://showdowngg.challonge.com/comeonandban44"
    ])
 
 (def made
@@ -153,6 +154,9 @@
    "http://capitolfightdistrict.challonge.com/GSL25S"
    "http://capitolfightdistrict.challonge.com/GSL26S"
    "http://challonge.com/GSL27S"
+   "http://capitolfightdistrict.challonge.com/GSL28S"
+   "http://capitolfightdistrict.challonge.com/GSL29S"
+   "http://capitolfightdistrict.challonge.com/GSL30S"
    ])
 
 (def ghost-at-dc
@@ -345,6 +349,8 @@
    "http://challonge.com/phoenixuprising13"
    "http://challonge.com/phoenixuprising14"
    "http://challonge.com/phoenixuprising15"
+   "http://challonge.com/phoenixuprising16"
+   "http://challonge.com/phoenixuprising17"
    ])
 
 (def super-south-bay-sundays
@@ -369,6 +375,11 @@
    "http://challonge.com/SSmashing8"
    ])
 
+(def smash-at-kin
+  [
+   "http://smashkin.challonge.com/smashkin1"
+   "http://challonge.com/zsv9hsmy"
+   ])
 
 (def miscellaneous-tournaments
   [
@@ -405,6 +416,7 @@
           simply-smashing
           rise-at-ssf
           casa-del-fuego
+          smash-at-kin
           miscellaneous-tournaments))
 
 (def test-urls
@@ -463,7 +475,7 @@
 (def aliases
   [["Crow" "Chaos Crow" "Maleficent"]
    ["Glith" "glith10" "gltih"]
-   ["KossisMOSS" "Kossimoss"]
+   ["KossisMOSS" "Kossimoss" "AAA Batteries?!"]
    ["Parasite" "Not Last"]
    (comment "This is due to a bug with team name processing."
             "'BKOlC4' and 'BKO|C4' often happen so we need to strip out the l")
@@ -658,6 +670,8 @@
           "Villain"]
    "tsm" ["Soulimar"
           "Boringman"
+          "Legit"
+          "Teb"
           "Virus"
           "Pulse"
           "JTF"
