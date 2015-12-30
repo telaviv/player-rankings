@@ -344,15 +344,6 @@
                    "set p.ranked = record.ranked ")]
     (cypher/tquery conn query {:records records})))
 
-(defn- merge-participants-with-tournament [tournament-id tournament-data]
-  (let [query (str "unwind {players} as player "
-                   "match (p:player {name: player.name}) "
-                   "match (t:tournament) "
-                   "where id(t) = {tournament_id} "
-                   "create (p)-[:participated {placement: player.placement}]->(t) ")]
-    (cypher/tquery conn query {:players (:participants tournament-data)
-                               :tournament_id tournament-id})))
-
 (defnp cache-tournament-data [tournament-data]
   (cypher/tquery conn
                  "create (tc:tournament_cache {blob: {tournament_data}})"
@@ -369,22 +360,32 @@
 
 (defnp create-tournament-graph [tournament-data]
   (spy :info (get-in tournament-data [:tournament :title]))
-  (let [query (str "create (t:tournament {tdata}) "
+  (let [txn (transaction/begin-tx conn)
+        query (str "create (t:tournament {tdata}) "
                    "with t "
                    "unwind {match_ids} as match_id "
                    "match (m:match) "
                    "where id(m) = match_id "
                    "create (t)-[:hosted]->(m) "
-                   "return id(t) as id ")
+                   "with t "
+                   "unwind {players} as player "
+                   "match (p:player {name: player.name}) "
+                   "create (p)-[:participated {placement: player.placement}]->(t) ")
         query-data {:tdata (:tournament tournament-data)
                     :players (:participants tournament-data)
-                    :match_ids (create-match-graphs (:matches tournament-data))}
-        tournament-id ((first (cypher/tquery conn query query-data)) "id")]
-    (merge-participants-with-tournament tournament-id tournament-data)))
+                    :match_ids (create-match-graphs (:matches tournament-data))}]
+    (transaction/execute conn txn (transaction/statement query query-data))
+    (transaction/commit conn txn)))
 
 (defnp delete-uncached-data []
-  (let [query (str "match (p:player)--(t:tournament), (t)--(m:match) "
-                   "detach delete p, t, m")]
+  (let [query (str "match (p:player) "
+                   "detach delete p "
+                   "with p "
+                   "match (t:tournament) "
+                   "detach delete t "
+                   "with t "
+                   "match (m:match) "
+                   "detach delete m ")]
     (cypher/tquery conn query)))
 
 (defnp load-tournament-data
