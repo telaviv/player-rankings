@@ -9,6 +9,13 @@
                                                     load-new-tournaments
                                                     update-player-data]]))
 
+
+(defn filter-tournament-date [year month day]
+  (filter (fn [tournament]
+            (time/after? (-> (get-in tournament [:tournament :started_at]) coerce-time/from-long)
+                         (time/date-time year month day)))
+          (pmap get-tournament-data tournament-urls)))
+
 (defn load-data-from-tournaments [tournaments]
   (load-tournaments tournaments)
   (update-player-data))

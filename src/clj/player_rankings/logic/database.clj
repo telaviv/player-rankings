@@ -41,6 +41,11 @@
 (defn- keys->keywords [coll]
   (into {} (for [[k v] coll] [(keyword k) v])))
 
+(defn- create-tournament-node [tournament]
+  (let [query (str "create (t:tournament {data}) "
+                   "return id(t) as id")]
+    ((first (cypher/tquery conn query {:data tournament})) "id")))
+
 (defnp get-existing-players []
   (let [query (str "match (p:player) "
                    "return id(p) as id, p.aliases as aliases")
@@ -353,6 +358,18 @@
     (cypher/tquery conn query {:players (:participants tournament-data)
                                :tournament_id tournament-id})))
 
+(defn- merge-matches-with-tournament [tournament-id tournament-data]
+  (let [match-ids (create-match-graphs (:matches tournament-data))
+        query (str "unwind {match_ids} as match_id "
+                   "match (m:match) "
+                   "where id(m) = match_id "
+                   "match (t:tournament) "
+                   "where id(t) = {tournament_id} "
+                   "create (t)-[:hosted]->(m) ")]
+    (cypher/tquery conn query {:match_ids match-ids
+                               :players (:participants tournament-data)
+                               :tournament_id tournament-id})))
+
 (defnp cache-tournament-data [tournament-data]
   (cypher/tquery conn
                  "create (tc:tournament_cache {blob: {tournament_data}})"
@@ -369,17 +386,8 @@
 
 (defnp create-tournament-graph [tournament-data]
   (spy :info (get-in tournament-data [:tournament :title]))
-  (let [query (str "create (t:tournament {tdata}) "
-                   "with t "
-                   "unwind {match_ids} as match_id "
-                   "match (m:match) "
-                   "where id(m) = match_id "
-                   "create (t)-[:hosted]->(m) "
-                   "return id(t) as id ")
-        query-data {:tdata (:tournament tournament-data)
-                    :players (:participants tournament-data)
-                    :match_ids (create-match-graphs (:matches tournament-data))}
-        tournament-id ((first (cypher/tquery conn query query-data)) "id")]
+  (let [tournament-id (create-tournament-node (:tournament tournament-data))]
+    (merge-matches-with-tournament tournament-id tournament-data)
     (merge-participants-with-tournament tournament-id tournament-data)))
 
 (defnp delete-uncached-data []
