@@ -106,6 +106,8 @@
    "http://challonge.com/BMOS14"
    "http://challonge.com/bmos15"
    "http://challonge.com/BMOS16"
+   "http://challonge.com/BMOS17"
+   "http://challonge.com/BMOS18"
    ])
 
 (def wombo-wednesdays
@@ -119,6 +121,7 @@
    "http://scusmash.challonge.com/WW17s4singles"
    "http://scusmash.challonge.com/WWS418"
    "http://scusmash.challonge.com/WW19s4singles"
+   "http://scusmash.challonge.com/WW20S4singles"
    ])
 
 (def gamerz-smash-labs
@@ -153,7 +156,7 @@
    "http://capitolfightdistrict.challonge.com/GSL24S"
    "http://capitolfightdistrict.challonge.com/GSL25S"
    "http://capitolfightdistrict.challonge.com/GSL26S"
-   "http://challonge.com/GSL27S"
+   "http://capitolfightdistrict.challonge.com/GSL27S"
    "http://capitolfightdistrict.challonge.com/GSL28S"
    "http://capitolfightdistrict.challonge.com/GSL29S"
    "http://capitolfightdistrict.challonge.com/GSL30S"
@@ -294,6 +297,7 @@
    "http://bko.challonge.com/SO7S4"
    "http://bko.challonge.com/SO84"
    "http://bko.challonge.com/SO94"
+   "http://bko.challonge.com/SO104"
    ])
 
 (def the-2-stock-and-the-handshake
@@ -321,6 +325,7 @@
    "http://challonge.com/Teke8"
    "http://challonge.com/Teke9"
    "http://challonge.com/Teke10"
+   "http://challonge.com/Teke11Singles"
    ])
 
 (def game-addiction
@@ -331,6 +336,8 @@
    "http://challonge.com/Gaddiction5"
    "http://challonge.com/GAddiction6"
    "http://challonge.com/gaddiction7"
+   "http://challonge.com/gaddiction8"
+   "http://challonge.com/Gaddiction9"
    ])
 
 (def pheonix-uprising
@@ -352,6 +359,8 @@
    "http://challonge.com/phoenixuprising15"
    "http://challonge.com/phoenixuprising16"
    "http://challonge.com/phoenixuprising17"
+   "http://challonge.com/phoenixuprising18"
+   "http://challonge.com/phoenixuprising19"
    ])
 
 (def super-south-bay-sundays
@@ -363,6 +372,7 @@
    "http://ssbs.challonge.com/SSBS7_4Singles"
    "http://ssbs.challonge.com/SSBS8S4singles"
    "http://ssbs.challonge.com/SSBS9s4singles"
+   "http://ssbs.challonge.com/SSBS10S4singles"
    ])
 
 (def simply-smashing
@@ -374,6 +384,8 @@
    "http://challonge.com/SSmashing6"
    "http://challonge.com/ssmashing7"
    "http://challonge.com/SSmashing8"
+   "http://challonge.com/Ssmashing9"
+   "http://challonge.com/SSmashing11"
    ])
 
 (def smash-at-kin
@@ -502,7 +514,7 @@
    ["Kitka" "Ktika"]
    ["MF Space" "Space" "MF" "8BIT | Masta Space"]
    ["SirDaniel" "Sir"]
-   ["Shia Lepuff" "Demi Lovato" "Shia La Puff" "ShaiLapuff" "Shila La Puff"]
+   ["Shia Lepuff" "Demi Lovato" "Shia La Puff" "ShaiLapuff" "Shila La Puff" "Demi Lavato"]
    ["Pulse" "RH | Old man Pulse" "Pulse *ganon grunt*" "Pulse *ganon grunts*"]
    ["8BIT | Blank" "Blankey69" "8BIT | Trojan"]
    ["K10" "ss3Katen" "KIO"]
@@ -524,6 +536,7 @@
    ["Violet" "Andrew Le"]
    ["York" "T 17/York"]
    ["Scourge" "Summus" "Lt. Skerge" "Melon Lord"]
+   ["Mr. Peabody" "peabody"]
    ["Kronos2560" "Kronos"]
    ["Krustol" "TCM/Krustol"]
    ["110" "110_"]
