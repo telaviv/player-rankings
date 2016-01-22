@@ -361,6 +361,8 @@
    "http://challonge.com/phoenixuprising17"
    "http://challonge.com/phoenixuprising18"
    "http://challonge.com/phoenixuprising19"
+   "http://challonge.com/phoenixuprising20"
+   "http://challonge.com/phoenixuprising21"
    ])
 
 (def super-south-bay-sundays
@@ -386,12 +388,15 @@
    "http://challonge.com/SSmashing8"
    "http://challonge.com/Ssmashing9"
    "http://challonge.com/SSmashing11"
+   "http://challonge.com/SSmashing12"
+   "http://challonge.com/SSmashing13"
    ])
 
 (def smash-at-kin
   [
    "http://smashkin.challonge.com/smashkin1"
    "http://challonge.com/zsv9hsmy"
+   "http://challonge.com/74jzzh0c"
    ])
 
 (def miscellaneous-tournaments
