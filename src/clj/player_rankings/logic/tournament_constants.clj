@@ -161,6 +161,8 @@
    "http://capitolfightdistrict.challonge.com/GSL29S"
    "http://capitolfightdistrict.challonge.com/GSL30S"
    "http://capitolfightdistrict.challonge.com/GSL31S"
+   "http://capitolfightdistrict.challonge.com/GSL32NBS"
+   "http://capitolfightdistrict.challonge.com/GSL33S"
    ])
 
 (def ghost-at-dc
@@ -397,6 +399,7 @@
    "http://smashkin.challonge.com/smashkin1"
    "http://challonge.com/zsv9hsmy"
    "http://challonge.com/74jzzh0c"
+   "http://challonge.com/Smashkin4dontgethit"
    ])
 
 (def miscellaneous-tournaments
@@ -407,7 +410,6 @@
    "http://bko.challonge.com/BM24"
    "https://smash.gg/tournament/extra-life-charity-smash-4-tournament-presented-by-showdown"
    "http://capitolfightdistrict.challonge.com/CGELS4S"
-   "http://smashkin.challonge.com/smashkin1"
    "http://challonge.com/cogpog4s4singles"
    "http://challonge.com/cogpogs4amateur"
    ])
@@ -551,7 +553,7 @@
    ["Ninja-The-Link-Sage" "FINAL-NINJA-THE-LINK-SAGE"]
    ["Saint" " Deity"]
    ["Boba Tapioca" "Boba"]
-   ["UC | DSS" "@UC_DSS" "Rocky"]
+   ["UC | DSS" "@UC_DSS" "Rocky" "DSS uP"]
    ["Beast" "Daimyes" "Jimber Jangers"]
    ["MisterQ" "MrQ" "Mr. Q"]
    ["Crisis" "Tep"]
