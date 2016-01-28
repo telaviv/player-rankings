@@ -270,6 +270,12 @@
    {:url "http://brackets.godlikecombo.com/#!/sm4sh22"
     :date (t/date-time 2015 12 7)
     :title "Versus Revival - Sm4sh Singles ep 22"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh23"
+    :date (t/date-time 2016 1 11)
+    :title "Versus Revival - Sm4sh Singles ep 23"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh24"
+    :date (t/date-time 2016 1 25)
+    :title "Versus Revival - Sm4sh Singles ep 24"}
    ])
 
 (def rise-at-ssf
@@ -365,6 +371,7 @@
    "http://challonge.com/phoenixuprising19"
    "http://challonge.com/phoenixuprising20"
    "http://challonge.com/phoenixuprising21"
+   "http://challonge.com/phoenixuprising22"
    ])
 
 (def super-south-bay-sundays
