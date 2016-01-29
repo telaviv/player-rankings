@@ -122,6 +122,7 @@
    "http://scusmash.challonge.com/WWS418"
    "http://scusmash.challonge.com/WW19s4singles"
    "http://scusmash.challonge.com/WW20S4singles"
+   "http://scusmash.challonge.com/ww21s4singles"
    ])
 
 (def gamerz-smash-labs
