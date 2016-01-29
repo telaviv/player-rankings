@@ -17,7 +17,7 @@
                  [ring-middleware-format "0.5.0"]
                  [bouncer "0.3.2"]
                  [prone "0.8.1"]
-                 [org.clojure/tools.nrepl "0.2.11"]
+                 [org.clojure/tools.nrepl "0.2.12"]
                  [ring-server "0.4.0"]
                  [clj-http "3.0.0-SNAPSHOT"]
                  [org.clojure/data.json "0.2.6"]
@@ -41,9 +41,8 @@
   :plugins [[lein-ring "0.9.1"]
             [lein-environ "1.0.0"]
             [lein-ancient "0.6.5"]
-            [cider/cider-nrepl "0.10.0-SNAPSHOT"]
+            [cider/cider-nrepl "0.11.0-SNAPSHOT"]
             ]
-
 
 
   :ring {:handler player-rankings.handler/app
