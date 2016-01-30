@@ -451,9 +451,6 @@
   [
    "http://showdowngg.challonge.com/comeonandban12singles"
    "https://smash.gg/tournament/extra-life-charity-smash-4-tournament-presented-by-showdown"
-   {:url "http://brackets.godlikecombo.com/#!/sm4sh17"
-    :date (t/date-time 2015 11 2)
-    :title "Versus Revival - Sm4sh Singles ep 17"}
    ])
 
 (def team-names
