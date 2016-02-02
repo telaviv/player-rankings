@@ -164,6 +164,7 @@
    "http://capitolfightdistrict.challonge.com/GSL31S"
    "http://capitolfightdistrict.challonge.com/GSL32NBS"
    "http://capitolfightdistrict.challonge.com/GSL33S"
+   "http://capitolfightdistrict.challonge.com/GSL34S"
    ])
 
 (def ghost-at-dc
@@ -282,6 +283,7 @@
 (def rise-at-ssf
   [
    "http://challonge.com/risessfs3e1"
+   "http://challonge.com/risessfs3e2"
    ])
 
 (def casa-del-fuego
@@ -410,6 +412,11 @@
    "http://challonge.com/Smashkin4dontgethit"
    ])
 
+(def e1337ent-smash-open
+  ["http://challonge.com/ESO_W1_2016"
+   "http://challonge.com/ESO_W2"
+   ])
+
 (def miscellaneous-tournaments
   [
    "http://challonge.com/surfcityslamsinglesPRO"
@@ -420,6 +427,10 @@
    "http://capitolfightdistrict.challonge.com/CGELS4S"
    "http://challonge.com/cogpog4s4singles"
    "http://challonge.com/cogpogs4amateur"
+   "http://challonge.com/TheRegulation"
+   "http://csueastbaysmash.challonge.com/dydsm4S"
+   "http://challonge.com/ESO_W2"
+   "http://challonge.com/sacsunsmash1"
    ])
 
 (def tournament-urls
@@ -445,6 +456,7 @@
           rise-at-ssf
           casa-del-fuego
           smash-at-kin
+          e1337ent-smash-open
           miscellaneous-tournaments))
 
 (def test-urls
@@ -505,6 +517,7 @@
    (comment "This is due to a bug with team name processing."
             "'BKOlC4' and 'BKO|C4' often happen so we need to strip out the l")
    ["Legit" "egit"]
+   ["Jose" "FONC! Jose"]
    ["Myro" "Myron"]
    ["Three" "Three!"]
    ["ShadowsDepth" "ShadowsDeath"]
