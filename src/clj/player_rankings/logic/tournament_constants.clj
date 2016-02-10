@@ -278,6 +278,12 @@
    {:url "http://brackets.godlikecombo.com/#!/sm4sh24"
     :date (t/date-time 2016 1 25)
     :title "Versus Revival - Sm4sh Singles ep 24"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh25"
+    :date (t/date-time 2016 2 2)
+    :title "Versus Revival - Sm4sh Singles ep 25"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh26"
+    :date (t/date-time 2016 2 9)
+    :title "Versus Revival - Sm4sh Singles ep 26"}
    ])
 
 (def rise-at-ssf
@@ -349,6 +355,7 @@
    "http://challonge.com/gaddiction7"
    "http://challonge.com/gaddiction8"
    "http://challonge.com/Gaddiction9"
+   "http://challonge.com/Gaddiction10"
    ])
 
 (def pheonix-uprising
@@ -375,6 +382,7 @@
    "http://challonge.com/phoenixuprising20"
    "http://challonge.com/phoenixuprising21"
    "http://challonge.com/phoenixuprising22"
+   "http://challonge.com/phoenixuprising23"
    ])
 
 (def super-south-bay-sundays
@@ -410,11 +418,21 @@
    "http://challonge.com/zsv9hsmy"
    "http://challonge.com/74jzzh0c"
    "http://challonge.com/Smashkin4dontgethit"
+   "http://challonge.com/SmashKin5"
    ])
 
 (def e1337ent-smash-open
   ["http://challonge.com/ESO_W1_2016"
    "http://challonge.com/ESO_W2"
+   "http://challonge.com/ESO_W3"
+   ])
+
+(def smash-at-berkeley
+  ["http://challonge.com/bayo"])
+
+(def did-that-just-happen
+  ["http://sslsmash.challonge.com/dtjhsjsu05Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu07Smash4"
    ])
 
 (def miscellaneous-tournaments
@@ -429,8 +447,9 @@
    "http://challonge.com/cogpogs4amateur"
    "http://challonge.com/TheRegulation"
    "http://csueastbaysmash.challonge.com/dydsm4S"
-   "http://challonge.com/ESO_W2"
    "http://challonge.com/sacsunsmash1"
+   "http://challonge.com/lanb4strife"
+   "http://challonge.com/SIOM7"
    ])
 
 (def tournament-urls
@@ -457,6 +476,8 @@
           casa-del-fuego
           smash-at-kin
           e1337ent-smash-open
+          smash-at-berkeley
+          did-that-just-happen
           miscellaneous-tournaments))
 
 (def test-urls
@@ -507,23 +528,54 @@
    "dire"
    "tcm"
    "#lh"
+   "qt"
    ])
 
 (def aliases
   [["Crow" "Chaos Crow" "Maleficent"]
    ["Glith" "glith10" "gltih"]
    ["KossisMOSS" "Kossimoss" "AAA Batteries?!"]
+   ["BlueBomber22" "Blue Bomber"]
+   ["DarkSilence" "Darlsilence"]
+   ["DeathPheonix13" "Deathphoenix13"]
+   ["Dong Dong Never Die" "Dong Dong Never Dies"]
+   ["Dr. Grin" "Dr. Grim"]
+   ["Toon" "418"]
+   ["Tucan" "Tucan'"]
+   ["Yes2DaKing" "Yes_To_The_King"]
+   ["mMmK4rma" "mMm-k4rma" "K4rma"]
+   ["Saucy McYolo" "SauceyMcYolo"]
+   ["StarWarriorChris" "StarWariorChris"]
+   ["DunkinLikeJordan" "Dunken like Jordan" "Dunking Like Jordan"]
+   ["EUEE" "EUEE_D2"]
+   ["Electric Soldier" "Electric Solider"]
+   ["Gamersaurus" "Gamersaurs"]
+   ["WimpLow" "Wimplo"]
+   ["Goomba" "Gooomba"]
+   ["HollyPop" "HolliPop"]
+   ["Jackaria" "Jackaraia"]
+   ["JimmyNugz" "JimmyNug"]
+   ["Onii~Chan" "Onii Chan"]
+   ["Patty Ricker" "Patty Ricker."]
+   ["JollyOllyman" "JollyOlyman"]
+   ["JustACoolDude" "JustCoolDude"]
+   ["Metakirby" "Meta-kirby"]
    ["Parasite" "Not Last"]
    (comment "This is due to a bug with team name processing."
             "'BKOlC4' and 'BKO|C4' often happen so we need to strip out the l")
    ["Legit" "egit"]
    ["Jose" "FONC! Jose"]
+   ["3rdEyeVision" "3rd EyeVission"]
+   ["Blank" "Blanky"]
    ["Myro" "Myron"]
    ["Three" "Three!"]
+   ["Nik64" "Nick64"]
+   ["Glacer" "Glacier"]
+   ["Gmo Skee" "G-Mo Skee"]
    ["ShadowsDepth" "ShadowsDeath"]
    ["Serg!" "Surg!" "Surge!"]
    ["Snorlax" "SnorlaxPlox" "Snorlax Plo"]
-   ["Dyno Wright" "BBSOWN BlackDynoWright" "Black_DynoWright" "BlueDyno"]
+   ["Dyno Wright" "BBSOWN BlackDynoWright" "BlueDyno"]
    ["Jirachinik" "Jirachinick"]
    ["Trevonte" "Trevante" "SiN | Thizz Naruto! DBZ"]
    ["QT | K4rma" "QT.k4rma"]
@@ -537,23 +589,23 @@
    ["NME | Nanerz" "Cynthia"]
    ["Rickshaw" "NinjaRlink" "Richshaw" "Dickshaw"]
    ["Kitka" "Ktika"]
-   ["MF Space" "Space" "MF" "8BIT | Masta Space"]
+   ["MF Space" "Space" "MF" "8BIT | Masta Space" "8bitMastaSpace"]
    ["SirDaniel" "Sir"]
    ["Shia Lepuff" "Demi Lovato" "Shia La Puff" "ShaiLapuff" "Shila La Puff" "Demi Lavato"]
    ["Pulse" "RH | Old man Pulse" "Pulse *ganon grunt*" "Pulse *ganon grunts*"]
    ["8BIT | Blank" "Blankey69" "8BIT | Trojan"]
    ["K10" "ss3Katen" "KIO"]
    ["DMG | Shingo" "Shing0" "Shing07"]
-   ["Vermillion" "STVermillion" "ST_vermillion"]
+   ["Vermillion" "STVermillion"]
    ["BaNdt" "ARaNdomVillager" "Bandito"]
-   ["TOME|Go!" "basedGO64" "OS/ basedgo64" "OS/.GO64" "GO" "GO 64" "OS~TOME`GO" "Tome"]
+   ["TOME|Go!" "basedGO64" "OS/ basedgo64" "OS/.GO64" "GO" "GO 64" "OS~TOME`GO" "Tome" "bbaseedGO64"]
    ["Robotic Painter" "Robatic Painter"]
    ["Mr. Pink" "Mr Pink" "Pink"]
-   ["Arikie" "MS | Shadow" "4B_Arikie" "Arike"]
-   ["GShark" "Leffen_Shark" "G-Shark" "isT_G Shark" "ShArK"]
+   ["Arikie" "MS | Shadow" "Arike"]
+   ["GShark" "Leffen Shark" "G-Shark" "isT G Shark" "ShArK"]
    ["Arda" "Ishiey" "A" "AA" "Ish" "Im The Best Wolf"]
    ["AD" "Adriel"]
-   ["ChosenL" "Chosen_L" "ChosenL*" "CoG_ChosenL"]
+   ["ChosenL" "ChosenL*" "CoG_ChosenL"]
    ["CrispyTacoz" "Tacoz" "TRNP | CrispyTacoz *"]
    ["z" "OS/z" "xy"]
    ["FONC | GPL Chye" "FONC | KOCI"]
@@ -564,14 +616,14 @@
    ["Mr. Peabody" "peabody"]
    ["Kronos2560" "Kronos"]
    ["Krustol" "TCM/Krustol"]
-   ["110" "110_"]
+   ["110"]
    ["Hitaku" "Hitaku Back Sunday"]
    ["Twich" "Twitch"]
    ["Electric Soldier" "Electric Solder"]
    ["Ninja-The-Link-Sage" "FINAL-NINJA-THE-LINK-SAGE"]
    ["Saint" " Deity"]
    ["Boba Tapioca" "Boba"]
-   ["UC | DSS" "@UC_DSS" "Rocky" "DSS uP"]
+   ["UC | DSS" "@UC DSS" "Rocky" "DSS uP"]
    ["Beast" "Daimyes" "Jimber Jangers"]
    ["MisterQ" "MrQ" "Mr. Q"]
    ["Crisis" "Tep"]
@@ -584,7 +636,8 @@
    ["Pheno" "GPheno"]
    ["TheComposer" "theComposr"]
    ["Rice" "Rice-kun" "Dark Rice" "Mr.Rice"]
-   ["Andy Sauro" "Andy_Sauro" "Andy" "Andy The Albatross"]
+   ["Andy Sauro" "Andy The Albatross"]
+   ["Baron Xieon" "Baron"]
    ["Shin" "Ph~ck Shin"]
    ["Warchief" "Warhief"]
    ["Tsarkhasm" "Tsharkasm"]
@@ -601,8 +654,8 @@
    ["MaddJu5t1n" "Madd Ju5tin"]
    ["Froggie" "Froggy" "Froge"]
    ["PewPewU" "CLG.PewPewU"]
-   ["Mr. Krabs" "Mr_Krabs"]
-   ["A Stray Cat" "Stray" "StrayCat" "A Stay Cat" "A_Stray_Cat"]
+   ["Mr. Krabs" "Mr Krabs"]
+   ["A Stray Cat" "Stray" "StrayCat" "A Stay Cat"]
    ["Trex Destiny" "T-Rex Destiny" "Jae Pea" "T-Rex"]
    ["AwesomeTheSauce" "AwesomeSauce"]
    ["Villain" "Villian"]])
