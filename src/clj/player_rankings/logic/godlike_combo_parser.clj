@@ -35,8 +35,9 @@
 
 (defn- strip-w-l [name]
   (let [match (re-matches #"(.*) \((W|L)\)" name)]
-    (assert (= 3 (count match)) (str name " isn't in the right format"))
-    (second match)))
+    (if (nil? match)
+      name
+      (second match))))
 
 (defn- strip-underscores [name]
   (let [match (re-matches #"(.*?)(_+)" name)]
