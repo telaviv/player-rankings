@@ -383,6 +383,7 @@
    "http://challonge.com/phoenixuprising21"
    "http://challonge.com/phoenixuprising22"
    "http://challonge.com/phoenixuprising23"
+   "http://challonge.com/phoenixuprising24"
    ])
 
 (def super-south-bay-sundays
