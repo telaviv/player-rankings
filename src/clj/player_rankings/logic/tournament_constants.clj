@@ -46,6 +46,8 @@
    "http://showdowngg.challonge.com/comeonandban42"
    "http://showdowngg.challonge.com/comeonandban43"
    "http://showdowngg.challonge.com/comeonandban44"
+   "http://showdowngg.challonge.com/comeonandban45"
+   "http://showdowngg.challonge.com/comeonandban47"
    ])
 
 (def made
@@ -64,6 +66,7 @@
    "http://challonge.com/SmashMassXMADESingles"
    "http://challonge.com/MADESingles15"
    "http://challonge.com/MADEFinalSingles"
+   "http://challonge.com/MADESmash416Singles"
    ])
 
 (def big-mamas-little-cup
@@ -165,6 +168,8 @@
    "http://capitolfightdistrict.challonge.com/GSL32NBS"
    "http://capitolfightdistrict.challonge.com/GSL33S"
    "http://capitolfightdistrict.challonge.com/GSL34S"
+   "http://capitolfightdistrict.challonge.com/GSL35WIIUS"
+   "http://capitolfightdistrict.challonge.com/GSL36WUS"
    ])
 
 (def ghost-at-dc
@@ -384,6 +389,7 @@
    "http://challonge.com/phoenixuprising22"
    "http://challonge.com/phoenixuprising23"
    "http://challonge.com/phoenixuprising24"
+   "http://challonge.com/phoenixuprising25"
    ])
 
 (def super-south-bay-sundays
@@ -411,6 +417,8 @@
    "http://challonge.com/SSmashing11"
    "http://challonge.com/SSmashing12"
    "http://challonge.com/SSmashing13"
+   "http://challonge.com/Ssmashing14"
+   "http://challonge.com/Ssmashing15"
    ])
 
 (def smash-at-kin
