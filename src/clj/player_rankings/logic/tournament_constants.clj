@@ -48,6 +48,7 @@
    "http://showdowngg.challonge.com/comeonandban44"
    "http://showdowngg.challonge.com/comeonandban45"
    "http://showdowngg.challonge.com/comeonandban47"
+   "http://showdowngg.challonge.com/comeonandban48"
    ])
 
 (def made
