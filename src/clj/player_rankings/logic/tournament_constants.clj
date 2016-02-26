@@ -126,7 +126,10 @@
    "http://scusmash.challonge.com/WWS418"
    "http://scusmash.challonge.com/WW19s4singles"
    "http://scusmash.challonge.com/WW20S4singles"
+   "http://scusmash.challonge.com/WW21S4"
    "http://scusmash.challonge.com/ww21s4singles"
+   "http://scusmash.challonge.com/ww23s4s"
+   "http://scusmash.challonge.com/WW24S4singles"
    ])
 
 (def gamerz-smash-labs
@@ -171,6 +174,7 @@
    "http://capitolfightdistrict.challonge.com/GSL34S"
    "http://capitolfightdistrict.challonge.com/GSL35WIIUS"
    "http://capitolfightdistrict.challonge.com/GSL36WUS"
+   "http://capitolfightdistrict.challonge.com/GSL37WUS"
    ])
 
 (def ghost-at-dc
@@ -230,6 +234,12 @@
 (def blu42-smash-mass
   [
    "http://challonge.com/Blu42smashmass"
+   ])
+
+(def smash-boba-and-tea
+  [
+   "http://challonge.com/smashbobaandteasingles"
+   "http://challonge.com/smashbobaandtea3singles"
    ])
 
 (def versus
@@ -391,6 +401,7 @@
    "http://challonge.com/phoenixuprising23"
    "http://challonge.com/phoenixuprising24"
    "http://challonge.com/phoenixuprising25"
+   "http://challonge.com/phoenixuprising26"
    ])
 
 (def super-south-bay-sundays
@@ -403,6 +414,8 @@
    "http://ssbs.challonge.com/SSBS8S4singles"
    "http://ssbs.challonge.com/SSBS9s4singles"
    "http://ssbs.challonge.com/SSBS10S4singles"
+   "http://ssbs.challonge.com/ssbs114"
+   "http://ssbs.challonge.com/SSBS12S4singles"
    ])
 
 (def simply-smashing
@@ -438,11 +451,15 @@
    ])
 
 (def smash-at-berkeley
-  ["http://challonge.com/bayo"])
+  ["http://challonge.com/bayo"
+   "http://sab.challonge.com/sp16bw2_4"
+   ])
 
 (def did-that-just-happen
-  ["http://sslsmash.challonge.com/dtjhsjsu05Smash4"
+  ["http://challonge.com/dtjhsjsu04Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu05Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu07Smash4"
+   "http://challonge.com/dtjhsjsu08Smash4"
    ])
 
 (def miscellaneous-tournaments
@@ -460,6 +477,7 @@
    "http://challonge.com/sacsunsmash1"
    "http://challonge.com/lanb4strife"
    "http://challonge.com/SIOM7"
+   "http://challonge.com/phoenixawakeningsingles"
    ])
 
 (def tournament-urls
@@ -488,6 +506,7 @@
           e1337ent-smash-open
           smash-at-berkeley
           did-that-just-happen
+          smash-boba-and-tea
           miscellaneous-tournaments))
 
 (def test-urls
