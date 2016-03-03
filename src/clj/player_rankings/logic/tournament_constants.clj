@@ -49,6 +49,7 @@
    "http://showdowngg.challonge.com/comeonandban45"
    "http://showdowngg.challonge.com/comeonandban47"
    "http://showdowngg.challonge.com/comeonandban48"
+   "http://showdowngg.challonge.com/comeonandban49"
    ])
 
 (def made
@@ -175,6 +176,7 @@
    "http://capitolfightdistrict.challonge.com/GSL35WIIUS"
    "http://capitolfightdistrict.challonge.com/GSL36WUS"
    "http://capitolfightdistrict.challonge.com/GSL37WUS"
+   "http://capitolfightdistrict.challonge.com/GSL38WUS"
    ])
 
 (def ghost-at-dc
@@ -374,6 +376,13 @@
    "http://challonge.com/Gaddiction10"
    ])
 
+(def stiikx
+  [
+   "http://challonge.com/stiikx3"
+   "http://challonge.com/stiikx4"
+   "http://challonge.com/stiikx5smash4sing"
+   ])
+
 (def pheonix-uprising
   [
    "http://challonge.com/phoenixuprising1"
@@ -402,6 +411,7 @@
    "http://challonge.com/phoenixuprising24"
    "http://challonge.com/phoenixuprising25"
    "http://challonge.com/phoenixuprising26"
+   "http://challonge.com/phoenixuprising27"
    ])
 
 (def super-south-bay-sundays
@@ -478,6 +488,7 @@
    "http://challonge.com/lanb4strife"
    "http://challonge.com/SIOM7"
    "http://challonge.com/phoenixawakeningsingles"
+   "http://challonge.com/GameNightsSSB4"
    ])
 
 (def tournament-urls
@@ -507,6 +518,7 @@
           smash-at-berkeley
           did-that-just-happen
           smash-boba-and-tea
+          stiikx
           miscellaneous-tournaments))
 
 (def test-urls
@@ -558,6 +570,7 @@
    "tcm"
    "#lh"
    "qt"
+   "thcm"
    ])
 
 (def aliases
