@@ -50,6 +50,8 @@
    "http://showdowngg.challonge.com/comeonandban47"
    "http://showdowngg.challonge.com/comeonandban48"
    "http://showdowngg.challonge.com/comeonandban49"
+   "http://showdowngg.challonge.com/comeonandban50"
+   "http://showdowngg.challonge.com/comeonandban51"
    ])
 
 (def made
@@ -131,6 +133,7 @@
    "http://scusmash.challonge.com/ww21s4singles"
    "http://scusmash.challonge.com/ww23s4s"
    "http://scusmash.challonge.com/WW24S4singles"
+   "http://scusmash.challonge.com/ww25s4s"
    ])
 
 (def gamerz-smash-labs
@@ -177,6 +180,8 @@
    "http://capitolfightdistrict.challonge.com/GSL36WUS"
    "http://capitolfightdistrict.challonge.com/GSL37WUS"
    "http://capitolfightdistrict.challonge.com/GSL38WUS"
+   "http://capitolfightdistrict.challonge.com/GSL39WUS"
+   "http://capitolfightdistrict.challonge.com/GGSL40WUS"
    ])
 
 (def ghost-at-dc
@@ -412,6 +417,7 @@
    "http://challonge.com/phoenixuprising25"
    "http://challonge.com/phoenixuprising26"
    "http://challonge.com/phoenixuprising27"
+   "http://challonge.com/phoenixuprising28"
    ])
 
 (def super-south-bay-sundays
@@ -452,12 +458,16 @@
    "http://challonge.com/74jzzh0c"
    "http://challonge.com/Smashkin4dontgethit"
    "http://challonge.com/SmashKin5"
+   "http://challonge.com/SmashKin6"
+   "http://challonge.com/SaK7"
    ])
 
 (def e1337ent-smash-open
   ["http://challonge.com/ESO_W1_2016"
    "http://challonge.com/ESO_W2"
    "http://challonge.com/ESO_W3"
+   "http://challonge.com/ESO_W4"
+   "http://challonge.com/ESO_W5"
    ])
 
 (def smash-at-berkeley
@@ -470,6 +480,7 @@
    "http://sslsmash.challonge.com/dtjhsjsu05Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu07Smash4"
    "http://challonge.com/dtjhsjsu08Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu09Smash4"
    ])
 
 (def miscellaneous-tournaments
@@ -489,6 +500,8 @@
    "http://challonge.com/SIOM7"
    "http://challonge.com/phoenixawakeningsingles"
    "http://challonge.com/GameNightsSSB4"
+   "http://challonge.com/smash_aau"
+   "http://challonge.com/TheForge1"
    ])
 
 (def tournament-urls
@@ -677,7 +690,7 @@
    ["Kitka" "Yung Lord Kitka" "Lord Kitka"]
    ["Pheno" "GPheno"]
    ["TheComposer" "theComposr"]
-   ["Rice" "Rice-kun" "Dark Rice" "Mr.Rice"]
+   ["Rice" "Rice-kun" "Dark Rice" "Mr.Rice" "Rice Whine"]
    ["Andy Sauro" "Andy The Albatross"]
    ["Baron Xieon" "Baron"]
    ["Shin" "Ph~ck Shin"]
