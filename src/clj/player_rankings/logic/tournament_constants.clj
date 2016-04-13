@@ -52,6 +52,9 @@
    "http://showdowngg.challonge.com/comeonandban49"
    "http://showdowngg.challonge.com/comeonandban50"
    "http://showdowngg.challonge.com/comeonandban51"
+   "http://showdowngg.challonge.com/comeonandban52"
+   "http://showdowngg.challonge.com/comeonandban53"
+   "http://showdowngg.challonge.com/comeonandban53"
    ])
 
 (def made
@@ -71,6 +74,8 @@
    "http://challonge.com/MADESingles15"
    "http://challonge.com/MADEFinalSingles"
    "http://challonge.com/MADESmash416Singles"
+   "http://challonge.com/made17singles"
+   "http://challonge.com/smash18singles"
    ])
 
 (def big-mamas-little-cup
@@ -93,6 +98,8 @@
    "http://challonge.com/BMLH4"
    "http://challonge.com/BMLH5"
    "http://challonge.com/BMLH6"
+   "http://challonge.com/smash18singles"
+   "http://challonge.com/BMLH42"
    ])
 
 (def big-mamas-off-season
@@ -134,6 +141,7 @@
    "http://scusmash.challonge.com/ww23s4s"
    "http://scusmash.challonge.com/WW24S4singles"
    "http://scusmash.challonge.com/ww25s4s"
+   "http://scusmash.challonge.com/ww26s4sings"
    ])
 
 (def gamerz-smash-labs
@@ -182,6 +190,7 @@
    "http://capitolfightdistrict.challonge.com/GSL38WUS"
    "http://capitolfightdistrict.challonge.com/GSL39WUS"
    "http://capitolfightdistrict.challonge.com/GGSL40WUS"
+   "http://capitolfightdistrict.challonge.com/GSL41WUS"
    ])
 
 (def ghost-at-dc
@@ -307,6 +316,9 @@
    {:url "http://brackets.godlikecombo.com/#!/sm4sh26"
     :date (t/date-time 2016 2 9)
     :title "Versus Revival - Sm4sh Singles ep 26"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh27"
+    :date (t/date-time 2016 2 16)
+    :title "Versus Revival - Sm4sh Singles ep 27"}
    ])
 
 (def rise-at-ssf
@@ -418,6 +430,10 @@
    "http://challonge.com/phoenixuprising26"
    "http://challonge.com/phoenixuprising27"
    "http://challonge.com/phoenixuprising28"
+   "http://challonge.com/phoenixuprising29"
+   "http://challonge.com/phoenixuprising30"
+   "http://challonge.com/phoenixuprising31"
+   "http://challonge.com/phoenixuprising32"
    ])
 
 (def super-south-bay-sundays
@@ -432,6 +448,7 @@
    "http://ssbs.challonge.com/SSBS10S4singles"
    "http://ssbs.challonge.com/ssbs114"
    "http://ssbs.challonge.com/SSBS12S4singles"
+   "http://ssbs.challonge.com/ssbs13sm4shsingles"
    ])
 
 (def simply-smashing
@@ -449,7 +466,15 @@
    "http://challonge.com/SSmashing13"
    "http://challonge.com/Ssmashing14"
    "http://challonge.com/Ssmashing15"
+   "http://challonge.com/SSmashing16"
+   "http://challonge.com/ssmashing17"
+   "http://challonge.com/SSmashing18"
    ])
+
+(def the-forge
+  ["http://challonge.com/TheForge1"
+   "http://challonge.com/HeatII"
+   "http://challonge.com/Forge3"])
 
 (def smash-at-kin
   [
@@ -460,6 +485,9 @@
    "http://challonge.com/SmashKin5"
    "http://challonge.com/SmashKin6"
    "http://challonge.com/SaK7"
+   "http://challonge.com/Smashkin8"
+   "http://challonge.com/SmashKin9"
+   "http://challonge.com/sak10"
    ])
 
 (def e1337ent-smash-open
@@ -502,6 +530,9 @@
    "http://challonge.com/GameNightsSSB4"
    "http://challonge.com/smash_aau"
    "http://challonge.com/TheForge1"
+   "http://scusmash.challonge.com/s4weeniehut"
+   "http://challonge.com/sass1sm4sh"
+   "http://challonge.com/71jh912n"
    ])
 
 (def tournament-urls
@@ -524,6 +555,7 @@
           pheonix-uprising
           super-south-bay-sundays
           simply-smashing
+          the-forge
           rise-at-ssf
           casa-del-fuego
           smash-at-kin
@@ -644,7 +676,7 @@
    ["NME | Nanerz" "Cynthia"]
    ["Rickshaw" "NinjaRlink" "Richshaw" "Dickshaw"]
    ["Kitka" "Ktika"]
-   ["MF Space" "Space" "MF" "8BIT | Masta Space" "8bitMastaSpace"]
+   ["MF Space" "Space" "MF" "8BIT | Masta Space" "8bitMastaSpace" "Nova!"]
    ["SirDaniel" "Sir"]
    ["Shia Lepuff" "Demi Lovato" "Shia La Puff" "ShaiLapuff" "Shila La Puff" "Demi Lavato"]
    ["Pulse" "RH | Old man Pulse" "Pulse *ganon grunt*" "Pulse *ganon grunts*"]
@@ -678,7 +710,7 @@
    ["Ninja-The-Link-Sage" "FINAL-NINJA-THE-LINK-SAGE"]
    ["Saint" " Deity"]
    ["Boba Tapioca" "Boba"]
-   ["UC | DSS" "@UC DSS" "Rocky" "DSS uP"]
+   ["UC | DSS" "@UC DSS" "Rocky" "DSS uP" "Fuk U Sakurai"]
    ["Beast" "Daimyes" "Jimber Jangers"]
    ["MisterQ" "MrQ" "Mr. Q"]
    ["Crisis" "Tep"]
@@ -713,6 +745,8 @@
    ["A Stray Cat" "Stray" "StrayCat" "A Stay Cat"]
    ["Trex Destiny" "T-Rex Destiny" "Jae Pea" "T-Rex"]
    ["AwesomeTheSauce" "AwesomeSauce"]
+   ["Sinister" "NitN"]
+   ["Zoom" "Three"]
    ["Villain" "Villian"]])
 
 (def january-power-ranks
