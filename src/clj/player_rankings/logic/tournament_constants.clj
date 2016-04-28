@@ -54,7 +54,9 @@
    "http://showdowngg.challonge.com/comeonandban51"
    "http://showdowngg.challonge.com/comeonandban52"
    "http://showdowngg.challonge.com/comeonandban53"
-   "http://showdowngg.challonge.com/comeonandban53"
+   "http://showdowngg.challonge.com/comeonandban54"
+   "http://showdowngg.challonge.com/comeonandban55"
+   "http://showdowngg.challonge.com/comeonandban56"
    ])
 
 (def made
@@ -76,6 +78,7 @@
    "http://challonge.com/MADESmash416Singles"
    "http://challonge.com/made17singles"
    "http://challonge.com/smash18singles"
+   "http://challonge.com/smash19singles"
    ])
 
 (def big-mamas-little-cup
@@ -98,7 +101,7 @@
    "http://challonge.com/BMLH4"
    "http://challonge.com/BMLH5"
    "http://challonge.com/BMLH6"
-   "http://challonge.com/smash18singles"
+   "http://challonge.com/BMLHTR"
    "http://challonge.com/BMLH42"
    ])
 
@@ -319,6 +322,9 @@
    {:url "http://brackets.godlikecombo.com/#!/sm4sh27"
     :date (t/date-time 2016 2 16)
     :title "Versus Revival - Sm4sh Singles ep 27"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh28"
+    :date (t/date-time 2016 2 23)
+    :title "Versus Revival - Sm4sh Singles ep 28"}
    ])
 
 (def rise-at-ssf
@@ -434,6 +440,8 @@
    "http://challonge.com/phoenixuprising30"
    "http://challonge.com/phoenixuprising31"
    "http://challonge.com/phoenixuprising32"
+   "http://challonge.com/phoenixuprising33"
+   "http://challonge.com/phoenixuprising34"
    ])
 
 (def super-south-bay-sundays
@@ -501,14 +509,17 @@
 (def smash-at-berkeley
   ["http://challonge.com/bayo"
    "http://sab.challonge.com/sp16bw2_4"
+   "http://sab.challonge.com/sp16bw3smash4"
+   "http://sab.challonge.com/sp16bw4singles"
    ])
 
 (def did-that-just-happen
   ["http://challonge.com/dtjhsjsu04Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu05Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu07Smash4"
-   "http://challonge.com/dtjhsjsu08Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu09Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu10Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu12Smash4"
    ])
 
 (def miscellaneous-tournaments
@@ -621,6 +632,9 @@
 (def aliases
   [["Crow" "Chaos Crow" "Maleficent"]
    ["Glith" "glith10" "gltih"]
+   ["Lolo" "Four"]
+   ["Rayn" "Keios"]
+   ["SuperFlyingTigerMan" "DJRelly"]
    ["KossisMOSS" "Kossimoss" "AAA Batteries?!"]
    ["BlueBomber22" "Blue Bomber"]
    ["DarkSilence" "Darlsilence"]
@@ -676,7 +690,7 @@
    ["NME | Nanerz" "Cynthia"]
    ["Rickshaw" "NinjaRlink" "Richshaw" "Dickshaw"]
    ["Kitka" "Ktika"]
-   ["MF Space" "Space" "MF" "8BIT | Masta Space" "8bitMastaSpace" "Nova!"]
+   ["Nova!" "MF Space" "Space" "MF" "8BIT | Masta Space" "8bitMastaSpace"]
    ["SirDaniel" "Sir"]
    ["Shia Lepuff" "Demi Lovato" "Shia La Puff" "ShaiLapuff" "Shila La Puff" "Demi Lavato"]
    ["Pulse" "RH | Old man Pulse" "Pulse *ganon grunt*" "Pulse *ganon grunts*"]
