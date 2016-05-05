@@ -57,6 +57,7 @@
    "http://showdowngg.challonge.com/comeonandban54"
    "http://showdowngg.challonge.com/comeonandban55"
    "http://showdowngg.challonge.com/comeonandban56"
+   "http://showdowngg.challonge.com/comeonandban57"
    ])
 
 (def made
@@ -145,6 +146,8 @@
    "http://scusmash.challonge.com/WW24S4singles"
    "http://scusmash.challonge.com/ww25s4s"
    "http://scusmash.challonge.com/ww26s4sings"
+   "http://scusmash.challonge.com/ww27s4s"
+   "http://scusmash.challonge.com/ww28s4s"
    ])
 
 (def gamerz-smash-labs
@@ -194,6 +197,15 @@
    "http://capitolfightdistrict.challonge.com/GSL39WUS"
    "http://capitolfightdistrict.challonge.com/GGSL40WUS"
    "http://capitolfightdistrict.challonge.com/GSL41WUS"
+   ])
+
+(def gamerz-underground
+  [
+   "http://challonge.com/GSU1"
+   "http://challonge.com/GZUuno"
+   "http://challonge.com/GUDWUS"
+   "http://challonge.com/GUTWUS"
+   "http://challonge.com/GUCWYWS"
    ])
 
 (def ghost-at-dc
@@ -259,6 +271,12 @@
   [
    "http://challonge.com/smashbobaandteasingles"
    "http://challonge.com/smashbobaandtea3singles"
+   ])
+
+(def smash-at-ronin
+  [
+   "http://challonge.com/ESR_1"
+   "http://challonge.com/ESR_2"
    ])
 
 (def versus
@@ -442,6 +460,8 @@
    "http://challonge.com/phoenixuprising32"
    "http://challonge.com/phoenixuprising33"
    "http://challonge.com/phoenixuprising34"
+   "http://challonge.com/phoenixuprising35"
+   "http://challonge.com/phoenixuprising36"
    ])
 
 (def super-south-bay-sundays
@@ -479,6 +499,15 @@
    "http://challonge.com/SSmashing18"
    ])
 
+(def fair-fights
+  [
+   "http://terrashockgg.challonge.com/FF_WiiU"
+   "http://terrashockgg.challonge.com/FF2_WiiU"
+   "http://terrashockgg.challonge.com/FF3_WiiU"
+   "http://terrashockgg.challonge.com/FF4_WiiU"
+   "http://terrashockgg.challonge.com/FF5_WiiU"])
+
+
 (def the-forge
   ["http://challonge.com/TheForge1"
    "http://challonge.com/HeatII"
@@ -496,6 +525,9 @@
    "http://challonge.com/Smashkin8"
    "http://challonge.com/SmashKin9"
    "http://challonge.com/sak10"
+   "http://challonge.com/ESK_Singles"
+   "http://challonge.com/ESK12"
+   "http://challonge.com/ESK_13"
    ])
 
 (def e1337ent-smash-open
@@ -511,6 +543,7 @@
    "http://sab.challonge.com/sp16bw2_4"
    "http://sab.challonge.com/sp16bw3smash4"
    "http://sab.challonge.com/sp16bw4singles"
+   "http://sab.challonge.com/fdsm4shsingles"
    ])
 
 (def did-that-just-happen
@@ -520,6 +553,7 @@
    "http://sslsmash.challonge.com/dtjhsjsu09Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu10Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu12Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu13Smash4"
    ])
 
 (def miscellaneous-tournaments
@@ -554,6 +588,7 @@
           big-mamas-off-season
           wombo-wednesdays
           gamerz-smash-labs
+          gamerz-underground
           ghost-at-dc
           ncr2015
           blu42-weekly
@@ -575,6 +610,8 @@
           did-that-just-happen
           smash-boba-and-tea
           stiikx
+          fair-fights
+          smash-at-ronin
           miscellaneous-tournaments))
 
 (def test-urls
@@ -690,7 +727,7 @@
    ["NME | Nanerz" "Cynthia"]
    ["Rickshaw" "NinjaRlink" "Richshaw" "Dickshaw"]
    ["Kitka" "Ktika"]
-   ["Nova!" "MF Space" "Space" "MF" "8BIT | Masta Space" "8bitMastaSpace"]
+   ["Nova!" "MF Space" "Space" "MF" "8BIT | Masta Space" "8bitMastaSpace" "Falcon X Falcon"]
    ["SirDaniel" "Sir"]
    ["Shia Lepuff" "Demi Lovato" "Shia La Puff" "ShaiLapuff" "Shila La Puff" "Demi Lavato"]
    ["Pulse" "RH | Old man Pulse" "Pulse *ganon grunt*" "Pulse *ganon grunts*"]
