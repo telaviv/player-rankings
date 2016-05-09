@@ -1,10 +1,8 @@
 (ns player-rankings.logic.database
   (:require [clojure.set :refer [difference intersection]]
-            [clojure.string :as string]
-            [clojurewerkz.neocons.rest :as nr]
+            [clojurewerkz.neocons.rest.cypher :as cypher]
             [clojurewerkz.neocons.rest.nodes :as nodes]
             [clojurewerkz.neocons.rest.labels :as labels]
-            [clojurewerkz.neocons.rest.cypher :as cypher]
             [clojurewerkz.neocons.rest.relationships :as relationships]
             [clojurewerkz.neocons.rest.transaction :as transaction]
             [clojure.data.json :as json]
@@ -13,8 +11,9 @@
             [schema.core :as s]
             [clj-time.coerce :as coerce-time]
             [clj-time.core :as time]
-            [player-rankings.secrets :refer [neo4j-username neo4j-password]]
             [player-rankings.profiling :refer [timed]]
+            [player-rankings.database.connection :refer [conn]]
+            [player-rankings.database.players :refer :all]
             [player-rankings.logic.rankings :as rankings]
             [player-rankings.logic.tournament-url-parser :as tournament-url-parser]
             [player-rankings.logic.tournament-constants :as constants]))
@@ -35,9 +34,6 @@
 (def Players
   [Player])
 
-(def conn (nr/connect
-           (str "http://" neo4j-username ":" neo4j-password "@localhost:7474/db/data/")))
-
 (defn- keys->keywords [coll]
   (into {} (for [[k v] coll] [(keyword k) v])))
 
@@ -52,45 +48,12 @@
         data (cypher/tquery conn query)]
     (map keys->keywords data)))
 
-(defnp get-players-for-rank-sorting []
-  (let [query (str "match (p:player) "
-                   "return id(p) as id, "
-                   "p.aliases as aliases, "
-                   "p.provisional_rating[0] as rating,"
-                   "p.provisional_rating[1] as stddev")
-        data (cypher/tquery conn query)]
-    (map keys->keywords data)))
-
 (defn- create-new-player-nodes [player-names]
   (let [query (str "unwind {names} as name "
                    "create (p:player {name: name, aliases: [name]}) "
                    "return id(p) as id, p.aliases as aliases")
         data (cypher/tquery conn query {:names player-names})]
     (map keys->keywords data)))
-
-(defn- remove-common-team-names [lowercased-player-name team-names]
-  (let [space-team-names (map #(str % " ") team-names)
-        i-team-names (map #(str % "i") space-team-names)
-        l-team-names (map #(str % "l") space-team-names)
-        strings-to-remove (concat i-team-names l-team-names space-team-names)]
-    (reduce (fn [acc team-name]
-              (if (.startsWith acc team-name)
-                (string/trim (string/replace-first acc team-name "")) acc))
-            lowercased-player-name strings-to-remove)))
-
-(defn normalize-name
-  ([player-name] (normalize-name player-name constants/team-names))
-  ([player-name team-names]
-   (-> player-name
-       (string/replace #"!" " ")
-       (string/replace #"_" " ")
-       (string/replace #"\(.*\)" "")
-       (string/split #"\|")
-       last
-       string/trim
-       string/lower-case
-       (remove-common-team-names team-names)
-       (string/replace #"\s" ""))))
 
 (defn- get-matching-player [player-name players]
   (some #(when (some (fn [existing-player-name]
@@ -112,52 +75,11 @@
                 {:matched matched :unmatched (conj unmatched player)}))
             {:matched [] :unmatched []} players)))
 
-(defn- merge-aliases [players]
-  (let [aliases (mapcat :aliases players)]
-    (reduce
-     (fn [acc alias]
-       (let [normalized-acc (map normalize-name acc)
-             normalized-alias (normalize-name alias)]
-         (if (some #(= normalized-alias %) normalized-acc)
-           acc
-           (conj acc alias)))) [] aliases)))
-
 (defn- pair-merge-nodes-from-list [players]
   (let [aliases (merge-aliases players)
         canon-id (-> players first :id)
         merge-ids (map :id (rest players))]
     (reduce #(conj %1 {:aid canon-id :bid %2 :aliases aliases}) [] merge-ids)))
-
-(defn- get-matching-players-from-alias-map
-  ([alias-map player] (get-matching-players-from-alias-map alias-map player (:aliases player)))
-  ([alias-map player aliases]
-   (let [normalized-aliases (map normalize-name aliases)
-         alias-to-check (first normalized-aliases)]
-     (cond
-       (empty? aliases) [player]
-       (contains? alias-map alias-to-check) (conj (alias-map alias-to-check) player)
-       :else (recur alias-map player (rest aliases))))))
-
-(defn- add-player-to-alias-map [alias-map player]
-  (let [matching-players (get-matching-players-from-alias-map alias-map player)
-        aliases (merge-aliases matching-players)]
-    (apply assoc (concat [alias-map]
-                         (interleave (map normalize-name aliases) (repeat matching-players))))))
-
-(defn- merge-in-alias-list [alias-map alias-list]
-  (let [normalized-aliases (map normalize-name alias-list)
-        matching-aliases (distinct (filter #(contains? alias-map %) normalized-aliases))
-        merged-players (distinct (mapcat #(get alias-map %) matching-aliases))]
-    (reduce #(assoc %1 %2 merged-players) alias-map matching-aliases)))
-
-(defn- merge-players-by-explicit-alias [alias-map]
-  (reduce (fn [coll alias-list]
-            (merge-in-alias-list coll alias-list))
-          alias-map constants/aliases))
-
-(defn create-alias-map [players]
-  (merge-players-by-explicit-alias
-   (reduce #(add-player-to-alias-map %1 %2) {} players)))
 
 (defn- create-merge-nodes-from-mergeable-players [mergeable-players]
   (let [players-to-merge (p :filter-empty-players (filter #(> (count %) 1) mergeable-players))]
@@ -204,20 +126,6 @@
   (-> (get-existing-players)
       create-merge-nodes
       merge-nodes-into-db))
-
-(defn get-players-by-name-for-rank-sorting [player-names]
-  (let [players (get-players-for-rank-sorting)
-        alias-map (create-alias-map players)]
-    (map (fn [player-name]
-           (let [normalized-name (normalize-name player-name)]
-             (if (contains? alias-map normalized-name)
-               (assoc (first (get alias-map normalized-name)) :name player-name :new false)
-               {:aliases [player-name]
-                :rating (:rating rankings/default-rating)
-                :stddev (:rd rankings/default-rating)
-                :name player-name
-                :new true})))
-         player-names)))
 
 (defnp filtered-crew-members [crew existing-players]
   (let [crew-scores (map #(get-matching-player % existing-players) crew)]
