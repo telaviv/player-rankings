@@ -205,7 +205,7 @@
       create-merge-nodes
       merge-nodes-into-db))
 
-(defn- get-players-by-name-for-rank-sorting [player-names]
+(defn get-players-by-name-for-rank-sorting [player-names]
   (let [players (get-players-for-rank-sorting)
         alias-map (create-alias-map players)]
     (map (fn [player-name]
@@ -218,20 +218,6 @@
                 :name player-name
                 :new true})))
          player-names)))
-
-(defn- normalize-player-scores [players]
-  (map (fn [{:keys [rating stddev] :as player}]
-         (let [min (- rating (* stddev 3))
-               max (+ rating (* stddev 3))]
-           (dissoc (assoc player :min min :max max) :rating :stddev :id)))
-       players))
-
-(defnp sort-player-names-by-cse [player-names]
-  (->> player-names
-       (get-players-by-name-for-rank-sorting)
-       (normalize-player-scores)
-       (sort-by :min)
-       (reverse)))
 
 (defnp filtered-crew-members [crew existing-players]
   (let [crew-scores (map #(get-matching-player % existing-players) crew)]

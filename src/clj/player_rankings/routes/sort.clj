@@ -3,7 +3,7 @@
             [clojure.data.json :as json]
             [compojure.core :refer [defroutes GET]]
             [clojure.java.io :as io]
-            [player-rankings.logic.database :refer [sort-player-names-by-cse]]))
+            [player-rankings.actions :refer [sort-player-names-by-cse]]))
 
 (defn sort-players [req]
   (let [players (json/read-str (get-in req [:params :players]))]
