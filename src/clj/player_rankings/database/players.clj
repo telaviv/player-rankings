@@ -103,5 +103,8 @@
                    "where id(a) = {aid} and id(b) = {bid} "
                    "return t.title as tournament, "
                    "pl.won as won, m.score as score, m.time as time "
-                   "order by time desc ")]
-    (cypher/tquery conn query {:aid (:id player1) :bid (:id player2)})))
+                   "order by time desc ")
+        matches (cypher/tquery conn query {:aid (:id player1) :bid (:id player2)})]
+    (->> matches
+         (map keys->keywords)
+         (filter #(-> % :score rankings/is-disqualifying-score not)))))
