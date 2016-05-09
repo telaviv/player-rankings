@@ -58,6 +58,7 @@
    "http://showdowngg.challonge.com/comeonandban55"
    "http://showdowngg.challonge.com/comeonandban56"
    "http://showdowngg.challonge.com/comeonandban57"
+   "http://showdowngg.challonge.com/comeonandban58"
    ])
 
 (def made
@@ -80,6 +81,7 @@
    "http://challonge.com/made17singles"
    "http://challonge.com/smash18singles"
    "http://challonge.com/smash19singles"
+   "http://challonge.com/MADE20singles"
    ])
 
 (def big-mamas-little-cup
