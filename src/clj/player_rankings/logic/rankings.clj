@@ -91,14 +91,17 @@
         player-ids (player-ids-from-matches matches)]
     (mapv #(group-match-by-id % player-ids) matches-by-period)))
 
-(defnp is-disqualifying-score [score]
+(defnp score-into-parts [score]
   (let [score-parts (-> score
                         (string/replace #"(-?\d)-(-?\d)" "$1 $2")
                         (string/split #" "))]
-    (->> score-parts
-         (map read-string)
+    (->> score-parts (map read-string))))
+
+(defnp is-disqualifying-score [score]
+    (->> score
+         (score-into-parts)
          (some #(< % 0))
-         (= true))))
+         (= true)))
 
 (defnp normalize-match-for-calculation [match player-scores]
   {:id (match "played_id")

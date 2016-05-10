@@ -97,6 +97,17 @@
                 :new true})))
          player-names)))
 
+(defn- normalize-score [score]
+  (let [score-parts (rankings/score-into-parts score)]
+    (string/join "-" [(apply max score-parts) (apply min score-parts)])))
+
+(defn- normalize-compared-match [match player1 player2]
+  {:tournament (:tournament match)
+   :time (:time match)
+   :score (normalize-score (:score match))
+   :winner (if (:won match) player1 player2)
+   :loser (if (:won match) player2 player1)})
+
 (defn compare-players [player1 player2]
   (let [query (str "match (a:player)-[pl:played]-(m:match), "
                    "(m)--(b:player), (m)--(t:tournament) "
@@ -107,4 +118,5 @@
         matches (cypher/tquery conn query {:aid (:id player1) :bid (:id player2)})]
     (->> matches
          (map keys->keywords)
-         (filter #(-> % :score rankings/is-disqualifying-score not)))))
+         (filter #(-> % :score rankings/is-disqualifying-score not))
+         (map #(normalize-compared-match % player1 player2)))))
