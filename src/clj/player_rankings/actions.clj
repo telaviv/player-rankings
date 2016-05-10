@@ -3,7 +3,9 @@
             [clj-time.local :as l]
             [taoensso.timbre.profiling :refer [defnp]]
             [player-rankings.database.players :as players]
-            [player-rankings.logic.database :as db]))
+            [player-rankings.logic.database :as db]
+            [player-rankings.logic.rankings :as rankings]))
+
 
 (defn- normalize-player-scores [players]
   (map (fn [{:keys [rating stddev] :as player}]
@@ -34,4 +36,6 @@
         (players/get-players-by-name-for-rank-sorting
          [player1-name, player2-name])
         matches (players/compare-players player1 player2)]
-    (map replace-time-with-date matches)))
+    {:players [player1 player2]
+     :matches (map replace-time-with-date matches)
+     :win-percentage (rankings/win-percentage player1 player2)}))
