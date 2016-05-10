@@ -1,5 +1,7 @@
 (ns player-rankings.actions
-  (:require [taoensso.timbre.profiling :refer [defnp]]
+  (:require [clj-time.core :as t]
+            [clj-time.local :as l]
+            [taoensso.timbre.profiling :refer [defnp]]
             [player-rankings.database.players :as players]
             [player-rankings.logic.database :as db]))
 
@@ -17,8 +19,19 @@
        (sort-by :min)
        (reverse)))
 
+(defn- timestamp-to-date [timestamp]
+  (let [local (l/to-local-date-time timestamp)
+        day (t/day local)
+        month (t/month local)
+        year (t/year local)]
+    (format "%d-%d-%d" day month year)))
+
+(defn- replace-time-with-date [match]
+  (dissoc (assoc match :date (timestamp-to-date (:time match))) :time))
+
 (defnp compare-players [player1-name player2-name]
   (let [[player1 player2]
         (players/get-players-by-name-for-rank-sorting
-         [player1-name, player2-name])]
-    (players/compare-players player1 player2)))
+         [player1-name, player2-name])
+        matches (players/compare-players player1 player2)]
+    (map replace-time-with-date matches)))

@@ -119,4 +119,4 @@
     (->> matches
          (map keys->keywords)
          (filter #(-> % :score rankings/is-disqualifying-score not))
-         (map #(normalize-compared-match % player1 player2)))))
+         (map #(normalize-compared-match % (:name player1) (:name player2))))))
