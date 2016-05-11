@@ -3,6 +3,7 @@
             [player-rankings.routes.home :refer [home-routes]]
             [player-rankings.routes.tournament :refer [tournament-routes]]
             [player-rankings.routes.sort :refer [sort-routes]]
+            [player-rankings.routes.compare :refer [compare-routes]]
             [player-rankings.middleware :refer [development-middleware production-middleware]]
             [player-rankings.session :as session]
             [compojure.route :as route]
@@ -72,6 +73,7 @@
         home-routes
         tournament-routes
         sort-routes
+        compare-routes
         base-routes)
       development-middleware
       production-middleware))

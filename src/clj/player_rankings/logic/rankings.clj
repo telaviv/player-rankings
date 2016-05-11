@@ -9,8 +9,6 @@
             org.goochjs.glicko2.Rating
             org.goochjs.glicko2.RatingPeriodResults))
 
-
-
 (def DEFAULT-VOLATILITY 0.06)
 (def DEFAULT-TAU 1.2)
 

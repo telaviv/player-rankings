@@ -26,7 +26,7 @@
         day (t/day local)
         month (t/month local)
         year (t/year local)]
-    (format "%d-%d-%d" day month year)))
+    (format "%d-%d-%d" month day year)))
 
 (defn- replace-time-with-date [match]
   (dissoc (assoc match :date (timestamp-to-date (:time match))) :time))
