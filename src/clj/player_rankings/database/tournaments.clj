@@ -7,7 +7,7 @@
             [taoensso.timbre :refer [spy info]]
             [taoensso.timbre.profiling :refer [defnp]]
             [player-rankings.database.connection :refer [conn]]
-            [player-rankings.database.players :refer [normalize-name]]
+            [player-rankings.database.players.read :refer [normalize-name]]
             [player-rankings.logic.database :refer :all]
             [player-rankings.logic.rankings :as rankings]
             [player-rankings.logic.tournament-url-parser :as tournament-url-parser]

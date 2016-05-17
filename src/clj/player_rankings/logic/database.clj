@@ -5,16 +5,12 @@
             [clojurewerkz.neocons.rest.labels :as labels]
             [clojurewerkz.neocons.rest.relationships :as relationships]
             [clojurewerkz.neocons.rest.transaction :as transaction]
-            [taoensso.timbre :refer [info]]
             [taoensso.timbre.profiling :refer [p defnp]]
             [schema.core :as s]
-            [clj-time.coerce :as coerce-time]
-            [clj-time.core :as time]
             [player-rankings.profiling :refer [timed]]
             [player-rankings.database.connection :refer [conn]]
-            [player-rankings.database.players :refer :all]
+            [player-rankings.database.players.read :refer :all]
             [player-rankings.logic.rankings :as rankings]
-            [player-rankings.logic.tournament-url-parser :as tournament-url-parser]
             [player-rankings.logic.tournament-constants :as constants]))
 
 (def Aliases [s/Str])
@@ -35,11 +31,6 @@
 
 (defn- keys->keywords [coll]
   (into {} (for [[k v] coll] [(keyword k) v])))
-
-(defn- create-tournament-node [tournament]
-  (let [query (str "create (t:tournament {data}) "
-                   "return id(t) as id")]
-    ((first (cypher/tquery conn query {:data tournament})) "id")))
 
 (defnp get-existing-players []
   (let [query (str "match (p:player) "

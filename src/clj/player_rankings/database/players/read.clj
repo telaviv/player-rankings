@@ -1,4 +1,4 @@
-(ns player-rankings.database.players
+(ns player-rankings.database.players.read
   (:require [clojure.string :as string]
             [clojurewerkz.neocons.rest.cypher :as cypher]
             [taoensso.timbre.profiling :refer [defnp]]
