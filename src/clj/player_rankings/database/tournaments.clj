@@ -11,17 +11,8 @@
             [player-rankings.logic.database :refer :all]
             [player-rankings.logic.rankings :as rankings]
             [player-rankings.logic.tournament-url-parser :as tournament-url-parser]
-            [player-rankings.logic.tournament-constants :as constants]))
-
-(defn- keys->keywords [coll]
-  (into {} (for [[k v] coll] [(keyword k) v])))
-
-(defn- create-new-player-nodes [player-names]
-  (let [query (str "unwind {names} as name "
-                   "create (p:player {name: name, aliases: [name]}) "
-                   "return id(p) as id, p.aliases as aliases")
-        data (cypher/tquery conn query {:names player-names})]
-    (map keys->keywords data)))
+            [player-rankings.logic.tournament-constants :as constants]
+            [player-rankings.utilities :refer [keys->keywords]]))
 
 (defn- create-player-nodes [matches]
   (let [first-players (map :player-one matches)
@@ -35,7 +26,7 @@
     {"score" (:scores match)
      "time" (:time match)
      "player_one" {"id" (:id player1-node) "won" (= 1 (:winner match))}
-     "player_two" {"id" (:id player2-node) "won" (= 2 (:winner match))}}))
+     "player_two" {"id" (:id player2-node) "won" (= 2 (:winner) match))}}))
 
 (defn- create-match-graphs [matches]
   (let [player-nodes (create-player-nodes matches)

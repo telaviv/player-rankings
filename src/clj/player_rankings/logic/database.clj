@@ -11,7 +11,8 @@
             [player-rankings.database.connection :refer [conn]]
             [player-rankings.database.players.read :refer :all]
             [player-rankings.logic.rankings :as rankings]
-            [player-rankings.logic.tournament-constants :as constants]))
+            [player-rankings.logic.tournament-constants :as constants]
+            [player-rankings.utilities :refer [keys->keywords]]))
 
 (def Aliases [s/Str])
 
@@ -28,9 +29,6 @@
 
 (def Players
   [Player])
-
-(defn- keys->keywords [coll]
-  (into {} (for [[k v] coll] [(keyword k) v])))
 
 (defnp get-existing-players []
   (let [query (str "match (p:player) "

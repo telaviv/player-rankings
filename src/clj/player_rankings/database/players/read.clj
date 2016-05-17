@@ -4,10 +4,8 @@
             [taoensso.timbre.profiling :refer [defnp]]
             [player-rankings.database.connection :refer [conn]]
             [player-rankings.logic.rankings :as rankings]
-            [player-rankings.logic.tournament-constants :as constants]))
-
-(defn- keys->keywords [coll]
-  (into {} (for [[k v] coll] [(keyword k) v])))
+            [player-rankings.logic.tournament-constants :as constants]
+            [player-rankings.utilities :refer [keys->keywords]]))
 
 (defn- remove-common-team-names [lowercased-player-name team-names]
   (let [space-team-names (map #(str % " ") team-names)
