@@ -5,9 +5,9 @@
             [clj-time.core :as time]
             [player-rankings.logic.tournament-constants :refer [tournament-urls
                                                                 test-urls]]
-            [player-rankings.logic.database :refer [load-tournaments
-                                                    load-new-tournaments
-                                                    update-player-data]]))
+            [player-rankings.database.tournaments :refer [load-tournaments
+                                                          load-new-tournaments
+                                                          update-player-data]]))
 
 
 (defn filter-tournament-date [year month day]
