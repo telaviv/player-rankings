@@ -8,6 +8,7 @@
             [taoensso.timbre.profiling :refer [defnp]]
             [player-rankings.database.connection :refer [conn]]
             [player-rankings.database.players.read :refer [normalize-name]]
+            [player-rankings.database.players.write :refer [create-new-player-nodes]]
             [player-rankings.logic.database :refer :all]
             [player-rankings.logic.rankings :as rankings]
             [player-rankings.logic.tournament-url-parser :as tournament-url-parser]
@@ -26,7 +27,7 @@
     {"score" (:scores match)
      "time" (:time match)
      "player_one" {"id" (:id player1-node) "won" (= 1 (:winner match))}
-     "player_two" {"id" (:id player2-node) "won" (= 2 (:winner) match))}}))
+     "player_two" {"id" (:id player2-node) "won" (= 2 (:winner match))}}))
 
 (defn- create-match-graphs [matches]
   (let [player-nodes (create-player-nodes matches)
