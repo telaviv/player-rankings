@@ -118,3 +118,17 @@
          (map keys->keywords)
          (filter #(-> % :score rankings/is-disqualifying-score not))
          (map #(normalize-compared-match % (:name player1) (:name player2))))))
+
+(defnp get-existing-players []
+  (let [query (str "match (p:player) "
+                   "return id(p) as id, p.aliases as aliases")
+        data (cypher/tquery conn query)]
+    (map keys->keywords data)))
+
+
+(defn get-matching-player [player-name players]
+  (some #(when (some (fn [existing-player-name]
+                       (= (normalize-name player-name)
+                          (normalize-name existing-player-name)))
+                     (map normalize-name (:aliases %))) %)
+        players))
