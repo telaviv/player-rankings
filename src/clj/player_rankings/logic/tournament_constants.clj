@@ -59,6 +59,7 @@
    "http://showdowngg.challonge.com/comeonandban56"
    "http://showdowngg.challonge.com/comeonandban57"
    "http://showdowngg.challonge.com/comeonandban58"
+   "http://showdowngg.challonge.com/comeonandban59"
    ])
 
 (def made
@@ -150,6 +151,7 @@
    "http://scusmash.challonge.com/ww26s4sings"
    "http://scusmash.challonge.com/ww27s4s"
    "http://scusmash.challonge.com/ww28s4s"
+   "http://scusmash.challonge.com/WW29s4s"
    ])
 
 (def gamerz-smash-labs
@@ -208,6 +210,7 @@
    "http://challonge.com/GUDWUS"
    "http://challonge.com/GUTWUS"
    "http://challonge.com/GUCWYWS"
+   "http://challonge.com/GUSS"
    ])
 
 (def ghost-at-dc
@@ -464,6 +467,8 @@
    "http://challonge.com/phoenixuprising34"
    "http://challonge.com/phoenixuprising35"
    "http://challonge.com/phoenixuprising36"
+   "http://challonge.com/phoenixuprising37"
+   "http://challonge.com/phoenixuprising38"
    ])
 
 (def super-south-bay-sundays
@@ -479,6 +484,9 @@
    "http://ssbs.challonge.com/ssbs114"
    "http://ssbs.challonge.com/SSBS12S4singles"
    "http://ssbs.challonge.com/ssbs13sm4shsingles"
+   "http://ssbs.challonge.com/SSBS14smash4Singles"
+   "http://ssbs.challonge.com/ssbs15s4s"
+   "http://ssbs.challonge.com/ssbs16s4s"
    ])
 
 (def simply-smashing
@@ -499,6 +507,8 @@
    "http://challonge.com/SSmashing16"
    "http://challonge.com/ssmashing17"
    "http://challonge.com/SSmashing18"
+   "http://challonge.com/SSmashing19"
+   "http://challonge.com/Ssmashing21"
    ])
 
 (def fair-fights
@@ -507,13 +517,17 @@
    "http://terrashockgg.challonge.com/FF2_WiiU"
    "http://terrashockgg.challonge.com/FF3_WiiU"
    "http://terrashockgg.challonge.com/FF4_WiiU"
-   "http://terrashockgg.challonge.com/FF5_WiiU"])
+   "http://terrashockgg.challonge.com/FF5_WiiU"
+   "http://terrashockgg.challonge.com/FF6_WiiU"
+   ])
 
 
 (def the-forge
   ["http://challonge.com/TheForge1"
    "http://challonge.com/HeatII"
-   "http://challonge.com/Forge3"])
+   "http://challonge.com/Forge3"
+   "http://challonge.com/Heat4"
+   ])
 
 (def smash-at-kin
   [
@@ -530,6 +544,8 @@
    "http://challonge.com/ESK_Singles"
    "http://challonge.com/ESK12"
    "http://challonge.com/ESK_13"
+   "http://challonge.com/ESK_14"
+   "http://challonge.com/ESK_15"
    ])
 
 (def e1337ent-smash-open
@@ -538,6 +554,16 @@
    "http://challonge.com/ESO_W3"
    "http://challonge.com/ESO_W4"
    "http://challonge.com/ESO_W5"
+   ])
+
+(def smash-at-gg
+  ["http://challonge.com/ESO_S1"
+   "http://challonge.com/ESO_S2"
+   "http://challonge.com/ESO_S3"
+   "http://challonge.com/ESGT_3"
+   "http://challonge.com/ESG_S4"
+   "http://challonge.com/ESO_S5"
+   "http://challonge.com/ESG_T5"
    ])
 
 (def smash-at-berkeley
@@ -556,7 +582,30 @@
    "http://sslsmash.challonge.com/dtjhsjsu10Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu12Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu13Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu14Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu15Smash4"
    ])
+
+(def super-slug-fighters
+  ["http://scfgc.challonge.com/superslugfighters_sm4sh"
+   "http://scfgc.challonge.com/ssb4_top32_ssf2"])
+
+(def fight-nights
+  [
+   "http://scfgc.challonge.com/ssb4_ranked_night_8"
+   "http://scfgc.challonge.com/ssb4_ranked_night_12"
+   "http://scfgc.challonge.com/ssb4_ranked_night_15"
+   "http://scfgc.challonge.com/ssb4_ranked_night_16"
+   "http://scfgc.challonge.com/ssb4_ranked_night_18"
+   "http://scfgc.challonge.com/ssb4_ranked_night_21"
+   "http://scfgc.challonge.com/ssb4_ranked_night_30"
+   "http://scfgc.challonge.com/ssb4_ranked_night_33"
+   "http://scfgc.challonge.com/ssb4_ranked_night_36"
+   "http://scfgc.challonge.com/ssb4_ranked_night_38"
+   "http://scfgc.challonge.com/ssbm_ranked_night_40"
+   "http://scfgc.challonge.com/ssb4_ranked_night_42"
+   ])
+
 
 (def miscellaneous-tournaments
   [
@@ -580,6 +629,9 @@
    "http://scusmash.challonge.com/s4weeniehut"
    "http://challonge.com/sass1sm4sh"
    "http://challonge.com/71jh912n"
+   "http://challonge.com/gamerzlaststopsingles"
+   "http://terrashockgg.challonge.com/PTS_WiiU"
+   "http://srs.challonge.com/SSS1T8"
    ])
 
 (def tournament-urls
@@ -608,12 +660,15 @@
           casa-del-fuego
           smash-at-kin
           e1337ent-smash-open
+          smash-at-gg
           smash-at-berkeley
           did-that-just-happen
           smash-boba-and-tea
           stiikx
           fair-fights
           smash-at-ronin
+          super-slug-fighters
+          fight-nights
           miscellaneous-tournaments))
 
 (def test-urls
