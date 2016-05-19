@@ -19,7 +19,7 @@
   (let [player (Rating. "player" rating-system)]
     (.setRating player (rating :rating))
     (.setRatingDeviation player (rating :rd))
-    (.setVolatility player (rating :volatility))
+    (.setVolatility player (rating :volatility)
     player))
 
 (defnp rating-to-map [rating-object]
@@ -145,7 +145,7 @@
                  :matches (concat (:matches acc) (:matches new-ratings))}))
             {:player-ratings initial-ratings :matches []} periods)))
 
-(defnp win-percentage [player1 player2]
+(defn win-percentage [player1 player2]
   (let [c (/ (* 3 (Math/pow (Math/log 10) 2)) (Math/pow (* 400 Math/PI) 2))]
     (/ 1 (+ 1 (Math/pow 10 (/ (- (:rating player2) (:rating player1))
                               (* 400 (Math/sqrt (+ 1 (* c

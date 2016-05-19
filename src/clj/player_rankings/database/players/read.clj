@@ -119,6 +119,26 @@
          (filter #(-> % :score rankings/is-disqualifying-score not))
          (map #(normalize-compared-match % (:name player1) (:name player2))))))
 
+(defnp compare-players-fast [player1 player2]
+  (let [query (str "match (a:player)-[:aliased_to]-(al:alias {name: {player1}}), "
+                   "(b:player)-[:aliased_to]-(bl:alias {name: {player2}}), "
+                   "(a)-[pl:played]-(m:match)-[:played]-(b), (m)-[:hosted]-(t:tournament) "
+                   "with {title: t.title, won: pl.won, score: m.score, time: m.time} as match, a, b "
+                   "order by m.time desc "
+                   "with collect(match) as matches, a, b "
+                   "return matches, "
+                   "{name: a.name, rating: a.provisional_rating[0], stddev: a.provisional_rating[1], "
+                   "aliases: a.aliases, volatility: a.provisional_rating[2]} as player1, "
+                   "{name: b.name, rating: b.provisional_rating[0], stddev: b.provisional_rating[1], "
+                   "aliases: b.aliases, volatility: b.provisional_rating[2]} as player2 ")
+        p1name (normalize-name player1)
+        p2name (normalize-name player2)
+        results (cypher/tquery conn query {:player1 p1name :player2 p2name})
+        {:keys [player1 player2 matches]} (-> results first keys->keywords)
+        nmatches (map #(normalize-compared-match % player1 player2) matches)
+        win-percentage (rankings/win-percentage player1 player2)]
+    {:player1 player1 :player2 player2 :matches nmatches :win-percentage win-percentage}))
+
 (defnp get-existing-players []
   (let [query (str "match (p:player) "
                    "return id(p) as id, p.aliases as aliases")

@@ -2,8 +2,7 @@
   (:require [clj-time.core :as t]
             [clj-time.local :as l]
             [taoensso.timbre.profiling :refer [defnp]]
-            [player-rankings.database.players :as players]
-            [player-rankings.logic.database :as db]
+            [player-rankings.database.players.read :as players]
             [player-rankings.logic.rankings :as rankings]))
 
 
@@ -39,3 +38,7 @@
     {:players [player1 player2]
      :matches (map replace-time-with-date matches)
      :win-percentage (rankings/win-percentage player1 player2)}))
+
+(defn test-compare-players [player1-name player2-name]
+  (compare-players player1-name player2-name)
+  (players/compare-players-fast player1-name player2-name))

@@ -618,9 +618,8 @@
 
 (def test-urls
   [
-   "http://showdowngg.challonge.com/comeonandban12singles"
-   "http://challonge.com/blu429"
-   "https://smash.gg/tournament/extra-life-charity-smash-4-tournament-presented-by-showdown"
+   "http://showdowngg.challonge.com/comeonandban21singles"
+   "http://showdowngg.challonge.com/comeonandban58"
    ])
 
 (def team-names
