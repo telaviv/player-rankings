@@ -107,24 +107,11 @@
    :winner (if (:won match) player1 player2)
    :loser (if (:won match) player2 player1)})
 
-(defn compare-players [player1 player2]
-  (let [query (str "match (a:player)-[pl:played]-(m:match), "
-                   "(m)--(b:player), (m)--(t:tournament) "
-                   "where id(a) = {aid} and id(b) = {bid} "
-                   "return t.title as tournament, "
-                   "pl.won as won, m.score as score, m.time as time "
-                   "order by time desc ")
-        matches (cypher/tquery conn query {:aid (:id player1) :bid (:id player2)})]
-    (->> matches
-         (map keys->keywords)
-         (filter #(-> % :score rankings/is-disqualifying-score not))
-         (map #(normalize-compared-match % (:name player1) (:name player2))))))
-
-(defnp compare-players-fast [player1 player2]
+(defnp compare-players [player1 player2]
   (let [query (str "match (a:player)-[:aliased_to]-(al:alias {name: {player1}}), "
                    "(b:player)-[:aliased_to]-(bl:alias {name: {player2}}), "
                    "(a)-[pl:played]-(m:match)-[:played]-(b), (m)-[:hosted]-(t:tournament) "
-                   "with {title: t.title, won: pl.won, score: m.score, time: m.time} as match, a, b "
+                   "with {tournament: t.title, won: pl.won, score: m.score, time: m.time} as match, a, b "
                    "order by m.time desc "
                    "with collect(match) as matches, a, b "
                    "return matches, "

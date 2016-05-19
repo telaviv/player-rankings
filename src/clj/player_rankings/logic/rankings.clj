@@ -19,7 +19,7 @@
   (let [player (Rating. "player" rating-system)]
     (.setRating player (rating :rating))
     (.setRatingDeviation player (rating :rd))
-    (.setVolatility player (rating :volatility)
+    (.setVolatility player (rating :volatility))
     player))
 
 (defnp rating-to-map [rating-object]

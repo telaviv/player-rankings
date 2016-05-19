@@ -29,16 +29,3 @@
 
 (defn- replace-time-with-date [match]
   (dissoc (assoc match :date (timestamp-to-date (:time match))) :time))
-
-(defnp compare-players [player1-name player2-name]
-  (let [[player1 player2]
-        (players/get-players-by-name-for-rank-sorting
-         [player1-name, player2-name])
-        matches (players/compare-players player1 player2)]
-    {:players [player1 player2]
-     :matches (map replace-time-with-date matches)
-     :win-percentage (rankings/win-percentage player1 player2)}))
-
-(defn test-compare-players [player1-name player2-name]
-  (compare-players player1-name player2-name)
-  (players/compare-players-fast player1-name player2-name))
