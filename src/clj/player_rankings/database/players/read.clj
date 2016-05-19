@@ -1,8 +1,9 @@
 (ns player-rankings.database.players.read
-  (:require [clojure.string :as string]
+  (:require [clojure.set :refer [difference]]
+            [clojure.string :as string]
             [clojurewerkz.neocons.rest.cypher :as cypher]
             [taoensso.timbre.profiling :refer [defnp]]
-            [player-rankings.database.connection :refer [conn]]
+            [player-rankings.database.connection :refer [conn cquery]]
             [player-rankings.logic.rankings :as rankings]
             [player-rankings.logic.tournament-constants :as constants]
             [player-rankings.utilities :refer [keys->keywords]]))
@@ -139,12 +140,21 @@
         win-percentage (rankings/win-percentage player1 player2)]
     {:player1 player1 :player2 player2 :matches nmatches :win-percentage win-percentage}))
 
+(defnp find-missing-players [players]
+  (let [query (str "unwind {players} as player "
+                   "match (a:alias {name: player}) "
+                   "return collect(a.name) as names")
+        normalized (map normalize-name players)
+        nmap (zipmap normalized players)
+        results (-> (cquery query {:players normalized}) first :names)
+        missing (difference (set normalized) (set results))]
+    (map #(get nmap %) missing)))
+
 (defnp get-existing-players []
   (let [query (str "match (p:player) "
                    "return id(p) as id, p.aliases as aliases")
         data (cypher/tquery conn query)]
     (map keys->keywords data)))
-
 
 (defn get-matching-player [player-name players]
   (some #(when (some (fn [existing-player-name]
