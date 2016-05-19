@@ -107,10 +107,17 @@
    :winner (if (:won match) player1 player2)
    :loser (if (:won match) player2 player1)})
 
+(defn- normalize-matches [matches player1 player2]
+  (comment "in the case of no matches this is the weird monstrosity we get.")
+  (if (= matches [{:tournament nil, :won nil, :score nil, :time nil}])
+    []
+    (map #(normalize-compared-match % player1 player2) matches)))
+
 (defnp compare-players [player1 player2]
-  (let [query (str "match (a:player)-[:aliased_to]-(al:alias {name: {player1}}), "
-                   "(b:player)-[:aliased_to]-(bl:alias {name: {player2}}), "
-                   "(a)-[pl:played]-(m:match)-[:played]-(b), (m)-[:hosted]-(t:tournament) "
+  (let [query (str "match (a:player)-[:aliased_to]-(:alias {name: {player1}}), "
+                   "(b:player)-[:aliased_to]-(:alias {name: {player2}}) "
+                   "with a, b "
+                   "optional match (a)-[pl:played]-(m:match)-[:played]-(b), (m)-[:hosted]-(t:tournament) "
                    "with {tournament: t.title, won: pl.won, score: m.score, time: m.time} as match, a, b "
                    "order by m.time desc "
                    "with collect(match) as matches, a, b "
@@ -121,9 +128,9 @@
                    "aliases: b.aliases, volatility: b.provisional_rating[2]} as player2 ")
         p1name (normalize-name player1)
         p2name (normalize-name player2)
-        results (cypher/tquery conn query {:player1 p1name :player2 p2name})
+        results (cquery query {:player1 p1name :player2 p2name})
         {:keys [player1 player2 matches]} (-> results first keys->keywords)
-        nmatches (map #(normalize-compared-match % player1 player2) matches)
+        nmatches (normalize-matches matches player1 player2)
         win-percentage (rankings/win-percentage player1 player2)]
     {:player1 player1 :player2 player2 :matches nmatches :win-percentage win-percentage}))
 
