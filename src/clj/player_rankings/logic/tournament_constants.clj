@@ -60,6 +60,7 @@
    "http://showdowngg.challonge.com/comeonandban57"
    "http://showdowngg.challonge.com/comeonandban58"
    "http://showdowngg.challonge.com/comeonandban59"
+   "http://showdowngg.challonge.com/comeonandban60"
    ])
 
 (def made
