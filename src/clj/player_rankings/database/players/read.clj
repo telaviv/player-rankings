@@ -120,7 +120,7 @@
                    "optional match (a)-[pl:played]-(m:match)-[:played]-(b), (m)-[:hosted]-(t:tournament) "
                    "with {tournament: t.title, won: pl.won, score: m.score, time: m.time} as match, a, b "
                    "order by m.time desc "
-                   "with collect(match) as matches, a, b "
+                   "with collect(distinct match) as matches, a, b "
                    "return matches, "
                    "{name: a.name, rating: a.provisional_rating[0], stddev: a.provisional_rating[1], "
                    "aliases: a.aliases, volatility: a.provisional_rating[2]} as player1, "
