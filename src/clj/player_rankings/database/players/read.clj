@@ -104,8 +104,8 @@
   {:tournament (:tournament match)
    :time (:time match)
    :score (normalize-score (:score match))
-   :winner (if (:won match) player1 player2)
-   :loser (if (:won match) player2 player1)})
+   :winner (if (:won match) (:name player1) (:name player2))
+   :loser (if (:won match) (:name player2) (:name player1))})
 
 (defn- normalize-matches [matches player1 player2]
   (comment "in the case of no matches this is the weird monstrosity we get.")
