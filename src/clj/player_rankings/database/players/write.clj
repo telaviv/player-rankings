@@ -2,7 +2,7 @@
   (:require [clojure.set :refer [intersection]]
             [clojurewerkz.neocons.rest.cypher :as cypher]
             [schema.core :as s]
-            [player-rankings.database.connection :refer [conn]]
+            [player-rankings.database.connection :refer [conn cquery]]
             [player-rankings.database.players.read :as players]
             [player-rankings.logic.tournament-constants :as constants]
             [player-rankings.utilities :refer [keys->keywords]]
@@ -94,7 +94,16 @@
   (let [partitioned-players (partition-by-mergeable-players players)]
     (create-merge-nodes-from-mergeable-players partitioned-players)))
 
+(defnp delete-empty-players []
+  (cquery (str "match (p:player) "
+               "where size((p)-[:played]-()) = 0 "
+               "with p "
+               "match (p)-[pa:participated]-(), "
+               "(p)-[al:aliased_to]-() "
+               "delete p, pa, al ")))
+
 (defnp merge-player-nodes []
+  (delete-empty-players)
   (-> (players/get-existing-players)
       create-merge-nodes
       merge-nodes-into-db))

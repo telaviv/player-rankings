@@ -73,6 +73,16 @@
   (merge-players-by-explicit-alias
    (reduce #(add-player-to-alias-map %1 %2) {} players)))
 
+(defnp find-missing-players [players]
+  (let [query (str "unwind {players} as player "
+                   "match (a:alias {name: player}) "
+                   "return collect(a.name) as names")
+        normalized (map normalize-name players)
+        nmap (zipmap normalized players)
+        results (-> (cquery query {:players normalized}) first :names)
+        missing (difference (set normalized) (set results))]
+    (map #(get nmap %) missing)))
+
 (defnp get-players-for-rank-sorting []
   (let [query (str "match (p:player) "
                    "return id(p) as id, "
@@ -176,16 +186,6 @@
         nmatches (normalize-matches matches player1 player2)
         win-percentage (rankings/win-percentage player1 player2)]
     {:player1 player1 :player2 player2 :matches nmatches :win-percentage win-percentage}))
-
-(defnp find-missing-players [players]
-  (let [query (str "unwind {players} as player "
-                   "match (a:alias {name: player}) "
-                   "return collect(a.name) as names")
-        normalized (map normalize-name players)
-        nmap (zipmap normalized players)
-        results (-> (cquery query {:players normalized}) first :names)
-        missing (difference (set normalized) (set results))]
-    (map #(get nmap %) missing)))
 
 (defnp get-existing-players []
   (let [query (str "match (p:player) "

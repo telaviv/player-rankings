@@ -674,8 +674,8 @@
 
 (def test-urls
   [
-   "http://showdowngg.challonge.com/comeonandban21singles"
-   "http://showdowngg.challonge.com/comeonandban58"
+   "http://showdowngg.challonge.com/comeonandban60"
+   "http://ssbs.challonge.com/ssbs13sm4shsingles"
    ])
 
 (def team-names

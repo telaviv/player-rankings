@@ -9,5 +9,6 @@
 
 (cypher/tquery conn "create constraint on (a:alias) assert a.name is unique")
 
-(defn cquery [query values]
-  (keys->keywords (cypher/tquery conn query values)))
+(defn cquery
+  ([query] (cquery query {}))
+  ([query values] (keys->keywords (cypher/tquery conn query values))))
