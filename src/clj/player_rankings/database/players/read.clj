@@ -22,7 +22,6 @@
   ([player-name] (normalize-name player-name constants/team-names))
   ([player-name team-names]
    (-> player-name
-       (string/replace #"!" " ")
        (string/replace #"_" " ")
        (string/replace #"\(.*\)" "")
        (string/split #"\|")
