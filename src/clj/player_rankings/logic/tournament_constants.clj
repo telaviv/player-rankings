@@ -470,6 +470,7 @@
    "http://challonge.com/phoenixuprising36"
    "http://challonge.com/phoenixuprising37"
    "http://challonge.com/phoenixuprising38"
+   "http://challonge.com/phoenixuprising39"
    ])
 
 (def super-south-bay-sundays
@@ -547,6 +548,7 @@
    "http://challonge.com/ESK_13"
    "http://challonge.com/ESK_14"
    "http://challonge.com/ESK_15"
+   "http://challonge.com/ESK16"
    ])
 
 (def e1337ent-smash-open
@@ -633,6 +635,7 @@
    "http://challonge.com/gamerzlaststopsingles"
    "http://terrashockgg.challonge.com/PTS_WiiU"
    "http://srs.challonge.com/SSS1T8"
+   "http://challonge.com/WTC1"
    ])
 
 (def tournament-urls
