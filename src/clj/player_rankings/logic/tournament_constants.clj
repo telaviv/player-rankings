@@ -764,7 +764,6 @@
    ["3rdEyeVision" "3rd EyeVission"]
    ["Blank" "Blanky"]
    ["Myro" "Myron"]
-   ["Three" "Three!"]
    ["Nik64" "Nick64"]
    ["Glacer" "Glacier"]
    ["Gmo Skee" "G-Mo Skee"]
@@ -855,7 +854,7 @@
    ["Trex Destiny" "T-Rex Destiny" "Jae Pea" "T-Rex"]
    ["AwesomeTheSauce" "AwesomeSauce"]
    ["Sinister" "NitN"]
-   ["Zoom" "Three"]
+   ["Zoom" "Three" "Three!"]
    ["Villain" "Villian"]])
 
 (def january-power-ranks
