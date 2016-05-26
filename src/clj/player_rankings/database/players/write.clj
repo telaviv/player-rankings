@@ -101,8 +101,9 @@
 
 (defn create-new-player-nodes [player-names]
   (let [query (str "unwind {records} as record "
+                   "merge (a:alias {name: record.normalized}) "
                    "create (p:player {name: record.name, aliases: [record.name]}) "
-                   "create (a:alias {name: record.normalized})<-[:aliased_to]-(p) "
+                   "create (p)-[:aliased_to]->(a) "
                    "return id(p) as id, p.aliases as aliases")
         normalized-names (map players/normalize-name player-names)
         records (map (fn [p n] {:name p :normalized n}) player-names normalized-names)

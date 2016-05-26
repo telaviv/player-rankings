@@ -29,3 +29,7 @@
 
 (defn- replace-time-with-date [match]
   (dissoc (assoc match :date (timestamp-to-date (:time match))) :time))
+
+(defnp test-player-sorting [player-names]
+  (sort-player-names-by-cse [player-names])
+  (players/sort-players-by-cse [player-names]))

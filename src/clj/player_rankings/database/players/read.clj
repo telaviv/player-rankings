@@ -96,6 +96,49 @@
                 :new true})))
          player-names)))
 
+(defn- get-existing-player-data [names]
+  (comment "not guaranteed to be sorted")
+  (let [query (str "match (p:player)-[:aliased_to]-(al:alias) "
+                   "where al.name in {names} "
+                   "return al.name as normalized, "
+                   "p.provisional_rating[0] as rating,"
+                   "p.provisional_rating[1] as stddev")
+        normalized (map normalize-name names)
+        alias-map (zipmap normalized names)
+        data (cquery query {:names normalized})]
+    (map (fn [player]
+           {:name (get alias-map (:normalized player))
+            :rating (:rating player)
+            :stddev (:stddev player)
+            :new false})
+         data)))
+
+(defn- new-player [name]
+  {:rating (:rating rankings/default-rating)
+   :stddev (:rd rankings/default-rating)
+   :name name
+   :new true})
+
+(defn- load-player-data-by-name [names]
+  (let [missing-players (find-missing-players names)
+        existing-players (difference (set names) (set missing-players))]
+    (concat (get-existing-player-data existing-players)
+            (map new-player missing-players))))
+
+(defn- transform-scores-to-cse [players]
+  (map (fn [{:keys [rating stddev] :as player}]
+         (let [min (- rating (* stddev 3))
+               max (+ rating (* stddev 3))]
+           (dissoc (assoc player :min min :max max) :rating :stddev)))
+       players))
+
+(defnp sort-players-by-cse [names]
+  (->> names
+       (load-player-data-by-name)
+       (transform-scores-to-cse)
+       (sort-by :min)
+       (reverse)))
+
 (defn- normalize-score [score]
   (let [score-parts (rankings/score-into-parts score)]
     (string/join "-" [(apply max score-parts) (apply min score-parts)])))
