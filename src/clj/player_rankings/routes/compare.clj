@@ -19,7 +19,7 @@
         errors (validate-players player1 player2)]
     (if (empty? errors)
       {:status 200 :body (players/compare-players player1 player2)}
-      {:status 403 :body {:errors errors}})))
+      {:status 400 :body {:errors errors}})))
 
 (defroutes compare-routes
   (GET "/compare" req (compare-players-response req)))

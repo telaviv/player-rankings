@@ -61,6 +61,7 @@
    "http://showdowngg.challonge.com/comeonandban58"
    "http://showdowngg.challonge.com/comeonandban59"
    "http://showdowngg.challonge.com/comeonandban60"
+   "http://showdowngg.challonge.com/comeonandban61"
    ])
 
 (def made
@@ -471,6 +472,7 @@
    "http://challonge.com/phoenixuprising37"
    "http://challonge.com/phoenixuprising38"
    "http://challonge.com/phoenixuprising39"
+   "http://challonge.com/phoenixuprising40"
    ])
 
 (def super-south-bay-sundays
@@ -489,6 +491,7 @@
    "http://ssbs.challonge.com/SSBS14smash4Singles"
    "http://ssbs.challonge.com/ssbs15s4s"
    "http://ssbs.challonge.com/ssbs16s4s"
+   "http://ssbs.challonge.com/ssbs17s4s"
    ])
 
 (def simply-smashing
@@ -511,6 +514,7 @@
    "http://challonge.com/SSmashing18"
    "http://challonge.com/SSmashing19"
    "http://challonge.com/Ssmashing21"
+   "http://challonge.com/Ssmashing22"
    ])
 
 (def fair-fights
@@ -567,6 +571,7 @@
    "http://challonge.com/ESG_S4"
    "http://challonge.com/ESO_S5"
    "http://challonge.com/ESG_T5"
+   "http://challonge.com/ESO_S6"
    ])
 
 (def smash-at-berkeley
