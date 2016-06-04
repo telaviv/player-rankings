@@ -2,6 +2,7 @@
   (:require [clojure.set :refer [difference]]
             [clojure.string :as string]
             [clojurewerkz.neocons.rest.cypher :as cypher]
+            [taoensso.timbre :refer [spy]]
             [taoensso.timbre.profiling :refer [defnp]]
             [player-rankings.database.connection :refer [conn cquery]]
             [player-rankings.logic.rankings :as rankings]
@@ -155,25 +156,26 @@
 (defn- normalize-compared-match [match player1 player2]
   {:tournament (:tournament match)
    :time (:time match)
+   :id (:id match)
    :score (normalize-score (:score match))
    :winner (if (:won match) (:name player1) (:name player2))
    :loser (if (:won match) (:name player2) (:name player1))})
 
 (defn- normalize-matches [matches player1 player2]
-  (comment "in the case of no matches this is the weird monstrosity we get.")
-  (if (= matches [{:tournament nil, :won nil, :score nil, :time nil}])
-    []
-    (map #(normalize-compared-match % player1 player2) matches)))
+  (map #(normalize-compared-match % player1 player2) matches))
 
 (defnp compare-players [player1 player2]
   (let [query (str "match (a:player)-[:aliased_to]-(:alias {name: {player1}}), "
                    "(b:player)-[:aliased_to]-(:alias {name: {player2}}) "
                    "with a, b "
                    "optional match (a)-[pl:played]-(m:match)-[:played]-(b), (m)-[:hosted]-(t:tournament) "
-                   "with {tournament: t.title, won: pl.won, score: m.score, time: m.time} as match, a, b "
+                   "with {tournament: t.title, won: pl.won, score: m.score, "
+                   "time: m.time, id: id(m)} as match, a, b "
                    "order by m.time desc "
                    "with collect(distinct match) as matches, a, b "
-                   "return matches, "
+                   "return "
+                   "case when matches[0]['id'] is null then [] "
+                   "else matches end as matches, "
                    "{name: a.name, rating: a.provisional_rating[0], stddev: a.provisional_rating[1], "
                    "aliases: a.aliases, volatility: a.provisional_rating[2]} as player1, "
                    "{name: b.name, rating: b.provisional_rating[0], stddev: b.provisional_rating[1], "

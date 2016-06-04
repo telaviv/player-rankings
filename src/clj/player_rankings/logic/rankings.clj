@@ -90,6 +90,7 @@
     (mapv #(group-match-by-id % player-ids) matches-by-period)))
 
 (defnp score-into-parts [score]
+  (assert (-> score nil? not))
   (let [score-parts (-> score
                         (string/replace #"(-?\d)-(-?\d)" "$1 $2")
                         (string/split #" "))]
