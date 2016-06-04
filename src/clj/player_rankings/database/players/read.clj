@@ -83,6 +83,14 @@
         missing (difference (set normalized) (set results))]
     (map #(get nmap %) missing)))
 
+(defnp same-player? [p1 p2]
+  (let [query (str "match (al:alias)-[:aliased_to]-(p:player)-[:aliased_to]-(bl:alias) "
+                   "where al.name in {players} and bl.name in {players} "
+                   "return count(*) as same ")
+        players (map normalize-name [p1 p2])
+        result (-> (cquery query {:players players}) first :same)]
+    (not (= result 0))))
+
 (defnp get-players-for-rank-sorting []
   (let [query (str "match (p:player) "
                    "return id(p) as id, "
