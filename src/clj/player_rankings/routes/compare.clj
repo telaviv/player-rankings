@@ -5,7 +5,7 @@
             [clojure.java.io :as io]
             [player-rankings.database.players.read :as players]))
 
-(defn- validate-players [player1 player2]
+(defn- missing-players-error [player1 player2]
   (let [missing-players (players/find-missing-players [player1 player2])]
     (reduce (fn [err player]
               (let [key (condp = player
@@ -13,6 +13,17 @@
                           player2 :player2)]
                 (assoc err key {:msg (str "We found no record of " player)})))
             {} missing-players)))
+
+(defn- same-player-error [player1 player2]
+  (if (players/same-player? player1 player2)
+    {:_error {:msg (str player1 " and " player2 " are the same player.")}}
+    {}))
+
+(defn- validate-players [player1 player2]
+  (let [error1 (missing-players-error player1 player2)]
+    (if (empty? error1)
+      (same-player-error player1 player2)
+      error1)))
 
 (defn compare-players-response [req]
   (let [{:keys [player1 player2]} (:params req)
