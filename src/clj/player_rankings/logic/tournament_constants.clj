@@ -62,6 +62,7 @@
    "http://showdowngg.challonge.com/comeonandban59"
    "http://showdowngg.challonge.com/comeonandban60"
    "http://showdowngg.challonge.com/comeonandban61"
+   "http://showdowngg.challonge.com/comeonandban62"
    ])
 
 (def made
@@ -85,6 +86,7 @@
    "http://challonge.com/smash18singles"
    "http://challonge.com/smash19singles"
    "http://challonge.com/MADE20singles"
+   "http://challonge.com/MADE21singles"
    ])
 
 (def big-mamas-little-cup
@@ -109,6 +111,13 @@
    "http://challonge.com/BMLH6"
    "http://challonge.com/BMLHTR"
    "http://challonge.com/BMLH42"
+   "http://srs.challonge.com/BMLH43"
+   "http://srs.challonge.com/BMLH44"
+   "http://srs.challonge.com/BMLH46"
+   "http://srs.challonge.com/BMLH47"
+   "http://srs.challonge.com/BMLH48"
+   "http://srs.challonge.com/BMLH49"
+   "http://srs.challonge.com/BMLH50"
    ])
 
 (def big-mamas-off-season
@@ -284,6 +293,7 @@
   [
    "http://challonge.com/ESR_1"
    "http://challonge.com/ESR_2"
+   "http://challonge.com/ESR_3"
    ])
 
 (def versus
@@ -350,6 +360,21 @@
    {:url "http://brackets.godlikecombo.com/#!/sm4sh28"
     :date (t/date-time 2016 2 23)
     :title "Versus Revival - Sm4sh Singles ep 28"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh29"
+    :date (t/date-time 2016 4 25)
+    :title "Versus Revival ep 29"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh30"
+    :date (t/date-time 2016 5 2)
+    :title "Versus Revival ep 30"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh31"
+    :date (t/date-time 2016 5 2)
+    :title "Versus Revival ep 31"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh33"
+    :date (t/date-time 2016 5 23)
+    :title "Versus Revival ep 33"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh34"
+    :date (t/date-time 2016 5 30)
+    :title "Versus Revival ep 34"}
    ])
 
 (def rise-at-ssf
@@ -614,9 +639,68 @@
    "http://scfgc.challonge.com/ssb4_ranked_night_42"
    ])
 
+(def beta-blast
+  [
+   "http://challonge.com/betaboyz"
+   "http://challonge.com/Betaz"
+   "http://challonge.com/Betazs"
+   "http://challonge.com/betablast4"
+   "http://challonge.com/Betablast5"
+   "http://challonge.com/Hddghutt"
+   ])
+
+(def solitude-smash
+  [
+   "http://challonge.com/GameNightsSSB4"
+   "http://challonge.com/SoSsmash4"
+   "http://challonge.com/Smashshore3singles"
+   ])
+
+(def smash-4-cash
+  [
+   "http://apstournaments.challonge.com/s4c8smash4"
+   "http://apstournaments.challonge.com/s4c9smash4"
+   ])
+
+(def battleground-wii-u
+  [
+   "http://challonge.com/BGwiiU"
+   "http://challonge.com/BGWiiU2"
+   "http://challonge.com/BGWiiU3"
+   "http://challonge.com/BGWiiU4"
+   "http://challonge.com/BGWiiU5"
+   "http://challonge.com/BGWiiU6"
+   "http://challonge.com/BGWiiU7"
+   "http://challonge.com/BGWiiU8"
+   "http://challonge.com/BGWiiU9"
+   "http://challonge.com/BGWiiU10"
+   "http://challonge.com/BGWiiU11"
+   "http://challonge.com/BGWiiU12"
+   "http://challonge.com/BGWiiU13"
+   "http://challonge.com/BGWiiU14"
+   "http://challonge.com/BGWiiU15"
+   "http://challonge.com/BGWiiU16"
+   "http://challonge.com/BGWiiU17"
+   "http://challonge.com/BGWiiU18"
+   "http://challonge.com/BGWiiU19"
+   "http://challonge.com/BGWiiU20"
+   "http://challonge.com/BGWiiU21"
+   "http://challonge.com/BGWiiU22"
+   "http://challonge.com/BGWiiU23"
+   "http://challonge.com/BGWiiU24"
+   "http://challonge.com/BGWiiU025"
+   "http://challonge.com/BGWiiU26"
+   "http://challonge.com/BGWiiU27"
+   "http://challonge.com/BGWiiU28"
+   "http://challonge.com/BGWiiU29"
+   ])
+
+
 
 (def miscellaneous-tournaments
   [
+   "http://challonge.com/NorCow"
+   "http://challonge.com/spudsmashsingles"
    "http://challonge.com/surfcityslamsinglesPRO"
    "http://challonge.com/minibosssmash4singles2"
    "http://bko.challonge.com/BMS4S"
@@ -639,8 +723,10 @@
    "http://challonge.com/71jh912n"
    "http://challonge.com/gamerzlaststopsingles"
    "http://terrashockgg.challonge.com/PTS_WiiU"
+   "http://srs.challonge.com/SSS1"
    "http://srs.challonge.com/SSS1T8"
    "http://challonge.com/WTC1"
+   "http://surfcityslam.challonge.com/Top48"
    ])
 
 (def tournament-urls
@@ -664,6 +750,7 @@
           pheonix-uprising
           super-south-bay-sundays
           simply-smashing
+          beta-blast
           the-forge
           rise-at-ssf
           casa-del-fuego
@@ -678,6 +765,7 @@
           smash-at-ronin
           super-slug-fighters
           fight-nights
+          battleground-wii-u
           miscellaneous-tournaments))
 
 (def test-urls
