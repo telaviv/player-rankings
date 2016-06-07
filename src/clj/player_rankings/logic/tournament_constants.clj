@@ -727,6 +727,7 @@
    "http://srs.challonge.com/SSS1T8"
    "http://challonge.com/WTC1"
    "http://surfcityslam.challonge.com/Top48"
+   "http://challonge.com/wyp1singles"
    ])
 
 (def tournament-urls
@@ -833,11 +834,13 @@
    ["Dong Dong Never Die" "Dong Dong Never Dies"]
    ["Dr. Grin" "Dr. Grim"]
    ["Toon" "418"]
+   ["Agape" "SP Agape"]
    ["Tucan" "Tucan'"]
    ["Yes2DaKing" "Yes_To_The_King"]
    ["mMmK4rma" "mMm-k4rma" "K4rma"]
    ["Saucy McYolo" "SauceyMcYolo"]
    ["StarWarriorChris" "StarWariorChris"]
+   ["~fade" "fade~"]
    ["DunkinLikeJordan" "Dunken like Jordan" "Dunking Like Jordan"]
    ["EUEE" "EUEE_D2"]
    ["Electric Soldier" "Electric Solider"]
