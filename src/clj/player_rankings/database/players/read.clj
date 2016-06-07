@@ -196,6 +196,18 @@
         win-percentage (rankings/win-percentage player1 player2)]
     {:player1 player1 :player2 player2 :matches nmatches :win-percentage win-percentage}))
 
+(defnp player-history [player]
+  (let [query (str "match (al:alias {name: {name}})-[:aliased_to]-(p:player)-[pl:played]-(m:match), "
+                   "(m)--(t:tournament), (m)-[plo:played]-(o:player) "
+                   "with p, {tournament: t.title, won: pl.won, score: m.score, time: m.time, "
+                   "id: id(m), opponent: o.name} as match "
+                   "order by match.time desc "
+                   "return {name: p.name, rating: p.provisional_rating[0], stddev: p.provisional_rating[1], "
+                   "aliases: p.aliases, volatility: p.provisional_rating[2]} as player, "
+                   "collect(match) as matches ")
+        normalized (normalize-name player)]
+    (first (cquery query {:name normalized}))))
+
 (defnp get-existing-players []
   (let [query (str "match (p:player) "
                    "return id(p) as id, p.aliases as aliases")
