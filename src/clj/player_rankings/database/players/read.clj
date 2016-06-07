@@ -164,6 +164,13 @@
   (let [score-parts (rankings/score-into-parts score)]
     (string/join "-" [(apply max score-parts) (apply min score-parts)])))
 
+(defn- rearrange-score-for-player [match]
+  (let [score-parts (rankings/score-into-parts (:score match))
+        big (apply max score-parts)
+        little (apply min score-parts)
+        score-parts-arranged (if (:won match) [big little] [little big])]
+    (assoc match :score (string/join "-" score-parts-arranged))))
+
 (defn- normalize-compared-match [match player1 player2]
   {:tournament (:tournament match)
    :time (:time match)
@@ -174,6 +181,11 @@
 
 (defn- normalize-matches [matches player1 player2]
   (map #(normalize-compared-match % player1 player2) matches))
+
+(defn filter-disqualifications [matches]
+  (filter (fn [match]
+            (not (rankings/is-disqualifying-score (:score match))))
+          matches))
 
 (defnp compare-players [player1 player2]
   (let [query (str "match (a:player)-[:aliased_to]-(:alias {name: {player1}}), "
@@ -195,6 +207,7 @@
         p2name (normalize-name player2)
         results (cquery query {:player1 p1name :player2 p2name})
         {:keys [player1 player2 matches]} (-> results first keys->keywords)
+        matches (filter-disqualifications matches)
         nmatches (normalize-matches matches player1 player2)
         win-percentage (rankings/win-percentage player1 player2)]
     {:player1 player1 :player2 player2 :matches nmatches :win-percentage win-percentage}))
@@ -208,8 +221,10 @@
                    "return {name: p.name, rating: p.provisional_rating[0], stddev: p.provisional_rating[1], "
                    "aliases: p.aliases, volatility: p.provisional_rating[2]} as player, "
                    "collect(match) as matches ")
-        normalized (normalize-name player)]
-    (first (cquery query {:name normalized}))))
+        normalized (normalize-name player)
+        {:keys [player matches]} (first (cquery query {:name normalized}))
+        matches (map rearrange-score-for-player (filter-disqualifications matches))]
+    {:player player :matches matches}))
 
 (defnp get-existing-players []
   (let [query (str "match (p:player) "
