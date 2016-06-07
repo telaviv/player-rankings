@@ -83,6 +83,9 @@
         missing (difference (set normalized) (set results))]
     (map #(get nmap %) missing)))
 
+(defnp player-exists? [player]
+  (= 0 (count (find-missing-players [player]))))
+
 (defnp same-player? [p1 p2]
   (let [query (str "match (al:alias)-[:aliased_to]-(p:player)-[:aliased_to]-(bl:alias) "
                    "where al.name in {players} and bl.name in {players} "
