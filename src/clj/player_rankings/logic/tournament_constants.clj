@@ -118,6 +118,7 @@
    "http://srs.challonge.com/BMLH48"
    "http://srs.challonge.com/BMLH49"
    "http://srs.challonge.com/BMLH50"
+   "http://srs.challonge.com/BMLH51"
    ])
 
 (def big-mamas-off-season
@@ -375,6 +376,9 @@
    {:url "http://brackets.godlikecombo.com/#!/sm4sh34"
     :date (t/date-time 2016 5 30)
     :title "Versus Revival ep 34"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh35"
+    :date (t/date-time 2016 6 6)
+    :title "Versus Revival ep 35"}
    ])
 
 (def rise-at-ssf
@@ -498,6 +502,7 @@
    "http://challonge.com/phoenixuprising38"
    "http://challonge.com/phoenixuprising39"
    "http://challonge.com/phoenixuprising40"
+   "http://challonge.com/phoenixuprising41"
    ])
 
 (def super-south-bay-sundays
@@ -540,6 +545,7 @@
    "http://challonge.com/SSmashing19"
    "http://challonge.com/Ssmashing21"
    "http://challonge.com/Ssmashing22"
+   "http://challonge.com/Ssmashing23"
    ])
 
 (def fair-fights
@@ -595,8 +601,11 @@
    "http://challonge.com/ESGT_3"
    "http://challonge.com/ESG_S4"
    "http://challonge.com/ESO_S5"
+   "http://challonge.com/ESO_T4"
    "http://challonge.com/ESG_T5"
    "http://challonge.com/ESO_S6"
+   "http://challonge.com/ESO_S7"
+   "http://challonge.com/ESG_T8"
    ])
 
 (def smash-at-berkeley
