@@ -179,13 +179,25 @@
    :winner (if (:won match) (:name player1) (:name player2))
    :loser (if (:won match) (:name player2) (:name player1))})
 
-(defn- normalize-matches [matches player1 player2]
-  (map #(normalize-compared-match % player1 player2) matches))
+(defn- add-win-percentage-to-match [match]
+  (assoc match
+         :win-percentage
+         (rankings/win-percentage (:start_rating match)
+                                  (:opponent_rating match))))
 
 (defn filter-disqualifications [matches]
   (filter (fn [match]
             (not (rankings/is-disqualifying-score (:score match))))
           matches))
+
+(defn normalize-player-history-matches [matches]
+  (let [filtered (filter-disqualifications matches)]
+    (->> filtered
+         (map rearrange-score-for-player)
+         (map add-win-percentage-to-match))))
+
+(defn- normalize-matches [matches player1 player2]
+  (map #(normalize-compared-match % player1 player2) matches))
 
 (defnp compare-players [player1 player2]
   (let [query (str "match (a:player)-[:aliased_to]-(:alias {name: {player1}}), "
@@ -214,16 +226,22 @@
 
 (defnp player-history [player]
   (let [query (str "match (al:alias {name: {name}})-[:aliased_to]-(p:player)-[pl:played]-(m:match), "
-                   "(m)--(t:tournament), (m)-[plo:played]-(o:player) "
-                   "with p, {tournament: t.title, won: pl.won, score: m.score, time: m.time, "
-                   "id: id(m), opponent: o.name} as match "
+                   "(m)-[:hosted]-(t:tournament), (m)-[plo:played]-(o:player) "
+                   "with p, {tournament: t.title, won: pl.won, score: m.score, time: m.time, id: id(m), "
+                   "opponent: o.name, "
+                   "start_rating: {rating: pl.start_rating[0], stddev: pl.start_rating[1], "
+                   "volatility: pl.start_rating[2]}, "
+                   "end_rating: {rating: pl.end_rating[0], stddev: pl.end_rating[1], "
+                   "volatility: pl.end_rating[2]}, "
+                   "opponent_rating: {rating: plo.start_rating[0], stddev: plo.start_rating[1], "
+                   "volatility: plo.start_rating[2]}} as match "
                    "order by match.time desc "
                    "return {name: p.name, rating: p.provisional_rating[0], stddev: p.provisional_rating[1], "
                    "aliases: p.aliases, volatility: p.provisional_rating[2]} as player, "
                    "collect(match) as matches ")
         normalized (normalize-name player)
         {:keys [player matches]} (first (cquery query {:name normalized}))
-        matches (map rearrange-score-for-player (filter-disqualifications matches))]
+        matches (normalize-player-history-matches matches)]
     {:player player :matches matches}))
 
 (defnp get-existing-players []
