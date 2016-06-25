@@ -88,6 +88,7 @@
    "http://challonge.com/smash19singles"
    "http://challonge.com/MADE20singles"
    "http://challonge.com/MADE21singles"
+   "http://challonge.com/MADE22Singles"
    ])
 
 (def big-mamas-little-cup
@@ -120,6 +121,7 @@
    "http://srs.challonge.com/BMLH49"
    "http://srs.challonge.com/BMLH50"
    "http://srs.challonge.com/BMLH51"
+   "http://srs.challonge.com/BMLH52"
    ])
 
 (def big-mamas-off-season
@@ -224,6 +226,7 @@
    "http://challonge.com/GUTWUS"
    "http://challonge.com/GUCWYWS"
    "http://challonge.com/GUSS"
+   "http://challonge.com/GZUOS"
    ])
 
 (def ghost-at-dc
@@ -380,6 +383,12 @@
    {:url "http://brackets.godlikecombo.com/#!/sm4sh35"
     :date (t/date-time 2016 6 6)
     :title "Versus Revival ep 35"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh36"
+    :date (t/date-time 2016 6 13)
+    :title "Versus Revival ep 36"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh37"
+    :date (t/date-time 2016 6 20)
+    :title "Versus Revival ep 37"}
    ])
 
 (def rise-at-ssf
@@ -392,6 +401,7 @@
   [
    "http://challonge.com/CDF1singles"
    "http://challonge.com/CDF2"
+   "http://challonge.com/casadefeugorevival"
    ])
 
 (def smash-odyssey
@@ -459,6 +469,7 @@
    "http://challonge.com/stiikx3"
    "http://challonge.com/stiikx4"
    "http://challonge.com/stiikx5smash4sing"
+   "http://challonge.com/stiikx6smash4sing"
    ])
 
 (def pheonix-uprising
@@ -504,6 +515,8 @@
    "http://challonge.com/phoenixuprising39"
    "http://challonge.com/phoenixuprising40"
    "http://challonge.com/phoenixuprising41"
+   "http://challonge.com/phoenixuprising42"
+   "http://challonge.com/phoenixuprising43"
    ])
 
 (def super-south-bay-sundays
@@ -547,6 +560,7 @@
    "http://challonge.com/Ssmashing21"
    "http://challonge.com/Ssmashing22"
    "http://challonge.com/Ssmashing23"
+   "http://challonge.com/Ssmashing24"
    ])
 
 (def fair-fights
@@ -557,6 +571,8 @@
    "http://terrashockgg.challonge.com/FF4_WiiU"
    "http://terrashockgg.challonge.com/FF5_WiiU"
    "http://terrashockgg.challonge.com/FF6_WiiU"
+   "http://terrashockgg.challonge.com/FF7_WiiU"
+   "http://terrashockgg.challonge.com/FF8_WiiU"
    ])
 
 
@@ -585,7 +601,11 @@
    "http://challonge.com/ESK_14"
    "http://challonge.com/ESK_15"
    "http://challonge.com/ESK16"
+   "http://challonge.com/ESK_17"
+   "http://challonge.com/ESK_18"
+   "http://challonge.com/ESK_19"
    ])
+
 
 (def e1337ent-smash-open
   ["http://challonge.com/ESO_W1_2016"
@@ -594,6 +614,7 @@
    "http://challonge.com/ESO_W4"
    "http://challonge.com/ESO_W5"
    ])
+
 
 (def smash-at-gg
   ["http://challonge.com/ESO_S1"
@@ -607,7 +628,17 @@
    "http://challonge.com/ESO_S6"
    "http://challonge.com/ESO_S7"
    "http://challonge.com/ESG_T8"
+   "http://challonge.com/ESG_T9"
+   "http://challonge.com/ESO_Sum1"
+   "http://challonge.com/ESG_T10"
    ])
+
+
+(def smash-for-tats
+  [
+   "http://challonge.com/SMASHFORTATS"
+   ])
+
 
 (def smash-at-berkeley
   ["http://challonge.com/bayo"
@@ -627,6 +658,8 @@
    "http://sslsmash.challonge.com/dtjhsjsu13Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu14Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu15Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu16Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu17Smash4"
    ])
 
 (def super-slug-fighters
@@ -705,11 +738,27 @@
    "http://challonge.com/BGWiiU29"
    ])
 
+(def welcome-to-cowtown
+  [
+   "http://challonge.com/NorCow"
+   "http://challonge.com/welcometocowtown2"
+   ])
+
+
+(def dont-you-dair
+  [
+   "http://competeleaguesmash.challonge.com/dyd1singles"
+   ])
+
+
+(def smash-attack
+  [
+   "http://challonge.com/SmashAttack8"
+   ])
 
 
 (def miscellaneous-tournaments
   [
-   "http://challonge.com/NorCow"
    "http://challonge.com/spudsmashsingles"
    "http://challonge.com/surfcityslamsinglesPRO"
    "http://challonge.com/minibosssmash4singles2"
@@ -738,6 +787,7 @@
    "http://challonge.com/WTC1"
    "http://surfcityslam.challonge.com/Top48"
    "http://challonge.com/wyp1singles"
+   "http://challonge.com/smashbrosinthemorning1"
    ])
 
 (def tournament-urls
@@ -777,6 +827,10 @@
           super-slug-fighters
           fight-nights
           battleground-wii-u
+          smash-for-tats
+          welcome-to-cowtown
+          dont-you-dair
+          smash-attack
           miscellaneous-tournaments))
 
 (def test-urls
