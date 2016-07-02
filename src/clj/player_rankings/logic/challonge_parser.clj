@@ -65,9 +65,12 @@
                     (not= (nmatch "scores_csv") ""))))
            matches))
 
+(defn identifier [url]
+  (str "challonge-" (create-url-id url)))
+
 (defn- get-tournament-from-url [url]
   (let [tournament (-> url tournament-url make-request (get "tournament"))]
-    {:identifier (create-url-id url)
+    {:identifier (identifier url)
      :title (tournament "name")
      :started_at (coerce-time/to-long (tournament "started_at"))
      :updated_at (coerce-time/to-long (tournament "updated_at"))

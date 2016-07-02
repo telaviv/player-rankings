@@ -843,7 +843,10 @@
 (def test-urls
   [
    "http://showdowngg.challonge.com/comeonandban60"
-   "http://ssbs.challonge.com/ssbs13sm4shsingles"
+   "https://smash.gg/tournament/smash-of-the-titans-3"
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh37"
+    :date (t/date-time 2016 6 20)
+    :title "Versus Revival ep 37"}
    ])
 
 (def team-names

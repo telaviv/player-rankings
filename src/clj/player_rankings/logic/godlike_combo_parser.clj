@@ -78,9 +78,12 @@
           :winner (winner-from-match match)})
        matches))
 
+(defn- identifier [tournament]
+  (str "godlike-combo-" (:bracketUrlPath tournament)))
+
 (defn- normalize-tournament [raw-tournament time title url]
   (let [tournament (:tourney raw-tournament)]
-    {:identifier (:bracketUrlPath tournament)
+    {:identifier (identifier tournament)
      :title title
      :started_at time
      :updated_at time

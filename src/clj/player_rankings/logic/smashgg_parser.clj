@@ -88,9 +88,12 @@
           :winner (winner-from-match match)})
        matches))
 
+(defn- identifier [tournament]
+  (str "smashgg-" (get-in tournament [:slugs 0])))
+
 (defn- normalized-tournament [tournament url]
   (let [{:keys [start-time updated-time]} (times-from-tournament tournament)]
-    {:identifier (get-in tournament [:slugs 0])
+    {:identifier (identifier tournament)
      :title (:name tournament)
      :started_at start-time
      :updated_at updated-time
