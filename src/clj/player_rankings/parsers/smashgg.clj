@@ -1,4 +1,4 @@
-(ns player-rankings.logic.smashgg-parser
+(ns player-rankings.parsers.smashgg
   (:require [clj-http.client :as client]
             [clojure.data.json :as json])
   (:import [java.net URL]))

@@ -1,7 +1,7 @@
-(ns player-rankings.logic.tournament-url-parser
-  (:require [player-rankings.logic.smashgg-parser :as smashgg]
-            [player-rankings.logic.challonge-parser :as challonge]
-            [player-rankings.logic.godlike-combo-parser :as godlike]
+(ns player-rankings.parsers.tournament-urls
+  (:require [player-rankings.parsers.smashgg :as smashgg]
+            [player-rankings.parsers.challonge :as challonge]
+            [player-rankings.parsers.godlike-combo :as godlike]
             [taoensso.timbre :refer [spy]]
             [schema.core :as s]))
 

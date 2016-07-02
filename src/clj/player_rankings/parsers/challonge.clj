@@ -1,4 +1,4 @@
-(ns player-rankings.logic.challonge-parser
+(ns player-rankings.parsers.challonge
   (:require [clojure.string :as string]
             [player-rankings.secrets :refer [challonge-api-key]]
             [player-rankings.profiling :refer [timed]]

@@ -1,4 +1,4 @@
-(ns player-rankings.logic.godlike-combo-parser
+(ns player-rankings.parsers.godlike-combo
   (:require [clj-http.client :as client]
             [clojure.data.json :as json]
             [taoensso.timbre :refer [spy info]]

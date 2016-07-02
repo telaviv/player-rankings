@@ -1,5 +1,5 @@
 (ns player-rankings.logic.initializers
-  (:require [player-rankings.logic.tournament-url-parser :refer [get-tournament-data]]
+  (:require [player-rankings.parsers.tournament-urls :refer [get-tournament-data]]
             [taoensso.timbre :refer [spy]]
             [clj-time.coerce :as coerce-time]
             [clj-time.core :as time]

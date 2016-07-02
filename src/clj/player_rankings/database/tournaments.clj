@@ -12,7 +12,7 @@
             [player-rankings.database.players.write :refer
              [create-new-player-nodes merge-player-nodes]]
             [player-rankings.logic.rankings :as rankings]
-            [player-rankings.logic.tournament-url-parser :as tournament-url-parser]
+            [player-rankings.parsers.tournament-urls :as tournament-url-parser]
             [player-rankings.logic.tournament-constants :as constants]
             [player-rankings.utilities :refer [keys->keywords]]))
 
