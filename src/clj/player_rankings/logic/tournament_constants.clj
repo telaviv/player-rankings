@@ -66,6 +66,11 @@
    "http://showdowngg.challonge.com/comeonandban63"
    ])
 
+(def smash-of-the-titans
+  [
+   "https://smash.gg/tournament/smash-of-the-titans-3"
+   ])
+
 (def made
   [
    "http://challonge.com/MADEsmashbi4singles"
@@ -793,6 +798,7 @@
 (def tournament-urls
   (set
    (concat the-foundry
+           smash-of-the-titans
            made
            big-mamas-little-cup
            big-mamas-little-house
