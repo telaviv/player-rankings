@@ -791,7 +791,7 @@
    "http://srs.challonge.com/SSS1T8"
    "http://challonge.com/WTC1"
    "http://surfcityslam.challonge.com/Top48"
-   "http://challonge.com/wyp1singles"
+   "http://8bit.challonge.com/wyp1singles"
    "http://challonge.com/smashbrosinthemorning1"
    ])
 
