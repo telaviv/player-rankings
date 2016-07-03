@@ -8,6 +8,7 @@
            (str "http://" neo4j-username ":" neo4j-password "@localhost:7474/db/data/")))
 
 (cypher/tquery conn "create constraint on (a:alias) assert a.name is unique")
+(cypher/tquery conn "create constraint on (t:tournament) assert t.identifier is unique")
 
 (defn cquery
   ([query] (cquery query {}))

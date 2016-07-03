@@ -204,7 +204,7 @@
                    "(b:player)-[:aliased_to]-(:alias {name: {player2}}) "
                    "with a, b "
                    "optional match (a)-[pl:played]-(m:match)-[:played]-(b), (m)-[:hosted]-(t:tournament) "
-                   "with {tournament: t.title, won: pl.won, score: m.score, "
+                   "with {tournament: {title: t.title, id: t.identifier}, won: pl.won, score: m.score, "
                    "time: m.time, id: id(m)} as match, a, b "
                    "order by m.time desc "
                    "with collect(distinct match) as matches, a, b "
