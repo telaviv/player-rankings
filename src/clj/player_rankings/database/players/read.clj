@@ -227,8 +227,8 @@
 (defnp player-history [player]
   (let [query (str "match (al:alias {name: {name}})-[:aliased_to]-(p:player)-[pl:played]-(m:match), "
                    "(m)-[:hosted]-(t:tournament), (m)-[plo:played]-(o:player) "
-                   "with p, {tournament: t.title, won: pl.won, score: m.score, time: m.time, id: id(m), "
-                   "opponent: o.name, "
+                   "with p, {tournament: {title: t.title, id: t.identifier}, won: pl.won, "
+                   "score: m.score, time: m.time, id: id(m), opponent: o.name, "
                    "start_rating: {rating: pl.start_rating[0], stddev: pl.start_rating[1], "
                    "volatility: pl.start_rating[2]}, "
                    "end_rating: {rating: pl.end_rating[0], stddev: pl.end_rating[1], "
