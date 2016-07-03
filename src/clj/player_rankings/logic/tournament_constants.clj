@@ -893,6 +893,7 @@
    "#lh"
    "qt"
    "thcm"
+   "tsg"
    ])
 
 (def aliases
