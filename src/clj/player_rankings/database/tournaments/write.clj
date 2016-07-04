@@ -1,4 +1,4 @@
-(ns player-rankings.database.tournaments
+(ns player-rankings.database.tournaments.write
   (:require [clojure.set :refer [difference]]
             [clojure.data.json :as json]
             [clojurewerkz.neocons.rest.cypher :as cypher]
