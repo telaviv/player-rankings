@@ -762,6 +762,13 @@
    ])
 
 
+(def whos-your-pappy
+  [
+   "http://8bit.challonge.com/wyp1singles"
+   "http://8bit.challonge.com/wyp2singles"
+   ])
+
+
 (def miscellaneous-tournaments
   [
    "http://challonge.com/spudsmashsingles"
@@ -791,7 +798,6 @@
    "http://srs.challonge.com/SSS1T8"
    "http://challonge.com/WTC1"
    "http://surfcityslam.challonge.com/Top48"
-   "http://8bit.challonge.com/wyp1singles"
    "http://challonge.com/smashbrosinthemorning1"
    ])
 
@@ -838,6 +844,7 @@
            welcome-to-cowtown
            dont-you-dair
            smash-attack
+           whos-your-pappy
            miscellaneous-tournaments)))
 
 (def test-urls
