@@ -37,6 +37,11 @@
 (defn- normalize-matches [matches]
   (map normalize-match matches))
 
+(defn median-time [matches]
+  (get-in matches [(quot (count matches) 2) :time]))
+
 (defn tournament-data [identifier]
   (let [data (raw-tournament-data identifier)]
-    (update data :matches normalize-matches)))
+    (-> data
+        (update :matches normalize-matches)
+        (assoc :time (median-time (:matches data))))))
