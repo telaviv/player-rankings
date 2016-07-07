@@ -641,7 +641,6 @@
    "http://challonge.com/ESG_T8"
    "http://challonge.com/ESG_T9"
    "http://challonge.com/ESO_Sum1"
-   "http://challonge.com/ESG_T10"
    ])
 
 
