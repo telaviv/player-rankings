@@ -127,6 +127,7 @@
    "http://srs.challonge.com/BMLH50"
    "http://srs.challonge.com/BMLH51"
    "http://srs.challonge.com/BMLH52"
+   "http://srs.challonge.com/BMLH53"
    ])
 
 (def big-mamas-off-season
@@ -232,6 +233,8 @@
    "http://challonge.com/GUCWYWS"
    "http://challonge.com/GUSS"
    "http://challonge.com/GZUOS"
+   "http://challonge.com/GZUDS"
+   "http://challonge.com/GZUOSs"
    ])
 
 (def ghost-at-dc
@@ -522,6 +525,8 @@
    "http://challonge.com/phoenixuprising41"
    "http://challonge.com/phoenixuprising42"
    "http://challonge.com/phoenixuprising43"
+   "http://challonge.com/phoenixuprising44"
+   "http://challonge.com/phoenixuprising45"
    ])
 
 (def super-south-bay-sundays
@@ -609,6 +614,7 @@
    "http://challonge.com/ESK_17"
    "http://challonge.com/ESK_18"
    "http://challonge.com/ESK_19"
+   "http://challonge.com/Singles22kin"
    ])
 
 
@@ -665,6 +671,8 @@
    "http://sslsmash.challonge.com/dtjhsjsu15Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu16Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu17Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu18Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu19Smash4"
    ])
 
 (def super-slug-fighters
@@ -701,6 +709,7 @@
   [
    "http://challonge.com/GameNightsSSB4"
    "http://challonge.com/SoSsmash4"
+   "http://challonge.com/SoS3smash4"
    "http://challonge.com/Smashshore3singles"
    ])
 
@@ -747,6 +756,7 @@
   [
    "http://challonge.com/NorCow"
    "http://challonge.com/welcometocowtown2"
+   "http://challonge.com/NorCow2"
    ])
 
 
@@ -768,9 +778,17 @@
    "http://8bit.challonge.com/wyp2singles"
    ])
 
+(def super-smash-bros-in-the-morning
+  [
+   "http://challonge.com/smashbrosinthemorning1"
+   "http://challonge.com/ssb4inthemorning2"
+   ])
 
 (def miscellaneous-tournaments
   [
+   "http://challonge.com/NGHA2"
+   "http://challonge.com/gocwetakethose0"
+   "http://challonge.com/cz8333ak"
    "http://challonge.com/spudsmashsingles"
    "http://challonge.com/surfcityslamsinglesPRO"
    "http://challonge.com/minibosssmash4singles2"
@@ -798,7 +816,7 @@
    "http://srs.challonge.com/SSS1T8"
    "http://challonge.com/WTC1"
    "http://surfcityslam.challonge.com/Top48"
-   "http://challonge.com/smashbrosinthemorning1"
+   "http://challonge.com/SmashdownSingles"
    ])
 
 (def tournament-urls
@@ -845,6 +863,7 @@
            dont-you-dair
            smash-attack
            whos-your-pappy
+           super-smash-bros-in-the-morning
            miscellaneous-tournaments)))
 
 (def test-urls
