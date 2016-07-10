@@ -69,6 +69,7 @@
 (def smash-of-the-titans
   [
    "https://smash.gg/tournament/smash-of-the-titans-3"
+   "https://smash.gg/tournament/smash-of-the-titans-2-1"
    ])
 
 (def made
@@ -671,6 +672,7 @@
    "http://sslsmash.challonge.com/dtjhsjsu17Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu18Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu19Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu20Smash4"
    ])
 
 (def super-slug-fighters
@@ -923,6 +925,8 @@
 (def aliases
   [["Crow" "Chaos Crow" "Maleficent"]
    ["Glith" "glith10" "gltih"]
+   ["snackthyme" "snacktyme"]
+   ["Kham" "k-ham"]
    ["Lolo" "Four"]
    ["Rayn" "Keios"]
    ["SuperFlyingTigerMan" "DJRelly"]
