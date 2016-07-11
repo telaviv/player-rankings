@@ -1,7 +1,7 @@
-(ns player-rankings.database.players.read
+(ns player-rankings.database.tournaments.read
   (:require [player-rankings.database.connection :refer [cquery]]
+            [player-rankings.logic.rankings :as rankings]
             [clojure.string :as string]))
-
 (defn- newline-joined [& lines]
   (string/join "\n" lines))
 

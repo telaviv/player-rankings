@@ -1,11 +1,9 @@
 (ns player-rankings.routes.tournament
-  (:require [player-rankings.layout :as layout]
-            [compojure.core :refer [defroutes GET]]
-            [clojure.java.io :as io]))
+  (:require [compojure.core :refer [defroutes GET]]
+            [player-rankings.database.tournaments.read :refer [tournament-data]]))
 
-(defn create-tournament-page []
-  (layout/render "create-tournament.html"))
-
+(defn tournament-info [req]
+  {:status 200 :body (tournament-data (get-in req [:params :id]))})
 
 (defroutes tournament-routes
-  (GET "/tournament/create" [] (create-tournament-page)))
+  (GET "/tournament" req (tournament-info req)))
