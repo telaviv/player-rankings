@@ -30,9 +30,14 @@
       (update :end_rating rating-array-to-object)))
 
 (defn- normalize-match [match]
-  (-> match
-      (update :winner normalize-player)
-      (update :loser normalize-player)))
+  (let [winner (normalize-player (:winner match))
+        loser (normalize-player (:loser match))
+        win-percentage (rankings/win-percentage (:start_rating winner)
+                                                (:start_rating loser))]
+    (assoc match
+           :winner winner
+           :loser loser
+           :win-percentage win-percentage)))
 
 (defn- normalize-matches [matches]
   (map normalize-match matches))
