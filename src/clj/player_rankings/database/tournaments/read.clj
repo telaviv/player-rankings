@@ -16,7 +16,7 @@
                "loser: {name: p2.name, start_rating: pl2.start_rating, end_rating: pl2.end_rating},"
                "score: m.score, time: m.time, id: id(m)} as matches"
                "order by m.time"
-               "return {title: t.title, url: t.url, id: id(t)} as tournament, collect(matches) as matches")]
+               "return {title: t.title, url: t.url, id: t.identifier} as tournament, collect(matches) as matches")]
     (first (cquery query {:identifier identifier}))))
 
 (defn- rating-array-to-object [rating-array]
@@ -50,3 +50,10 @@
     (-> data
         (update :matches normalize-matches)
         (assoc-in [:tournament :time] (median-time (:matches data))))))
+
+(defn tournament-exists? [identifier]
+  (let [query (newline-joined
+               "match (t:tournament {identifier: {identifier}})"
+               "return count(*) as count")
+        c (:count (first (cquery query {:identifier identifier})))]
+    (not (= 0 c))))
