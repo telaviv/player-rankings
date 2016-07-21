@@ -129,6 +129,7 @@
    "http://srs.challonge.com/BMLH51"
    "http://srs.challonge.com/BMLH52"
    "http://srs.challonge.com/BMLH53"
+   "http://srs.challonge.com/BMLH54"
    ])
 
 (def big-mamas-off-season
@@ -303,6 +304,12 @@
    "http://challonge.com/smashbobaandtea3singles"
    ])
 
+(def tea-rex
+  [
+   "http://challonge.com/teabobasmash1"
+   "http://challonge.com/smashtrex2"
+   ])
+
 (def smash-at-ronin
   [
    "http://challonge.com/ESR_1"
@@ -398,6 +405,12 @@
    {:url "http://brackets.godlikecombo.com/#!/sm4sh37"
     :date (t/date-time 2016 6 20)
     :title "Versus Revival ep 37"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh38"
+    :date (t/date-time 2016 6 27)
+    :title "Versus Revival ep 38"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh39"
+    :date (t/date-time 2016 7 7)
+    :title "Versus Revival ep 39"}
    ])
 
 (def rise-at-ssf
@@ -528,6 +541,8 @@
    "http://challonge.com/phoenixuprising43"
    "http://challonge.com/phoenixuprising44"
    "http://challonge.com/phoenixuprising45"
+   "http://challonge.com/phoenixuprising46"
+   "http://challonge.com/phoenixuprising47"
    ])
 
 (def super-south-bay-sundays
@@ -572,6 +587,7 @@
    "http://challonge.com/Ssmashing22"
    "http://challonge.com/Ssmashing23"
    "http://challonge.com/Ssmashing24"
+   "http://challonge.com/Ssmashing25"
    ])
 
 (def fair-fights
@@ -615,7 +631,10 @@
    "http://challonge.com/ESK_17"
    "http://challonge.com/ESK_18"
    "http://challonge.com/ESK_19"
+   "http://e1337gaming.challonge.com/ESK_21"
    "http://challonge.com/Singles22kin"
+   "http://e1337gaming.challonge.com/ESK23"
+   "http://e1337gaming.challonge.com/ESK24"
    ])
 
 
@@ -641,6 +660,11 @@
    "http://challonge.com/ESO_S7"
    "http://challonge.com/ESG_T8"
    "http://challonge.com/ESG_T9"
+   "http://e1337gaming.challonge.com/ESG_T10"
+   "http://e1337gaming.challonge.com/ESG_T11"
+   "http://e1337gaming.challonge.com/ESO_Tuesday12"
+   "http://e1337gaming.challonge.com/ESG_T13"
+   "http://e1337gaming.challonge.com/ESO_T14"
    ])
 
 
@@ -769,6 +793,7 @@
 (def smash-attack
   [
    "http://challonge.com/SmashAttack8"
+   "http://challonge.com/SmashAttack9"
    ])
 
 
@@ -784,11 +809,17 @@
    "http://challonge.com/ssb4inthemorning2"
    ])
 
+(def we-take-those
+  [
+   "http://challonge.com/gocwetakethose0"
+   "http://challonge.com/cz8333ak"
+   "http://challonge.com/ycuiu7tw"
+   ])
+
 (def miscellaneous-tournaments
   [
    "http://challonge.com/NGHA2"
-   "http://challonge.com/gocwetakethose0"
-   "http://challonge.com/cz8333ak"
+   "http://challonge.com/duelisthaven"
    "http://challonge.com/spudsmashsingles"
    "http://challonge.com/surfcityslamsinglesPRO"
    "http://challonge.com/minibosssmash4singles2"
@@ -817,10 +848,11 @@
    "http://challonge.com/WTC1"
    "http://surfcityslam.challonge.com/Top48"
    "http://challonge.com/SmashdownSingles"
+   "http://challonge.com/z4zbz9bw"
    ])
 
 (def tournament-urls
-  (set
+  (distinct
    (concat the-foundry
            smash-of-the-titans
            made
@@ -852,6 +884,7 @@
            smash-at-berkeley
            did-that-just-happen
            smash-boba-and-tea
+           tea-rex
            stiikx
            fair-fights
            smash-at-ronin
