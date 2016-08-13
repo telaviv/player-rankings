@@ -64,12 +64,15 @@
    "http://showdowngg.challonge.com/comeonandban61"
    "http://showdowngg.challonge.com/comeonandban62"
    "http://showdowngg.challonge.com/comeonandban63"
+   "http://showdowngg.challonge.com/comeonandban64"
    ])
 
 (def smash-of-the-titans
   [
    "https://smash.gg/tournament/smash-of-the-titans-3"
    "https://smash.gg/tournament/smash-of-the-titans-2-1"
+   "https://smash.gg/tournament/smash-of-the-titans-3-1"
+   "https://smash.gg/tournament/smash-of-the-titans-4"
    ])
 
 (def made
@@ -95,6 +98,7 @@
    "http://challonge.com/MADE20singles"
    "http://challonge.com/MADE21singles"
    "http://challonge.com/MADE22Singles"
+   "http://challonge.com/MADE23Singles"
    ])
 
 (def big-mamas-little-cup
@@ -130,6 +134,7 @@
    "http://srs.challonge.com/BMLH52"
    "http://srs.challonge.com/BMLH53"
    "http://srs.challonge.com/BMLH54"
+   "http://srs.challonge.com/BMLH55"
    ])
 
 (def big-mamas-off-season
@@ -175,6 +180,7 @@
    "http://scusmash.challonge.com/ww27s4s"
    "http://scusmash.challonge.com/ww28s4s"
    "http://scusmash.challonge.com/WW29s4s"
+   "http://scusmash.challonge.com/ww30s4"
    ])
 
 (def gamerz-smash-labs
@@ -237,6 +243,9 @@
    "http://challonge.com/GZUOS"
    "http://challonge.com/GZUDS"
    "http://challonge.com/GZUOSs"
+   "http://challonge.com/GUCS"
+   "http://challonge.com/GZUNS"
+   "http://challonge.com/GZUSS"
    ])
 
 (def ghost-at-dc
@@ -302,6 +311,7 @@
   [
    "http://challonge.com/smashbobaandteasingles"
    "http://challonge.com/smashbobaandtea3singles"
+   "http://challonge.com/smashbobaandtea5singles"
    ])
 
 (def tea-rex
@@ -315,6 +325,7 @@
    "http://challonge.com/ESR_1"
    "http://challonge.com/ESR_2"
    "http://challonge.com/ESR_3"
+   "http://challonge.com/ESR4"
    ])
 
 (def versus
@@ -543,6 +554,14 @@
    "http://challonge.com/phoenixuprising45"
    "http://challonge.com/phoenixuprising46"
    "http://challonge.com/phoenixuprising47"
+   "http://challonge.com/phoenixuprising48"
+   "http://challonge.com/phoenixuprising49"
+   "http://challonge.com/phoenixuprising50"
+   ])
+
+(def pheonix-awakening
+  [
+   "http://challonge.com/phoenixawakening2singles"
    ])
 
 (def super-south-bay-sundays
@@ -583,6 +602,7 @@
    "http://challonge.com/ssmashing17"
    "http://challonge.com/SSmashing18"
    "http://challonge.com/SSmashing19"
+   "http://challonge.com/Ssmashing20"
    "http://challonge.com/Ssmashing21"
    "http://challonge.com/Ssmashing22"
    "http://challonge.com/Ssmashing23"
@@ -652,6 +672,7 @@
    "http://challonge.com/ESO_S2"
    "http://challonge.com/ESO_S3"
    "http://challonge.com/ESGT_3"
+   "http://challonge.com/ESGT_4"
    "http://challonge.com/ESG_S4"
    "http://challonge.com/ESO_S5"
    "http://challonge.com/ESO_T4"
@@ -665,6 +686,15 @@
    "http://e1337gaming.challonge.com/ESO_Tuesday12"
    "http://e1337gaming.challonge.com/ESG_T13"
    "http://e1337gaming.challonge.com/ESO_T14"
+   ])
+
+(def eso-tuesdays
+  [
+   "http://challonge.com/ESO_Sum1"
+   "http://challonge.com/ESO_T1"
+   "http://challonge.com/ESO_T5"
+   "http://challonge.com/ESO_Tues_2"
+   "http://challonge.com/ESO_W6"
    ])
 
 
@@ -682,12 +712,16 @@
    "http://sab.challonge.com/fdsm4shsingles"
    ])
 
+(def bair-necessities
+  ["http://sab.challonge.com/BairNecessities1"])
+
 (def did-that-just-happen
   ["http://challonge.com/dtjhsjsu04Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu05Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu07Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu09Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu10Smash4"
+   "http://challonge.com/sjsu11_Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu12Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu13Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu14Smash4"
@@ -739,6 +773,9 @@
 
 (def smash-4-cash
   [
+   "http://cvs.challonge.com/smash4cash5"
+   "http://cvs.challonge.com/smash4cash6"
+   "http://cvs.challonge.com/smash4cash7smash4singles"
    "http://apstournaments.challonge.com/s4c8smash4"
    "http://apstournaments.challonge.com/s4c9smash4"
    ])
@@ -818,6 +855,15 @@
 
 (def miscellaneous-tournaments
   [
+   "http://srs.challonge.com/GN2"
+   "http://srs.challonge.com/SAG2"
+   "http://srs.challonge.com/WCCCSmash"
+   "https://smash.gg/tournament/burton-smash-fest/…879/38163"
+   "https://smash.gg/tournament/the-gator-games-2/…712/69001"
+   "http://ncr2016.challonge.com/WiiU"
+   "http://levelupvideogames.challonge.com/SMASHBROSWIIU2016"
+   "http://csueastbaysmash.challonge.com/DYD2SM4SHSingles"
+   "http://capitolfightdistrict.challonge.com/GSP"
    "http://challonge.com/NGHA2"
    "http://challonge.com/duelisthaven"
    "http://challonge.com/spudsmashsingles"
@@ -837,7 +883,6 @@
    "http://challonge.com/phoenixawakeningsingles"
    "http://challonge.com/GameNightsSSB4"
    "http://challonge.com/smash_aau"
-   "http://challonge.com/TheForge1"
    "http://scusmash.challonge.com/s4weeniehut"
    "http://challonge.com/sass1sm4sh"
    "http://challonge.com/71jh912n"
@@ -849,6 +894,12 @@
    "http://surfcityslam.challonge.com/Top48"
    "http://challonge.com/SmashdownSingles"
    "http://challonge.com/z4zbz9bw"
+   "http://challonge.com/hgm7r27b"
+   "http://challonge.com/nabstershouse2smash4singles"
+   "http://challonge.com/shmashcpctournament"
+   "http://challonge.com/smashtarotaro1"
+   "http://challonge.com/ttnw"
+   "http://challonge.com/zbghh6du"
    ])
 
 (def tournament-urls
@@ -882,6 +933,8 @@
            e1337ent-smash-open
            smash-at-gg
            smash-at-berkeley
+           eso-tuesdays
+           smash-4-cash
            did-that-just-happen
            smash-boba-and-tea
            tea-rex
@@ -897,6 +950,7 @@
            smash-attack
            whos-your-pappy
            super-smash-bros-in-the-morning
+           bair-necessities
            miscellaneous-tournaments)))
 
 (def test-urls
@@ -982,6 +1036,7 @@
    ["Electric Soldier" "Electric Solider"]
    ["Gamersaurus" "Gamersaurs"]
    ["WimpLow" "Wimplo"]
+   ["Kid Icarus" "Oblivion"]
    ["Goomba" "Gooomba"]
    ["HollyPop" "HolliPop"]
    ["Jackaria" "Jackaraia"]
