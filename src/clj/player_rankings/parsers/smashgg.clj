@@ -41,11 +41,11 @@
 
 (defn get-tournament-information [url]
   (let [tournament-info (-> url general-info-api-url make-request)
-        group-ids (map :id (get-in raw-tournament-information [:entities :groups]))
+        group-ids (map :id (get-in tournament-info [:entities :groups]))
         event-id (singles-event-id tournament-info)]
     {:event-id event-id
      :brackets (brackets-from-ids group-ids)
-     :tournament (get-in raw-tournament-information [:entities :tournament])}))
+     :tournament (get-in tournament-info [:entities :tournament])}))
 
 (defn- get-participants [brackets]
   (let [participants (mapcat #(get-in % [:entities :player]) brackets)]
@@ -63,8 +63,8 @@
                           (nil? (:winnerId match))))))
           matches))
 
-(defn- get-matches [brackets]
-  (filter-matches (mapcat #(get-in % [:entities :sets]) brackets)) event-id)
+(defn- get-matches [brackets event-id]
+  (filter-matches (mapcat #(get-in % [:entities :sets]) brackets) event-id))
 
 (defn- score-from-match [match]
   (letfn [(get-score [key]
