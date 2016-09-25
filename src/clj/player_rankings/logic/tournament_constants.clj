@@ -1,3 +1,4 @@
+
 (ns player-rankings.logic.tournament-constants
   (:require [clojure.set :refer [difference]]
             [clj-time.core :as t]))
@@ -73,6 +74,8 @@
    "https://smash.gg/tournament/smash-of-the-titans-2-1"
    "https://smash.gg/tournament/smash-of-the-titans-3-1"
    "https://smash.gg/tournament/smash-of-the-titans-4"
+   "https://smash.gg/tournament/smash-of-the-titans-5"
+   "https://smash.gg/tournament/smash-of-the-titans-6"
    ])
 
 (def made
@@ -318,6 +321,7 @@
   [
    "http://challonge.com/teabobasmash1"
    "http://challonge.com/smashtrex2"
+   "http://challonge.com/smashtrex3"
    ])
 
 (def smash-at-ronin
@@ -557,6 +561,8 @@
    "http://challonge.com/phoenixuprising48"
    "http://challonge.com/phoenixuprising49"
    "http://challonge.com/phoenixuprising50"
+   "http://challonge.com/phoenixuprising51"
+   "http://challonge.com/phoenixuprising52"
    ])
 
 (def pheonix-awakening
@@ -838,6 +844,7 @@
   [
    "http://8bit.challonge.com/wyp1singles"
    "http://8bit.challonge.com/wyp2singles"
+   "https://smash.gg/tournament/who-s-your-pappy-3"
    ])
 
 (def super-smash-bros-in-the-morning
