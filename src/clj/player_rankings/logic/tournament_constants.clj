@@ -102,6 +102,7 @@
    "http://challonge.com/MADE21singles"
    "http://challonge.com/MADE22Singles"
    "http://challonge.com/MADE23Singles"
+   "http://challonge.com/MADE24Singles"
    ])
 
 (def big-mamas-little-cup
@@ -138,6 +139,8 @@
    "http://srs.challonge.com/BMLH53"
    "http://srs.challonge.com/BMLH54"
    "http://srs.challonge.com/BMLH55"
+   "http://srs.challonge.com/bmlh56"
+   "http://srs.challonge.com/BMLH57"
    ])
 
 (def big-mamas-off-season
@@ -249,6 +252,8 @@
    "http://challonge.com/GUCS"
    "http://challonge.com/GZUNS"
    "http://challonge.com/GZUSS"
+   "http://challonge.com/GZUQS"
+   "http://gzugg.challonge.com/GZUDS"
    ])
 
 (def ghost-at-dc
@@ -322,6 +327,10 @@
    "http://challonge.com/teabobasmash1"
    "http://challonge.com/smashtrex2"
    "http://challonge.com/smashtrex3"
+   "http://challonge.com/Sm4shtearex4"
+   "http://challonge.com/smashtearex5"
+   "http://challonge.com/Smashtearex6"
+   "http://challonge.com/smashtearex7"
    ])
 
 (def smash-at-ronin
@@ -330,6 +339,19 @@
    "http://challonge.com/ESR_2"
    "http://challonge.com/ESR_3"
    "http://challonge.com/ESR4"
+   ])
+
+(def share-stock-saturdays
+  [
+   "http://challonge.com/sssep5"
+   "http://challonge.com/Sssep7"
+   "http://challonge.com/Sss9"
+   "http://challonge.com/sssep10"
+   ])
+
+(def back-2-basics
+  [
+   "http://challonge.com/h8kp5gf6"
    ])
 
 (def versus
@@ -426,6 +448,18 @@
    {:url "http://brackets.godlikecombo.com/#!/sm4sh39"
     :date (t/date-time 2016 7 7)
     :title "Versus Revival ep 39"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh40"
+    :date (t/date-time 2016 7 14)
+    :title "Versus Revival ep 40"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh41"
+    :date (t/date-time 2016 7 21)
+    :title "Versus Revival ep 41"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh42"
+    :date (t/date-time 2016 7 28)
+    :title "Versus Revival ep 42"}
+   {:url "http://brackets.godlikecombo.com/#!/sm4sh43"
+    :date (t/date-time 2016 8 29)
+    :title "Sayonara Versus - The Final Episode"}
    ])
 
 (def rise-at-ssf
@@ -563,6 +597,9 @@
    "http://challonge.com/phoenixuprising50"
    "http://challonge.com/phoenixuprising51"
    "http://challonge.com/phoenixuprising52"
+   "http://challonge.com/phoenixuprising53"
+   "http://challonge.com/phoenixuprising54"
+   "http://challonge.com/phoenixuprising55"
    ])
 
 (def pheonix-awakening
@@ -626,6 +663,11 @@
    "http://terrashockgg.challonge.com/FF6_WiiU"
    "http://terrashockgg.challonge.com/FF7_WiiU"
    "http://terrashockgg.challonge.com/FF8_WiiU"
+   "http://terrashockgg.challonge.com/FF9_WiiU"
+   "http://terrashockgg.challonge.com/FF10_WiiU"
+   "http://terrashockgg.challonge.com/FF11_WiiU"
+   "http://terrashockgg.challonge.com/FF12_WiiU"
+   "http://terrashockgg.challonge.com/FF13_WiiU"
    ])
 
 
@@ -661,6 +703,7 @@
    "http://challonge.com/Singles22kin"
    "http://e1337gaming.challonge.com/ESK23"
    "http://e1337gaming.challonge.com/ESK24"
+   "http://challonge.com/RoKsingles1"
    ])
 
 
@@ -716,6 +759,7 @@
    "http://sab.challonge.com/sp16bw3smash4"
    "http://sab.challonge.com/sp16bw4singles"
    "http://sab.challonge.com/fdsm4shsingles"
+   "http://sab.challonge.com/bbb1sm4shsingles"
    ])
 
 (def bair-necessities
@@ -737,6 +781,7 @@
    "http://sslsmash.challonge.com/dtjhsjsu18Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu19Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu20Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu25Smash4"
    ])
 
 (def super-slug-fighters
@@ -824,12 +869,14 @@
    "http://challonge.com/NorCow"
    "http://challonge.com/welcometocowtown2"
    "http://challonge.com/NorCow2"
+   "http://challonge.com/WTC3smash"
    ])
 
 
 (def dont-you-dair
   [
    "http://competeleaguesmash.challonge.com/dyd1singles"
+   "https://smash.gg/tournament/don-t-you-dair-3"
    ])
 
 
@@ -837,6 +884,8 @@
   [
    "http://challonge.com/SmashAttack8"
    "http://challonge.com/SmashAttack9"
+   "http://challonge.com/SA10"
+   "http://challonge.com/PGGsa11"
    ])
 
 
@@ -858,15 +907,26 @@
    "http://challonge.com/gocwetakethose0"
    "http://challonge.com/cz8333ak"
    "http://challonge.com/ycuiu7tw"
+   "http://challonge.com/Wetakethose8"
+   "http://challonge.com/singleswtt9"
+   "http://challonge.com/wttrp10"
+   "http://challonge.com/wetakethose11"
+   ])
+
+(def afk-gaming
+  [
+   "http://challonge.com/afkggsm4sh4"
+   "http://challonge.com/afkggsm4sh5"
    ])
 
 (def miscellaneous-tournaments
   [
+   "http://challonge.com/ss1s"
+   "http://challonge.com/smashedpotatoes8"
+   "http://challonge.com/pppp1sm4sh"
    "http://srs.challonge.com/GN2"
    "http://srs.challonge.com/SAG2"
    "http://srs.challonge.com/WCCCSmash"
-   "https://smash.gg/tournament/burton-smash-fest/…879/38163"
-   "https://smash.gg/tournament/the-gator-games-2/…712/69001"
    "http://ncr2016.challonge.com/WiiU"
    "http://levelupvideogames.challonge.com/SMASHBROSWIIU2016"
    "http://csueastbaysmash.challonge.com/DYD2SM4SHSingles"
@@ -907,6 +967,9 @@
    "http://challonge.com/smashtarotaro1"
    "http://challonge.com/ttnw"
    "http://challonge.com/zbghh6du"
+   {:url "http://brackets.godlikecombo.com/#!/sjsm4sh1"
+    :date (t/date-time 2016 9 5)
+    :title "Sharkade Circuit: Smash 4 - Fall 2016"}
    ])
 
 (def tournament-urls
@@ -958,6 +1021,9 @@
            whos-your-pappy
            super-smash-bros-in-the-morning
            bair-necessities
+           share-stock-saturdays
+           afk-gaming
+           back-2-basics
            miscellaneous-tournaments)))
 
 (def test-urls
@@ -1024,7 +1090,7 @@
    ["Lolo" "Four"]
    ["Rayn" "Keios"]
    ["SuperFlyingTigerMan" "DJRelly"]
-   ["KossisMOSS" "Kossimoss" "AAA Batteries?!"]
+   ["KossisMOSS" "Kossimoss" "AAA Batteries?!" "Koss"]
    ["BlueBomber22" "Blue Bomber"]
    ["DarkSilence" "Darlsilence"]
    ["DeathPheonix13" "Deathphoenix13"]
@@ -1104,7 +1170,7 @@
    ["FONC | Fist o cuffs" "FistOCuffs" "FONC | Fist'O'cuffs"]
    ["Violet" "Andrew Le"]
    ["York" "T 17/York"]
-   ["Scourge" "Summus" "Lt. Skerge" "Melon Lord"]
+   ["Scourge" "Summus" "Lt. Skerge" "Melon Lord" "Blue"]
    ["Mr. Peabody" "peabody"]
    ["Kronos2560" "Kronos"]
    ["Krustol" "TCM/Krustol"]
