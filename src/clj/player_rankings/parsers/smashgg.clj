@@ -10,7 +10,7 @@
   (let [slug (tournament-slug url)]
     (str "https://smash.gg/api/-/resource/gg_api./tournament/"
          slug
-         ";expand=%5B%22groups%22%2C%22tournament%22%5D"
+         ";expand=%5B%22groups%22%2C%22tournament%22%2C%22event%22%5D"
          ";slug="
          slug)))
 
@@ -33,10 +33,18 @@
   (pmap (fn [group-id] (-> group-id bracket-url make-request))
         group-ids))
 
+(defn singles-event-id [tournament-info]
+  (->> (get-in tournament-info [:entities :event])
+       (filter #(= "Wii U Singles" (:name %)))
+       (first)
+       (:id)))
+
 (defn get-tournament-information [url]
-  (let [raw-tournament-information (-> url general-info-api-url make-request)
-        group-ids (map :id (get-in raw-tournament-information [:entities :groups]))]
-    {:brackets (brackets-from-ids group-ids)
+  (let [tournament-info (-> url general-info-api-url make-request)
+        group-ids (map :id (get-in raw-tournament-information [:entities :groups]))
+        event-id (singles-event-id tournament-info)]
+    {:event-id event-id
+     :brackets (brackets-from-ids group-ids)
      :tournament (get-in raw-tournament-information [:entities :tournament])}))
 
 (defn- get-participants [brackets]
@@ -47,15 +55,16 @@
                      (participant-name participant)))
             {} participants)))
 
-(defn- filter-matches [matches]
+(defn- filter-matches [matches event-id]
   (filter (fn [match]
-            (not (or (nil? (:entrant1Id match))
-                     (nil? (:entrant2Id match))
-                     (nil? (:winnerId match)))))
+            (and (= (:eventId match) event-id)
+                 (not (or (nil? (:entrant1Id match))
+                          (nil? (:entrant2Id match))
+                          (nil? (:winnerId match))))))
           matches))
 
 (defn- get-matches [brackets]
-  (filter-matches (mapcat #(get-in % [:entities :sets]) brackets)))
+  (filter-matches (mapcat #(get-in % [:entities :sets]) brackets)) event-id)
 
 (defn- score-from-match [match]
   (letfn [(get-score [key]
@@ -100,9 +109,9 @@
      :url url}))
 
 (defn get-tournament-data [url]
-  (let [{:keys [brackets tournament]} (get-tournament-information url)
+  (let [{:keys [brackets tournament event-id]} (get-tournament-information url)
         participants (get-participants brackets)
-        matches (get-matches brackets)]
+        matches (get-matches brackets event-id)]
     {:participants (normalize-participants participants)
      :matches (merge-matches-and-participants matches participants)
      :tournament (normalized-tournament tournament url)}))
