@@ -76,6 +76,7 @@
    "https://smash.gg/tournament/smash-of-the-titans-4"
    "https://smash.gg/tournament/smash-of-the-titans-5"
    "https://smash.gg/tournament/smash-of-the-titans-6"
+   "https://smash.gg/tournament/smash-of-the-titans-7"
    ])
 
 (def made
@@ -254,6 +255,7 @@
    "http://challonge.com/GZUSS"
    "http://challonge.com/GZUQS"
    "http://gzugg.challonge.com/GZUDS"
+   "http://gzugg.challonge.com/GZUDSSS"
    ])
 
 (def ghost-at-dc
@@ -347,6 +349,7 @@
    "http://challonge.com/Sssep7"
    "http://challonge.com/Sss9"
    "http://challonge.com/sssep10"
+   "http://challonge.com/singlessss11"
    ])
 
 (def back-2-basics
@@ -600,6 +603,8 @@
    "http://challonge.com/phoenixuprising53"
    "http://challonge.com/phoenixuprising54"
    "http://challonge.com/phoenixuprising55"
+   "http://challonge.com/phoenixuprising56"
+   "http://challonge.com/phoenixuprising57"
    ])
 
 (def pheonix-awakening
@@ -624,6 +629,7 @@
    "http://ssbs.challonge.com/ssbs15s4s"
    "http://ssbs.challonge.com/ssbs16s4s"
    "http://ssbs.challonge.com/ssbs17s4s"
+   "https://smash.gg/tournament/super-south-bay-sunday-18-who-are-you-people-edition"
    ])
 
 (def simply-smashing
@@ -704,6 +710,9 @@
    "http://e1337gaming.challonge.com/ESK23"
    "http://e1337gaming.challonge.com/ESK24"
    "http://challonge.com/RoKsingles1"
+   "http://challonge.com/RoK2Singles"
+   "http://challonge.com/ROK3singles"
+   "http://challonge.com/ROK4singles"
    ])
 
 
@@ -760,6 +769,8 @@
    "http://sab.challonge.com/sp16bw4singles"
    "http://sab.challonge.com/fdsm4shsingles"
    "http://sab.challonge.com/bbb1sm4shsingles"
+   "http://sab.challonge.com/bbb2sm4shsingles"
+   "http://sab.challonge.com/bbb3sm4shsingles"
    ])
 
 (def bair-necessities
@@ -782,6 +793,10 @@
    "http://sslsmash.challonge.com/dtjhsjsu19Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu20Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu25Smash4"
+   "http://sslsmash.challonge.com/mdtjhsjsu26Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu27Smash4"
+   "http://sslsmash.challonge.com/mdtjhsjsu28Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu29Smash4"
    ])
 
 (def super-slug-fighters
@@ -894,6 +909,7 @@
    "http://8bit.challonge.com/wyp1singles"
    "http://8bit.challonge.com/wyp2singles"
    "https://smash.gg/tournament/who-s-your-pappy-3"
+   "https://smash.gg/tournament/who-s-your-pappy-4"
    ])
 
 (def super-smash-bros-in-the-morning
@@ -908,19 +924,27 @@
    "http://challonge.com/cz8333ak"
    "http://challonge.com/ycuiu7tw"
    "http://challonge.com/Wetakethose8"
+   "http://challonge.com/wetakethoseep8"
+   "http://challonge.com/wetakethose9"
    "http://challonge.com/singleswtt9"
    "http://challonge.com/wttrp10"
    "http://challonge.com/wetakethose11"
+   "http://challonge.com/wetakethose12"
+   "http://challonge.com/wetakethose13"
    ])
 
 (def afk-gaming
   [
    "http://challonge.com/afkggsm4sh4"
    "http://challonge.com/afkggsm4sh5"
+   "http://challonge.com/afkggsm4sh6"
    ])
 
 (def miscellaneous-tournaments
   [
+   "https://smash.gg/tournament/let-it-shine-iii"
+   "http://challonge.com/gamergalasmash4singles"
+   "http://challonge.com/NoFair1S"
    "http://challonge.com/ss1s"
    "http://challonge.com/smashedpotatoes8"
    "http://challonge.com/pppp1sm4sh"
@@ -954,6 +978,7 @@
    "http://challonge.com/sass1sm4sh"
    "http://challonge.com/71jh912n"
    "http://challonge.com/gamerzlaststopsingles"
+   "http://gzugg.challonge.com/gamerzrebooted2s"
    "http://terrashockgg.challonge.com/PTS_WiiU"
    "http://srs.challonge.com/SSS1"
    "http://srs.challonge.com/SSS1T8"
@@ -982,6 +1007,7 @@
            big-mamas-off-season
            wombo-wednesdays
            gamerz-smash-labs
+           we-take-those
            gamerz-underground
            ghost-at-dc
            ncr2015
@@ -1090,7 +1116,7 @@
    ["Lolo" "Four"]
    ["Rayn" "Keios"]
    ["SuperFlyingTigerMan" "DJRelly"]
-   ["KossisMOSS" "Kossimoss" "AAA Batteries?!" "Koss"]
+   ["KossisMOSS" "Kossimoss" "AAA Batteries?!" "Koss" "Miranda KOSSgrove"]
    ["BlueBomber22" "Blue Bomber"]
    ["DarkSilence" "Darlsilence"]
    ["DeathPheonix13" "Deathphoenix13"]
