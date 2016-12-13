@@ -997,6 +997,82 @@
     :title "Sharkade Circuit: Smash 4 - Fall 2016"}
    ])
 
+(def to-be-organized
+  [
+   "http://831ssb.challonge.com/outcast3"
+   "http://challonge.com/Duelertime"
+   "http://challonge.com/ESG_T10"
+   "http://challonge.com/ForgeV"
+   "http://challonge.com/NoFair2S"
+   "http://challonge.com/NorCow3"
+   "http://challonge.com/NorCow4"
+   "http://challonge.com/ROK6singles"
+   "http://challonge.com/SA12true"
+   "http://challonge.com/SmashedPotatoes3"
+   "http://challonge.com/Smashshore3singles"
+   "http://challonge.com/SoSsmash4"
+   "http://challonge.com/Wetakethose20"
+   "http://challonge.com/afkggsm4sh10"
+   "http://challonge.com/afkggsm4sh3"
+   "http://challonge.com/afkggsm4sh7"
+   "http://challonge.com/afkggsm4sh8"
+   "http://challonge.com/afkggsm4sh9"
+   "http://challonge.com/back2basics4"
+   "http://challonge.com/gs3ssb4"
+   "http://challonge.com/mm2smash4singless"
+   "http://challonge.com/phoenixawakening2singles"
+   "http://challonge.com/phoenixuprising58"
+   "http://challonge.com/phoenixuprising59"
+   "http://challonge.com/phoenixuprising60"
+   "http://challonge.com/phoenixuprising61"
+   "http://challonge.com/phoenixuprising63"
+   "http://challonge.com/phoenixuprising64"
+   "http://challonge.com/rok11singles"
+   "http://challonge.com/rok12singles"
+   "http://challonge.com/sccsm4sh1"
+   "http://challonge.com/singleswtt22"
+   "http://challonge.com/smashatemeraldglen2"
+   "http://challonge.com/smashtearex11"
+   "http://challonge.com/spln3"
+   "http://challonge.com/ssb4cure"
+   "http://challonge.com/wtt17"
+   "http://challonge.com/wtt21"
+   "http://challonge.com/wyp1singles"
+   "http://gzugg.challonge.com/gamerzrebooted10s"
+   "http://r3.challonge.com/sb2wiiusingles"
+   "http://sab.challonge.com/bbb4sm4shsingles"
+   "http://sab.challonge.com/bbb5sm4shsingles"
+   "http://sab.challonge.com/finalsdestination5sm4shsingles"
+   "http://srs.challonge.com/BMLH59"
+   "http://srs.challonge.com/bmhh2"
+   "http://sslsmash.challonge.com/dtjhsjsu24Smash4"
+   "http://sslsmash.challonge.com/dtjhsjsu30Smash4"
+   "http://sslsmash.challonge.com/mdtjhsjsu32Smash4"
+   "http://sslsmash.challonge.com/mdtjhsjsu34Smash4"
+   "https://smash.gg/tournament/battle-at-the-bear-s-den/events/wii-u-singles/brackets"
+   "https://smash.gg/tournament/burton-smash-fest/brackets/11566/10879/38163"
+   "https://smash.gg/tournament/competeleague-presents-don-t-you-dair-2/brackets"
+   "https://smash.gg/tournament/don-t-you-dair-3/brackets"
+   "https://smash.gg/tournament/don-t-you-dair-4/events/wii-u-singles/brackets"
+   "https://smash.gg/tournament/gladiator-2-rise-of-gohan/events/wii-u-singles/brackets"
+   "https://smash.gg/tournament/gladiator-a-smash-monthly/events/wii-u-singles/brackets"
+   "https://smash.gg/tournament/hard-reads/events/wii-u-singles/brackets"
+   "https://smash.gg/tournament/let-it-shine-iii/brackets"
+   "https://smash.gg/tournament/smash-of-the-titans-10/events/wii-u-singles/brackets"
+   "https://smash.gg/tournament/smash-of-the-titans-11/events/wii-u-singles/brackets"
+   "https://smash.gg/tournament/smash-of-the-titans-5/brackets"
+   "https://smash.gg/tournament/smash-of-the-titans-6/brackets"
+   "https://smash.gg/tournament/smash-of-the-titans-7/brackets"
+   "https://smash.gg/tournament/super-south-bay-sunday-18-who-are-you-people-edition/brackets"
+   "https://smash.gg/tournament/super-south-bay-sunday-19/events/wii-u-singles/brackets"
+   "https://smash.gg/tournament/super-south-bay-sunday-21/events/wii-u-singles/brackets"
+   "https://smash.gg/tournament/the-gator-games-2/brackets/11564/20712/69001"
+   "https://smash.gg/tournament/who-s-your-pappy-3/brackets"
+   "https://smash.gg/tournament/who-s-your-pappy-4/brackets"
+   "https://smash.gg/tournament/who-s-your-pappy-5/events/wii-u-singles/brackets"
+   "https://smash.gg/tournament/wombo-wednesday-31/events/wii-u-singles/brackets"
+   ])
+
 (def tournament-urls
   (distinct
    (concat the-foundry
@@ -1050,6 +1126,7 @@
            share-stock-saturdays
            afk-gaming
            back-2-basics
+           to-be-organized
            miscellaneous-tournaments)))
 
 (def test-urls

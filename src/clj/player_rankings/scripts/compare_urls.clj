@@ -19,9 +19,9 @@
   (html/html-resource (java.net.URL. url)))
 
 (defn norcal-google-redirects []
-  (->> (html/select (fetch-url NORCAL-TOURNAMENT-URL) [:tr :td.s10])
+  (->> (html/select (fetch-url NORCAL-TOURNAMENT-URL) [:tr :td :a])
        (filter #(= "Singles" (html/text %)))
-       (map (fn [elem] (-> elem :content first :attrs :href)))))
+       (map (fn [elem] (-> elem :attrs :href)))))
 
 (defn normalized-old-tournament-urls []
   (map (fn [url]
