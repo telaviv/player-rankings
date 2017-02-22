@@ -119,3 +119,7 @@
 (defn matching-url? [url]
   (assert (-> url nil? not))
   (re-matches #".*smash.gg.*" url))
+
+(defn normalize-url [url]
+  (let [name (second (re-matches #".*smash.gg/tournament/([^/]+).*" url))]
+    (str "https://smash.gg/tournament/" name)))
