@@ -100,3 +100,6 @@
 (defn matching-url? [url]
   (assert (-> url nil? not))
   (re-matches #".*challonge.com.*" url))
+
+(defn normalize-url [url]
+  (second (re-matches #"(http://.*challonge.com/[^/]+).*" url)))
