@@ -197,7 +197,7 @@
    "http://scusmash.challonge.com/ww28s4s"
    "http://scusmash.challonge.com/WW29s4s"
    "http://scusmash.challonge.com/ww30s4"
-   "https://smash.gg/tournament/wombo-wednesday-31/"
+   "https://smash.gg/tournament/wombo-wednesday-31"
    ])
 
 (def gamerz-smash-labs
@@ -831,19 +831,16 @@
 
 (def eso-tuesdays
   [
-   "http://challonge.com/ESO_Sum1"
    "http://challonge.com/ESO_T1"
    "http://challonge.com/ESO_T5"
    "http://challonge.com/ESO_Tues_2"
    "http://challonge.com/ESO_W6"
    ])
 
-
 (def smash-for-tats
   [
    "http://challonge.com/SMASHFORTATS"
    ])
-
 
 (def smash-at-berkeley
   ["http://challonge.com/bayo"
@@ -874,7 +871,6 @@
    "http://sslsmash.challonge.com/dtjhsjsu17Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu18Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu19Smash4"
-   "http://sslsmash.challonge.com/dtjhsjsu20Smash"
    "http://sslsmash.challonge.com/dtjhsjsu21Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu22Smash4"
    "http://sslsmash.challonge.com/dtjhsjsu23Smash4"
@@ -1047,12 +1043,9 @@
    "http://challonge.com/wetakethose14"
    "http://challonge.com/wetakethose15"
    "http://challonge.com/wetakethose16"
-   "http://challonge.com/wetakethose17"
    "http://challonge.com/wetakethose18"
    "http://challonge.com/wetakethose19"
    "http://challonge.com/wetakethose20"
-   "http://challonge.com/wetakethose21"
-   "http://challonge.com/wetakethose22"
    "http://challonge.com/wetakethose23"
    "http://challonge.com/wetakethose24"
    "http://challonge.com/wetakethose25"
@@ -1068,7 +1061,6 @@
    "http://challonge.com/afkggsm4sh8"
    "http://challonge.com/afkggsm4sh9"
    "http://challonge.com/afkggsm4sh10"
-   "http://challonge.com/afkggsm4sh11"
    "http://challonge.com/afkggsm4sh12"
    "http://challonge.com/afkggsm4sh13"
    ])
@@ -1158,7 +1150,6 @@
    "http://challonge.com/ssb4cure"
    "http://challonge.com/wtt17"
    "http://challonge.com/wtt21"
-   "http://challonge.com/wyp1singles"
    "http://gzugg.challonge.com/gamerzrebooted10s"
    "http://r3.challonge.com/sb2wiiusingles"
    "http://sab.challonge.com/bbb4sm4shsingles"
@@ -1166,13 +1157,6 @@
    "http://sab.challonge.com/finalsdestination5sm4shsingles"
    "http://srs.challonge.com/bmhh2"
    "http://sslsmash.challonge.com/dtjhsjsu24Smash4"
-   "https://smash.gg/tournament/battle-at-the-bear-s-den/events/wii-u-singles/brackets"
-   "https://smash.gg/tournament/burton-smash-fest/brackets/11566/10879/38163"
-   "https://smash.gg/tournament/gladiator-2-rise-of-gohan/events/wii-u-singles/brackets"
-   "https://smash.gg/tournament/gladiator-a-smash-monthly/events/wii-u-singles/brackets"
-   "https://smash.gg/tournament/hard-reads/events/wii-u-singles/brackets"
-   "https://smash.gg/tournament/let-it-shine-iii/brackets"
-   "https://smash.gg/tournament/the-gator-games-2/brackets/11564/20712/69001"
    ])
 
 (def tournament-urls
