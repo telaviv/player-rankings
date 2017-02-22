@@ -1019,6 +1019,7 @@
    "https://smash.gg/tournament/who-s-your-pappy-3"
    "https://smash.gg/tournament/who-s-your-pappy-4"
    "https://smash.gg/tournament/who-s-your-pappy-5"
+   "https://smash.gg/tournament/who-s-your-pappy-6"
    ])
 
 (def super-smash-bros-in-the-morning
@@ -1278,6 +1279,7 @@
 (def aliases
   [["Crow" "Chaos Crow" "Maleficent"]
    ["Glith" "glith10" "gltih"]
+   ["Domo" "Dave"]
    ["snackthyme" "snacktyme"]
    ["Kham" "k-ham"]
    ["Lolo" "Four"]

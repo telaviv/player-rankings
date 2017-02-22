@@ -5,6 +5,7 @@
             [net.cgrand.enlive-html :as html]
             [player-rankings.parsers.smashgg :as smashgg]
             [player-rankings.parsers.challonge :as challonge]
+            [player-rankings.logic.initializers :refer [load-data-from-tournaments]]
             [player-rankings.logic.tournament-constants :refer [tournament-urls]]))
 
 (def NORCAL-TOURNAMENT-URL
@@ -12,7 +13,6 @@
 
 (def NEW-URL-BLACKLIST
   ["http://gameworksseattle.challonge.com/SWPS4Top32"
-   "http://brackets.godlikecombo.com/#!/tourney-direct/-8116973707330696792/standing"
    "http://challonge.com/WWLSm4sh/groups"
    ])
 
@@ -55,3 +55,7 @@
 
 (defn print-missing-urls []
   (doseq [url (sort (unadded-urls))] (println (format "\"%s\"" url))))
+
+
+(defn load-new-urls []
+  (load-data-from-tournaments (unadded-urls)))
