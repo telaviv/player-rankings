@@ -2,6 +2,7 @@
   (:require [player-rankings.database.connection :refer [cquery]]
             [player-rankings.logic.rankings :as rankings]
             [clojure.string :as string]))
+
 (defn- newline-joined [& lines]
   (string/join "\n" lines))
 
@@ -12,9 +13,7 @@
                "(p1:player)-[pl1:played]-(m)-[pl2:played]-(p2:player)"
                "where pl1.won = true"
                "with t, "
-               "{winner: {name: p1.name, start_rating: pl1.start_rating, end_rating: pl1.end_rating},"
-               "loser: {name: p2.name, start_rating: pl2.start_rating, end_rating: pl2.end_rating},"
-               "score: m.score, time: m.time, id: id(m)} as matches"
+               "{winner: p1.name, loser: p2.name, score: m.score, time: m.time, id: id(m)} as matches"
                "order by m.time"
                "return {title: t.title, url: t.url, id: t.identifier} as tournament, collect(matches) as matches")]
     (first (cquery query {:identifier identifier}))))
@@ -48,7 +47,6 @@
 (defn tournament-data [identifier]
   (let [data (raw-tournament-data identifier)]
     (-> data
-        (update :matches normalize-matches)
         (assoc-in [:tournament :time] (median-time (:matches data))))))
 
 (defn tournament-exists? [identifier]
