@@ -1,7 +1,7 @@
 (ns player-rankings.scripts.compare-urls
   (:require [cemerick.url :refer [url]]
             [clojure.set :refer [difference]]
-            [clojure.string :as str]
+            [clojure.string :as string]
             [clj-http.client :as client]
             [net.cgrand.enlive-html :as html]
             [player-rankings.parsers.smashgg :as smashgg]
@@ -37,6 +37,12 @@
          (-> gurl url :query (get "q")))
        (norcal-google-redirects)))
 
+(defn normalize-url [url]
+  (let [url (string/lower-case url)]
+    (cond (smashgg/matching-url? url) (smashgg/normalize-url url)
+          (challonge/matching-url? url) (challonge/normalize-url url)
+          :else nil)))
+
 (defn normalized-new-tournament-urls []
   (reduce (fn [urls url]
             (let [normalized (normalize-url url)]
@@ -49,14 +55,8 @@
   (difference (normalized-new-tournament-urls)
               (normalized-old-tournament-urls)))
 
-(defn normalize-url [url]
-  (cond (smashgg/matching-url? url) (smashgg/normalize-url url)
-        (challonge/matching-url? url) (challonge/normalize-url url)
-        :else nil))
-
 (defn print-missing-urls []
   (doseq [url (sort (unadded-urls))] (println (format "\"%s\"" url))))
-
 
 (defn load-new-urls []
   (load-data-from-tournaments (unadded-urls)))

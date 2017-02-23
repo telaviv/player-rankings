@@ -1,4 +1,3 @@
-
 (ns player-rankings.logic.tournament-constants
   (:require [clojure.set :refer [difference]]
             [clj-time.core :as t]))
