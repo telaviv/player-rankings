@@ -1,5 +1,6 @@
 (ns player-rankings.scripts.compare-urls
-  (:require [clojure.set :refer [difference]]
+  (:require [cemerick.url :refer [url]]
+            [clojure.set :refer [difference]]
             [clojure.string :as str]
             [clj-http.client :as client]
             [net.cgrand.enlive-html :as html]
