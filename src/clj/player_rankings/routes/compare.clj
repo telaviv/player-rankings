@@ -1,8 +1,10 @@
 (ns player-rankings.routes.compare
-  (:require [player-rankings.layout :as layout]
+  (:require [player-rankings.routes.schema :refer [ComparisonPage]]
+            [player-rankings.layout :as layout]
             [clojure.data.json :as json]
             [compojure.core :refer [defroutes GET]]
             [clojure.java.io :as io]
+            [schema.core :as s]
             [player-rankings.database.players.read :as players]))
 
 (defn- missing-players-error [player1 player2]
@@ -29,7 +31,7 @@
   (let [{:keys [player1 player2]} (:params req)
         errors (validate-players player1 player2)]
     (if (empty? errors)
-      {:status 200 :body (players/compare-players player1 player2)}
+      {:status 200 :body (s/validate ComparisonPage (players/compare-players player1 player2))}
       {:status 400 :body {:errors errors}})))
 
 (defroutes compare-routes
