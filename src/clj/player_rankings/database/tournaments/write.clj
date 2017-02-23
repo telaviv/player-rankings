@@ -174,6 +174,15 @@
              (cache-tournament-data tournament-data)
              tournament-data))))))
 
+(defnp load-multiple-tournaments [meta-urls tournament-cache]
+  (reduce (fn [datum meta-url]
+            (try
+              (cons (load-tournament-data meta-url tournament-cache) datum)
+              (catch Exception e
+                (info "couldn't load: " (tournament-url-parser/url-from-meta-url meta-url))
+                datum)))
+          '() meta-urls))
+
 (defnp get-loaded-tournament-urls []
   (set (map #(get % "url") (cypher/tquery conn "match (t:tournament) return t.url as url"))))
 
@@ -194,7 +203,7 @@
 (defnp load-tournaments [tournaments]
   (let [urls-to-load (remove-loaded-tournaments tournaments)
         tournament-cache (load-tournament-cache)
-        tournament-datum (map #(load-tournament-data % tournament-cache) urls-to-load)]
+        tournament-datum (load-multiple-tournaments urls-to-load tournament-cache)]
     (doseq [tournament-data tournament-datum]
       (create-tournament-graph tournament-data))))
 

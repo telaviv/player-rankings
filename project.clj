@@ -3,7 +3,7 @@
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
 
-  :dependencies [[org.clojure/clojure "1.7.0"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
                  [selmer "0.8.2"]
                  [com.taoensso/timbre "4.1.1"]
                  [com.taoensso/tower "3.0.2"]
@@ -26,6 +26,8 @@
                  [com.taoensso/timbre "3.4.0"]
                  [spyscope "0.1.5"]
                  [prismatic/schema "1.0.1"]
+                 [com.cemerick/url "0.1.1"]
+                 [enlive "1.1.6"]
                  ]
 
   :min-lein-version "2.0.0"

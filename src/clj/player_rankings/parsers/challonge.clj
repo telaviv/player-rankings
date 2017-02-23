@@ -90,7 +90,8 @@
        participants))
 
 (defn get-tournament-data [url]
-  (let [matches (future (raw-matches-from-url url))
+  (let [url (string/lower-case url)
+        matches (future (raw-matches-from-url url))
         participants (future (raw-participants-from-url url))
         tournament (future (get-tournament-from-url url))]
     {:participants (normalize-participants @participants)
@@ -100,3 +101,6 @@
 (defn matching-url? [url]
   (assert (-> url nil? not))
   (re-matches #".*challonge.com.*" url))
+
+(defn normalize-url [url]
+  (second (re-matches #"(http://.*challonge.com/[^/]+).*" url)))
