@@ -1,6 +1,7 @@
 (ns player-rankings.parsers.smashgg
   (:require [clj-http.client :as client]
-            [clojure.data.json :as json])
+            [clojure.data.json :as json]
+            [clojure.string :as string])
   (:import [java.net URL]))
 
 (defn- tournament-slug [url]
@@ -109,7 +110,8 @@
      :url url}))
 
 (defn get-tournament-data [url]
-  (let [{:keys [brackets tournament event-id]} (get-tournament-information url)
+  (let [url (string/lower-case url)
+        {:keys [brackets tournament event-id]} (get-tournament-information url)
         participants (get-participants brackets)
         matches (get-matches brackets event-id)]
     {:participants (normalize-participants participants)
