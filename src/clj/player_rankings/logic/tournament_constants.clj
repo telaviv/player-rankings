@@ -1118,7 +1118,6 @@
    "http://challonge.com/sass1sm4sh"
    "http://challonge.com/71jh912n"
    "http://challonge.com/gamerzlaststopsingles"
-   "http://gzugg.challonge.com/gamerzrebooted2s"
    "http://terrashockgg.challonge.com/PTS_WiiU"
    "http://srs.challonge.com/SSS1"
    "http://srs.challonge.com/SSS1T8"
