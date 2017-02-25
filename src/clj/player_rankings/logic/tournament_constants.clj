@@ -1,5 +1,6 @@
 (ns player-rankings.logic.tournament-constants
   (:require [clojure.set :refer [difference]]
+            [clojure.string :as string]
             [player-rankings.parsers.smashgg :as smashgg]
             [player-rankings.parsers.challonge :as challonge]
             [clj-time.core :as t]))
