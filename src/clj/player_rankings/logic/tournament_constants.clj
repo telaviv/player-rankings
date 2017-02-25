@@ -1,5 +1,7 @@
 (ns player-rankings.logic.tournament-constants
   (:require [clojure.set :refer [difference]]
+            [player-rankings.parsers.smashgg :as smashgg]
+            [player-rankings.parsers.challonge :as challonge]
             [clj-time.core :as t]))
 
 (def the-foundry
@@ -1157,8 +1159,14 @@
    "http://sslsmash.challonge.com/dtjhsjsu24Smash4"
    ])
 
+(defn normalize-url [url]
+  (let [url (string/lower-case url)]
+    (cond (smashgg/matching-url? url) (smashgg/normalize-url url)
+          (challonge/matching-url? url) (challonge/normalize-url url)
+          :else url)))
+
 (def tournament-urls
-  (distinct
+  (->
    (concat the-foundry
            smash-of-the-titans
            made
@@ -1215,7 +1223,9 @@
            afk-gaming
            back-2-basics
            to-be-organized
-           miscellaneous-tournaments)))
+           miscellaneous-tournaments)
+   normalize-url
+   distinct))
 
 (def test-urls
   [
