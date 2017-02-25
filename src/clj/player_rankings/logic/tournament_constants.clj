@@ -1132,7 +1132,6 @@
    "http://challonge.com/ttnw"
    "http://challonge.com/zbghh6du"
    "http://831ssb.challonge.com/outcast3"
-   "http://challonge.com/Smashshore3singles"
    "http://challonge.com/gs3ssb4"
    {:url "http://brackets.godlikecombo.com/#!/sjsm4sh1"
     :date (t/date-time 2016 9 5)
