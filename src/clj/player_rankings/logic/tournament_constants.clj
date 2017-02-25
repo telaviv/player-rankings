@@ -1167,7 +1167,7 @@
           :else url)))
 
 (def tournament-urls
-  (->
+  (->>
    (concat the-foundry
            smash-of-the-titans
            made
@@ -1225,7 +1225,7 @@
            back-2-basics
            to-be-organized
            miscellaneous-tournaments)
-   normalize-url
+   (map normalize-url)
    distinct))
 
 (def test-urls
