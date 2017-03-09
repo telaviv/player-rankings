@@ -23,6 +23,11 @@
 (defn load-data []
   (load-data-from-tournaments tournament-urls))
 
+(defn load-data-in-partitions
+  ([] (load-data-in-partitions 100))
+  ([n] (doseq [chunked-urls (partition n tournament-urls)]
+         (load-data-from-tournaments chunked-urls))))
+
 (defn load-test-data []
   (load-data-from-tournaments test-urls))
 

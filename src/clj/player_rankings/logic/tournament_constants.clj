@@ -1287,13 +1287,16 @@
 
 (def aliases
   [["Crow" "Chaos Crow" "Maleficent"]
+   ["Lui$" "Luis"]
+   ["Future" "Terry Bogard"]
+   ["Ursa Major" "Big Mama"]
    ["Glith" "glith10" "gltih"]
    ["Domo" "Dave"]
    ["snackthyme" "snacktyme"]
    ["Kham" "k-ham"]
    ["Lolo" "Four"]
    ["Rayn" "Keios"]
-   ["SuperFlyingTigerMan" "DJRelly"]
+   ["DJRelly" "SuperFlyingTigerMan"]
    ["KossisMOSS" "Kossimoss" "AAA Batteries?!" "Koss" "Miranda KOSSgrove"]
    ["BlueBomber22" "Blue Bomber"]
    ["DarkSilence" "Darlsilence"]
