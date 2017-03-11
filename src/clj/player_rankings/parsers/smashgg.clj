@@ -1,5 +1,6 @@
 (ns player-rankings.parsers.smashgg
-  (:require [clj-http.client :as client]
+  (:require [taoensso.timbre :refer [spy]]
+            [clj-http.client :as client]
             [clojure.data.json :as json]
             [clojure.string :as string])
   (:import [java.net URL]))
@@ -56,16 +57,18 @@
                      (participant-name participant)))
             {} participants)))
 
-(defn- filter-matches [matches event-id]
+(defn- filter-matches [matches participants event-id]
   (filter (fn [match]
             (and (= (:eventId match) event-id)
                  (not (or (nil? (:entrant1Id match))
+                          (nil? (get participants (:entrant1Id match)))
                           (nil? (:entrant2Id match))
+                          (nil? (get participants (:entrant2Id match)))
                           (nil? (:winnerId match))))))
           matches))
 
-(defn- get-matches [brackets event-id]
-  (filter-matches (mapcat #(get-in % [:entities :sets]) brackets) event-id))
+(defn- get-matches [brackets participants event-id]
+  (filter-matches (mapcat #(get-in % [:entities :sets]) brackets) participants event-id))
 
 (defn- score-from-match [match]
   (letfn [(get-score [key]
@@ -113,7 +116,7 @@
   (let [url (string/lower-case url)
         {:keys [brackets tournament event-id]} (get-tournament-information url)
         participants (get-participants brackets)
-        matches (get-matches brackets event-id)]
+        matches (get-matches brackets participants event-id)]
     {:participants (normalize-participants participants)
      :matches (merge-matches-and-participants matches participants)
      :tournament (normalized-tournament tournament url)}))
