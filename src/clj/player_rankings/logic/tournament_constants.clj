@@ -800,6 +800,7 @@
    "http://challonge.com/ROK16singles"
    "http://challonge.com/ROK17singles"
    "http://challonge.com/ROK18singles"
+   "http://challonge.com/rok25singles"
    ])
 
 

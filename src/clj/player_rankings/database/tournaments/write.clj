@@ -218,3 +218,8 @@
 (defnp add-tournament [tournament-url]
   (load-tournaments [tournament-url])
   (update-player-data))
+
+(defnp delete-everything []
+  (let [query (str "match (n) "
+                   "detach delete n ")]
+    (cypher/tquery conn query)))
