@@ -1427,6 +1427,7 @@
    ["Trex Destiny" "T-Rex Destiny" "Jae Pea" "T-Rex"]
    ["AwesomeTheSauce" "AwesomeSauce"]
    ["Sinister" "NitN"]
+   ["Sean" "Sean Strife"]
    ["Zoom" "Three" "Three!"]
    ["Villain" "Villian"]])
 
