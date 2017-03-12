@@ -1004,6 +1004,7 @@
    "https://smash.gg/tournament/competeleague-presents-don-t-you-dair-2"
    "https://smash.gg/tournament/don-t-you-dair-3"
    "https://smash.gg/tournament/don-t-you-dair-4"
+   "https://smash.gg/tournament/don-t-you-dair-6"
    ])
 
 
