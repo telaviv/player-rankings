@@ -1292,6 +1292,7 @@
 (def aliases
   [["Crow" "Chaos Crow" "Maleficent"]
    ["Lui$" "Luis"]
+   ["N4SIR" "Stryker"]
    ["Future" "Terry Bogard"]
    ["Ursa Major" "Big Mama"]
    ["Glith" "glith10" "gltih"]
