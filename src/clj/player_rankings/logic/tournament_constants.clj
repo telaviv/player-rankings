@@ -87,6 +87,7 @@
    "https://smash.gg/tournament/smash-of-the-titans-13"
    "https://smash.gg/tournament/smash-of-the-titans-21"
    "https://smash.gg/tournament/smash-of-the-titans-22"
+   "https://smash.gg/tournament/smash-of-the-titans-23"
    ])
 
 (def made
