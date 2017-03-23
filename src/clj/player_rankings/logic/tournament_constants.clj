@@ -115,6 +115,7 @@
    "http://challonge.com/MADE22Singles"
    "http://challonge.com/MADE23Singles"
    "http://challonge.com/MADE24Singles"
+   "http://challonge.com/Sm4shmadesingles"
    ])
 
 (def big-mamas-little-cup
@@ -664,7 +665,7 @@
    "http://challonge.com/phoenixuprising68"
    "http://challonge.com/phoenixuprising69"
    "http://challonge.com/phoenixuprising70"
-
+   "http://challonge.com/phoenixuprising79"
    ])
 
 (def pheonix-awakening
